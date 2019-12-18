@@ -1,22 +1,355 @@
-.App {
-  text-align: center;
+body {
+  background: rgb(240, 240, 240);
 }
 
-.App-logo {
-  height: 40vmin;
+.links img {
+  height: 32px;
+  width: 32px;
+  margin-right: 10px;
+  /* border-radius: 100%; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.entry {
+  border: 1px solid grey;
+  overflow: hidden;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+  margin: 10px;
+  background: white;
+  border-radius: 10px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.entry:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+  background: rgb(244, 255, 243);
+}
+
+.entry:hover .votecount {
+  background: rgb(230, 241, 228);
+}
+
+.contest {
+  /* background: rgb(240, 240, 240); */
+  border-radius: 20px;
+  /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
+}
+
+.entries {
   display: flex;
-  flex-direction: column;
+  padding: 10px;
+  overflow: auto;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+/* h1 {
+  margin: 0; 
+} */
+
+.contest_header {
+  background: rgb(80, 80, 80);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  height: 60px;
+  padding-left: 20px;
+  margin-top: 32px;
+  border-radius: 10px;
+  z-index: 10;
+  color: white;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.contest_header p {
+  margin-left: 50px;
+  color: rgb(230, 230, 230);
+}
+
+.fic_data {
+  padding: 0 20px 0 20px;
+}
+
+h4 {
+  font-weight: normal;
+  color: rgb(100, 100, 100);
+}
+
+.author {
+  font-weight: bold;
+}
+
+.votecount {
+  margin-top: 18px;
+  display: block;
+  height: 50px;
+  color: maroon;
+  font-weight: bold;
+  cursor: pointer;
+  background: rgb(247, 247, 247);
+  border-radius: 0 0 10px 10px;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.votecount p {
+  transform: translateY(40%);
+}
+
+.voted {
+  color: rgb(17, 122, 31);
+}
+
+.nsfw_indicator {
+  color: maroon;
+  float: right;
+  font-weight: normal;
+  font-size: 80%;
+  border: 1px dashed rgb(85, 45, 45);
+  border-radius: 10px;
+  padding: 0 6px 0 6px;
+}
+
+#header {
+  height: 80px;
+  background: rgb(46, 46, 46);
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+#header_content, #content {
+  max-width: 1920px;
+  margin: 0 auto;
 }
+
+#header_content {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+#user {
+  justify-self: end;
+  align-items: center;
+  display: flex;
+  background: rgb(35,35,35);
+  height: 80px;
+  padding: 0 24px 0 24px;
+}
+
+#user img {
+  border-radius: 100%;
+  width: 42px;
+  height: 42px;
+}
+
+#user p {
+  font-weight: bold;
+  font-size: 1.3em;
+  margin: 0 16px 0 16px;
+}
+
+#user #discriminator {
+  font-weight: normal;
+  color: rgb(170, 170, 170);
+}
+
+#header button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  cursor: pointer;
+  color: white;
+  text-decoration: underline;
+}
+
+#header h1 {
+  margin-left: 20px;
+}
+
+#content {
+  padding: 0 20px 100px 20px;
+}
+
+.no_entries {
+  font-size: 1.2em;
+  margin: 0 -10px;
+  font-weight: bold;
+  background: rgb(206, 206, 206);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+/* Typeahead Styling Tests */
+/* .typeahead-selector {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 24px 32px;
+}
+
+.typeahead-selector li {
+  list-style: none;
+  padding: 6px 0;
+}
+
+.typeahead-selector li a {
+  text-decoration: none;
+}
+
+.typeahead-selector .results-truncated {
+  font-style: italic;
+  color: darkgray;
+}
+
+.typeahead-tokenizer {
+  display: flex;
+  flex-direction: row;
+}
+
+.typeahead {
+  order: 1;
+}
+
+.typeahead input {
+  border: none;
+  background: none;
+  height: 32px;
+  border-bottom: 1px solid grey;
+  margin-top: 10px;
+  border-radius: 10px 10px 0 0;
+  font-size: 12pt;
+}
+
+.typeahead input:focus {
+  background: white;
+  border-bottom: 1px solid blue;
+}
+
+.typeahead-token {
+  font-size: 10pt;
+  color: darkblue;
+  background: rgb(183, 244, 248);
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(84, 223, 233);
+  margin-top: 10px;
+  margin-right: 10px;
+  max-height: 32px;
+}
+
+.typeahead-token a {
+  text-decoration: none;
+  padding-left: 4px;
+  font-weight: bolder;
+  color: darkblue;
+} */
+
+
+
+
+
+
+/* React-bootstrap-typeahead */
+/* .rbt-menu {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 24px 32px;
+  max-width: 90%;
+}
+
+.rbt-menu li {
+  list-style: none;
+  padding: 6px 0;
+}
+
+.rbt-menu li :hover {
+  background: lightgrey;
+}
+
+.rbt-menu li a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.rbt-input-main {
+  border: none;
+  background: none;
+  height: 32px;
+  border-bottom: 1px solid grey;
+  margin-top: 10px;
+  border-radius: 10px 10px 0 0;
+  font-size: 12pt;
+}
+
+.rbt-input-main :focus {
+  background: white;
+  border-bottom: 1px solid blue;
+} 
+*/
+/* .rbt-input-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.rbt-token {
+  font-size: 10pt;
+  color: darkblue;
+  background: rgb(183, 244, 248);
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(84, 223, 233);
+  margin-right: 10px;
+  max-height: 32px;
+  cursor: default;
+}
+
+.rbt-token-removeable button {
+  border: none;
+  background: none;
+  margin-left: 4px;
+  font-weight: bolder;
+  color: darkblue;
+  cursor: pointer;
+  font-size: 12pt;
+}
+
+.rbt-token-removeable button .sr-only {
+  display: none;
+} */
+
+li .dropdown-item {
+  font-weight: bold;
+}
+
+.rbt-highlight-text {
+  font-weight: normal;
+  background: none;
+  padding: inherit;
+}
+
+.rbt-menu li:last-of-type a {
+  color: gray;
+  font-weight: normal;
+}
+/*
+.dropdown-divider {
+  height: 0px;
+  border: 1px solid grey;
+  width: 100%;
+
+} */
