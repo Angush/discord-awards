@@ -16,6 +16,11 @@ Perhaps use **[Bootstrap 4.4](https://getbootstrap.com/docs/4.4/getting-started/
 
 ## Various Typeahead Options
 
+### Tested
+
+1. `react-bootstrap-typeahead` - probably best one. It's fully-featured, and if you use Bootstrap, it's pre-styled (which only needs a few tweaks; see `App.css`)
+2. 
+
 ### Untested
 
-https://www.npmjs.com/package/ship-components-typeahead
+1. https://www.npmjs.com/package/ship-components-typeahead
