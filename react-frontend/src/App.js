@@ -1,19 +1,36 @@
-// import React, { useState, useEffect } from 'react'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 // import { useCookies } from 'react-cookie'
-import { Router, Link, Redirect } from '@reach/router'
+import { Router } from '@reach/router'
+import { Container, Navbar, Nav } from 'react-bootstrap'
+import NavLink from './components/NavLink'
 import VotePage from './pages/VotePage'
 import NominationPage from './pages/NominationPage'
-import NominationOptionsPage from './pages/NominationOptionsPage'
-import CategoryPage from './pages/CategoryPage'
+// import ErrorPage from './pages/ErrorPage'
+
+import './style/bootstrap.min.css'
 import './style/App.css'
 
 const App = () => {
+  const [expanded, setExpanded] = useState(false)
+  const [navlinks] = useState([
+    {
+      text: 'Vote',
+      to: '/'
+    },
+    {
+      text: 'Nominate',
+      to: '/nominate'
+    }
+  ])
   // const [userData, setUserData] = useState({})
   // const [cookies, , removeCookies] = useCookies(['discord_data'])
 
   // ! it doesn't load when the "discord_data" cookie is present. figure out why!
   // * look more at the react-cookie docs maybe?
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeydown)
+  }, [])
 
   // useEffect(() => {
   //   if (cookies && cookies.discord_data && !userData.loggedOut) {
@@ -31,38 +48,71 @@ const App = () => {
   //   window.location.href = 'http://10.0.0.65:3001/login'
   // }
 
+  const handleKeydown = event => {
+    if (![32, 13].includes(event.keyCode)) return
+    if (!document.activeElement.getAttribute('keyboard-clickable')) return
+    document.activeElement.click()
+  }
+
+  const closeMenu = () => setExpanded(false)
+
   return (
     <div className='App'>
-      <div id='header'>
-        <div id='header_content'>
-          <h1>Cauldron Awards {new Date().getFullYear()}</h1>
-          <nav>
-            <Link to={`/`}>Vote</Link>
-            <Link to={`/nominate`}>Nominate</Link>
-            <Link to={`/categories`}>Categories</Link>
-          </nav>
-          {/* {userData.id ? (
-            <div id='user'>
-              <img src={userData.avatar} alt='User avatar' />
-              <p>
-                <span id='username'>{userData.username}</span>
-                <span id='discriminator'>{`#${userData.discriminator}`}</span>
-              </p>
-              <button onClick={logout}>Logout</button>
-            </div>
-          ) : (
-            <button onClick={login}>Login</button>
-          )} */}
-          {/* : <a href="http://10.0.0.65:3001/login">Login</a>} */}
-        </div>
-      </div>
+      <Navbar
+        expanded={expanded}
+        expand='md'
+        bg='dark'
+        variant='dark'
+        className={expanded && 'expanded'}
+        fixed='top'
+      >
+        <Container>
+          <Navbar.Brand>Cauldron Awards 2019</Navbar.Brand>
+          <Navbar.Toggle onClick={() => setExpanded(expanded ? false : true)} />
+          <Navbar.Collapse>
+            <Nav>
+              {navlinks.map((link, index) => (
+                <NavLink to={link.to} key={index} onClick={closeMenu}>
+                  {link.text}
+                </NavLink>
+              ))}
+            </Nav>
+            {/* {userData.id ? (
+              <div id='user'>
+                <img src={userData.avatar} alt='User avatar' />
+                <p>
+                  <span id='username'>{userData.username}</span>
+                  <span id='discriminator'>{`#${userData.discriminator}`}</span>
+                </p>
+                <button onClick={logout}>Logout</button>
+              </div>
+            ) : (
+              <button onClick={login}>Login</button>
+            )} */}
+            {/* : <a href="http://10.0.0.65:3001/login">Login</a>} */}
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      <Router>
-        <VotePage path='/' userData={null} />
-        <NominationOptionsPage path='/nominate' />
-        <NominationPage path='/nominate/:contestID' />
-        <CategoryPage path='/categories' />
-      </Router>
+      <Container>
+        <div id='top'>Jump to top.</div>
+        <Router>
+          <VotePage path='/' userData={null} />
+          <NominationPage path='/nominate' />
+        </Router>
+      </Container>
+
+      {/* <div
+        className='back-to-top'
+        onClick={() => {
+          window.scrollTo({
+            top: document.getElementById('top'),
+            behavior: 'smooth'
+          })
+        }}
+      >
+        Back to top.
+      </div> */}
     </div>
   )
 }

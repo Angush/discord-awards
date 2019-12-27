@@ -1,16 +1,23 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import { navigate } from '@reach/router'
+import { Card } from 'react-bootstrap'
 
-const CategoryInfo = ({ data: { id, name, type, description } }) => {
+const CategoryInfo = ({ data: { id, name, description }, tabindex }) => {
   return (
-    <div className='entry'>
-      <h3>{name}</h3>
-      <h4>
-        <strong>Type:</strong> {type}
-      </h4>
-      <p>{description}</p>
-      <Link to={`/nominate/${id}`}>Nominate something for this category!</Link>
-    </div>
+    <Card
+      className='contest-card'
+      onClick={e => {
+        e.preventDefault()
+        navigate(`/nominate/${id}`)
+      }}
+      tabIndex={0}
+      keyboard-clickable='true'
+    >
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <Card.Text>{description}</Card.Text>
+      </Card.Body>
+    </Card>
   )
 }
 

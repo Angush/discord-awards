@@ -1,5 +1,7 @@
 body {
   background: rgb(240, 240, 240);
+  padding-top: 72px;
+  scroll-behavior: smooth;
 }
 
 .links img {
@@ -9,26 +11,154 @@ body {
   /* border-radius: 100%; */
 }
 
-.entry {
-  border: 1px solid grey;
-  overflow: hidden;
-  width: 300px;
-  height: 200px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  margin: 10px;
+.card,
+.contest-filler {
+  width: 250px;
   background: white;
   border-radius: 10px;
-  position: relative;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  margin: 8px;
+  transition: all 0.2s;
+  flex-grow: 1;
 }
 
-.entry:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-  background: rgb(244, 255, 243);
+.contest-filler {
+  height: 0px;
+  background: none;
 }
 
-.entry:hover .votecount {
+.navbar-dark.bg-dark {
+  background-color: #262a2e !important;
+}
+
+.navbar-dark .nav-item {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-item {
+  transition: color 0.2s;
+}
+
+.navbar-dark .nav-item:hover {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.nav-item.active,
+.nav-item.active:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.category-selection .input-group {
+  padding: 16px 0 20px 0;
+  position: sticky;
+  top: 56px;
+  background: linear-gradient(
+    rgba(240, 240, 240, 1) 0%,
+    rgba(240, 240, 240, 1) 85%,
+    rgba(240, 240, 240, 0) 100%
+  );
+  z-index: 20;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgb(255, 255, 235);
+}
+
+.contest-card {
+  cursor: pointer;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+  background: black;
+  color: white;
+  text-align: center;
+  line-height: normal;
+  font-size: 10pt;
+  cursor: pointer;
+}
+
+#top {
+  visibility: hidden;
+  height: 0px;
+}
+
+/* 
+  Loading indicator stuff.
+  (including fade-in/rise-up animation)
+  (spinner animation in spinner.css)
+*/
+
+.loading-children {
+  margin: 30px 0;
+}
+
+.loading-section {
+  margin: 20% auto 60px;
+  text-align: center;
+  opacity: 1;
+  padding-top: 0px;
+  transition: opacity 1s, padding-top 1s;
+}
+
+.loading-section.delayed {
+  opacity: 0;
+  padding-top: 10px;
+}
+
+/*
+  Generic classes for fade-in/rise-up animation
+*/
+
+.fade-rise {
+  animation: fadein-riseup 0.5s;
+}
+
+.fade-rise-1s {
+  animation: fadein-riseup 1s;
+}
+
+.fade-rise-2s {
+  animation: fadein-riseup 2s;
+}
+
+@keyframes fadein-riseup {
+  from {
+    opacity: 0;
+    padding-top: 15px;
+  }
+  to {
+    opacity: 1;
+    padding-top: 0px;
+  }
+}
+
+/* Other animation stuff */
+
+/* .card-link:hover {
+  text-decoration: none;
+}
+
+.contests .card-footer, .contests .card-link {
+  transition: all 0.2s;
+}
+
+.contests .card-footer:hover {
+  background: rgba(0, 0, 255, 0.03);
+}
+
+.contests .card-link {
+  color: 
+} */
+
+.card:hover .votecount {
   background: rgb(230, 241, 228);
 }
 
@@ -38,13 +168,20 @@ body {
   /* box-shadow: 0 2px 5px rgba(0,0,0,0.2); */
 }
 
-.entries {
+.entries,
+.contests {
   display: flex;
-  padding: 10px;
   overflow: auto;
   z-index: 2;
   flex-wrap: wrap;
+  justify-items: left;
+  margin: 0 -8px;
 }
+
+/* .contests::after {
+  content: '';
+  flex-grow: 1000;
+} */
 
 /* h1 {
   margin: 0; 
@@ -72,10 +209,10 @@ body {
   padding: 0 20px 0 20px;
 }
 
-h4 {
+/* h4 {
   font-weight: normal;
   color: rgb(100, 100, 100);
-}
+} */
 
 .author {
   font-weight: bold;
@@ -112,7 +249,7 @@ h4 {
   padding: 0 6px 0 6px;
 }
 
-#header {
+/* #header {
   height: 80px;
   background: rgb(46, 46, 46);
   color: white;
@@ -170,7 +307,7 @@ h4 {
 
 #content {
   padding: 0 20px 100px 20px;
-}
+} */
 
 .no_entries {
   font-size: 1.2em;
@@ -186,11 +323,11 @@ h4 {
   font-weight: bold;
 }
 
-nav {
+/* nav {
   display: flex;
   justify-items: end;
   justify-content: space-between;
-}
+} */
 
 /* Typeahead Styling Tests */
 /* .typeahead-selector {

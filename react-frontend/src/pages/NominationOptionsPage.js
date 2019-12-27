@@ -4,6 +4,10 @@ import axios from 'axios'
 const NominationOptionsPage = () => {
   const [contestTypes, setContestTypes] = useState([])
 
+  //!  In this page:
+  //*  1. Present all available categories to user (possibly with a search bar and/or type filter).
+  //*  2. When user selects a category, redirect them to /nominate/:categoryID - utilizing NominationPage.js
+
   useEffect(() => {
     console.log(`Fetching data...`)
     axios.get(`http://localhost:3001/api/contests`).then(res => {
