@@ -1,8 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { CookiesProvider } from 'react-cookie'
-import './index.css'
+import './style/index.css'
 import App from './App'
 // require('dotenv').config()
 
-ReactDOM.render(<CookiesProvider><App/></CookiesProvider>, document.getElementById('root'))
+ReactDOM.render(
+  <CookiesProvider>
+    <App />
+  </CookiesProvider>,
+  document.getElementById('root')
+)
