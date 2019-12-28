@@ -1,14 +1,10 @@
 import React from 'react'
-import { navigate } from '@reach/router'
 import { Card } from 'react-bootstrap'
 
-const CategoryInfo = ({ data: { id, name, description }, hidden }) => {
+const CategoryInfo = ({ data: { id, name, description }, hidden, onClick }) => {
   let props = !hidden && {
     className: 'enabled-card',
-    onClick: e => {
-      e.preventDefault()
-      navigate(`/nominate/${id}`)
-    },
+    onClick: onClick,
     tabIndex: 0,
     'keyboard-clickable': 'true'
   }

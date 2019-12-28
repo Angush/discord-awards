@@ -1,17 +1,30 @@
 import React, { useState } from 'react'
-import CategorySelect from '../components/nominate/CategorySelect'
+import SelectCategory from '../components/nominate/SelectCategory'
 
 const NominationPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [selected, setSelected] = useState(null)
+
+  const select = category => {
+    setSelected(category)
+  }
 
   return (
     <div className='nomination-flow'>
-      <CategorySelect hidden={selectedCategory ? true : false} />
-      <p className='text-center'>
-        <a onClick={() => setSelectedCategory(!selectedCategory)} href='#z'>
-          Click me!
-        </a>
-      </p>
+      <SelectCategory hidden={selected ? true : false} select={select} />
+      {selected && (
+        <div className='text-center fade-rise'>
+          <hr></hr>
+          <h6 className='text-muted'>
+            <em>You selected...</em>
+          </h6>
+          <h4>{selected.name}</h4>
+          <h6>{selected.description}</h6>
+          <hr></hr>
+          <a onClick={() => setSelected(null)} href='#deselect'>
+            Click to deselect.
+          </a>
+        </div>
+      )}
     </div>
   )
 }
