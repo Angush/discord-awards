@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import Spinner from './Spinner'
 
-const LoadingIndicator = props => {
-  const [hidden, setHidden] = useState(props.timeout ? true : false)
+const LoadingIndicator = ({ timeout, children }) => {
+  const [hidden, setHidden] = useState(timeout ? true : false)
 
   // NOTE: the animation on a delayed appearance takes 1 second, so from the
-  // user perspective, the delay will be ~50-70% longer than props.timeout.
+  // user perspective, the delay will be ~50-70% longer than timeout.
   useEffect(() => {
-    if (!props.timeout || !hidden) return
-    const timeout = setTimeout(() => {
+    if (!timeout || !hidden) return
+    const countdown = setTimeout(() => {
       setHidden(false)
-    }, props.timeout)
-    return () => clearTimeout(timeout)
-  }, [hidden, props.timeout])
+    }, timeout)
+    return () => clearTimeout(countdown)
+  }, [hidden, timeout])
 
   return (
     <div className={hidden ? 'loading-section delayed' : 'loading-section'}>
       <Spinner />
-      <div className='loading-children'>{props.children}</div>
+      <div className='loading-children'>{children}</div>
     </div>
   )
 }

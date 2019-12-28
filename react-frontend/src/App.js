@@ -98,7 +98,7 @@ const App = () => {
         <div id='top'>Jump to top.</div>
         <Router>
           <VotePage path='/' userData={null} />
-          <NominationPage path='/nominate' />
+          <NominationPage path='/nominate/*' />
         </Router>
       </Container>
 

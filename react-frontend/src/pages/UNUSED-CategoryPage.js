@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { InputGroup, FormControl } from 'react-bootstrap'
-import CategoryInfo from '../components/CategoryInfo'
+import CategoryInfo from '../components/nominate/CategoryInfo'
 import LoadingIndicator from '../components/LoadingIndicator'
 import axios from 'axios'
 const MAX_PER_ROW = 4
