@@ -1,19 +1,22 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 
-const CategoryInfo = ({ data: { id, name, description }, hidden, onClick }) => {
-  let props = !hidden && {
-    className: 'enabled-card',
-    onClick: onClick,
-    tabIndex: 0,
-    'keyboard-clickable': 'true'
-  }
+const CategoryInfo = ({ data, selected, hidden, onClick }) => {
+  let classes = selected ? 'selected-card ' : ''
+  let props = hidden
+    ? { className: classes }
+    : {
+        className: classes + 'enabled-card',
+        onClick: onClick,
+        tabIndex: 0,
+        'keyboard-clickable': 'true'
+      }
 
   return (
     <Card {...props}>
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>{description}</Card.Text>
+        <Card.Title>{data.name}</Card.Title>
+        <Card.Text>{data.description}</Card.Text>
       </Card.Body>
     </Card>
   )

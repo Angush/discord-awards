@@ -1,28 +1,35 @@
 import React, { useState } from 'react'
+import { navigate } from '@reach/router'
+import slug from 'slug'
 import SelectCategory from '../components/nominate/SelectCategory'
+import InputMain from '../components/nominate/InputMain'
 
 const NominationPage = () => {
   const [selected, setSelected] = useState(null)
 
   const select = category => {
     setSelected(category)
+    navigate(`/nominate/${slug(category.name.toLowerCase())}`)
+  }
+
+  const deselect = () => {
+    setSelected(null)
+    navigate('/nominate')
+    window.scrollTo(0, 0)
   }
 
   return (
     <div className='nomination-flow'>
-      <SelectCategory hidden={selected ? true : false} select={select} />
+      <SelectCategory
+        hidden={selected ? true : false}
+        select={select}
+        selected={selected}
+      />
       {selected && (
-        <div className='text-center fade-rise'>
+        <div id='input-main' className='fade-rise'>
           <hr></hr>
-          <h6 className='text-muted'>
-            <em>You selected...</em>
-          </h6>
-          <h4>{selected.name}</h4>
-          <h6>{selected.description}</h6>
-          <hr></hr>
-          <a onClick={() => setSelected(null)} href='#deselect'>
-            Click to deselect.
-          </a>
+          <InputMain select={select} deselect={deselect} selected={selected} />
+          <div className='vertical-padding'></div>
         </div>
       )}
     </div>

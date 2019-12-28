@@ -1,5 +1,5 @@
 import React from 'react'
-import '../style/spinner.css'
+import '../../style/spinner.css'
 
 const Spinner = ({
   width = '18px',
