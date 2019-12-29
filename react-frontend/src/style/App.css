@@ -57,7 +57,7 @@ body {
 }
 
 .nomination-flow .input-group {
-  margin: 20px 0;
+  margin: 24px 0;
 }
 
 .category-input {
@@ -107,7 +107,7 @@ body {
 
 #top {
   visibility: hidden;
-  height: 1px;
+  height: 0px;
 }
 
 .nomination-flow div {
@@ -129,7 +129,7 @@ div.hidden {
 }
 
 .nomination-flow {
-  margin-bottom: calc(56px + 40vh);
+  margin-bottom: calc(56px + 30vh);
 }
 
 .input-clear {
@@ -148,6 +148,71 @@ div.hidden {
   cursor: pointer;
 }
 
+.hidden .input-clear:hover {
+  color: grey;
+  cursor: default;
+}
+
+.goback {
+  float: right;
+}
+
+input::placeholder {
+  /* font-style: italic; */
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.pad-top {
+  margin-top: 20vh;
+}
+
+.manual-input .input-group {
+  margin: 0;
+}
+
+.conjoined-inputs.input-group,
+.conjoined-inputs .input-group,
+.conjoined-inputs .input-group-text,
+.conjoined-inputs input {
+  border-radius: 0;
+  margin: 0;
+}
+
+.conjoined-inputs .input-group {
+  margin-bottom: -1px;
+}
+
+/*
+  Border radii on the vertically-grouped inputs (.conjoined-inputs)
+  (really dodgy but I couldn't get it working another way)
+*/
+
+.conjoined-inputs img {
+  width: 28px;
+  height: 28px;
+}
+
+.conjoined-inputs .input-group-text {
+  padding: 4px 8px;
+}
+
+.conjoined-inputs > .input-group:first-child .input-group-text {
+  border-top-left-radius: 0.25rem;
+}
+
+.conjoined-inputs > .input-group:last-child .input-group-text {
+  border-bottom-left-radius: 0.25rem;
+}
+
+.conjoined-inputs > .input-group:first-child input {
+  border-top-right-radius: 0.25rem;
+}
+
+.conjoined-inputs > .input-group:last-child input {
+  border-bottom-right-radius: 0.25rem;
+}
+
 /* 
   Loading indicator stuff.
   (including fade-in/rise-up animation)
@@ -163,7 +228,7 @@ div.hidden {
 }
 
 .loading-section {
-  margin: 20% auto 60px;
+  margin: 20vh auto 60px;
   text-align: center;
   opacity: 1;
   padding-top: 0px;

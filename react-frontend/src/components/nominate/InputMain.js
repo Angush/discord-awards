@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Button } from 'react-bootstrap'
 import InputFic from './InputFic'
 
 const InputMain = ({ select, deselect, selected }) => {
@@ -10,27 +9,30 @@ const InputMain = ({ select, deselect, selected }) => {
     })
   }, [])
 
-  const GoBack = () => (
-    <Button variant='link' onClick={deselect}>
-      {'< Go back'}
-    </Button>
-  )
-
   const INPUT_SELECTOR = {
-    fic: <InputFic contest={selected} />,
-    art: <div>Art input not implemented.</div>,
-    text: (
-      <div>
-        How did you even <em>get</em> here?
-      </div>
-    )
+    fic: <InputFic />,
+    art: <div>Art input not implemented.</div>
   }
 
+  const GoBack = () => (
+    <a href='#back' className='goback' onClick={deselect}>
+      <small>Go back</small>
+    </a>
+  )
+
   return (
-    <>
+    <div id='nomination-selection'>
+      <h5 className='align-bottom'>
+        <GoBack />
+        <small className='text-muted'>Step 2</small>
+      </h5>
+      <h4 className='align-top'>
+        {selected.type === 'text'
+          ? 'Enter your nominee'
+          : `Enter your ${selected.type} nominee`}
+      </h4>
       {INPUT_SELECTOR[selected.type]}
-      <GoBack />
-    </>
+    </div>
   )
 }
 

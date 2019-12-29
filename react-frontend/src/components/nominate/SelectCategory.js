@@ -4,30 +4,37 @@ import CategoryInfo from './CategoryInfo'
 import LoadingIndicator from '../util/LoadingIndicator'
 import InputClear from '../util/InputClear'
 import padWithEmptyElements from '../../functions/padWithEmptyElements'
-import axios from 'axios'
 
 const SelectCategory = ({ hidden, select, selected }) => {
   const [contests, setContests] = useState(null)
   const [matching, setMatching] = useState(null)
   const [wasLoading, setWasLoading] = useState(false)
-  const [searchterm, setSearchterm] = useState(null)
+  const [searchterm, setSearchterm] = useState('')
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/contests`).then(res => {
-      setContests(res.data)
-      setWasLoading(true)
-    })
+    window
+      .fetch(`http://192.168.1.110:3001/api/contests`)
+      .then(response => response.json())
+      .then(data => {
+        //! timeout for force-testing the loading indicator on mobile
+        // setTimeout(() => {
+        setContests(data)
+        setWasLoading(true)
+        // }, 8000)
+      })
   }, [])
 
   useEffect(() => {
-    if (!searchterm) {
-      setMatching(contests)
-    } else {
-      const results = contests.filter(c =>
-        `${c.name}\n${c.description}`.includes(searchterm)
-      )
-      setMatching(results)
-    }
+    const term = searchterm.toLowerCase()
+    setMatching(
+      searchterm
+        ? contests.filter(
+            c =>
+              c.name.toLowerCase().includes(term) ||
+              c.description.toLowerCase().includes(term)
+          )
+        : contests
+    )
   }, [contests, searchterm])
 
   if (!matching)
@@ -45,19 +52,19 @@ const SelectCategory = ({ hidden, select, selected }) => {
   }`.trim()
 
   const handleInputChange = e => {
-    if (e.target.value.trim() === '') return setSearchterm(null)
+    window.scrollTo(0, 0)
     setSearchterm(e.target.value.trim())
   }
 
   const clearInput = () => {
-    document.getElementById('input-clearable').value = ''
-    setSearchterm(null)
+    window.scrollTo(0, 0)
+    setSearchterm('')
   }
 
   return (
     <div id='category-selection' className={classes}>
-      <h5 id='category-selection-heading'>
-        <small className='text-muted align-bottom'>Step 1</small>
+      <h5 id='category-selection-heading' className='align-bottom'>
+        <small className='text-muted'>Step 1</small>
       </h5>
       <h4 className='align-top'>Select a category</h4>
       <div className={'category-input' + (selected ? '' : ' stick')}>
@@ -68,7 +75,13 @@ const SelectCategory = ({ hidden, select, selected }) => {
             disabled={hidden ? true : false}
             onChange={handleInputChange}
           />
-          {searchterm && <InputClear onClick={clearInput} />}
+          {searchterm && (
+            <InputClear
+              onClick={clearInput}
+              selector='#input-clearable'
+              hidden={hidden ? true : false}
+            />
+          )}
         </InputGroup>
       </div>
       <div className='contests'>

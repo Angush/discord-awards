@@ -50,7 +50,7 @@ const App = () => {
 
   const handleKeydown = event => {
     if (![32, 13].includes(event.keyCode)) return
-    if (!document.activeElement.getAttribute('keyboard-clickable')) return
+    if (!document.activeElement.getAttribute('keyclickable')) return
     document.activeElement.click()
   }
 

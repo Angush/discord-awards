@@ -5,11 +5,11 @@ import { Link } from '@reach/router'
 
 const VotePage = ({ userData }) => {
   return (
-    <div className='fade-rise'>
-      <h1>Voting is not yet open!</h1>
+    <div className='vote-flow fade-rise text-center pad-top'>
+      <h3>Voting is not yet open!</h3>
       <p>
-        Go to <Link to='nominate'>the nomination page</Link> to nominate
-        something in one of our <Link to='categories'>many categories</Link>!
+        Visit <Link to='nominate'>the nomination page</Link> to nominate
+        something in one of our many categories!
       </p>
     </div>
   )

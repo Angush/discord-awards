@@ -171,6 +171,12 @@
       "name": "Favourite Fanart",
       "type": "art",
       "description": "Art by fans."
+    },
+    {
+      "id": 3,
+      "name": "Best Mod",
+      "type": "text",
+      "description": "Which Cauldron mod was the coolest in 2019?"
     }
   ]
 }

@@ -4,14 +4,19 @@ Do the nominations page first, with a votes page that just says "Voting is not o
 
 In order to create the nominations page, we need a few elements:
 
-1. Nav bar (login optional)
-2. On-page navigation (tabs? done with nested router maybe?)
-3. Various nomination input types, which correspond to the various categories:
-   1. Searchable fic entry (typeahead pulling from scraped WSS data) - **DO LAST!**
-   2. Manual fic entry; `FIELDS:` title + author + links - _if typeahead is done, make this a fallback with a de-emphasized link below the typeahead input._
-   3. Art entry; `FIELDS:` title + author + image/url - _support URL input first, but maybe also support direct image uploading? up to Keira._
-   4. Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"
+1. **DONE!** ~~Nav bar (login optional)~~
+2. **DONE!** ~~On-page navigation (tabs? done with nested router maybe?)~~ (I did a category selection screen with a search bar instead.)
+3. **IN-PROGRESS!** Various nomination input types, which correspond to the various categories:
+   1. **HALF-DONE!** ~~Searchable fic entry (typeahead pulling from scraped WSS data) - **DO LAST!**~~ (Still needs (a) scraped data, and (b) submission.)
+   2. **HALF-DONE!** ~~Manual fic entry; `FIELDS:` title + author + links - _if typeahead is done, make this a fallback with a de-emphasized link below the typeahead input._~~ (Still needs validation & submission.)
+   3. **TO-DO!** Art entry; `FIELDS:` title + author + image/url - _support URL input first, but maybe also support direct image uploading? up to Keira._
+   4. **TO-DO!** Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"
    5. Discord member selection (typeahead pulling from...?) - **ULTRA OPTIONAL!**
+4. On submission, change "Submit" button to a loading indicator and disable inputs until it's done.
+5. After submission, show the user a "Thanks for nominating" screen with three options:
+   1. "Nominate something else for the same category." (Takes user back to already-selected Step 2.)
+   2. "Add your nominee to another category." (How to do this? Save nominee data, then return to Step 1, and filter out categories with different types?)
+   3. "Go back to the start." (Basically just returns you to Step 1 as if you'd hit "Go back" a couple times.)
 
 Perhaps use **[Bootstrap 4.4](https://getbootstrap.com/docs/4.4/getting-started/introduction/)** to get it all up-and-running as quickly as possible? (Bonus: the styling works for the `react-bootstrap-typeahead` listed below.)
 

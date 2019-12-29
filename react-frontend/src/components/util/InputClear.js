@@ -1,11 +1,16 @@
 import React from 'react'
 
-const InputClear = ({ onClick }) => {
-  const props = {
-    'keyboard-clickable': 'true'
+const InputClear = ({ onClick, selector, hidden }) => {
+  const props = !hidden && {
+    keyclickable: 'true',
+    tabIndex: '0',
+    onClick: e => {
+      if (selector) document.querySelector(selector).value = ''
+      if (onClick) onClick(e)
+    }
   }
   return (
-    <span className='input-clear' onClick={onClick} tabIndex={0} {...props}>
+    <span className='input-clear' {...props}>
       <svg
         className='bi bi-x-circle'
         width='32px'

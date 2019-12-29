@@ -10,6 +10,14 @@ const NominationPage = () => {
   const select = category => {
     setSelected(category)
     navigate(`/nominate/${slug(category.name.toLowerCase())}`)
+
+    // = Potential use for slugs =
+    // Perhaps add pre-determined slugs to the raw data, so the slug
+    // library isn't needed. That way, we can also use slugs as IDs,
+    // and as query params, so if someone opens the app to a certain
+    // slug (like "/nominate/fic-of-the-year"), we can automatically
+    // select that category and jump straight to fic selection, once
+    // the category data has been loaded.
   }
 
   const deselect = () => {
