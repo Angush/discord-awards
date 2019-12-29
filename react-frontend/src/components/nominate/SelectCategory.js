@@ -5,6 +5,33 @@ import LoadingIndicator from '../util/LoadingIndicator'
 import InputClear from '../util/InputClear'
 import padWithEmptyElements from '../../functions/padWithEmptyElements'
 
+const rawContestData = [
+  {
+    id: 0,
+    name: 'Fic of the Year',
+    type: 'fic',
+    description: 'The best fic to happen this year.'
+  },
+  {
+    id: 1,
+    name: 'Favourite NSFW Fic',
+    type: 'fic',
+    description: 'Lewds galore. Cauldron-appropriate only!'
+  },
+  {
+    id: 2,
+    name: 'Favourite Fanart',
+    type: 'art',
+    description: 'Art by fans.'
+  },
+  {
+    id: 3,
+    name: 'Best Mod',
+    type: 'text',
+    description: 'Which Cauldron mod was the coolest in 2019?'
+  }
+]
+
 const SelectCategory = ({ hidden, select, selected }) => {
   const [contests, setContests] = useState(null)
   const [matching, setMatching] = useState(null)
@@ -12,16 +39,16 @@ const SelectCategory = ({ hidden, select, selected }) => {
   const [searchterm, setSearchterm] = useState('')
 
   useEffect(() => {
-    window
-      .fetch(`http://192.168.1.110:3001/api/contests`)
-      .then(response => response.json())
-      .then(data => {
-        //! timeout for force-testing the loading indicator on mobile
-        // setTimeout(() => {
-        setContests(data)
-        setWasLoading(true)
-        // }, 8000)
-      })
+    // window
+    //   .fetch(`http://192.168.1.110:3001/api/contests`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //! timeout for force-testing the loading indicator on mobile
+    setTimeout(() => {
+      setContests(rawContestData)
+      setWasLoading(true)
+    }, 4000)
+    // })
   }, [])
 
   useEffect(() => {
