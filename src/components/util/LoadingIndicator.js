@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Spinner from './Spinner'
 
-const LoadingIndicator = ({ timeout, children, showSlow = true }) => {
+const LoadingIndicator = ({ id, timeout, children, showSlow = true }) => {
   const [hidden, setHidden] = useState(timeout ? true : false)
   const [slowLoad, setSlowLoad] = useState(false)
 
@@ -24,10 +24,13 @@ const LoadingIndicator = ({ timeout, children, showSlow = true }) => {
   }, [hidden, showSlow])
 
   return (
-    <div className={hidden ? 'loading-section delayed' : 'loading-section'}>
+    <div
+      className={hidden ? 'loading-section delayed' : 'loading-section'}
+      id={id}
+    >
       <Spinner />
       <div className='loading-children'>
-        {children}
+        {children ? children : <div className='shrink-me'></div>}
         {slowLoad && (
           <div className='fade-rise'>This is taking a while, isn't it?</div>
         )}

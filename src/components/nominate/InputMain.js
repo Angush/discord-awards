@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import InputFic from './InputFic'
+import InputArt from './InputArt'
 
 const InputMain = ({ select, deselect, selected }) => {
   useEffect(() => {
@@ -11,17 +12,17 @@ const InputMain = ({ select, deselect, selected }) => {
 
   const INPUT_SELECTOR = {
     fic: <InputFic />,
-    art: <div>Art input not implemented.</div>
+    art: <InputArt />
   }
 
   const GoBack = () => (
     <a href='#back' className='goback' onClick={deselect}>
-      <small>Go back</small>
+      <small>{'< Go back'}</small>
     </a>
   )
 
   return (
-    <div id='nomination-selection'>
+    <div id='nomination-selection' className='max-width'>
       <h5 className='align-bottom'>
         <GoBack />
         <small className='text-muted'>Step 2</small>

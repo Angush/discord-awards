@@ -56,8 +56,9 @@ body {
   color: rgba(255, 255, 255, 1);
 }
 
-.nomination-flow .input-group {
-  margin: 24px 0;
+.max-width {
+  max-width: 768px;
+  margin: 24px auto 0 auto;
 }
 
 .category-input {
@@ -128,24 +129,29 @@ div.hidden {
   background-color: #fff !important;
 }
 
-.nomination-flow {
-  margin-bottom: calc(56px + 30vh);
+.vertical-padding {
+  margin-bottom: calc(56px + 20vh);
 }
 
 .input-clear {
   z-index: 30;
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  color: grey;
 }
 
-.input-clear {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  color: grey;
+.height-lg {
+  height: 48px;
 }
 
 .input-clear:hover {
   color: black;
   cursor: pointer;
+}
+
+.category-input input {
+  border-radius: 0.3rem !important;
 }
 
 .hidden .input-clear:hover {
@@ -167,26 +173,101 @@ input::placeholder {
   margin-top: 20vh;
 }
 
-.manual-input .input-group {
-  margin: 0;
+.submission-options .btn-primary {
+  width: 100%;
+  min-width: 200px;
 }
 
-.conjoined-inputs.input-group,
-.conjoined-inputs .input-group,
-.conjoined-inputs .input-group-text,
-.conjoined-inputs input {
-  border-radius: 0;
-  margin: 0;
+.nomination-flow .form-group,
+#typeahead-container {
+  margin: 24px 0;
 }
 
-.conjoined-inputs .input-group {
-  margin-bottom: -1px;
+.submission-options {
+  width: fit-content;
+  margin: 32px auto;
+}
+
+.form-group :not(.input-group-prepend, .input-group-append) button {
+  margin-right: 16px;
+}
+
+@media (max-width: 768px) {
+  #nomination-selection .form-row > div:first-child {
+    margin-bottom: 24px;
+  }
+}
+
+.submission-alternatives {
+  text-align: center;
+}
+
+.submission-alternatives > *:not(.btn-link) {
+  margin: 12px auto 0 auto !important;
+}
+
+.input-group-lg input,
+input.input-group-lg,
+input.form-control-lg {
+  font-size: 1rem !important;
+  /* padding: 3px auto !important; */
+  height: 48px !important;
+}
+
+#preview {
+  width: 100%;
+  height: fit-content;
+  max-width: 400px;
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+#preview > img {
+  align-self: flex-start;
+  border-radius: 1rem !important;
+}
+
+#image-load {
+  margin-top: 0;
+  z-index: 10;
+}
+
+.shrink-me {
+  margin-bottom: -19px;
+}
+
+#art-input button[type='submit'] {
+  /* margin-top: -20px; */
+  margin-bottom: -10px;
+}
+
+.input-group-lg .input-group-text {
+  font-size: 1rem !important;
+}
+
+button[disabled] {
+  cursor: default;
+}
+
+*[optional='true']::after {
+  content: '*';
+  opacity: 0.5;
 }
 
 /*
   Border radii on the vertically-grouped inputs (.conjoined-inputs)
   (really dodgy but I couldn't get it working another way)
 */
+
+.conjoined-inputs .input-group-text,
+.conjoined-inputs input {
+  border-radius: 0 !important;
+}
+
+.conjoined-inputs .input-group {
+  margin-top: -1px;
+}
 
 .conjoined-inputs img {
   width: 28px;
@@ -198,19 +279,19 @@ input::placeholder {
 }
 
 .conjoined-inputs > .input-group:first-child .input-group-text {
-  border-top-left-radius: 0.25rem;
+  border-top-left-radius: 0.25rem !important;
 }
 
 .conjoined-inputs > .input-group:last-child .input-group-text {
-  border-bottom-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem !important;
 }
 
 .conjoined-inputs > .input-group:first-child input {
-  border-top-right-radius: 0.25rem;
+  border-top-right-radius: 0.25rem !important;
 }
 
 .conjoined-inputs > .input-group:last-child input {
-  border-bottom-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem !important;
 }
 
 /* 

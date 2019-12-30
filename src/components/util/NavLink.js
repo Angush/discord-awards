@@ -7,8 +7,8 @@ const NavLink = props => {
     <Link
       {...props}
       className={classes}
-      getProps={({ isCurrent }) => {
-        if (isCurrent)
+      getProps={linkProps => {
+        if (linkProps.isPartiallyCurrent)
           return {
             className: classes + ' active'
           }

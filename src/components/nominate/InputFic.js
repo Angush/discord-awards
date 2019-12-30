@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { InputGroup, Form, Col, Button } from 'react-bootstrap'
+import { InputGroup, Form, Button } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import InputClear from '../util/InputClear'
+import Submission from '../util/Submission'
 const allFics = Object.values(require('../../FanficTitlesAndIDs.json'))
 
 const InputFic = ({ contest }) => {
@@ -11,9 +12,14 @@ const InputFic = ({ contest }) => {
   const [manual, setManual] = useState(false)
   const [fics] = useState(allFics)
 
+  const handleTypeaheadSubmit = e => {
+    e.preventDefault()
+    console.log(selection)
+  }
+
   if (!manual)
     return (
-      <>
+      <Form onSubmit={handleTypeaheadSubmit}>
         <InputGroup id='typeahead-container'>
           <Typeahead
             onInputChange={input => setSearchterm(input)}
@@ -44,7 +50,14 @@ const InputFic = ({ contest }) => {
             />
           )}
         </InputGroup>
-        <div id='selected'>
+
+        <Submission tall>
+          <Button variant='link' onClick={() => setManual(true)}>
+            Enter fic details manually
+          </Button>
+        </Submission>
+
+        <div id='selected' className='text-center'>
           Selected:
           {selection.length > 0 &&
             selection.map(fic => (
@@ -54,37 +67,39 @@ const InputFic = ({ contest }) => {
             ))}
           {selection.length === 0 && ' None!'}
         </div>
-        <a href='#manual' onClick={() => setManual(true)}>
-          Or click for manual input
-        </a>
-      </>
+      </Form>
     )
 
   const LINK_TYPES = [
     {
-      short: 'SB',
-      long: 'Spacebattles',
+      id: 'linkSB',
+      name: 'Spacebattles',
       img: '/images/sb.png'
     },
     {
-      short: 'SV',
-      long: 'Sufficient Velocity',
+      id: 'linkSV',
+      name: 'Sufficient Velocity',
       img: '/images/sv.png'
     },
     {
-      short: 'QQ',
-      long: 'Questionable Questing',
+      id: 'linkQQ',
+      name: 'Questionable Questing',
       img: '/images/qq.png'
     },
     {
-      short: 'AO3',
-      long: 'Archive Of Our Own',
+      id: 'linkAO3',
+      name: 'Archive Of Our Own',
       img: '/images/ao3.png'
     },
     {
-      short: 'FFN',
-      long: 'Fanfiction.net',
+      id: 'linkFFN',
+      name: 'Fanfiction.net',
       img: '/images/ffn.png'
+    },
+    {
+      id: 'linkMisc',
+      name: 'Miscellaneous',
+      img: '/images/misc.png'
     }
   ]
 
@@ -103,62 +118,68 @@ const InputFic = ({ contest }) => {
 
   if (manual)
     return (
-      <>
-        <Form id='manual-input' onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
           <Form.Row>
-            <Form.Group as={Col} controlId='ficTitle'>
-              <Form.Label>Title</Form.Label>
-              <Form.Control placeholder='Fic title' />
-            </Form.Group>
-            <Form.Group as={Col} controlId='ficAuthor'>
-              <Form.Label>Author</Form.Label>
-              <Form.Control placeholder='Author name' />
-            </Form.Group>
+            <div className='col-md-6'>
+              <InputGroup size='lg'>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Title</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control placeholder='Fic title' id='ficTitle' />
+              </InputGroup>
+            </div>
+            <div className='col-md-6'>
+              <InputGroup size='lg'>
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Author</InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control placeholder='Author name' id='ficAuthor' />
+              </InputGroup>
+            </div>
           </Form.Row>
+        </Form.Group>
 
-          <Form.Group id='ficIsNSFW'>
-            <Form.Check
-              custom
-              type='switch'
-              id='nomineeIsNSFW'
-              label='This nominee contains explicit sexual content'
-            />
-          </Form.Group>
+        <Form.Group>
+          <Form.Label>Links</Form.Label>
+          <InputGroup className='conjoined-inputs'>
+            {LINK_TYPES.map(link => {
+              return (
+                <InputGroup size='lg' key={link.id}>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text>
+                      <img
+                        src={link.img}
+                        alt={`${link.name} link input icon`}
+                      />
+                    </InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    id={link.id}
+                    placeholder={`${link.name} link`}
+                    aria-describedby={link.id}
+                  />
+                </InputGroup>
+              )
+            })}
+          </InputGroup>
+        </Form.Group>
 
-          <Form.Group>
-            <Form.Label>Links</Form.Label>
-            <InputGroup className='conjoined-inputs'>
-              {LINK_TYPES.map(link => {
-                return (
-                  <InputGroup key={link.short}>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text>
-                        <img
-                          src={link.img}
-                          alt={`${link.long} link input icon`}
-                          width='24px'
-                          height='24px'
-                        />
-                      </InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <Form.Control
-                      id={`link${link.short}`}
-                      placeholder={`${link.long} link`}
-                      aria-describedby={`link${link.short}`}
-                    />
-                  </InputGroup>
-                )
-              })}
-            </InputGroup>
-          </Form.Group>
+        <Form.Group className='text-center'>
+          <Form.Check
+            custom
+            type='switch'
+            id='nomineeIsNSFW'
+            label='This nominee contains explicit sexual content'
+          />
+        </Form.Group>
 
-          <Button type='submit'>Submit</Button>
-
-          <a href='#typeahead' onClick={() => setManual(false)}>
-            Or click for typeahead input
-          </a>
-        </Form>
-      </>
+        <Submission tall>
+          <Button variant='link' onClick={() => setManual(false)}>
+            Select fic interactively
+          </Button>
+        </Submission>
+      </Form>
     )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import { useCookies } from 'react-cookie'
-import { Router } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 import { Container, Navbar, Nav } from 'react-bootstrap'
 import NavLink from './components/util/NavLink'
 import VotePage from './pages/VotePage'
@@ -15,7 +15,7 @@ const App = () => {
   const [navlinks] = useState([
     {
       text: 'Vote',
-      to: '/'
+      to: '/vote'
     },
     {
       text: 'Nominate',
@@ -67,7 +67,7 @@ const App = () => {
         fixed='top'
       >
         <Container>
-          <Navbar.Brand>Cauldron Awards 2019</Navbar.Brand>
+          <Navbar.Brand>Cauldron Awards</Navbar.Brand>
           <Navbar.Toggle onClick={() => setExpanded(expanded ? false : true)} />
           <Navbar.Collapse>
             <Nav>
@@ -97,8 +97,9 @@ const App = () => {
       <Container>
         <div id='top'>Jump to top.</div>
         <Router>
-          <VotePage path='/' userData={null} />
+          <VotePage path='/vote' userData={null} />
           <NominationPage path='/nominate/*' />
+          <Redirect from='/' to='/nominate' />
         </Router>
       </Container>
 
