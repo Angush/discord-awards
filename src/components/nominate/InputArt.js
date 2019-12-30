@@ -120,8 +120,6 @@ const InputArt = () => {
         />
       </Form.Group>
 
-      <Submission tall disabled={!loaded || !artist} />
-
       {loaded && (
         <h5 className='text-center'>
           <em>{title ? title : 'Untitled'} </em>
@@ -132,6 +130,11 @@ const InputArt = () => {
       )}
       <div id='preview' className='mx-auto'>
         {!loaded && !error && url && <LoadingIndicator id='image-load' />}
+        {(!url || error) && (
+          <span className='text-muted '>
+            Enter {error ? 'a valid' : 'an'} image to submit.
+          </span>
+        )}
         {url && (
           <Image
             src={url}
@@ -147,6 +150,8 @@ const InputArt = () => {
           />
         )}
       </div>
+
+      <Submission tall disabled={!loaded || !artist} />
     </Form>
   )
 }
