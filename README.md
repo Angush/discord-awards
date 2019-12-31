@@ -39,6 +39,7 @@ Whilst testing this, I've realised there's a better structure available, and it 
 3. **`Step 3`** - Depends on the nominee type.
    - `fic`/`art`: Opens category selection form (pre-filtered so it only shows categories with matching types), where user can select **MULTIPLE** categories (as many as they want), thus enabling them to nominate their input for multiple categories at once.
    - `other`: Opens relevant category nomination form.
+4. **`Step 4`** - Submit form to server, then show feedback ("Thanks for nominating, click here to go back and nominate something else, or click here to nominate another {fic/art/other.title} for these categories," yadda yadda).
 
 ## Vote Page
 
