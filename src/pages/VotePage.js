@@ -8,7 +8,7 @@ const VotePage = ({ userData }) => {
     <div className='vote-flow fade-rise text-center pad-top'>
       <h3>Voting is not yet open!</h3>
       <p>
-        Visit <Link to='nominate'>the nomination page</Link> to nominate
+        Visit <Link to='/nominate'>the nomination page</Link> to nominate
         something in one of our many categories!
       </p>
     </div>

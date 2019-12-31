@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { InputGroup, FormControl } from 'react-bootstrap'
+import slug from 'slug'
 import CategoryInfo from './CategoryInfo'
 import LoadingIndicator from '../util/LoadingIndicator'
 import InputClear from '../util/InputClear'
 import padWithEmptyElements from '../../functions/padWithEmptyElements'
-// const rawContestData = require('../../FanficContests.json')
+const rawContestData = null // require('../../FanficContests.json')
 
-const SelectCategory = ({ hidden, select, selected }) => {
+const SelectCategory = ({ hidden, select, selected, href }) => {
   const [contests, setContests] = useState(null)
   const [matching, setMatching] = useState(null)
   const [wasLoading, setWasLoading] = useState(false)
   const [searchterm, setSearchterm] = useState('')
 
   useEffect(() => {
-    window
-      .fetch(`http://192.168.1.110:3001/api/contests`)
-      .then(response => response.json())
-      .then(data => {
-        setContests(data)
-        setWasLoading(true)
-      })
+    if (rawContestData) setContests(rawContestData)
+    else
+      window
+        .fetch(`http://192.168.1.110:3001/api/contests`)
+        .then(response => response.json())
+        .then(data => {
+          let editedData = data.map(category => {
+            return {
+              ...category,
+              slug: slug(category.name.toLowerCase())
+            }
+          })
+          setContests(editedData)
+          setWasLoading(true)
+        })
   }, [])
 
   useEffect(() => {
@@ -34,6 +43,12 @@ const SelectCategory = ({ hidden, select, selected }) => {
         : contests
     )
   }, [contests, searchterm])
+
+  useEffect(() => {
+    if (!contests || href === '' || selected) return
+    let preselected = contests.find(item => item.slug === href)
+    if (preselected) select(preselected)
+  }, [contests, href, selected, select])
 
   if (!matching)
     return (

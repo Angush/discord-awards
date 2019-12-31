@@ -9,6 +9,7 @@ const InputFic = ({ contest }) => {
   const [searchterm, setSearchterm] = useState('')
   const [selection, setSelection] = useState([])
   const [typeahead, setTypeahead] = useState(null)
+  const [manualInput, setManualInput] = useState({})
   const [manual, setManual] = useState(false)
   const [fics] = useState(allFics)
 
@@ -126,7 +127,7 @@ const InputFic = ({ contest }) => {
                 <InputGroup.Prepend>
                   <InputGroup.Text>Title</InputGroup.Text>
                 </InputGroup.Prepend>
-                <Form.Control placeholder='Fic title' id='ficTitle' />
+                <Form.Control placeholder='Fic title' id='ficTitle' onChange={e => setManualInput({ ...manualInput, title: e.target.value })} />
               </InputGroup>
             </div>
             <div className='col-md-6'>
@@ -173,6 +174,31 @@ const InputFic = ({ contest }) => {
             label='This nominee contains explicit sexual content'
           />
         </Form.Group>
+
+        <div id='preview' className='mx-auto'>
+          {/* {!loaded && !error && url && (
+            <LoadingIndicator timeout={100} id='image-load' />
+          )}
+          {(!url || error) && (
+            <span className='text-muted '>
+              Enter {error ? 'a valid' : 'an'} image to submit.
+            </span>
+          )}
+          {url && (
+            <Image
+              src={url}
+              alt='Your nomination (preview)'
+              onLoad={() => {
+                setError(false)
+                setLoaded(true)
+              }}
+              onError={() => setError(true)}
+              className={(error || !loaded) && 'd-none'}
+              rounded
+              fluid
+            />
+          )} */}
+        </div>
 
         <Submission tall>
           <Button variant='link' onClick={() => setManual(false)}>

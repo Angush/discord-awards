@@ -173,7 +173,8 @@ input::placeholder {
   margin-top: 20vh;
 }
 
-.submission-options .btn-primary {
+.submission-options .btn-primary,
+.submission-options .btn-outline-primary {
   width: 100%;
   min-width: 200px;
 }
@@ -319,6 +320,10 @@ button[disabled] {
 .loading-section.delayed {
   opacity: 0;
   padding-top: 10px;
+}
+
+.btn-link:hover {
+  cursor: pointer;
 }
 
 /*

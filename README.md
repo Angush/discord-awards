@@ -12,20 +12,33 @@ In order to create the nominations page, we need a few elements:
    1. **`HALF-DONE!`** ~~Searchable fic entry (typeahead pulling from scraped WSS data) - **DO LAST!**~~ **(Still needs (a) scraped data, and (b) submission.)**
    2. **`HALF-DONE!`** ~~Manual fic entry; `FIELDS:` title + author + links - _if typeahead is done, make this a fallback with a de-emphasized link below the typeahead input._~~ **(Still needs validation & submission.)**
    3. **`HALF-DONE!`** ~~Art entry; `FIELDS:` title + author + image/url~~ - _~~support URL input first, but~~ maybe also support direct image uploading? up to Keira._ **(Still needs submission & possibly image uploading.)**
-   4. **`TO-DO!`** Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"
+   4. **`HALF-DONE!`** ~~Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"~~ **(Still needs submission & support for image categories, and maybe image/url validation?)**
    5. Discord member selection (typeahead pulling from...?) - **ULTRA OPTIONAL!**
 4. Add nominee preview below submit button for more complex inputs (ie. art and fic nominees).
-   - Art preview: **`FINISHED!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~
-   - Fic preview: **`TO-DO!`** Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.
+   - `art` preview: **`FINISHED!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~
+   - `fic` preview: **`TO-DO!`** Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.
+   - `other` preview? Maybe figure out a way to do it.
 5. Add verification (ie. required fields) and ensure the submit button is disabled when they aren't properly filled. Also display the "This is a required field." messages on blur if they're empty.
    - Submit disabling already functional for art input.
    - Need to figure out the best way (UI-wise and code-wise) to display stuff like "This is a required field." and other validation text.
 6. On submission, change "Submit" button to a loading indicator and disable inputs until it's done. (Do some nice animations/transitions, perhaps?)
-7. After submission, show the user a "Thanks for nominating" screen with three options:
-   1. "Nominate something else for the same category." (Takes user back to already-selected Step 2.)
-   2. "Add your nominee to another category." (How to do this? Save nominee data, then return to Step 1, and filter out categories with different types?)
-   3. "Go back to the start." (Basically just returns you to Step 1 as if you'd hit "Go back" a couple times.)
-8. Add step-skipping support via Reach-Router's location props, so `/nominate` takes us to the category selection, while `/nominate/:category-slug` will jump us straight to step 2 for the given category?
+7. **`OBSOLETE!` - SEE [RESTRUCTURING](#nomination-restructuring)** - ~~After submission, show the user a "Thanks for nominating" screen with three options:~~
+   1. ~~"Nominate something else for the same category." (Takes user back to already-selected Step 2.)~~
+   2. ~~"Add your nominee to another category." (How to do this? Save nominee data, then return to Step 1, and filter out categories with different types?)~~
+   3. ~~"Go back to the start." (Basically just returns you to Step 1 as if you'd hit "Go back" a couple times.)~~
+8. **`DONE!`** - ~~Add step-skipping support via Reach-Router's location props, so `/nominate` takes us to the category selection, while `/nominate/:category-slug` will jump us straight to step 2 for the given category?~~ **(Will need tweaking/redoing after restructuring, though; see below.)**
+
+### Nomination Restructuring
+
+Whilst testing this, I've realised there's a better structure available, and it should be converted to utilize that.
+
+1. **`Step 1`** - Select the nominee **TYPE** (ie. `fic`, `art`, or `other`).
+2. **`Step 2`** - Depends on the nominee type.
+   - `fic`/`art`: Opens relevant nomination form.
+   - `other`: Opens category selection screen (pre-filtered so it only shows those with the type `other`), where user can select **ONE** category.
+3. **`Step 3`** - Depends on the nominee type.
+   - `fic`/`art`: Opens category selection form (pre-filtered so it only shows categories with matching types), where user can select **MULTIPLE** categories (as many as they want), thus enabling them to nominate their input for multiple categories at once.
+   - `other`: Opens relevant category nomination form.
 
 ## Vote Page
 

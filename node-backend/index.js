@@ -1,9 +1,10 @@
-let fs = require('fs')
-let axios = require('axios')
-let btoa = require('btoa')
-let express = require('express')
-let cors = require('cors')
-let app = express()
+const fs = require('fs')
+const axios = require('axios')
+const btoa = require('btoa')
+const express = require('express')
+const cors = require('cors')
+const app = express()
+const path = require('path')
 require('dotenv').config()
 
 const CLIENT_ID = process.env.CLIENT_ID
@@ -71,6 +72,11 @@ app.use(cors({
 // populateCollections()
 
 let AwardsClient = JSON.parse(fs.readFileSync('./data.json'))
+
+console.log(__dirname)
+console.log(path.join(__dirname, '../build/index.html'))
+
+app.use(express.static(path.join(__dirname, '../build')))
 
 app.get('/api', (req, res) => {
   console.log(`${new Date().toUTCString()} - GET request @ /api`)
@@ -206,6 +212,10 @@ app.get('/authenticated', (req, res) => {
     // ! Then, the login button on the frontend can just open the login endpoint on the backend.
 
   }).catch(console.error)
+})
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'))
 })
 
 let server = app.listen(3001, () => {

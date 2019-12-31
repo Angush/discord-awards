@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import InputFic from './InputFic'
 import InputArt from './InputArt'
+import InputOther from './InputOther'
 
-const InputMain = ({ select, deselect, selected }) => {
+const InputMain = ({ select, deselect, category }) => {
   useEffect(() => {
     document.getElementById('input-main').scrollIntoView({
       behavior: 'smooth',
@@ -12,13 +13,19 @@ const InputMain = ({ select, deselect, selected }) => {
 
   const INPUT_SELECTOR = {
     fic: <InputFic />,
-    art: <InputArt />
+    art: <InputArt />,
+    other: <InputOther fields={category.fields || []} />
   }
 
   const GoBack = () => (
-    <a href='#back' className='goback' onClick={deselect}>
+    <div
+      className='goback btn-link'
+      keyclickable='true'
+      onClick={deselect}
+      tabIndex={0}
+    >
       <small>{'< Go back'}</small>
-    </a>
+    </div>
   )
 
   return (
@@ -28,11 +35,11 @@ const InputMain = ({ select, deselect, selected }) => {
         <small className='text-muted'>Step 2</small>
       </h5>
       <h4 className='align-top'>
-        {selected.type === 'text'
-          ? 'Enter your nominee'
-          : `Enter your ${selected.type} nominee`}
+        {category.type === 'other'
+          ? `Enter your ${category.title ? ` ${category.title} ` : ``}nominee`
+          : `Enter your ${category.type} nominee`}
       </h4>
-      {INPUT_SELECTOR[selected.type]}
+      {INPUT_SELECTOR[category.type]}
     </div>
   )
 }

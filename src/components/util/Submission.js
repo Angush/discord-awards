@@ -6,8 +6,9 @@ const Submission = props => {
     <div className='submission-options'>
       <Button
         type='submit'
-        className={props.tall && 'height-lg'}
         disabled={props.disabled}
+        className={props.tall && 'height-lg'}
+        variant={props.disabled ? 'outline-primary' : 'primary'}
       >
         Submit
       </Button>

@@ -1,30 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { navigate } from '@reach/router'
 import slug from 'slug'
 import SelectCategory from '../components/nominate/SelectCategory'
 import InputMain from '../components/nominate/InputMain'
 
-const NominationPage = () => {
+const NominationPage = props => {
   const [selected, setSelected] = useState(null)
+  const [clicked, setClicked] = useState(false)
+  const href = props['*']
+
+  useEffect(() => {
+    if (selected && href === '')
+      navigate(`/nominate/${slug(selected.name.toLowerCase())}`)
+    else if (!selected && href !== '' && clicked) navigate(`/nominate`)
+  }, [selected, href, clicked])
 
   const select = category => {
     setSelected(category)
-    navigate(`/nominate/${slug(category.name.toLowerCase())}`)
-
-    // = Potential use for slugs =
-    // Perhaps add pre-determined slugs to the raw data, so the slug
-    // library isn't needed. That way, we can also use slugs as IDs,
-    // and as query params, so if someone opens the app to a certain
-    // slug (like "/nominate/fic-of-the-year"), we can automatically
-    // select that category and jump straight to fic selection, once
-    // the category data has been loaded.
+    setClicked(true)
   }
 
   const deselect = () => {
     setSelected(null)
-    navigate('/nominate')
+    setClicked(true)
     window.scrollTo(0, 0)
   }
+
+  // const navigateTo = target => {
+  //   if (target === 'step1') setSelected(null)
+  //   else setPreselected(target)
+  // }
 
   return (
     <div className='nomination-flow'>
@@ -32,11 +37,12 @@ const NominationPage = () => {
         hidden={selected ? true : false}
         select={select}
         selected={selected}
+        href={!clicked ? href : null}
       />
       {selected && (
         <div id='input-main' className='fade-rise'>
           <hr></hr>
-          <InputMain select={select} deselect={deselect} selected={selected} />
+          <InputMain select={select} deselect={deselect} category={selected} />
           <div className='vertical-padding'></div>
         </div>
       )}

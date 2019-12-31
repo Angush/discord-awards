@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Form, Button, InputGroup, Image } from 'react-bootstrap'
+import { Form, InputGroup, Image } from 'react-bootstrap'
+// import { Form, Button, InputGroup, Image } from 'react-bootstrap'
 import Submission from '../util/Submission'
 import LoadingIndicator from '../util/LoadingIndicator'
 
@@ -129,7 +130,9 @@ const InputArt = () => {
         </h5>
       )}
       <div id='preview' className='mx-auto'>
-        {!loaded && !error && url && <LoadingIndicator id='image-load' />}
+        {!loaded && !error && url && (
+          <LoadingIndicator timeout={100} id='image-load' />
+        )}
         {(!url || error) && (
           <span className='text-muted '>
             Enter {error ? 'a valid' : 'an'} image to submit.

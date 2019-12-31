@@ -174,9 +174,86 @@
     },
     {
       "id": 3,
-      "name": "Best Mod",
-      "type": "text",
-      "description": "Which Cauldron mod was the coolest in 2019?"
+      "name": "Coolest Mod",
+      "type": "other",
+      "title": "Mod",
+      "description": "Which Cauldron mod was the coolest in 2019?",
+      "fields": [
+        {
+          "id": "modName",
+          "name": "Name",
+          "placeholder": "The Mod's name"
+        },
+        {
+          "id": "modWhy",
+          "name": "Reason",
+          "placeholder": "Why was this Mod the coolest?"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Best Event",
+      "type": "other",
+      "title": "event",
+      "description": "Which Cauldron event made the biggest mark?",
+      "fields": [
+        {
+          "id": "eventName",
+          "name": "Event Name",
+          "placeholder": "What was the event called?"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Best Pet",
+      "type": "other",
+      "title": "pet",
+      "description": "The cutest pet belonging to a Cauldron member.",
+      "fields": [
+        {
+          "id": "petName",
+          "name": "Name",
+          "placeholder": "The pet's name"
+        },
+        {
+          "id": "petOwner",
+          "name": "Owner",
+          "placeholder": "Name of the pet's owner"
+        },
+        {
+          "id": "petPhoto",
+          "name": "Photo",
+          "placeholder": "A photo of the pet",
+          "type": "image"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Favourite Satellite/Offshoot Community",
+      "type": "other",
+      "title": "offshoot",
+      "description": "Best Cauldron offshoot community.",
+      "fields": [
+        {
+          "id": "communityName",
+          "name": "Name",
+          "placeholder": "Name of the community"
+        },
+        {
+          "id": "communityOwner",
+          "name": "Creator",
+          "placeholder": "Name of the community's creator"
+        },
+        {
+          "id": "communityLink",
+          "name": "Link",
+          "placeholder": "A link to the community",
+          "type": "link"
+        }
+      ]
     }
   ]
 }
