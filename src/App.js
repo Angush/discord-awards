@@ -26,8 +26,32 @@ const App = () => {
   ])
 
   useEffect(() => {
+    window.addEventListener('click', handleClick)
     window.addEventListener('keydown', handleKeydown)
   }, [])
+
+  const handleClick = event => {
+    //* Handle clicks on card images (for opening lightboxes)
+    if (
+      event.target.tagName === 'IMG' &&
+      Object.values(event.target.classList).some(c =>
+        ['card-img', 'card-img-bottom', 'card-img-top'].includes(c)
+      )
+    ) {
+      event.preventDefault()
+      // console.log(
+      //   `Clicked card image! This is when we'd show a lightbox. Though that isn't actually coded yet.`
+      // )
+    }
+
+    //* The following is code for an attempt at wiggling disabled buttons on click
+    // if (event.target.classList.contains('button-disabled')) {
+    //   event.preventDefault()
+    //   setTimeout(() => {
+    //     event.target.blur()
+    //   }, 800)
+    // }
+  }
 
   const handleKeydown = event => {
     if (![32, 13].includes(event.keyCode)) return

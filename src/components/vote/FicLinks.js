@@ -1,5 +1,6 @@
 import React from 'react'
 
+//! move this elsewhere... somewhere
 const TYPE = {
   sb: {
     img: '/images/sb.png',
@@ -60,6 +61,7 @@ const getLinkType = link => {
 }
 
 const FicLinks = ({ links }) => {
+  //! move this sorting to the Submit stage (where shortening should also occur), and have database just store it as raw JSON
   const sorted = links
     .map(link => {
       return {
@@ -73,7 +75,12 @@ const FicLinks = ({ links }) => {
     <div className='fic-links'>
       {sorted.map(link => {
         return (
-          <a key={link.url} href={link.url}>
+          <a
+            key={link.url}
+            href={link.url}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {link.element && link.element}
             {link.img && <img src={link.img} alt='Destination website icon.' />}
           </a>

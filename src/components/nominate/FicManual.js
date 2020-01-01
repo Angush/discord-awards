@@ -42,8 +42,6 @@ const FicManual = ({ input, setInput }) => {
     if (!blurred[field]) setBlurred({ ...blurred, [field]: true })
   }
 
-  const errorClass = 'label-error'
-
   return (
     <>
       <Form.Group>
@@ -61,10 +59,7 @@ const FicManual = ({ input, setInput }) => {
                 onBlur={e => blur('title')}
               />
             </InputGroup>
-            <LabelShrinkable
-              valid={input.title}
-              className={blurred.title && errorClass}
-            >
+            <LabelShrinkable valid={input.title} error={blurred.title}>
               Fic title required.
             </LabelShrinkable>
           </Col>
@@ -81,10 +76,7 @@ const FicManual = ({ input, setInput }) => {
                 onBlur={e => blur('author')}
               />
             </InputGroup>
-            <LabelShrinkable
-              valid={input.author}
-              className={blurred.author && errorClass}
-            >
+            <LabelShrinkable valid={input.author} error={blurred.author}>
               Fic author required.
             </LabelShrinkable>
           </Col>
@@ -127,7 +119,7 @@ const FicManual = ({ input, setInput }) => {
         </InputGroup>
         <LabelShrinkable
           valid={input.links && Object.values(input.links).length > 0}
-          className={blurred.links && errorClass}
+          error={blurred.links}
         >
           Fic link required (at least one).
         </LabelShrinkable>

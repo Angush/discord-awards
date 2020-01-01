@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap'
 import Submission from '../util/Submission'
 import FicTypeahead from './FicTypeahead'
 import FicManual from './FicManual'
-import FicCard from '../cards/FicCard'
+import PreviewCard from '../cards/PreviewCard'
 
 const InputFic = ({ contest }) => {
   const [manualInput, setManualInput] = useState({})
@@ -68,7 +68,8 @@ const InputFic = ({ contest }) => {
           </span>
         )}
         {ficData && (
-          <FicCard
+          <PreviewCard
+            type='fic'
             fic={ficData}
             className={Object.values(ficData).length === 0 && 'd-none'}
           />

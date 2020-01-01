@@ -226,6 +226,16 @@
           "id": "image",
           "name": "Photo",
           "placeholder": "A photo of the pet"
+        },
+        {
+          "id": "description",
+          "name": "Cool Facts",
+          "placeholder": "Some cool facts about this pet"
+        },
+        {
+          "id": "link",
+          "name": "Gallery",
+          "placeholder": "Where we can find more photos"
         }
       ]
     },

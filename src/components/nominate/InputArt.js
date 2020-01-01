@@ -109,12 +109,8 @@ const InputArt = () => {
             </Button>
           </InputGroup.Append> */}
         </InputGroup>
-        <LabelShrinkable valid={!error && formData.url}>
-          {error ? (
-            <span className='label-error'>Valid image required.</span>
-          ) : (
-            <span>Image required.</span>
-          )}
+        <LabelShrinkable valid={!error && formData.url} error={error}>
+          {error ? 'Valid image required.' : 'Image required.'}
         </LabelShrinkable>
       </Form.Group>
 
@@ -141,9 +137,10 @@ const InputArt = () => {
         )}
         {formData.url && (
           <ArtCard
-            formData={formData}
+            type='art'
             onLoad={onLoad}
             onError={onError}
+            formData={formData}
             className={(error || !loaded) && 'd-none'}
           />
         )}

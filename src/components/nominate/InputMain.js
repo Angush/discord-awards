@@ -36,7 +36,7 @@ const InputMain = ({ select, deselect, category }) => {
       </h5>
       <h4 className='align-top'>
         {category.type === 'other'
-          ? `Enter your ${category.title ? ` ${category.title} ` : ``}nominee`
+          ? `Enter your ${category.title ? `${category.title} ` : ``}nominee`
           : `Enter your ${category.type} nominee`}
       </h4>
       {INPUT_SELECTOR[category.type]}

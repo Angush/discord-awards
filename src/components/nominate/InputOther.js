@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
+import LabelShrinkable from '../util/LabelShrinkable'
 import Submission from '../util/Submission'
+import PreviewCard from '../cards/PreviewCard'
 
 const InputOther = ({ fields }) => {
   const [formData, setFormData] = useState({})
   const [valid, setValid] = useState(false)
+
+  //! needs support for:
+  // - optional fields
+  // - validation on images (like art input) and links (like fic input)
+  const types = {}
+  fields.forEach(field => (types[field.id] = field.name))
 
   useEffect(() => {
     const validateField = field =>
@@ -16,15 +24,7 @@ const InputOther = ({ fields }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const data = Object.values(e.target.getElementsByTagName('input')).map(
-      input => {
-        return {
-          id: input.id,
-          value: input.type === 'checkbox' ? input.checked : input.value
-        }
-      }
-    )
-    console.log(data)
+    console.log(formData)
   }
 
   return (
@@ -37,7 +37,11 @@ const InputOther = ({ fields }) => {
                 <InputGroup.Text>{item.name}</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                placeholder={item.placeholder}
+                placeholder={
+                  item.placeholder
+                    ? item.placeholder
+                    : `Enter ${item.name.toLowerCase()} here`
+                }
                 id={item.id}
                 size='lg'
                 onChange={e =>
@@ -45,15 +49,25 @@ const InputOther = ({ fields }) => {
                 }
               />
             </InputGroup>
-            {item.text && (
-              <>
-                <Form.Text>{item.text}</Form.Text>
-                <div className='shrink-me'></div>
-              </>
+            {!item.optional && (
+              <LabelShrinkable valid={formData[item.id]}>
+                {item.text}
+              </LabelShrinkable>
             )}
           </Form.Group>
         )
       })}
+
+      <div id='preview' className='mx-auto'>
+        {formData && (
+          <PreviewCard
+            data={formData}
+            requiredTypes={types}
+            className={Object.values(formData).length === 0 && 'd-none'}
+            preview={true}
+          />
+        )}
+      </div>
 
       <Submission tall disabled={!valid} />
     </Form>
