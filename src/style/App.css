@@ -12,20 +12,13 @@ body {
   scroll-behavior: smooth;
 }
 
-.links img {
-  height: 32px;
-  width: 32px;
-  margin-right: 10px;
-  /* border-radius: 100%; */
-}
-
-.card,
+.contests .card,
 .contest-filler {
   width: 250px;
   background: white;
   border-radius: 10px;
   margin: 8px;
-  transition: all 0.2s;
+  transition: all 0.2s !important;
   flex-grow: 1;
 }
 
@@ -84,7 +77,7 @@ body {
 .enabled-card:hover {
   transform: translateY(-3px);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  background: rgb(255, 255, 235);
+  background: #d1e7ff;
 }
 
 .enabled-card {
@@ -121,8 +114,7 @@ div.hidden {
 }
 
 .selected-card {
-  background: rgb(255, 255, 235);
-  opacity: 0.7;
+  transition: all 1s;
 }
 
 .nomination-flow input:disabled {
@@ -215,18 +207,21 @@ input.form-control-lg {
   height: 48px !important;
 }
 
+.rbt-input-hint input {
+  font-size: 1rem !important;
+  padding-top: 11px !important;
+}
+
 #preview {
   width: 100%;
   height: fit-content;
   max-width: 400px;
-  max-height: 400px;
   display: flex;
   justify-content: center;
 }
 
-#preview > img {
-  align-self: flex-start;
-  border-radius: 1rem !important;
+#preview > .card {
+  width: 100%;
 }
 
 #image-load {
@@ -236,6 +231,11 @@ input.form-control-lg {
 
 .shrink-me {
   margin-bottom: -19px;
+}
+
+.label-error {
+  transition: color 0.3s;
+  color: red;
 }
 
 #art-input button[type='submit'] {
@@ -254,6 +254,88 @@ button[disabled] {
 *[optional='true']::after {
   content: '*';
   opacity: 0.5;
+}
+
+.art-card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fic-card,
+.art-card {
+  transition: all 0.2s !important;
+}
+
+.fic-card:hover,
+.art-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-parent {
+  overflow: hidden;
+}
+
+.card-img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.art-card .card-title {
+  margin-top: -6px;
+}
+
+.art-card .card-img:hover {
+  cursor: pointer;
+}
+
+.nsfw-img {
+  filter: blur(30px);
+  z-index: 1;
+}
+
+.nsfw-img:hover {
+  filter: blur(0px);
+  transition: filter 3s ease-in;
+}
+
+.nsfw-indicator {
+  color: rgb(255, 75, 75);
+  font-size: 1rem;
+  font-weight: normal;
+  background-color: #343a40;
+}
+
+.art-card .nsfw-indicator {
+  position: absolute;
+  margin-top: -44px;
+  left: 0px;
+  padding: 6px 20px 0px 20px;
+  border-top-right-radius: 0.25rem;
+}
+
+.fic-card .nsfw-indicator {
+  float: right;
+  vertical-align: top;
+}
+
+.fic-links {
+  margin-top: 10px;
+}
+
+.fic-links img,
+.fic-links .misc-link-svg {
+  height: 32px;
+  width: 32px;
+}
+
+.fic-links a {
+  margin-right: 10px;
+}
+
+.bg-dark .misc-link-svg {
+  fill: rgb(230, 230, 230);
 }
 
 /*

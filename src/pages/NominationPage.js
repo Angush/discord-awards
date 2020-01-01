@@ -43,9 +43,9 @@ const NominationPage = props => {
         <div id='input-main' className='fade-rise'>
           <hr></hr>
           <InputMain select={select} deselect={deselect} category={selected} />
-          <div className='vertical-padding'></div>
         </div>
       )}
+      <div className='vertical-padding'></div>
     </div>
   )
 }

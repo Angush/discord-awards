@@ -7,20 +7,27 @@ Do the nominations page first, with a votes page that just says "Voting is not o
 In order to create the nominations page, we need a few elements:
 
 1. **`DONE!`** ~~Nav bar (login optional)~~
-2. **`DONE!`** ~~On-page navigation (tabs? done with nested router maybe?)~~ **(I did a category selection screen with a search bar instead.)**
+2. **`DONE!`** ~~On-page navigation (tabs? done with nested router maybe?)~~
+   - **I did a category selection screen with a search bar instead.**
 3. **`IN-PROGRESS!`** Various nomination input types, which correspond to the various categories:
-   1. **`HALF-DONE!`** ~~Searchable fic entry (typeahead pulling from scraped WSS data) - **DO LAST!**~~ **(Still needs (a) scraped data, and (b) submission.)**
-   2. **`HALF-DONE!`** ~~Manual fic entry; `FIELDS:` title + author + links - _if typeahead is done, make this a fallback with a de-emphasized link below the typeahead input._~~ **(Still needs validation & submission.)**
-   3. **`HALF-DONE!`** ~~Art entry; `FIELDS:` title + author + image/url~~ - _~~support URL input first, but~~ maybe also support direct image uploading? up to Keira._ **(Still needs submission & possibly image uploading.)**
-   4. **`HALF-DONE!`** ~~Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"~~ **(Still needs submission & support for image categories, and maybe image/url validation?)**
-   5. Discord member selection (typeahead pulling from...?) - **ULTRA OPTIONAL!**
+   1. **`DONE!`** ~~Searchable fic entry (typeahead pulling from scraped WSS data).~~
+      - Still needs: **(a) scraped data, and (b) submission.**
+   2. **`DONE!`** ~~Manual fic entry; `FIELDS:` title + author + links - as a fallback with a de-emphasized link below the typeahead input.~~
+      - Still needs: **validation & submission.**
+   3. **`DONE!`** ~~Art entry; `FIELDS:` title + author + image/url - support URL input first.~~
+      - Still needs: **submission & possibly image uploading.**
+      - Maybe also support direct image uploading? Discuss with Keira.
+   4. **`DONE!`** ~~Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"~~
+      - Still needs: **submission & support for image categories, and maybe image/url validation?**
+   5. ~~Discord member selection (typeahead pulling from...?)~~ - **ULTRA OPTIONAL!** (and probably not worth it tbh)
 4. Add nominee preview below submit button for more complex inputs (ie. art and fic nominees).
    - `art` preview: **`FINISHED!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~
-   - `fic` preview: **`TO-DO!`** Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.
+   - `fic` preview: **`FINISHED!`** ~~Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.~~
    - `other` preview? Maybe figure out a way to do it.
-5. Add verification (ie. required fields) and ensure the submit button is disabled when they aren't properly filled. Also display the "This is a required field." messages on blur if they're empty.
+5. **`DONE!`** ~~Add verification (ie. required fields) and ensure the submit button is disabled when they aren't properly filled. Also display the "This is a required field." messages on blur if they're empty.~~
    - Submit disabling already functional for art input.
-   - Need to figure out the best way (UI-wise and code-wise) to display stuff like "This is a required field." and other validation text.
+   - **`DONE!`** ~~Need to figure out the best way (UI-wise and code-wise) to display stuff like "This is a required field." and other validation text.~~
+     - My solution: **I set up a LabelShrinkable component which takes a `valid` prop.** If that prop equates to true, it will render with the `invisible` class, thus hiding it and its children.
 6. On submission, change "Submit" button to a loading indicator and disable inputs until it's done. (Do some nice animations/transitions, perhaps?)
 7. **`OBSOLETE!` - SEE [RESTRUCTURING](#nomination-restructuring)** - ~~After submission, show the user a "Thanks for nominating" screen with three options:~~
    1. ~~"Nominate something else for the same category." (Takes user back to already-selected Step 2.)~~

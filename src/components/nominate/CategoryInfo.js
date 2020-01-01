@@ -13,8 +13,15 @@ const CategoryInfo = props => {
         keyclickable: 'true'
       }
 
+  const selectedProps = selected
+    ? {
+        bg: 'primary',
+        text: 'white'
+      }
+    : {}
+
   return (
-    <Card {...cardProps}>
+    <Card {...cardProps} {...selectedProps}>
       <Card.Body>
         <Card.Title>{data.name}</Card.Title>
         <Card.Text>{data.description}</Card.Text>

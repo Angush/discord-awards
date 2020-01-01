@@ -2,43 +2,42 @@ import React, { useState } from 'react'
 import { InputGroup } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import InputClear from '../util/InputClear'
-const allFics = Object.values(require('../../FanficTitlesAndIDs.json'))
+const allFics = require('../../json/SimpleFics.json')
 
-const FicTypeahead = () => {
+const FicTypeahead = ({ input, setInput }) => {
   const [searchterm, setSearchterm] = useState('')
-  const [selection, setSelection] = useState([])
-  const [fics] = useState(allFics)
+  const [typeahead, setTypeahead] = useState(null)
 
   return (
-    <>
-      <InputGroup id='typeahead-container'>
-        <Typeahead
-          onInputChange={input => setSearchterm(input)}
-          onChange={selected => setSelection(selected)}
-          options={fics}
-          selected={selection}
-          paginate={true}
-          maxResults={15}
-          placeholder='Search for a fic...'
-          bsSize='lg'
-          labelKey={option =>
-            option.author ? `${option.title} by ${option.author}` : option
-          }
-          id='typeahead'
+    <InputGroup id='typeahead-container'>
+      <Typeahead
+        onInputChange={text => setSearchterm(text)}
+        ref={ref => setTypeahead(ref)}
+        onChange={selected => {
+          setInput(selected[0])
+          let text = typeahead.getInstance().getInput()
+          setSearchterm(text.value)
+        }}
+        options={allFics}
+        selected={input && [input]}
+        value={input}
+        paginate={true}
+        maxResults={15}
+        placeholder='Search for a fic...'
+        bsSize='lg'
+        labelKey={fic => `${fic.title} by ${fic.author}`}
+        id='typeahead'
+      />
+      {searchterm && (
+        <InputClear
+          onClick={() => {
+            typeahead.getInstance().clear()
+            setInput(null)
+            setSearchterm('')
+          }}
         />
-        {searchterm && <InputClear selector='.rbt input' />}
-      </InputGroup>
-      <div id='selected'>
-        Selected:
-        {selection.length > 0
-          ? selection.map(fic => (
-              <div className='bold' key={fic.title ? fic.title : fic}>
-                {fic.author ? `${fic.title} by ${fic.author}` : fic}
-              </div>
-            ))
-          : ' None!'}
-      </div>
-    </>
+      )}
+    </InputGroup>
   )
 }
 

@@ -1,212 +1,93 @@
-import React, { useState } from 'react'
-import { InputGroup, Form, Button } from 'react-bootstrap'
-import { Typeahead } from 'react-bootstrap-typeahead'
-import InputClear from '../util/InputClear'
+import React, { useState, useEffect } from 'react'
+import { Form, Button } from 'react-bootstrap'
 import Submission from '../util/Submission'
-const allFics = Object.values(require('../../FanficTitlesAndIDs.json'))
+import FicTypeahead from './FicTypeahead'
+import FicManual from './FicManual'
+import FicCard from '../cards/FicCard'
 
 const InputFic = ({ contest }) => {
-  const [searchterm, setSearchterm] = useState('')
-  const [selection, setSelection] = useState([])
-  const [typeahead, setTypeahead] = useState(null)
   const [manualInput, setManualInput] = useState({})
+  const [selection, setSelection] = useState(null)
   const [manual, setManual] = useState(false)
-  const [fics] = useState(allFics)
+  const [ficData, setFicData] = useState({})
+  const [valid, setValid] = useState({ all: false })
 
-  const handleTypeaheadSubmit = e => {
-    e.preventDefault()
-    console.log(selection)
-  }
+  useEffect(() => {
+    if (manual) return
+    setValid(selection ? { all: true } : { all: false })
+    setFicData(selection ? selection : {})
+  }, [manual, selection])
 
-  if (!manual)
-    return (
-      <Form onSubmit={handleTypeaheadSubmit}>
-        <InputGroup id='typeahead-container'>
-          <Typeahead
-            onInputChange={input => setSearchterm(input)}
-            ref={ref => setTypeahead(ref)}
-            onChange={selected => {
-              setSelection(selected)
-              let input = typeahead.getInstance().getInput()
-              setSearchterm(input.value)
-            }}
-            options={fics}
-            selected={selection}
-            paginate={true}
-            maxResults={15}
-            placeholder='Search for a fic...'
-            bsSize='lg'
-            labelKey={option =>
-              option.author ? `${option.title} by ${option.author}` : option
-            }
-            id='typeahead'
-          />
-          {searchterm && (
-            <InputClear
-              onClick={() => {
-                typeahead.getInstance().clear()
-                setSelection([])
-                setSearchterm('')
-              }}
-            />
-          )}
-        </InputGroup>
-
-        <Submission tall>
-          <Button variant='link' onClick={() => setManual(true)}>
-            Enter fic details manually
-          </Button>
-        </Submission>
-
-        <div id='selected' className='text-center'>
-          Selected:
-          {selection.length > 0 &&
-            selection.map(fic => (
-              <div className='bold' key={fic.title ? fic.title : fic}>
-                {fic.author ? `${fic.title} by ${fic.author}` : fic}
-              </div>
-            ))}
-          {selection.length === 0 && ' None!'}
-        </div>
-      </Form>
-    )
-
-  const LINK_TYPES = [
-    {
-      id: 'linkSB',
-      name: 'Spacebattles',
-      img: '/images/sb.png'
-    },
-    {
-      id: 'linkSV',
-      name: 'Sufficient Velocity',
-      img: '/images/sv.png'
-    },
-    {
-      id: 'linkQQ',
-      name: 'Questionable Questing',
-      img: '/images/qq.png'
-    },
-    {
-      id: 'linkAO3',
-      name: 'Archive Of Our Own',
-      img: '/images/ao3.png'
-    },
-    {
-      id: 'linkFFN',
-      name: 'Fanfiction.net',
-      img: '/images/ffn.png'
-    },
-    {
-      id: 'linkMisc',
-      name: 'Miscellaneous',
-      img: '/images/misc.png'
+  useEffect(() => {
+    if (!manual) return
+    let values = Object.values(manualInput)
+    let allEmpty = values.every(v => !v || v.length === 0)
+    if (values.length === 0 || allEmpty) {
+      setValid({ all: false })
+      setFicData({})
+    } else {
+      let title = manualInput.title
+      let author = manualInput.author
+      let links = Object.values(manualInput.links || {})
+      let validTitle = title ? true : false
+      let validAuthor = author ? true : false
+      let validLinks = links.length > 0
+      setValid({
+        title: validTitle,
+        author: validAuthor,
+        links: validLinks,
+        all: validTitle && validAuthor && validLinks
+      })
+      setFicData({
+        title: title || 'Untitled',
+        author: author || 'Unknown',
+        links: links,
+        nsfw: manualInput.nsfw
+      })
     }
-  ]
+  }, [manual, manualInput])
 
   const handleSubmit = e => {
     e.preventDefault()
-    const data = Object.values(e.target.getElementsByTagName('input')).map(
-      input => {
-        return {
-          id: input.id,
-          value: input.type === 'checkbox' ? input.checked : input.value
-        }
-      }
-    )
-    console.log(data)
+    console.log(ficData)
+    // sort and shorten the fic links here, pre-POST request
   }
 
-  if (manual)
-    return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Row>
-            <div className='col-md-6'>
-              <InputGroup size='lg'>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Title</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control placeholder='Fic title' id='ficTitle' onChange={e => setManualInput({ ...manualInput, title: e.target.value })} />
-              </InputGroup>
-            </div>
-            <div className='col-md-6'>
-              <InputGroup size='lg'>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Author</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control placeholder='Author name' id='ficAuthor' />
-              </InputGroup>
-            </div>
-          </Form.Row>
-        </Form.Group>
+  return (
+    <Form onSubmit={handleSubmit}>
+      {manual ? (
+        <FicManual input={manualInput} setInput={setManualInput} />
+      ) : (
+        <FicTypeahead input={selection} setInput={setSelection} />
+      )}
 
-        <Form.Group>
-          <Form.Label>Links</Form.Label>
-          <InputGroup className='conjoined-inputs'>
-            {LINK_TYPES.map(link => {
-              return (
-                <InputGroup size='lg' key={link.id}>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text>
-                      <img
-                        src={link.img}
-                        alt={`${link.name} link input icon`}
-                      />
-                    </InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    id={link.id}
-                    placeholder={`${link.name} link`}
-                    aria-describedby={link.id}
-                  />
-                </InputGroup>
-              )
-            })}
-          </InputGroup>
-        </Form.Group>
-
-        <Form.Group className='text-center'>
-          <Form.Check
-            custom
-            type='switch'
-            id='nomineeIsNSFW'
-            label='This nominee contains explicit sexual content'
+      <div id='preview' className='mx-auto'>
+        {Object.values(ficData).length === 0 && (
+          <span className='text-muted '>
+            {manual ? 'Enter some fic data' : 'Select a fic'} to submit.
+          </span>
+        )}
+        {ficData && (
+          <FicCard
+            fic={ficData}
+            className={Object.values(ficData).length === 0 && 'd-none'}
           />
-        </Form.Group>
+        )}
+      </div>
 
-        <div id='preview' className='mx-auto'>
-          {/* {!loaded && !error && url && (
-            <LoadingIndicator timeout={100} id='image-load' />
-          )}
-          {(!url || error) && (
-            <span className='text-muted '>
-              Enter {error ? 'a valid' : 'an'} image to submit.
-            </span>
-          )}
-          {url && (
-            <Image
-              src={url}
-              alt='Your nomination (preview)'
-              onLoad={() => {
-                setError(false)
-                setLoaded(true)
-              }}
-              onError={() => setError(true)}
-              className={(error || !loaded) && 'd-none'}
-              rounded
-              fluid
-            />
-          )} */}
-        </div>
-
-        <Submission tall>
+      <Submission tall disabled={!valid.all}>
+        {manual ? (
           <Button variant='link' onClick={() => setManual(false)}>
-            Select fic interactively
+            Or select fic interactively.
           </Button>
-        </Submission>
-      </Form>
-    )
+        ) : (
+          <Button variant='link' onClick={() => setManual(true)}>
+            Or enter fic details manually.
+          </Button>
+        )}
+      </Submission>
+    </Form>
+  )
 }
 
 export default InputFic

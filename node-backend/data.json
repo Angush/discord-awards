@@ -170,7 +170,7 @@
       "id": 2,
       "name": "Favourite Fanart",
       "type": "art",
-      "description": "Art by fans."
+      "description": "Art by fans. Not much to say."
     },
     {
       "id": 3,
@@ -180,12 +180,12 @@
       "description": "Which Cauldron mod was the coolest in 2019?",
       "fields": [
         {
-          "id": "modName",
+          "id": "name",
           "name": "Name",
           "placeholder": "The Mod's name"
         },
         {
-          "id": "modWhy",
+          "id": "description",
           "name": "Reason",
           "placeholder": "Why was this Mod the coolest?"
         }
@@ -199,7 +199,7 @@
       "description": "Which Cauldron event made the biggest mark?",
       "fields": [
         {
-          "id": "eventName",
+          "id": "name",
           "name": "Event Name",
           "placeholder": "What was the event called?"
         }
@@ -213,20 +213,19 @@
       "description": "The cutest pet belonging to a Cauldron member.",
       "fields": [
         {
-          "id": "petName",
+          "id": "name",
           "name": "Name",
           "placeholder": "The pet's name"
         },
         {
-          "id": "petOwner",
+          "id": "owner",
           "name": "Owner",
           "placeholder": "Name of the pet's owner"
         },
         {
-          "id": "petPhoto",
+          "id": "image",
           "name": "Photo",
-          "placeholder": "A photo of the pet",
-          "type": "image"
+          "placeholder": "A photo of the pet"
         }
       ]
     },
@@ -238,20 +237,19 @@
       "description": "Best Cauldron offshoot community.",
       "fields": [
         {
-          "id": "communityName",
+          "id": "name",
           "name": "Name",
           "placeholder": "Name of the community"
         },
         {
-          "id": "communityOwner",
+          "id": "owner",
           "name": "Creator",
           "placeholder": "Name of the community's creator"
         },
         {
-          "id": "communityLink",
+          "id": "link",
           "name": "Link",
-          "placeholder": "A link to the community",
-          "type": "link"
+          "placeholder": "A link to the community"
         }
       ]
     }

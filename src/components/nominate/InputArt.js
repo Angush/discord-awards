@@ -1,34 +1,38 @@
 import React, { useState } from 'react'
-import { Form, InputGroup, Image } from 'react-bootstrap'
+import { Form, InputGroup, Col } from 'react-bootstrap'
 // import { Form, Button, InputGroup, Image } from 'react-bootstrap'
-import Submission from '../util/Submission'
 import LoadingIndicator from '../util/LoadingIndicator'
+import LabelShrinkable from '../util/LabelShrinkable'
+import Submission from '../util/Submission'
+import ArtCard from '../cards/ArtCard'
 
 const InputArt = () => {
-  const [url, setURL] = useState(null)
-  const [title, setTitle] = useState('')
-  const [artist, setArtist] = useState(null)
-  const [error, setError] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  const [error, setError] = useState(false)
+  const [formData, setFormData] = useState({
+    title: '',
+    artist: '',
+    url: '',
+    nsfw: false
+  })
 
   const handleSubmit = e => {
     e.preventDefault()
-    const data = Object.values(e.target.getElementsByTagName('input')).map(
-      input => {
-        return {
-          id: input.id,
-          value: input.type === 'checkbox' ? input.checked : input.value
-        }
-      }
-    )
-    console.log(data)
+    console.log(formData)
   }
+
+  const onLoad = () => {
+    setError(false)
+    setLoaded(true)
+  }
+
+  const onError = () => setError(true)
 
   return (
     <Form id='art-input' onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Row>
-          <div className='col-md-6'>
+          <Col md='6'>
             <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text>Title</InputGroup.Text>
@@ -37,11 +41,13 @@ const InputArt = () => {
                 placeholder='Image title (can leave blank)'
                 id='imgTitle'
                 size='lg'
-                onChange={e => setTitle(e.target.value)}
+                onChange={e =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
               />
             </InputGroup>
-          </div>
-          <div className='col-md-6'>
+          </Col>
+          <Col md='6'>
             <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text>Artist</InputGroup.Text>
@@ -50,17 +56,15 @@ const InputArt = () => {
                 placeholder='Artist name'
                 id='imgArtist'
                 size='lg'
-                onChange={e => setArtist(e.target.value)}
+                onChange={e =>
+                  setFormData({ ...formData, artist: e.target.value })
+                }
               />
             </InputGroup>
-            <Form.Text
-              className={artist === '' && 'invisible'}
-              // style={{ color: 'red' }}
-            >
+            <LabelShrinkable valid={formData.artist ? true : false}>
               Artist required.
-            </Form.Text>
-            <div className='shrink-me'></div>
-          </div>
+            </LabelShrinkable>
+          </Col>
         </Form.Row>
       </Form.Group>
 
@@ -96,7 +100,7 @@ const InputArt = () => {
             id='imgLink'
             onChange={e => {
               setLoaded(false)
-              setURL(e.target.value)
+              setFormData({ ...formData, url: e.target.value })
             }}
           />
           {/* <InputGroup.Append>
@@ -105,9 +109,13 @@ const InputArt = () => {
             </Button>
           </InputGroup.Append> */}
         </InputGroup>
-        <Form.Text className={!error && 'invisible'} style={{ color: 'red' }}>
-          Invalid image.
-        </Form.Text>
+        <LabelShrinkable valid={!error && formData.url}>
+          {error ? (
+            <span className='label-error'>Valid image required.</span>
+          ) : (
+            <span>Image required.</span>
+          )}
+        </LabelShrinkable>
       </Form.Group>
 
       <div className='shrink-me'></div>
@@ -118,43 +126,30 @@ const InputArt = () => {
           type='switch'
           id='nomineeIsNSFW'
           label='This nominee contains explicit sexual content'
+          onChange={e => setFormData({ ...formData, nsfw: e.target.checked })}
         />
       </Form.Group>
 
-      {loaded && (
-        <h5 className='text-center'>
-          <em>{title ? title : 'Untitled'} </em>
-          <span className='text-muted'>
-            by <em>{artist ? artist : 'Unknown'}</em>
-          </span>
-        </h5>
-      )}
       <div id='preview' className='mx-auto'>
-        {!loaded && !error && url && (
+        {!loaded && !error && formData.url && (
           <LoadingIndicator timeout={100} id='image-load' />
         )}
-        {(!url || error) && (
+        {(!formData.url || error) && (
           <span className='text-muted '>
             Enter {error ? 'a valid' : 'an'} image to submit.
           </span>
         )}
-        {url && (
-          <Image
-            src={url}
-            alt='Your nomination (preview)'
-            onLoad={() => {
-              setError(false)
-              setLoaded(true)
-            }}
-            onError={() => setError(true)}
+        {formData.url && (
+          <ArtCard
+            formData={formData}
+            onLoad={onLoad}
+            onError={onError}
             className={(error || !loaded) && 'd-none'}
-            rounded
-            fluid
           />
         )}
       </div>
 
-      <Submission tall disabled={!loaded || !artist} />
+      <Submission tall disabled={!loaded || !formData.artist} />
     </Form>
   )
 }

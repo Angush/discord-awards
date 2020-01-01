@@ -5,7 +5,7 @@ import CategoryInfo from './CategoryInfo'
 import LoadingIndicator from '../util/LoadingIndicator'
 import InputClear from '../util/InputClear'
 import padWithEmptyElements from '../../functions/padWithEmptyElements'
-const rawContestData = null // require('../../FanficContests.json')
+const rawContestData = null // require('../../json/FanficContests.json')
 
 const SelectCategory = ({ hidden, select, selected, href }) => {
   const [contests, setContests] = useState(null)
