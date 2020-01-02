@@ -13,7 +13,7 @@ In order to create the nominations page, we need a few elements:
    1. **`DONE!`** ~~Searchable fic entry (typeahead pulling from scraped WSS data).~~
       - Still needs: **submission & scraped data to pre-fill with.**
    2. **`DONE!`** ~~Manual fic entry; `FIELDS:` title + author + links - as a fallback with a de-emphasized link below the typeahead input.~~
-      - Still needs: **submission & url validation.**
+      - Still needs: **submission.**
    3. **`DONE!`** ~~Art entry; `FIELDS:` title + author + image/url - support URL input first.~~
       - Still needs: **submission.**
       - Maybe also support direct image uploading? Discuss with Keira.
