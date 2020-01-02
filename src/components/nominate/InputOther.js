@@ -7,17 +7,13 @@ import Submission from '../util/Submission'
 
 const InputOther = ({ fields }) => {
   const [formData, setFormData] = useState({})
-  const [blurred, setBlurred] = useState({})
   const [imgValid, setImgValid] = useState({})
+  const [blurred, setBlurred] = useState({})
   const [valid, setValid] = useState({
     image: false,
     link: false,
     all: false
   })
-
-  // = needs support for:
-  // - validation on images (like art input)
-  // - validation on links  (like fic input)
 
   const types = {}
   fields.forEach(field => (types[field.id] = field.name))
@@ -106,7 +102,11 @@ const InputOther = ({ fields }) => {
       <div id='preview' className='mx-auto'>
         {formData && (
           <PreviewCard
-            data={formData}
+            data={
+              formData.link && !validateField({ id: 'link' })
+                ? { ...formData, link: '#no-link' }
+                : formData
+            }
             requiredTypes={types}
             hide={Object.values(formData).length === 0 || imgValid.error}
             onLoad={onLoad}
