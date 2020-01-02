@@ -18,7 +18,7 @@ In order to create the nominations page, we need a few elements:
       - Still needs: **submission.**
       - Maybe also support direct image uploading? Discuss with Keira.
    4. **`DONE!`** ~~Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"~~
-      - Still needs: **submission & image/url validation?**
+      - Still needs: **submission.**
    5. ~~Discord member selection (typeahead pulling from...?)~~ - **ULTRA OPTIONAL!** (and probably not worth it tbh)
 4. Add nominee preview below submit button for more complex inputs (ie. art and fic nominees).
    - `art` preview: **`FINISHED!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~

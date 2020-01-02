@@ -27,9 +27,6 @@ const InputFic = ({ contest }) => {
       setValid({ all: false })
       setFicData({})
     } else {
-      //* move validating into the two input components, maybe?
-      //* there's a weird glitch where the state update here is one step behind the state update in FicManual
-
       let title = manualInput.title
       let author = manualInput.author
       let links = Object.values(manualInput.links || {})

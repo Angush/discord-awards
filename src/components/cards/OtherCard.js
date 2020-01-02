@@ -19,8 +19,7 @@ const OtherCard = ({
     link === DEFAULT_LINK
       ? {}
       : { target: '_blank', rel: 'noopener noreferrer' }
-  const imgProps =
-    image === DEFAULT_IMG ? {} : { onLoad: onLoad, onError: onError }
+  const imgProps = image === DEFAULT_IMG ? {} : { onLoad, onError }
 
   return (
     <Card bg='dark' text='white' className={classes}>
