@@ -8,6 +8,13 @@ const PreviewCard = props => {
   let { type } = propsCopy
   delete propsCopy.type
 
+  if (propsCopy.hide) {
+    propsCopy.className = propsCopy.className
+      ? propsCopy.className + ' d-none'
+      : 'd-none'
+    delete propsCopy.hide
+  }
+
   // return the easy ones
   if (type === 'fic') return <FicCard {...propsCopy} />
   if (type === 'art') return <ArtCard {...propsCopy} />
@@ -22,6 +29,7 @@ const PreviewCard = props => {
   const vowels = ['a', 'e', 'i', 'o', 'u']
   const blankField = field => {
     if (field === 'image') return '/images/noimage.png'
+    if (field === 'link') return '#no-link'
     let value = requiredTypes[field].toLowerCase()
     return `Enter ${
       value.charAt(value.length - 1) === 's'
@@ -38,10 +46,13 @@ const PreviewCard = props => {
   }
   propsCopy.data = cardData
 
-  let fieldCount = Object.values(cardData).filter(field =>
-    field ? true : false
-  ).length
-  if (fieldCount === 1 && !cardData.image) propsCopy.single = true
+  let fieldCount = Object.values(cardData).filter(field => field || false)
+    .length
+  if (
+    (fieldCount === 1 && !cardData.image) ||
+    (fieldCount === 2 && cardData.link && cardData.name)
+  )
+    propsCopy.single = true
 
   return <OtherCard {...propsCopy} />
 }

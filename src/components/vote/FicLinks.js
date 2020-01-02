@@ -1,4 +1,5 @@
 import React from 'react'
+import validateURL from '../../functions/validateURL'
 
 //! move this elsewhere... somewhere
 const TYPE = {
@@ -70,6 +71,7 @@ const FicLinks = ({ links }) => {
       }
     })
     .sort((a, b) => a.order - b.order)
+    .filter(link => validateURL(link.url))
 
   return (
     <div className='fic-links'>

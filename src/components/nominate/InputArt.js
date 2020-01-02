@@ -3,8 +3,8 @@ import { Form, InputGroup, Col } from 'react-bootstrap'
 // import { Form, Button, InputGroup, Image } from 'react-bootstrap'
 import LoadingIndicator from '../util/LoadingIndicator'
 import LabelShrinkable from '../util/LabelShrinkable'
+import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
-import ArtCard from '../cards/ArtCard'
 
 const InputArt = () => {
   const [loaded, setLoaded] = useState(false)
@@ -128,21 +128,23 @@ const InputArt = () => {
 
       <div id='preview' className='mx-auto'>
         {!loaded && !error && formData.url && (
-          <LoadingIndicator timeout={100} id='image-load' />
+          <LoadingIndicator timeout={100} id='image-load'>
+            <h5 className='text-muted'>Loading image...</h5>
+          </LoadingIndicator>
+        )}
+        {formData.url && (
+          <PreviewCard
+            type='art'
+            onLoad={onLoad}
+            onError={onError}
+            formData={formData}
+            hide={error || !loaded}
+          />
         )}
         {(!formData.url || error) && (
           <span className='text-muted '>
             Enter {error ? 'a valid' : 'an'} image to submit.
           </span>
-        )}
-        {formData.url && (
-          <ArtCard
-            type='art'
-            onLoad={onLoad}
-            onError={onError}
-            formData={formData}
-            className={(error || !loaded) && 'd-none'}
-          />
         )}
       </div>
 

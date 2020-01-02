@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, InputGroup, Col } from 'react-bootstrap'
 import LabelShrinkable from '../util/LabelShrinkable'
+import validateURL from '../../functions/validateURL'
 
 const LINK_TYPES = [
   {
@@ -37,6 +38,17 @@ const LINK_TYPES = [
 
 const FicManual = ({ input, setInput }) => {
   const [blurred, setBlurred] = useState({})
+  const [invalidLinkString, setInvalidLinkString] = useState('')
+
+  useEffect(() => {
+    if (!input.invalidLinks) return
+    let invalidNames = Object.values(input.invalidLinks).filter(l => l !== null)
+    if (invalidNames.length > 0) {
+      setInvalidLinkString(
+        `The following links are invalid: ${invalidNames.join(', ')}`
+      )
+    } else setInvalidLinkString('')
+  }, [input.invalidLinks])
 
   const blur = field => {
     if (!blurred[field]) setBlurred({ ...blurred, [field]: true })
@@ -100,6 +112,10 @@ const FicManual = ({ input, setInput }) => {
                   aria-describedby={link.id}
                   value={(input.links && input.links[link.id]) || ''}
                   onChange={e => {
+                    let valid = e.target.value
+                      ? validateURL(e.target.value)
+                      : true
+                    let invalidLinks = input.invalidLinks || {}
                     let links = {
                       ...input.links,
                       [link.id]: e.target.value
@@ -108,7 +124,11 @@ const FicManual = ({ input, setInput }) => {
                       .length
                     setInput({
                       ...input,
-                      links: linksCount > 0 ? links : {}
+                      links: linksCount > 0 ? links : {},
+                      invalidLinks: {
+                        ...invalidLinks,
+                        [link.id]: valid ? null : link.name
+                      }
                     })
                   }}
                   onBlur={e => blur('links')}
@@ -118,10 +138,16 @@ const FicManual = ({ input, setInput }) => {
           })}
         </InputGroup>
         <LabelShrinkable
-          valid={input.links && Object.values(input.links).length > 0}
+          valid={
+            input.links &&
+            Object.values(input.links).length > 0 &&
+            !invalidLinkString
+          }
           error={blurred.links}
         >
-          Fic link required (at least one).
+          {invalidLinkString
+            ? invalidLinkString
+            : 'Fic link required (at least one).'}
         </LabelShrinkable>
       </Form.Group>
 

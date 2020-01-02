@@ -11,24 +11,25 @@ In order to create the nominations page, we need a few elements:
    - **I did a category selection screen with a search bar instead.**
 3. **`IN-PROGRESS!`** Various nomination input types, which correspond to the various categories:
    1. **`DONE!`** ~~Searchable fic entry (typeahead pulling from scraped WSS data).~~
-      - Still needs: **(a) scraped data, and (b) submission.**
+      - Still needs: **submission & scraped data to pre-fill with.**
    2. **`DONE!`** ~~Manual fic entry; `FIELDS:` title + author + links - as a fallback with a de-emphasized link below the typeahead input.~~
-      - Still needs: **validation & submission.**
+      - Still needs: **submission & url validation.**
    3. **`DONE!`** ~~Art entry; `FIELDS:` title + author + image/url - support URL input first.~~
-      - Still needs: **submission & possibly image uploading.**
+      - Still needs: **submission.**
       - Maybe also support direct image uploading? Discuss with Keira.
    4. **`DONE!`** ~~Basic text entry (single-field); for stuff like "Favourite Event" and "Most Helpful Vergen"~~
-      - Still needs: **submission & support for image categories, and maybe image/url validation?**
+      - Still needs: **submission & image/url validation?**
    5. ~~Discord member selection (typeahead pulling from...?)~~ - **ULTRA OPTIONAL!** (and probably not worth it tbh)
 4. Add nominee preview below submit button for more complex inputs (ie. art and fic nominees).
    - `art` preview: **`FINISHED!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~
    - `fic` preview: **`FINISHED!`** ~~Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.~~
-   - `other` preview? Maybe figure out a way to do it.
+   - `other` preview? **`FINISHED!`** ~~Maybe figure out a way to do it.~~
 5. **`DONE!`** ~~Add verification (ie. required fields) and ensure the submit button is disabled when they aren't properly filled. Also display the "This is a required field." messages on blur if they're empty.~~
-   - Submit disabling already functional for art input.
+   - Submit disabling already functional for ~~art/fic~~ **ALL** input.
    - **`DONE!`** ~~Need to figure out the best way (UI-wise and code-wise) to display stuff like "This is a required field." and other validation text.~~
-     - My solution: **I set up a LabelShrinkable component which takes a `valid` prop.** If that prop equates to true, it will render with the `invisible` class, thus hiding it and its children.
+     - My solution: **I set up a LabelShrinkable component which takes a `valid` prop.** If that prop equates to true, it will render with the `invisible` class, thus hiding it and its `children`. It also takes an `error` prop, and if that equates to true, its text children will be coloured red.
 6. On submission, change "Submit" button to a loading indicator and disable inputs until it's done. (Do some nice animations/transitions, perhaps?)
+   - Also save the submission data (incl. the category) to local storage, and add a "My Nominations" page that loads and displays all of this data. Not the perfect solution to this, but it'll do for the 2019 awards. Can improve it for next time.
 7. **`OBSOLETE!` - SEE [RESTRUCTURING](#nomination-restructuring)** - ~~After submission, show the user a "Thanks for nominating" screen with three options:~~
    1. ~~"Nominate something else for the same category." (Takes user back to already-selected Step 2.)~~
    2. ~~"Add your nominee to another category." (How to do this? Save nominee data, then return to Step 1, and filter out categories with different types?)~~
@@ -47,6 +48,8 @@ Whilst testing this, I've realised there's a better structure available, and it 
    - `fic`/`art`: Opens category selection form (pre-filtered so it only shows categories with matching types), where user can select **MULTIPLE** categories (as many as they want), thus enabling them to nominate their input for multiple categories at once.
    - `other`: Opens relevant category nomination form.
 4. **`Step 4`** - Submit form to server, then show feedback ("Thanks for nominating, click here to go back and nominate something else, or click here to nominate another {fic/art/other.title} for these categories," yadda yadda).
+
+(Note: in order to support step-skipping, category info must be fetched at the very start, when the nomination page is first mounted.)
 
 ## Vote Page
 

@@ -19,6 +19,7 @@ const InputFic = ({ contest }) => {
   }, [manual, selection])
 
   useEffect(() => {
+    console.log(manualInput)
     if (!manual) return
     let values = Object.values(manualInput)
     let allEmpty = values.every(v => !v || v.length === 0)
@@ -26,12 +27,18 @@ const InputFic = ({ contest }) => {
       setValid({ all: false })
       setFicData({})
     } else {
+      //* move validating into the two input components, maybe?
+      //* there's a weird glitch where the state update here is one step behind the state update in FicManual
+
       let title = manualInput.title
       let author = manualInput.author
       let links = Object.values(manualInput.links || {})
+      let invalidLinks = Object.values(manualInput.invalidLinks || {}).filter(
+        l => l !== null
+      )
       let validTitle = title ? true : false
       let validAuthor = author ? true : false
-      let validLinks = links.length > 0
+      let validLinks = links.length > 0 && invalidLinks.length === 0
       setValid({
         title: validTitle,
         author: validAuthor,
@@ -71,7 +78,7 @@ const InputFic = ({ contest }) => {
           <PreviewCard
             type='fic'
             fic={ficData}
-            className={Object.values(ficData).length === 0 && 'd-none'}
+            hide={Object.values(ficData).length === 0}
           />
         )}
       </div>

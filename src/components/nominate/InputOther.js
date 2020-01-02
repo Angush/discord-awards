@@ -8,9 +8,10 @@ const InputOther = ({ fields }) => {
   const [formData, setFormData] = useState({})
   const [valid, setValid] = useState(false)
 
-  //! needs support for:
-  // - optional fields
-  // - validation on images (like art input) and links (like fic input)
+  // = needs support for:
+  // - validation on images (like art input)
+  // - validation on links  (like fic input)
+
   const types = {}
   fields.forEach(field => (types[field.id] = field.name))
 
@@ -26,6 +27,13 @@ const InputOther = ({ fields }) => {
     e.preventDefault()
     console.log(formData)
   }
+
+  const onLoad = () => {
+    // setError(false)
+    // setLoaded(true)
+  }
+
+  const onError = () => {} // setError(true)
 
   return (
     <Form id='other-input' onSubmit={handleSubmit}>
@@ -63,8 +71,9 @@ const InputOther = ({ fields }) => {
           <PreviewCard
             data={formData}
             requiredTypes={types}
-            className={Object.values(formData).length === 0 && 'd-none'}
-            preview={true}
+            hide={Object.values(formData).length === 0}
+            onLoad={onLoad}
+            onError={onError}
           />
         )}
       </div>

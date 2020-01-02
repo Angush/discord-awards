@@ -262,6 +262,26 @@
           "placeholder": "A link to the community"
         }
       ]
+    },
+    {
+      "id": 7,
+      "name": "Dopest Link",
+      "type": "other",
+      "title": "link",
+      "description": "Just show me a cool link.",
+      "fields": [
+        {
+          "id": "name",
+          "name": "Name",
+          "placeholder": "What the link is called",
+          "optional": true
+        },
+        {
+          "id": "link",
+          "name": "Link",
+          "placeholder": "The dope link"
+        }
+      ]
     }
   ]
 }
