@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Form, InputGroup } from 'react-bootstrap'
+import LoadingIndicator from '../util/LoadingIndicator'
 import LabelShrinkable from '../util/LabelShrinkable'
 import validateURL from '../../functions/validateURL'
 import PreviewCard from '../cards/PreviewCard'
@@ -22,8 +23,9 @@ const InputOther = ({ fields }) => {
     field => {
       let id = field.id
       if (id === 'link') return validateURL(formData.link)
-      if (id === 'image') return imgValid.loaded && !imgValid.error
-      return formData[id] && formData[id].trim().length > 0
+      if (id === 'image')
+        return imgValid.loaded && !imgValid.error ? true : false
+      return formData[id] && formData[id].trim().length > 0 ? true : false
     },
     [formData, imgValid]
   )
@@ -55,6 +57,23 @@ const InputOther = ({ fields }) => {
     if (!blurred[field]) setBlurred({ ...blurred, [field]: true })
   }
 
+  const getLabelText = (field, validated) => {
+    let id = field.id
+    let isFilled = formData[id] ? true : false
+    if (id === 'image' && !imgValid.loaded && isFilled)
+      return (
+        <LoadingIndicator
+          className='inline-load'
+          spinnerProps={{ width: '8px', height: '8px', margin: '0' }}
+          noRise={true}
+        >
+          Loading image...
+        </LoadingIndicator>
+      )
+    if (!validated && isFilled) return `Invalid ${id}.`
+    return field.text
+  }
+
   return (
     <Form id='other-input' onSubmit={handleSubmit}>
       {fields.map(item => {
@@ -84,15 +103,9 @@ const InputOther = ({ fields }) => {
             {(!item.optional || !validated) && (
               <LabelShrinkable
                 valid={formData[item.id] && validated}
-                error={blurred[item.id] || (blurred[item.id] && !validated)}
+                error={blurred[item.id] && !validated}
               >
-                {['link', 'image'].includes(item.id)
-                  ? item.id === 'image' && !imgValid.loaded && formData[item.id]
-                    ? `Loading...`
-                    : !validated && formData[item.id]
-                    ? `Invalid ${item.id}.`
-                    : item.text
-                  : item.text}
+                {getLabelText(item, validated)}
               </LabelShrinkable>
             )}
           </Form.Group>

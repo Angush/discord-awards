@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 const LabelShrinkable = ({ valid, error, children, style, className }) => {
   const classes = `shrink-me ${className || ''} ${
     valid ? 'label-invisible' : ''
-  } ${error ? 'label-error' : ''}`
+  } ${error ? 'label-error' : ''}`.replace(/\s+/, ' ')
   return (
     <Form.Text className={classes} style={style}>
       {children || 'Required.'}

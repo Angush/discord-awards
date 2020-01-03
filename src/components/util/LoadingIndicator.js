@@ -6,7 +6,9 @@ const LoadingIndicator = ({
   timeout,
   children,
   showSlow = true,
-  spinnerProps
+  noRise = false,
+  spinnerProps,
+  className
 }) => {
   const [hidden, setHidden] = useState(timeout ? true : false)
   const [slowLoad, setSlowLoad] = useState(false)
@@ -31,14 +33,19 @@ const LoadingIndicator = ({
 
   return (
     <div
-      className={hidden ? 'loading-section delayed' : 'loading-section'}
+      className={
+        (className ? className + ' ' : '') +
+        (hidden ? 'loading-section delayed' : 'loading-section')
+      }
       id={id}
     >
       <Spinner {...spinnerProps} />
       <div className='loading-children'>
         {children ? children : <div className='shrink-me'></div>}
         {slowLoad && (
-          <div className='fade-rise'>This is taking a while, isn't it?</div>
+          <div className={noRise ? 'fade-in' : 'fade-rise'}>
+            This is taking a while, isn't it?
+          </div>
         )}
       </div>
     </div>
