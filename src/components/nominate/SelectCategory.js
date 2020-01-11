@@ -1,118 +1,114 @@
 import React, { useState, useEffect } from 'react'
-import { InputGroup, FormControl } from 'react-bootstrap'
-import slug from 'slug'
-import CategoryInfo from './CategoryInfo'
-import LoadingIndicator from '../util/LoadingIndicator'
-import InputClear from '../util/InputClear'
+import { InputGroup, FormControl, Card, Button } from 'react-bootstrap'
 import padWithEmptyElements from '../../functions/padWithEmptyElements'
-const rawContestData = null // require('../../json/FanficContests.json')
+import jumpToId from '../../functions/jumpToID'
+import SelectableCard from '../cards/SelectableCard'
+import InputClear from '../util/InputClear'
 
-const SelectCategory = ({ hidden, select, selected, href }) => {
-  const [contests, setContests] = useState(null)
-  const [matching, setMatching] = useState(null)
-  const [wasLoading, setWasLoading] = useState(false)
+const SelectCategory = ({
+  select,
+  deselect,
+  selected = [],
+  multiple = false,
+  categories,
+  setDone,
+  done
+}) => {
   const [searchterm, setSearchterm] = useState('')
+  const [matching, setMatching] = useState(categories)
 
   useEffect(() => {
-    if (rawContestData) setContests(rawContestData)
+    const term = searchterm.toLowerCase().trim()
+    if (!term) setMatching(categories)
     else
-      window
-        .fetch(`http://192.168.1.110:3001/api/contests`)
-        .then(response => response.json())
-        .then(data => {
-          let editedData = data.map(category => {
-            return {
-              ...category,
-              slug: slug(category.name.toLowerCase())
-            }
-          })
-          setContests(editedData)
-          setWasLoading(true)
-        })
-  }, [])
-
-  useEffect(() => {
-    const term = searchterm.toLowerCase()
-    setMatching(
-      searchterm
-        ? contests.filter(
-            c =>
-              c.name.toLowerCase().includes(term) ||
-              c.description.toLowerCase().includes(term)
-          )
-        : contests
-    )
-  }, [contests, searchterm])
-
-  useEffect(() => {
-    if (!contests || href === '' || selected) return
-    let preselected = contests.find(item => item.slug === href)
-    if (preselected) select(preselected)
-  }, [contests, href, selected, select])
-
-  if (!matching)
-    return (
-      <LoadingIndicator timeout={1000}>
-        <h4>Just a moment!</h4>
-        <h6 className='text-muted'>
-          We're fetching the category data for you.
-        </h6>
-      </LoadingIndicator>
-    )
-
-  const classes = `${hidden ? 'hidden' : ''} ${
-    wasLoading ? 'fade-rise' : ''
-  }`.trim()
+      setMatching(
+        searchterm
+          ? categories.filter(
+              c =>
+                c.name.toLowerCase().includes(term) ||
+                c.description.toLowerCase().includes(term)
+            )
+          : categories
+      )
+  }, [categories, searchterm])
 
   const handleInputChange = e => {
-    window.scrollTo(0, 0)
+    jumpToId('category-selection', { offset: 56, smooth: false })
     setSearchterm(e.target.value.trim())
   }
 
   const clearInput = () => {
-    window.scrollTo(0, 0)
+    jumpToId('category-selection', { offset: 56, smooth: false })
     setSearchterm('')
   }
 
+  const buttonDisabled = done || selected.length === 0
+
   return (
-    <div id='category-selection' className={classes}>
-      <h5 id='category-selection-heading' className='align-bottom'>
-        <small className='text-muted'>Step 1</small>
-      </h5>
-      <h4 className='align-top'>Select a category</h4>
-      <div className={'category-input' + (selected ? '' : ' stick')}>
+    <div id='category-selection'>
+      <div className={'category-input' + (done ? '' : ' stick')}>
         <InputGroup size='lg'>
           <FormControl
-            id={!hidden && 'input-clearable'}
+            id={!done && 'input-clearable'}
             placeholder='Search for a category...'
-            disabled={hidden ? true : false}
+            disabled={done}
             onChange={handleInputChange}
           />
           {searchterm && (
             <InputClear
               onClick={clearInput}
               selector='#input-clearable'
-              hidden={hidden ? true : false}
+              hidden={done}
             />
           )}
         </InputGroup>
       </div>
-      <div className='contests'>
-        {matching.map(contest => (
-          <CategoryInfo
-            data={contest}
-            key={contest.id}
-            hidden={hidden}
-            selected={selected && contest.id === selected.id}
-            searchterm={searchterm}
-            onClick={e => {
-              e.preventDefault()
-              select(contest)
-            }}
-          />
-        ))}
-        {padWithEmptyElements(matching, 4, 'contest-filler')}
+
+      <div className='card-container'>
+        {matching.map(category => {
+          let isSelected = selected.some(s => s.id === category.id)
+          return (
+            <SelectableCard
+              key={category.id}
+              hidden={done}
+              selected={isSelected}
+              onClick={e => {
+                e.preventDefault()
+                if (!isSelected) select(category)
+                else if (multiple) deselect(category)
+              }}
+            >
+              <Card.Body>
+                <Card.Title>{category.name}</Card.Title>
+                <Card.Text>{category.description}</Card.Text>
+              </Card.Body>
+            </SelectableCard>
+          )
+        })}
+        {matching.length > 0 && padWithEmptyElements(null, 4, 'contest-filler')}
+        {matching.length === 0 && (
+          <div className='text-center mx-auto no-results'>
+            <h5>Uh-oh! No results!</h5>
+            <h6 className='text-muted'>
+              Double-check your search term,
+              <br />
+              or try something else.
+            </h6>
+          </div>
+        )}
       </div>
+      {multiple && (
+        <div className='submission-options'>
+          <Button
+            className='height-lg'
+            variant={buttonDisabled ? 'outline-primary' : 'primary'}
+            disabled={buttonDisabled}
+            onClick={() => setDone(true)}
+          >
+            Submit
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

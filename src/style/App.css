@@ -12,7 +12,8 @@ body {
   scroll-behavior: smooth;
 }
 
-.contests .card,
+.card-container .card,
+.type-selection .card,
 .contest-filler {
   width: 250px;
   background: white;
@@ -22,8 +23,39 @@ body {
   flex-grow: 1;
 }
 
+.entries,
+.card-container {
+  display: flex;
+  overflow: auto;
+  z-index: 2;
+  flex-wrap: wrap;
+  justify-items: left;
+  margin: 0 -8px;
+}
+
+.type-selection .card-list {
+  /* width: fit-content; */
+  /* margin: 0 auto; */
+  display: flex;
+  margin: 0 -8px;
+}
+
+.type-selection .card {
+  text-align: center;
+  text-transform: capitalize;
+  margin: 20px 8px 0 8px;
+  flex-grow: 1;
+  min-width: 6rem;
+}
+
+.type-selection .card-title {
+  margin: 0;
+}
+
 .contest-filler {
   height: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   background: none;
 }
 
@@ -74,9 +106,6 @@ body {
   transform: translateY(-3px);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   background: #d1e7ff;
-}
-
-.enabled-card {
   cursor: pointer;
 }
 
@@ -104,13 +133,17 @@ body {
   transition: opacity 0.5s;
 }
 
+.nomination-flow > * {
+  margin-bottom: 60px;
+}
+
 div.hidden {
   opacity: 0.4;
   cursor: default;
 }
 
 .selected-card {
-  transition: all 1s;
+  transition: all 2s;
 }
 
 .nomination-flow input:disabled {
@@ -181,9 +214,18 @@ input::placeholder {
   margin-right: 16px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   #nomination-selection .form-row > div:first-child {
     margin-bottom: 24px;
+  }
+
+  .type-selection .card-list {
+    flex-direction: column;
+  }
+
+  .type-selection .card {
+    width: calc(100% - 16px);
+    margin: 10px 8px;
   }
 }
 
@@ -208,7 +250,7 @@ input.form-control-lg {
   padding-top: 11px !important;
 }
 
-#preview {
+.preview {
   width: 100%;
   height: fit-content;
   max-width: 400px;
@@ -216,7 +258,7 @@ input.form-control-lg {
   justify-content: center;
 }
 
-#preview > .card {
+.preview > .card {
   width: 100%;
 }
 
@@ -298,9 +340,17 @@ input.form-control-lg {
   font-size: 1rem !important;
 }
 
-button[disabled] {
-  cursor: default;
-  pointer-events: visible;
+*[disabled],
+.hidden .card:hover,
+.hidden button.close:hover,
+.hidden .goback:hover {
+  cursor: default !important;
+}
+
+.hidden .goback,
+.hidden .goback:hover {
+  text-decoration: none;
+  color: #6c757d;
 }
 
 .button-disabled:hover {
@@ -345,6 +395,12 @@ button[disabled] {
 .other-card:hover {
   transform: translateY(-3px);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hidden .card:hover {
+  transform: none !important;
+  box-shadow: initial !important;
+  cursor: default !important;
 }
 
 .card.bg-dark.text-white .card-subtitle {
@@ -396,6 +452,10 @@ button[disabled] {
   cursor: pointer;
 }
 
+.hidden img:hover {
+  cursor: default !important;
+}
+
 .nsfw-img {
   filter: blur(30px);
   z-index: 1;
@@ -404,6 +464,11 @@ button[disabled] {
 .nsfw-img:hover {
   filter: blur(0px);
   transition: filter 3s ease-in;
+}
+
+.hidden .nsfw-img:hover {
+  filter: blur(30px);
+  transition: none;
 }
 
 .nsfw-indicator {
@@ -455,6 +520,10 @@ button[disabled] {
 
 .single-field-card:hover {
   cursor: pointer;
+}
+
+.no-results {
+  margin-top: 30px;
 }
 
 /*
@@ -618,16 +687,6 @@ button[disabled] {
 
 .contest {
   border-radius: 20px;
-}
-
-.entries,
-.contests {
-  display: flex;
-  overflow: auto;
-  z-index: 2;
-  flex-wrap: wrap;
-  justify-items: left;
-  margin: 0 -8px;
 }
 
 .contest_header {

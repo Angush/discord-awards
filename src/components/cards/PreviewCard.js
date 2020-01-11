@@ -26,6 +26,10 @@ const PreviewCard = props => {
   let allNull = Object.values(data).every(item => (item ? false : true))
   if (allNull || Object.values(data).length === 0) return null
 
+  let { usePlaceholders } = propsCopy
+  delete propsCopy.usePlaceholders
+  if (usePlaceholders === undefined) usePlaceholders = true
+
   const vowels = ['a', 'e', 'i', 'o', 'u']
   const blankField = field => {
     if (field === 'image') return '/images/noimage.png'
@@ -39,20 +43,29 @@ const PreviewCard = props => {
         : 'a'
     } ${value}.`
   }
-
   const cardData = {}
+  let emptyField = false
   for (const field in requiredTypes) {
-    cardData[field] = data[field] || blankField(field)
+    if (data[field]) cardData[field] = data[field]
+    else {
+      if (usePlaceholders) cardData[field] = blankField(field)
+      else emptyField = true
+    }
   }
   propsCopy.data = cardData
 
   let fieldCount = Object.values(cardData).filter(field => field || false)
     .length
   if (
-    (fieldCount === 1 && !cardData.image) ||
-    (fieldCount === 2 && cardData.link && cardData.name)
+    !emptyField &&
+    ((fieldCount === 1 && !cardData.image) ||
+      (fieldCount === 2 && cardData.link && cardData.name))
   )
     propsCopy.single = true
+
+  // TODO: move the "single" specification elsewhere, maybe?
+  // - It's got a weird interaction with optional fields.
+  // - Could also just figure out a solution to that. Needs work.
 
   return <OtherCard {...propsCopy} />
 }

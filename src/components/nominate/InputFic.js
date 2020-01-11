@@ -4,8 +4,9 @@ import Submission from '../util/Submission'
 import FicTypeahead from './FicTypeahead'
 import FicManual from './FicManual'
 import PreviewCard from '../cards/PreviewCard'
+import shortenURL from '../../functions/shortenURL'
 
-const InputFic = ({ contest }) => {
+const InputFic = ({ save, disabled }) => {
   const [manualInput, setManualInput] = useState({})
   const [selection, setSelection] = useState(null)
   const [manual, setManual] = useState(false)
@@ -19,7 +20,6 @@ const InputFic = ({ contest }) => {
   }, [manual, selection])
 
   useEffect(() => {
-    console.log(manualInput)
     if (!manual) return
     let values = Object.values(manualInput)
     let allEmpty = values.every(v => !v || v.length === 0)
@@ -53,19 +53,31 @@ const InputFic = ({ contest }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(ficData)
+    let editedData = {
+      ...ficData,
+      links: ficData.links.map(url => shortenURL(url))
+    }
+    save(editedData)
     // sort and shorten the fic links here, pre-POST request
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       {manual ? (
-        <FicManual input={manualInput} setInput={setManualInput} />
+        <FicManual
+          input={manualInput}
+          setInput={setManualInput}
+          disabled={disabled}
+        />
       ) : (
-        <FicTypeahead input={selection} setInput={setSelection} />
+        <FicTypeahead
+          input={selection}
+          setInput={setSelection}
+          disabled={disabled}
+        />
       )}
 
-      <div id='preview' className='mx-auto'>
+      <div className='preview mx-auto'>
         {Object.values(ficData).length === 0 && (
           <span className='text-muted '>
             {manual ? 'Enter some fic data' : 'Select a fic'} to submit.
@@ -80,13 +92,21 @@ const InputFic = ({ contest }) => {
         )}
       </div>
 
-      <Submission tall disabled={!valid.all}>
+      <Submission tall disabled={!valid.all || disabled}>
         {manual ? (
-          <Button variant='link' onClick={() => setManual(false)}>
+          <Button
+            variant='link'
+            onClick={() => setManual(false)}
+            disabled={disabled}
+          >
             Or select fic interactively.
           </Button>
         ) : (
-          <Button variant='link' onClick={() => setManual(true)}>
+          <Button
+            variant='link'
+            onClick={() => setManual(true)}
+            disabled={disabled}
+          >
             Or enter fic details manually.
           </Button>
         )}

@@ -174,7 +174,7 @@
     },
     {
       "id": 3,
-      "name": "Coolest Mod",
+      "name": "Coolest Oppressor",
       "type": "other",
       "title": "Mod",
       "description": "Which Cauldron mod was the coolest in 2019?",
@@ -187,7 +187,8 @@
         {
           "id": "description",
           "name": "Reason",
-          "placeholder": "Why was this Mod the coolest?"
+          "placeholder": "Why was this Mod the coolest?",
+          "optional": true
         }
       ]
     },
@@ -235,7 +236,8 @@
         {
           "id": "link",
           "name": "Gallery",
-          "placeholder": "Where we can find more photos"
+          "placeholder": "Where we can find more photos",
+          "optional": true
         }
       ]
     },

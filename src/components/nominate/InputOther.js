@@ -6,7 +6,7 @@ import validateURL from '../../functions/validateURL'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
-const InputOther = ({ fields }) => {
+const InputOther = ({ category, save, disabled }) => {
   const [formData, setFormData] = useState({})
   const [imgValid, setImgValid] = useState({})
   const [blurred, setBlurred] = useState({})
@@ -17,7 +17,7 @@ const InputOther = ({ fields }) => {
   })
 
   const types = {}
-  fields.forEach(field => (types[field.id] = field.name))
+  category.fields.forEach(field => (types[field.id] = field.name))
 
   const validateField = useCallback(
     field => {
@@ -31,12 +31,14 @@ const InputOther = ({ fields }) => {
   )
 
   useEffect(() => {
-    setValid(fields.every(field => field.optional || validateField(field)))
-  }, [fields, validateField])
+    setValid(
+      category.fields.every(field => field.optional || validateField(field))
+    )
+  }, [category.fields, validateField])
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(formData)
+    save(formData)
   }
 
   const onLoad = () => {
@@ -76,7 +78,7 @@ const InputOther = ({ fields }) => {
 
   return (
     <Form id='other-input' onSubmit={handleSubmit}>
-      {fields.map(item => {
+      {category.fields.map(item => {
         const validated = validateField(item)
         return (
           <Form.Group key={item.id}>
@@ -98,12 +100,14 @@ const InputOther = ({ fields }) => {
                     setImgValid({ error: false, loaded: false })
                 }}
                 onBlur={e => blur(item.id)}
+                disabled={disabled}
               />
             </InputGroup>
-            {(!item.optional || !validated) && (
+            {!validated && (
               <LabelShrinkable
                 valid={formData[item.id] && validated}
                 error={blurred[item.id] && !validated}
+                optional={item.optional}
               >
                 {getLabelText(item, validated)}
               </LabelShrinkable>
@@ -112,7 +116,7 @@ const InputOther = ({ fields }) => {
         )
       })}
 
-      <div id='preview' className='mx-auto'>
+      <div className='preview mx-auto'>
         {formData && (
           <PreviewCard
             data={
@@ -128,7 +132,7 @@ const InputOther = ({ fields }) => {
         )}
       </div>
 
-      <Submission tall disabled={!valid} />
+      <Submission tall disabled={!valid || disabled} />
     </Form>
   )
 }

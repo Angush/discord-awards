@@ -39,9 +39,9 @@ const App = () => {
       )
     ) {
       event.preventDefault()
-      // console.log(
-      //   `Clicked card image! This is when we'd show a lightbox. Though that isn't actually coded yet.`
-      // )
+      console.log(
+        `Clicked card image! This is when we'd show a lightbox. Though that isn't actually coded yet. SRC: ${event.target.src}`
+      )
     }
 
     //* The following is code for an attempt at wiggling disabled buttons on click

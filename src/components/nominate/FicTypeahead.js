@@ -4,7 +4,7 @@ import { Typeahead } from 'react-bootstrap-typeahead'
 import InputClear from '../util/InputClear'
 const allFics = require('../../json/SimpleFics.json')
 
-const FicTypeahead = ({ input, setInput }) => {
+const FicTypeahead = ({ input, setInput, disabled }) => {
   const [searchterm, setSearchterm] = useState('')
   const [typeahead, setTypeahead] = useState(null)
 
@@ -27,6 +27,7 @@ const FicTypeahead = ({ input, setInput }) => {
         bsSize='lg'
         labelKey={fic => `${fic.title} by ${fic.author}`}
         id='typeahead'
+        disabled={disabled}
       />
       {searchterm && (
         <InputClear
@@ -35,6 +36,7 @@ const FicTypeahead = ({ input, setInput }) => {
             setInput(null)
             setSearchterm('')
           }}
+          hidden={disabled}
         />
       )}
     </InputGroup>

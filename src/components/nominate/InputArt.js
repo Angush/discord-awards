@@ -6,7 +6,7 @@ import LabelShrinkable from '../util/LabelShrinkable'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
-const InputArt = () => {
+const InputArt = ({ save, disabled }) => {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
@@ -18,7 +18,7 @@ const InputArt = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(formData)
+    save(formData)
   }
 
   const onLoad = () => {
@@ -44,6 +44,7 @@ const InputArt = () => {
                 onChange={e =>
                   setFormData({ ...formData, title: e.target.value })
                 }
+                disabled={disabled}
               />
             </InputGroup>
           </Col>
@@ -59,6 +60,7 @@ const InputArt = () => {
                 onChange={e =>
                   setFormData({ ...formData, artist: e.target.value })
                 }
+                disabled={disabled}
               />
             </InputGroup>
             <LabelShrinkable valid={formData.artist ? true : false}>
@@ -102,6 +104,7 @@ const InputArt = () => {
               setLoaded(false)
               setFormData({ ...formData, url: e.target.value })
             }}
+            disabled={disabled}
           />
           {/* <InputGroup.Append>
             <Button variant='dark' onClick={() => {}}>
@@ -123,10 +126,11 @@ const InputArt = () => {
           id='nomineeIsNSFW'
           label='This nominee contains explicit sexual content'
           onChange={e => setFormData({ ...formData, nsfw: e.target.checked })}
+          disabled={disabled}
         />
       </Form.Group>
 
-      <div id='preview' className='mx-auto'>
+      <div className='preview mx-auto'>
         {!loaded && !error && formData.url && (
           <LoadingIndicator timeout={100} id='image-load'>
             <h5 className='text-muted'>Loading image...</h5>
@@ -148,7 +152,7 @@ const InputArt = () => {
         )}
       </div>
 
-      <Submission tall disabled={!loaded || !formData.artist} />
+      <Submission tall disabled={!loaded || !formData.artist || disabled} />
     </Form>
   )
 }

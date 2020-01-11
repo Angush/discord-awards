@@ -36,7 +36,7 @@ const LINK_TYPES = [
   }
 ]
 
-const FicManual = ({ input, setInput }) => {
+const FicManual = ({ input, setInput, disabled }) => {
   const [blurred, setBlurred] = useState({})
   const [invalidLinkString, setInvalidLinkString] = useState('')
 
@@ -69,6 +69,7 @@ const FicManual = ({ input, setInput }) => {
                 value={input.title || ''}
                 onChange={e => setInput({ ...input, title: e.target.value })}
                 onBlur={e => blur('title')}
+                disabled={disabled}
               />
             </InputGroup>
             <LabelShrinkable valid={input.title} error={blurred.title}>
@@ -86,6 +87,7 @@ const FicManual = ({ input, setInput }) => {
                 value={input.author || ''}
                 onChange={e => setInput({ ...input, author: e.target.value })}
                 onBlur={e => blur('author')}
+                disabled={disabled}
               />
             </InputGroup>
             <LabelShrinkable valid={input.author} error={blurred.author}>
@@ -120,8 +122,7 @@ const FicManual = ({ input, setInput }) => {
                       ...input.links,
                       [link.id]: e.target.value
                     }
-                    let linksCount = Object.values(links).filter(l => l !== '')
-                      .length
+                    let linksCount = Object.values(links).filter(l => l).length
                     setInput({
                       ...input,
                       links: linksCount > 0 ? links : {},
@@ -132,6 +133,7 @@ const FicManual = ({ input, setInput }) => {
                     })
                   }}
                   onBlur={e => blur('links')}
+                  disabled={disabled}
                 />
               </InputGroup>
             )
@@ -159,6 +161,7 @@ const FicManual = ({ input, setInput }) => {
           label='This nominee contains explicit sexual content'
           checked={input.nsfw || false}
           onChange={e => setInput({ ...input, nsfw: e.target.checked })}
+          disabled={disabled}
         />
       </Form.Group>
     </>

@@ -21,9 +21,9 @@ In order to create the nominations page, we need a few elements:
       - Still needs: **submission.**
    5. ~~Discord member selection (typeahead pulling from...?)~~ - **ULTRA OPTIONAL!** (and probably not worth it tbh)
 4. Add nominee preview below submit button for more complex inputs (ie. art and fic nominees).
-   - `art` preview: **`FINISHED!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~
-   - `fic` preview: **`FINISHED!`** ~~Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.~~
-   - `other` preview? **`FINISHED!`** ~~Maybe figure out a way to do it.~~
+   - `art` preview: **`DONE!`** ~~Display image, as well as title/artist (with "Untitled" fallback support), but ONLY if the image actually works.~~
+   - `fic` preview: **`DONE!`** ~~Display the fic card format that we'd get in the actual voting page. Shouldn't be too hard.~~
+   - `other` preview? **`DONE!`** ~~Maybe figure out a way to do it.~~
 5. **`DONE!`** ~~Add verification (ie. required fields) and ensure the submit button is disabled when they aren't properly filled. Also display the "This is a required field." messages on blur if they're empty.~~
    - Submit disabling already functional for ~~art/fic~~ **ALL** input.
    - **`DONE!`** ~~Need to figure out the best way (UI-wise and code-wise) to display stuff like "This is a required field." and other validation text.~~
@@ -40,16 +40,36 @@ In order to create the nominations page, we need a few elements:
 
 Whilst testing this, I've realised there's a better structure available, and it should be converted to utilize that.
 
-1. **`Step 1`** - Select the nominee **TYPE** (ie. `fic`, `art`, or `other`).
-2. **`Step 2`** - Depends on the nominee type.
-   - `fic`/`art`: Opens relevant nomination form.
-   - `other`: Opens category selection screen (pre-filtered so it only shows those with the type `other`), where user can select **ONE** category.
-3. **`Step 3`** - Depends on the nominee type.
-   - `fic`/`art`: Opens category selection form (pre-filtered so it only shows categories with matching types), where user can select **MULTIPLE** categories (as many as they want), thus enabling them to nominate their input for multiple categories at once.
-   - `other`: Opens relevant category nomination form.
-4. **`Step 4`** - Submit form to server, then show feedback ("Thanks for nominating, click here to go back and nominate something else, or click here to nominate another {fic/art/other.title} for these categories," yadda yadda).
+1. **`Step 1`** - **`DONE!`** ~~Select the nominee **TYPE** (ie. `fic`, `art`, or `other`).~~
+2. **`Step 2`** - **`DONE!`** ~~Depends on the nominee type.~~
+   - `fic`/`art`: **`DONE!`** ~~Opens relevant nomination form.~~
+   - `other`: **`DONE!`** ~~Opens category selection screen (pre-filtered so it only shows those with the type `other`), where user can select **ONE** category.~~
+3. **`Step 3`** - **`DONE!`** ~~Depends on the nominee type.~~
+   - `fic`/`art`: **`DONE!`** ~~Opens category selection form (pre-filtered so it only shows categories with matching types), where user can select **MULTIPLE** categories (as many as they want), thus enabling them to nominate their input for multiple categories at once.~~
+   - `other`: **`DONE!`** ~~Opens relevant category nomination form.~~
+4. **`Step 4`** - **`TO-DO!`** Submit form to server, then show feedback ("Thanks for nominating, click here to go back and nominate something else, or click here to nominate another {fic/art/other.title} for these categories," yadda yadda).
 
 (Note: in order to support step-skipping, category info must be fetched at the very start, when the nomination page is first mounted.)
+
+### Other Things To Do
+
+In rough order of priority:
+
+1. Prep backend with keira; need both **(a)** the API endpoint (`/api/contests` or `/api/categories`), and **(b)** the actual category data drawn up and ready to be served. **Make sure to support the section groupings!** (see [CATEGORIES.md](CATEGORIES.md))
+2. Add the submission feedback stuff from [point 4 here](#nomination-restructuring) and [point 6 here](#nominate-page)]
+3. Scrape 2019 fic data from WSS. Then manually add NSFW specification to any NSFW fics (only gotta check those with AO3/QQ links). Data needed: `title`, `author`, `links` (shortened), and `isNSFW`.
+4. Make fic/art input (step 2) button say "Proceed" or "Save" or something, instead of "Submit" (which should only be the button name for step 3).
+5. Re-implement the step-skipping functionality by specifying the category name in the url as a slug. It was removed in the nomination restructuring commit.
+6. Maybe tweak the SelectCategory submit button styling/placement for multiple category selection. Looks a little odd. (Maybe also change the selected card styling, since it looks pretty much identical to the submit buttons, and in that scenario might be a bit confusing.)
+7. Stop input-clear elements from being tab selectable when hidden.
+8. Try and implement that "My Nominations" page (see [point 6 here](#nominate-page))?
+9. Perhaps work out a way to have the category selection section be a consistent height (ie. max height), so it doesn't jump partway down the page when there are only a few results?
+10. ...?
+
+And some other stuff:
+
+- ~~Maybe rename 'other' type to 'community'?~~ Better: add the section groupings, then have the type selection step (and thus the category filtration step that follows) split the 'other' types up based on their section grouping.
+  - NOTE: the type selection screen may need empty elements for padding purposes, once more than one option is supported.
 
 ## Vote Page
 
