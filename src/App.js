@@ -6,6 +6,7 @@ import NavLink from './components/util/NavLink'
 // router pages
 import NotFoundPage from './pages/NotFoundPage'
 import NominationPage from './pages/NominationPage'
+import MyNomineesPage from './pages/MyNomineesPage'
 import VotePage from './pages/VotePage'
 
 // css sheets
@@ -22,6 +23,10 @@ const App = () => {
     {
       text: 'Nominate',
       to: '/nominate'
+    },
+    {
+      text: 'My Nominees',
+      to: '/nominees'
     }
   ])
 
@@ -91,6 +96,7 @@ const App = () => {
         <Router>
           <VotePage path='/vote' userData={null} />
           <NominationPage path='/nominate/*' />
+          <MyNomineesPage path='/nominees' />
           <Redirect from='/' to='/nominate' noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>

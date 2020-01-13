@@ -459,16 +459,19 @@ input.form-control-lg {
 .nsfw-img {
   filter: blur(30px);
   z-index: 1;
+  transition: filter 3s ease-in;
+}
+
+.hidden .nsfw-img {
+  transition: none;
 }
 
 .nsfw-img:hover {
   filter: blur(0px);
-  transition: filter 3s ease-in;
 }
 
 .hidden .nsfw-img:hover {
   filter: blur(30px);
-  transition: none;
 }
 
 .nsfw-indicator {
@@ -524,6 +527,18 @@ input.form-control-lg {
 
 .no-results {
   margin-top: 30px;
+}
+
+.my-nominees .category {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.entries .card {
+  width: 400px;
+  max-width: 400px;
+  height: fit-content;
+  margin: 8px;
 }
 
 /*

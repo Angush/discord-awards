@@ -58,7 +58,6 @@ const InputFic = ({ save, disabled }) => {
       links: ficData.links.map(url => shortenURL(url))
     }
     save(editedData)
-    // sort and shorten the fic links here, pre-POST request
   }
 
   return (

@@ -29,7 +29,7 @@ In order to create the nominations page, we need a few elements:
    - **`DONE!`** ~~Need to figure out the best way (UI-wise and code-wise) to display stuff like "This is a required field." and other validation text.~~
      - My solution: **I set up a LabelShrinkable component which takes a `valid` prop.** If that prop equates to true, it will render with the `invisible` class, thus hiding it and its `children`. It also takes an `error` prop, and if that equates to true, its text children will be coloured red.
 6. On submission, change "Submit" button to a loading indicator and disable inputs until it's done. (Do some nice animations/transitions, perhaps?)
-   - Also save the submission data (incl. the category) to local storage, and add a "My Nominations" page that loads and displays all of this data. Not the perfect solution to this, but it'll do for the 2019 awards. Can improve it for next time.
+   - **`DONE!`** - ~~Also save the submission data (incl. the category) to local storage, and add a "My Nominations" page that loads and displays all of this data.~~ Not the perfect solution to this, but it'll do for the 2019 awards. Can improve it for next time.
 7. **`OBSOLETE!` - SEE [RESTRUCTURING](#nomination-restructuring)** - ~~After submission, show the user a "Thanks for nominating" screen with three options:~~
    1. ~~"Nominate something else for the same category." (Takes user back to already-selected Step 2.)~~
    2. ~~"Add your nominee to another category." (How to do this? Save nominee data, then return to Step 1, and filter out categories with different types?)~~
@@ -62,7 +62,7 @@ In rough order of priority:
 5. Re-implement the step-skipping functionality by specifying the category name in the url as a slug. It was removed in the nomination restructuring commit.
 6. Maybe tweak the SelectCategory submit button styling/placement for multiple category selection. Looks a little odd. (Maybe also change the selected card styling, since it looks pretty much identical to the submit buttons, and in that scenario might be a bit confusing.)
 7. Stop input-clear elements from being tab selectable when hidden.
-8. Try and implement that "My Nominations" page (see [point 6 here](#nominate-page))?
+8. **`DONE!`** - ~~Try and implement that "My Nominations" page (see [point 6 here](#nominate-page))?~~
 9. Perhaps work out a way to have the category selection section be a consistent height (ie. max height), so it doesn't jump partway down the page when there are only a few results?
 10. ...?
 

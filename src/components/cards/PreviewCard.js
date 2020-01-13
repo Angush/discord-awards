@@ -43,6 +43,7 @@ const PreviewCard = props => {
         : 'a'
     } ${value}.`
   }
+
   const cardData = {}
   let emptyField = false
   for (const field in requiredTypes) {

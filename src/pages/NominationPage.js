@@ -9,7 +9,7 @@ import GoBack from '../components/util/GoBack'
 // import slug from 'slug'
 
 // ! hardcoded contest data for testing without an api
-const rawContestData = require('../json/FanficContests.json')
+// const rawContestData = require('../json/FanficContests.json')
 
 const NominationPage = props => {
   const [categoryTypes, setCategoryTypes] = useState([])
@@ -30,35 +30,51 @@ const NominationPage = props => {
   useEffect(() => {
     // ! hardcoded contest data for testing without an api
     // - remove this line (and declaration above) and uncomment the fetch request here when done
-    let data = rawContestData
-    // window
-    //   .fetch(`http://localhost:3001/api/contests`)
-    //   .then(response => response.json())
-    //   .then(data => {
-    // set category types
-    let types = data.reduce(
-      (arr, { type }) => (arr.includes(type) ? arr : [...arr, type]),
-      []
-    )
-    setCategories(data)
-    setCategoryTypes(types)
-    // })
+    // let data = rawContestData
+    window
+      .fetch(`http://localhost:3001/api/contests`)
+      .then(response => response.json())
+      .then(data => {
+        // set category types
+        let types = data.reduce(
+          (arr, { type }) => (arr.includes(type) ? arr : [...arr, type]),
+          []
+        )
+        setCategories(data)
+        setCategoryTypes(types)
+        let stringified = JSON.stringify(data)
+        if (localStorage.categories !== stringified)
+          localStorage.categories = stringified
+      })
   }, [])
 
   const save = nomineeData => {
-    console.log(nomineeData)
     setNominee(nomineeData)
-    setDone(
-      selected.type === 'other'
-        ? {
-            ...done,
-            stepThree: true
-          }
-        : {
-            ...done,
-            stepTwo: true
-          }
-    )
+    if (selected.type !== 'other')
+      setDone({
+        ...done,
+        stepTwo: true
+      })
+  }
+
+  const submit = nomineeData => {
+    if (!nominee && !nomineeData) return
+
+    setDone({
+      ...done,
+      stepThree: true
+    })
+
+    let nominees = localStorage.nominees
+      ? JSON.parse(localStorage.nominees)
+      : []
+    localStorage.nominees = JSON.stringify([
+      ...nominees,
+      {
+        categories: selected.categories.map(c => c.id),
+        data: nominee ? nominee : nomineeData
+      }
+    ])
   }
 
   const reset = stage => {
@@ -235,7 +251,10 @@ const NominationPage = props => {
                 nominee
               </h4>
               <InputMain
-                save={save}
+                save={dataToSave => {
+                  save(dataToSave)
+                  submit(dataToSave)
+                }}
                 type={selected.type}
                 category={selected.categories[0]}
                 disabled={done.stepThree}
@@ -264,31 +283,14 @@ const NominationPage = props => {
                   })
                 }}
                 done={done.stepThree}
-                setDone={status =>
-                  setDone({
-                    ...done,
-                    stepThree: status
-                  })
-                }
+                setDone={() => submit()}
               />
             </>
           )}
         </div>
       )}
 
-      {done.stepThree && (
-        <SubmitStep
-          selected={selected}
-          nominee={nominee}
-          reset={reset}
-          goBack={() => {
-            setDone({
-              ...done,
-              stepThree: false
-            })
-          }}
-        />
-      )}
+      {done.stepThree && <SubmitStep selected={selected} reset={reset} />}
       <div className='vertical-padding'></div>
     </div>
   )

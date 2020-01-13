@@ -1,13 +1,7 @@
 import React from 'react'
-import PreviewCard from '../cards/PreviewCard'
-import GoBack from '../util/GoBack'
+import { Button } from 'react-bootstrap'
 
-const SubmitStep = ({
-  nominee,
-  selected: { type, categories },
-  reset,
-  goBack
-}) => {
+const SubmitStep = ({ reset, selected: { type, categories } }) => {
   const requiredTypes = {}
   if (type === 'other')
     categories[0].fields.forEach(
@@ -17,7 +11,6 @@ const SubmitStep = ({
   return (
     <div>
       <h5>
-        <GoBack onClick={goBack} />
         <small className='text-muted'>That's it!</small>
       </h5>
       <h4>Nominee submitted!</h4>
@@ -34,19 +27,9 @@ const SubmitStep = ({
           </li>
         ))}
       </ol>
-      <div className='preview mx-auto'>
-        {type === 'other' ? (
-          <PreviewCard
-            data={nominee}
-            requiredTypes={requiredTypes}
-            usePlaceholders={false}
-          />
-        ) : type === 'fic' ? (
-          <PreviewCard type='fic' fic={nominee} />
-        ) : (
-          <PreviewCard type='art' formData={nominee} />
-        )}
-      </div>
+      <Button className='height-lg' variant='danger' onClick={reset}>
+        Reset
+      </Button>
     </div>
   )
 }

@@ -7,7 +7,7 @@ const JumpTo = ({ id, offset, smooth }) => {
       offset: offset,
       smooth: smooth
     })
-  })
+  }, [id, offset, smooth])
 
   return <></>
 }
