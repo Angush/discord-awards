@@ -15,7 +15,7 @@ const MyNomineesPage = () => {
 
   if (!nominees || !categories)
     return (
-      <div className='vote-flow fade-rise text-center pad-top'>
+      <div className='fade-rise text-center pad-top'>
         <h3>You haven't nominated anything yet!</h3>
         <p>
           Or if you have, I can't retrieve the records. (This'll be improved for
@@ -34,7 +34,15 @@ const MyNomineesPage = () => {
       .map(n => n.data)
 
   return (
-    <>
+    <div className='fade-rise'>
+      <h2
+        style={{
+          marginTop: '20px',
+          marginBottom: '40px'
+        }}
+      >
+        My Nominees
+      </h2>
       <div className='my-nominees'>
         {categories.map(category => {
           let categoryNominees = getCategoryNominees(category.id)
@@ -79,7 +87,7 @@ const MyNomineesPage = () => {
         })}
       </div>
       <div className='vertical-padding'></div>
-    </>
+    </div>
   )
 }
 
