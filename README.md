@@ -1,5 +1,7 @@
 # The Cauldron Awards Plan
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4bc8477d-6b83-40ac-a1a0-a2480845f2d2/deploy-status)](https://app.netlify.com/sites/cauldron-awards/deploys)
+
 Do the nominations page first, with a votes page that just says "Voting is not open yet." Nominations will take a few weeks, which gives me time to get the vote part up-and-running.
 
 ## Nominate Page
