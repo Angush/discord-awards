@@ -79,7 +79,7 @@ const InputFic = ({ save, disabled }) => {
       <div className='preview mx-auto'>
         {Object.values(ficData).length === 0 && (
           <span className='text-muted '>
-            {manual ? 'Enter some fic data' : 'Select a fic'} to submit.
+            {manual ? 'Enter some fic data' : 'Select a fic'} to continue.
           </span>
         )}
         {ficData && (
@@ -91,7 +91,7 @@ const InputFic = ({ save, disabled }) => {
         )}
       </div>
 
-      <Submission tall disabled={!valid.all || disabled}>
+      <Submission tall disabled={!valid.all || disabled} text='Continue'>
         {manual ? (
           <Button
             variant='link'

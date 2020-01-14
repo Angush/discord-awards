@@ -103,21 +103,19 @@ const InputOther = ({ category, save, disabled }) => {
                 disabled={disabled}
               />
             </InputGroup>
-            {!validated && (
-              <LabelShrinkable
-                valid={formData[item.id] && validated}
-                error={blurred[item.id] && !validated}
-                optional={item.optional}
-              >
-                {getLabelText(item, validated)}
-              </LabelShrinkable>
-            )}
+            <LabelShrinkable
+              valid={formData[item.id] && validated}
+              error={blurred[item.id] && !validated}
+              optional={item.optional}
+            >
+              {getLabelText(item, validated)}
+            </LabelShrinkable>
           </Form.Group>
         )
       })}
 
       <div className='preview mx-auto'>
-        {formData && (
+        {Object.values(formData).filter(v => v).length > 0 ? (
           <PreviewCard
             data={
               formData.link && !validateField({ id: 'link' })
@@ -129,6 +127,10 @@ const InputOther = ({ category, save, disabled }) => {
             onLoad={onLoad}
             onError={onError}
           />
+        ) : (
+          <span className='text-muted '>
+            Enter the required data to submit.
+          </span>
         )}
       </div>
 

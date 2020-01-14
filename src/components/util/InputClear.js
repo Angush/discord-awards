@@ -7,9 +7,19 @@ const InputClear = ({ onClick, selector, hidden }) => {
       if (onClick) onClick(e)
     }
   }
+
+  const hiddenProps = hidden && {
+    tabIndex: -1
+  }
+
   return (
     <span className='input-clear' {...props}>
-      <button type='button' className='close' aria-label='Clear input'>
+      <button
+        type='button'
+        className='close'
+        aria-label='Clear input'
+        {...hiddenProps}
+      >
         <span aria-hidden='true'>&times;</span>
       </button>
     </span>

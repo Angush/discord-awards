@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-const Submission = ({ tall, disabled, children }) => {
+const Submission = ({ tall, disabled, children, onClick, text = 'Submit' }) => {
   const classes = tall ? 'height-lg' : ''
 
   //* An attempt at disabling buttons via a class (and an onClick handler in App.js), so that I could make them shake when clicked as a form of negative feedback. Wasn't a great solution. (To re-enable, uncomment the lines in App.js and below, and comment out the 'classes' declaration above and 'disabled={disabled}' below.)
@@ -17,8 +17,9 @@ const Submission = ({ tall, disabled, children }) => {
         disabled={disabled}
         tabIndex={disabled ? -1 : 0}
         variant={disabled ? 'outline-primary' : 'primary'}
+        onClick={onClick}
       >
-        Submit
+        {text}
       </Button>
       {children && <div className='submission-alternatives'>{children}</div>}
     </div>

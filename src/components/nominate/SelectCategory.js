@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { InputGroup, FormControl, Card, Button } from 'react-bootstrap'
+import { InputGroup, FormControl, Card } from 'react-bootstrap'
 import padWithEmptyElements from '../../functions/padWithEmptyElements'
 import jumpToId from '../../functions/jumpToID'
 import SelectableCard from '../cards/SelectableCard'
 import InputClear from '../util/InputClear'
+import Submission from '../util/Submission'
 
 const SelectCategory = ({
   select,
@@ -26,7 +27,8 @@ const SelectCategory = ({
           ? categories.filter(
               c =>
                 c.name.toLowerCase().includes(term) ||
-                c.description.toLowerCase().includes(term)
+                c.description.toLowerCase().includes(term) ||
+                selected.some(s => s.id === c.id)
             )
           : categories
       )
@@ -41,8 +43,6 @@ const SelectCategory = ({
     jumpToId('category-selection', { offset: 56, smooth: false })
     setSearchterm('')
   }
-
-  const buttonDisabled = done || selected.length === 0
 
   return (
     <div id='category-selection'>
@@ -98,16 +98,11 @@ const SelectCategory = ({
         )}
       </div>
       {multiple && (
-        <div className='submission-options'>
-          <Button
-            className='height-lg'
-            variant={buttonDisabled ? 'outline-primary' : 'primary'}
-            disabled={buttonDisabled}
-            onClick={() => setDone(true)}
-          >
-            Submit
-          </Button>
-        </div>
+        <Submission
+          tall
+          disabled={done || selected.length === 0}
+          onClick={() => setDone()}
+        />
       )}
     </div>
   )

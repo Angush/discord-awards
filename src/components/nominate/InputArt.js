@@ -147,12 +147,16 @@ const InputArt = ({ save, disabled }) => {
         )}
         {(!formData.url || error) && (
           <span className='text-muted '>
-            Enter {error ? 'a valid' : 'an'} image to submit.
+            Enter {error ? 'a valid' : 'an'} image to continue.
           </span>
         )}
       </div>
 
-      <Submission tall disabled={!loaded || !formData.artist || disabled} />
+      <Submission
+        tall
+        disabled={!loaded || !formData.artist || disabled}
+        text='Continue'
+      />
     </Form>
   )
 }

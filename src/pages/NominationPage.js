@@ -9,7 +9,7 @@ import GoBack from '../components/util/GoBack'
 // import slug from 'slug'
 
 // ! hardcoded contest data for testing without an api
-// const rawContestData = require('../json/FanficContests.json')
+const rawContestData = require('../json/FanficContests.json')
 
 const NominationPage = props => {
   const [categoryTypes, setCategoryTypes] = useState([])
@@ -30,22 +30,22 @@ const NominationPage = props => {
   useEffect(() => {
     // ! hardcoded contest data for testing without an api
     // - remove this line (and declaration above) and uncomment the fetch request here when done
-    // let data = rawContestData
-    window
-      .fetch(`http://localhost:3001/api/contests`)
-      .then(response => response.json())
-      .then(data => {
-        // set category types
-        let types = data.reduce(
-          (arr, { type }) => (arr.includes(type) ? arr : [...arr, type]),
-          []
-        )
-        setCategories(data)
-        setCategoryTypes(types)
-        let stringified = JSON.stringify(data)
-        if (localStorage.categories !== stringified)
-          localStorage.categories = stringified
-      })
+    let data = rawContestData
+    // window
+    //   .fetch(`http://10.0.0.62:3001/api/contests`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    // set category types
+    let types = data.reduce(
+      (arr, { type }) => (arr.includes(type) ? arr : [...arr, type]),
+      []
+    )
+    setCategories(data)
+    setCategoryTypes(types)
+    let stringified = JSON.stringify(data)
+    if (localStorage.categories !== stringified)
+      localStorage.categories = stringified
+    // })
   }, [])
 
   const save = nomineeData => {
@@ -102,7 +102,7 @@ const NominationPage = props => {
   //   if (preselected) select(preselected)
   // }, [categories, href, selected, select])
 
-  if (!categories || !categoryTypes)
+  if (categories.length === 0 || categoryTypes.length === 0)
     return (
       <LoadingIndicator timeout={1000}>
         <h4>Just a moment!</h4>

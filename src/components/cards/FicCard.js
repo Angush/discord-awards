@@ -8,8 +8,9 @@ const FicCard = ({ fic, className }) => {
   return (
     <Card bg='dark' text='white' className={classes}>
       <Card.Body>
-        {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-        <Card.Title>{fic.title}</Card.Title>
+        <Card.Title>
+          {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>} {fic.title}
+        </Card.Title>
         <Card.Subtitle>
           by <em>{fic.author}</em>
         </Card.Subtitle>

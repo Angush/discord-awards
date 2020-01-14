@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import JumpTo from '../util/JumpTo'
 
 const SubmitStep = ({ reset, selected: { type, categories } }) => {
   const requiredTypes = {}
@@ -9,7 +10,8 @@ const SubmitStep = ({ reset, selected: { type, categories } }) => {
     )
 
   return (
-    <div>
+    <div id='submit-step'>
+      <JumpTo id='submit-step' />
       <h5>
         <small className='text-muted'>That's it!</small>
       </h5>

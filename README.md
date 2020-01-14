@@ -60,18 +60,25 @@ In rough order of priority:
 1. Prep backend with keira; need both **(a)** the API endpoint (`/api/contests` or `/api/categories`), and **(b)** the actual category data drawn up and ready to be served. **Make sure to support the section groupings!** (see [CATEGORIES.md](CATEGORIES.md))
 2. Add the submission feedback stuff from [point 4 here](#nomination-restructuring) and [point 6 here](#nominate-page)]
 3. Scrape 2019 fic data from WSS. Then manually add NSFW specification to any NSFW fics (only gotta check those with AO3/QQ links). Data needed: `title`, `author`, `links` (shortened), and `isNSFW`.
-4. Make fic/art input (step 2) button say "Proceed" or "Save" or something, instead of "Submit" (which should only be the button name for step 3).
+4. **`DONE!`** - ~~Make fic/art input (step 2) button say "Proceed" or "Save" or something, instead of "Submit" (which should only be the button name for step 3).~~
 5. Re-implement the step-skipping functionality by specifying the category name in the url as a slug. It was removed in the nomination restructuring commit.
-6. Maybe tweak the SelectCategory submit button styling/placement for multiple category selection. Looks a little odd. (Maybe also change the selected card styling, since it looks pretty much identical to the submit buttons, and in that scenario might be a bit confusing.)
-7. Stop input-clear elements from being tab selectable when hidden.
+6. **`ACTUALLY IT LOOKS FINE!`** - ~~Maybe tweak the SelectCategory submit button styling/placement for multiple category selection. Looks a little odd. (Maybe also change the selected card styling, since it looks pretty much identical to the submit buttons, and in that scenario might be a bit confusing.)~~
+7. **`DONE!`** - ~~Stop input-clear elements from being tab selectable when hidden.~~
 8. **`DONE!`** - ~~Try and implement that "My Nominations" page (see [point 6 here](#nominate-page))?~~
 9. Perhaps work out a way to have the category selection section be a consistent height (ie. max height), so it doesn't jump partway down the page when there are only a few results?
 10. ...?
 
-And some other stuff:
+And MAYBE some other stuff:
 
-- ~~Maybe rename 'other' type to 'community'?~~ Better: add the section groupings, then have the type selection step (and thus the category filtration step that follows) split the 'other' types up based on their section grouping.
+- ~~Rename 'other' type to 'community'?~~ **Better:** add the section groupings ("People", etc.), then have the type selection step (and thus the category filtration step that follows) split the 'other' types up based on their section grouping.
   - NOTE: the type selection screen may need empty elements for padding purposes, once more than one option is supported.
+
+### Bugs
+
+- **`FIXED!`** - ~~Opening navbar on mobile initiates `JumpTo`?~~
+- **`FIXED!`** - ~~No gap between input title/artist in vertical mode. There used to be.~~
+  - **`FIXED!`** - ~~Connected bug: the gap between fic title and fic author is too small, too.~~
+- **`FIXED!`** - ~~Labels on other input snap-vanish instead of disappearing neatly like they do for fic/art input.~~
 
 ## Vote Page
 

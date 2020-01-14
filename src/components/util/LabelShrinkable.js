@@ -14,7 +14,7 @@ const LabelShrinkable = ({
   } ${error ? 'label-error' : ''}`.replace(/\s+/, ' ')
   return (
     <Form.Text className={classes} style={style}>
-      {children || (optional ? '' : 'Required.')}
+      {children || (optional ? '\u200b' : 'Required.')}
     </Form.Text>
   )
 }
