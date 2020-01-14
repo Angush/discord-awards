@@ -45,7 +45,9 @@
 - Friendliest Face
 - Pet of the Year
 - Favorite Event
-- Favorite Resource Channel [new]
-- Favorite Community Channel [new]
-- Favorite Community Project
-- Favorite Satellite/Offshoot Community
+- Favorite Resource Channel **`[new]`**
+- Favorite Community Channel **`[new]`**
+- ~~Favorite Community Project~~
+- ~~Favorite Satellite/Offshoot Community~~
+- Favorite Emoji **`[new]`**
+- Favorite Liveblog **`[new]`** (wait to see what options Etch finds)

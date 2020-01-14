@@ -17,6 +17,7 @@ const ArtCard = ({ formData, onLoad, onError, className }) => {
           onLoad={onLoad}
           onError={onError}
           className={formData.nsfw && 'nsfw-img'}
+          loading='lazy'
         />
       </div>
       <Card.Body>

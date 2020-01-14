@@ -32,7 +32,7 @@ const SelectCategory = ({
             )
           : categories
       )
-  }, [categories, searchterm])
+  }, [categories, searchterm, selected])
 
   const handleInputChange = e => {
     jumpToId('category-selection', { offset: 56, smooth: false })

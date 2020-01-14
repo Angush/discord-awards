@@ -60,13 +60,14 @@ In rough order of priority:
 1. Prep backend with keira; need both **(a)** the API endpoint (`/api/contests` or `/api/categories`), and **(b)** the actual category data drawn up and ready to be served. **Make sure to support the section groupings!** (see [CATEGORIES.md](CATEGORIES.md))
 2. Add the submission feedback stuff from [point 4 here](#nomination-restructuring) and [point 6 here](#nominate-page)]
 3. Scrape 2019 fic data from WSS. Then manually add NSFW specification to any NSFW fics (only gotta check those with AO3/QQ links). Data needed: `title`, `author`, `links` (shortened), and `isNSFW`.
-4. **`DONE!`** - ~~Make fic/art input (step 2) button say "Proceed" or "Save" or something, instead of "Submit" (which should only be the button name for step 3).~~
-5. Re-implement the step-skipping functionality by specifying the category name in the url as a slug. It was removed in the nomination restructuring commit.
-6. **`ACTUALLY IT LOOKS FINE!`** - ~~Maybe tweak the SelectCategory submit button styling/placement for multiple category selection. Looks a little odd. (Maybe also change the selected card styling, since it looks pretty much identical to the submit buttons, and in that scenario might be a bit confusing.)~~
-7. **`DONE!`** - ~~Stop input-clear elements from being tab selectable when hidden.~~
-8. **`DONE!`** - ~~Try and implement that "My Nominations" page (see [point 6 here](#nominate-page))?~~
-9. Perhaps work out a way to have the category selection section be a consistent height (ie. max height), so it doesn't jump partway down the page when there are only a few results?
-10. ...?
+4. Add support for image-only `other` categories, as well as support for very small images (eg. emojis) - they probably don't display properly.
+5. **`DONE!`** - ~~Make fic/art input (step 2) button say "Proceed" or "Save" or something, instead of "Submit" (which should only be the button name for step 3).~~
+6. Re-implement the step-skipping functionality by specifying the category name in the url as a slug. It was removed in the nomination restructuring commit.
+7. **`ACTUALLY IT LOOKS FINE!`** - ~~Maybe tweak the SelectCategory submit button styling/placement for multiple category selection. Looks a little odd. (Maybe also change the selected card styling, since it looks pretty much identical to the submit buttons, and in that scenario might be a bit confusing.)~~
+8. **`DONE!`** - ~~Stop input-clear elements from being tab selectable when hidden.~~
+9. **`DONE!`** - ~~Try and implement that "My Nominations" page (see [point 6 here](#nominate-page))?~~
+10. Perhaps work out a way to have the category selection section be a consistent height (ie. max height), so it doesn't jump partway down the page when there are only a few results?
+11. ...?
 
 And MAYBE some other stuff:
 
@@ -100,3 +101,9 @@ And obviously the voting interface is only actually available if you're logged i
 
 - Bootstrap 4.4
 - A CSS minifier to keep the bundle size low (incl. minifying Bootstrap itself). `purgecss`? https://www.purgecss.com/guides/react
+
+## Next Year (or Stretch Goals)
+
+Ideas:
+
+1. **Community Acknowledgements** - basically an `other` category where people can nominate a person/event/whatever for a special community acknowledgement (reason + name). Voting results for this category shows the percentage of people who think this nominee deserves a community acknowledgement.
