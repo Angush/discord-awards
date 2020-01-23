@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import CategoryTypeSelect from '../components/nominate/CategoryTypeSelect'
 import SelectCategory from '../components/nominate/SelectCategory'
@@ -6,10 +6,6 @@ import SubmitStep from '../components/nominate/SubmitStep'
 import InputMain from '../components/nominate/InputMain'
 import JumpTo from '../components/util/JumpTo'
 import GoBack from '../components/util/GoBack'
-// import slug from 'slug'
-
-// ! hardcoded contest data for testing without an api
-const rawContestData = require('../json/FanficContests.json')
 
 const NominationPage = props => {
   const [categoryTypes, setCategoryTypes] = useState([])
@@ -21,63 +17,110 @@ const NominationPage = props => {
   })
   const [done, setDone] = useState({
     stepTwo: false,
-    stepThree: false
+    stepThree: false,
+    submitting: false
   })
 
   // const [clicked, setClicked] = useState(false)
   // const href = props['*']
 
-  useEffect(() => {
-    // ! hardcoded contest data for testing without an api
-    // - remove this line (and declaration above) and uncomment the fetch request here when done
-    let data = rawContestData
-    // window
-    //   .fetch(`http://10.0.0.62:3001/api/contests`)
-    //   .then(response => response.json())
-    //   .then(data => {
+  const populateCategories = useCallback(data => {
     // set category types
-    let types = data.reduce(
-      (arr, { type }) => (arr.includes(type) ? arr : [...arr, type]),
-      []
-    )
-    setCategories(data)
+    // TODO: work out a way to have it show the category sections instead of the type names
+    let types = data.reduce((arr, { type, section }) => {
+      let obj = { type, section }
+      if (arr.some(existing => existing.type === type)) return arr
+      else return [...arr, obj]
+    }, [])
     setCategoryTypes(types)
-    let stringified = JSON.stringify(data)
-    if (localStorage.categories !== stringified)
-      localStorage.categories = stringified
-    // })
+    // set categories
+    setCategories(data)
   }, [])
+
+  useEffect(() => {
+    let cached = localStorage.categories
+    if (cached) populateCategories(JSON.parse(cached))
+    window
+      .fetch(`https://cauldron2019.wormfic.net/api/contests`)
+      .then(response => response.json())
+      .then(rawData => {
+        let data = Object.values(rawData).map(c => {
+          if (c.fields) return { ...c, fields: JSON.parse(c.fields) }
+          else return c
+        })
+        let stringified = JSON.stringify(data)
+        if (cached !== stringified) {
+          populateCategories(data)
+          localStorage.categories = stringified
+          localStorage.nominees = []
+        }
+      })
+  }, [populateCategories])
 
   const save = nomineeData => {
     setNominee(nomineeData)
-    if (selected.type !== 'other')
-      setDone({
-        ...done,
-        stepTwo: true
-      })
   }
 
   const submit = nomineeData => {
     if (!nominee && !nomineeData) return
-
     setDone({
       ...done,
-      stepThree: true
+      submitting: true
     })
 
-    let nominees = localStorage.nominees
-      ? JSON.parse(localStorage.nominees)
-      : []
-    localStorage.nominees = JSON.stringify([
-      ...nominees,
-      {
-        categories: selected.categories.map(c => c.id),
-        data: nominee ? nominee : nomineeData
-      }
-    ])
+    let approval = 0 // 0 indicating unvetted manual input
+    let editedData = nomineeData || nominee
+    if (editedData.approval) {
+      delete editedData.approval
+      approval = 2 // 2 indicating it was not manual input
+    }
+
+    let dataToSubmit = {
+      categories: selected.categories.map(c => c.id),
+      data: editedData,
+      approval: approval
+    }
+
+    console.log(dataToSubmit)
+
+    window
+      .fetch(`https://cauldron2019.wormfic.net/api/nominate`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'text/plain'
+        },
+        body: JSON.stringify(dataToSubmit)
+      })
+      .then(res => {
+        if (res.status === 201) {
+          setDone({
+            ...done,
+            stepThree: true,
+            submitting: false
+          })
+
+          //- Save updated nominees to localStorage
+          let nominees = localStorage.nominees
+            ? JSON.parse(localStorage.nominees)
+            : []
+
+          localStorage.nominees = JSON.stringify([
+            ...nominees,
+            { ...dataToSubmit }
+          ])
+        } else {
+          setDone({
+            ...done,
+            stepThree: 'error',
+            submitting: false
+          })
+        }
+      })
+      .catch(err => console.error(`POST to /api/nominate failed!`, err))
   }
 
-  const reset = stage => {
+  const reset = () => {
     setNominee(null)
     setSelected({
       type: null,
@@ -85,7 +128,8 @@ const NominationPage = props => {
     })
     setDone({
       stepTwo: false,
-      stepThree: false
+      stepThree: false,
+      submitting: false
     })
   }
 
@@ -203,7 +247,13 @@ const NominationPage = props => {
             <>
               <h4>Enter your {selected.type} nominee</h4>
               <InputMain
-                save={save}
+                save={args => {
+                  save(args)
+                  setDone({
+                    ...done,
+                    stepTwo: true
+                  })
+                }}
                 type={selected.type}
                 disabled={done.stepTwo}
               />
@@ -258,6 +308,7 @@ const NominationPage = props => {
                 type={selected.type}
                 category={selected.categories[0]}
                 disabled={done.stepThree}
+                submitting={done.submitting}
               />
             </>
           ) : (
@@ -284,13 +335,20 @@ const NominationPage = props => {
                 }}
                 done={done.stepThree}
                 setDone={() => submit()}
+                submitting={done.submitting}
               />
             </>
           )}
         </div>
       )}
 
-      {done.stepThree && <SubmitStep selected={selected} reset={reset} />}
+      {done.stepThree && (
+        <SubmitStep
+          selected={selected}
+          reset={reset}
+          error={done.stepThree === 'error'}
+        />
+      )}
       <div className='vertical-padding'></div>
     </div>
   )

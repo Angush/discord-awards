@@ -10,9 +10,9 @@ const CategoryTypeSelect = ({ types, selected, select, hidden }) => {
       </h5>
       <h4 className='align-top'>Select nomination type</h4>
       <div className='card-list'>
-        {types.map(type => (
+        {types.map(({ type, section }) => (
           <SelectableCard
-            key={type}
+            key={section}
             hidden={hidden}
             selected={selected && type === selected}
             onClick={e => {
@@ -21,7 +21,7 @@ const CategoryTypeSelect = ({ types, selected, select, hidden }) => {
             }}
           >
             <Card.Body>
-              <Card.Title className='h4'>{type}</Card.Title>
+              <Card.Title className='h4'>{section}</Card.Title>
             </Card.Body>
           </SelectableCard>
         ))}
