@@ -3,7 +3,13 @@ import InputOther from './InputOther'
 import InputArt from './InputArt'
 import InputFic from './InputFic'
 
-const InputMain = ({ save, type, category, submitting, disabled = false }) => {
+const InputMain = ({
+  save,
+  type,
+  category,
+  submitting = false,
+  disabled = false
+}) => {
   const INPUT_SELECTOR = {
     other: (
       <InputOther

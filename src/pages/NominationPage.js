@@ -114,7 +114,14 @@ const NominationPage = props => {
           })
         }
       })
-      .catch(err => console.error(`POST to /api/nominate failed!`, err))
+      .catch(err => {
+        console.error(`POST to /api/nominate failed!`, err)
+        setDone({
+          ...done,
+          stepThree: 'error',
+          submitting: false
+        })
+      })
   }
 
   const reset = () => {
@@ -284,7 +291,7 @@ const NominationPage = props => {
                 }}
                 type={selected.type}
                 category={selected.categories[0]}
-                disabled={done.stepThree || done.submitting}
+                disabled={done.stepThree}
                 submitting={done.submitting}
               />
             </>
