@@ -22,6 +22,7 @@ const InputOther = ({ category, save, disabled, submitting }) => {
   const validateField = useCallback(
     field => {
       let id = field.id
+      if (field.optional && !formData[id]) return true
       if (id === 'link') return validateURL(formData.link)
       if (id === 'image')
         return imgValid.loaded && !imgValid.error ? true : false
@@ -31,9 +32,7 @@ const InputOther = ({ category, save, disabled, submitting }) => {
   )
 
   useEffect(() => {
-    setValid(
-      category.fields.every(field => field.optional || validateField(field))
-    )
+    setValid(category.fields.every(field => validateField(field)))
   }, [category.fields, validateField])
 
   const handleSubmit = e => {
