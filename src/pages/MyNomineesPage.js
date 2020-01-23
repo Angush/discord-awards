@@ -13,36 +13,49 @@ const MyNomineesPage = () => {
     }
   }, [])
 
-  if (!nominees || !categories)
+  if (!nominees || nominees.length === 0 || !categories)
     return (
       <div className='fade-rise text-center pad-top'>
         <h3>You haven't nominated anything yet!</h3>
-        <p>
-          Or if you have, I can't retrieve the records. (This'll be improved for
-          the 2020 awards.)
+        <p style={{ marginTop: '20px' }}>
+          Or if you have, I can't retrieve the records.
         </p>
         <p>
           Visit <Link to='/nominate'>the nomination page</Link> to nominate
           something in one of our many categories!
         </p>
+        <p>(This'll be improved for the 2020 awards.)</p>
       </div>
     )
 
-  const getCategoryNominees = id =>
-    nominees
+  const getCategoryNominees = id => {
+    if (nominees.length === 0 || !nominees[0].categories) return []
+    return nominees
       .filter(nominee => nominee.categories.some(cid => cid === id))
       .map(n => n.data)
+  }
 
   return (
     <div className='fade-rise'>
-      <h2
+      <h3
         style={{
-          marginTop: '20px',
-          marginBottom: '40px'
+          marginTop: '20px'
         }}
       >
         My Nominees
-      </h2>
+      </h3>
+      <div className='clear-nominees'>
+        <div
+          className='btn-link text-danger'
+          onClick={() => {
+            setNominees(null)
+            localStorage.nominees = []
+          }}
+        >
+          Clear stored nominee history
+        </div>
+        <div className='text-muted'>(Note: does not undo nominations)</div>
+      </div>
       <div className='my-nominees'>
         {categories.map(category => {
           let categoryNominees = getCategoryNominees(category.id)
