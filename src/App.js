@@ -45,7 +45,10 @@ const App = () => {
     ) {
       event.preventDefault()
       console.log(
-        `Clicked card image! This is when we'd show a lightbox. Though that isn't actually coded yet. SRC: ${event.target.src}`
+        `Clicked card image! This is when we'd show a lightbox. Though that isn't actually coded yet.`,
+        {
+          src: event.target.src
+        }
       )
     }
 

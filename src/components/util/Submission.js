@@ -21,7 +21,7 @@ const Submission = ({
         disabled={disabled || submitting}
         tabIndex={disabled || submitting ? -1 : 0}
         variant={disabled ? 'outline-primary' : 'primary'}
-        onClick={onClick}
+        onClick={disabled || submitting ? null : onClick}
       >
         {submitting ? (
           <LoadingIndicator

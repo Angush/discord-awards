@@ -80,8 +80,6 @@ const NominationPage = props => {
       approval: approval
     }
 
-    console.log(dataToSubmit)
-
     window
       .fetch(`https://cauldron2019.wormfic.net/api/nominate`, {
         method: 'POST',
@@ -323,9 +321,10 @@ const NominationPage = props => {
 
       {done.stepThree && (
         <SubmitStep
-          selected={selected}
           reset={reset}
+          selected={selected}
           error={done.stepThree === 'error'}
+          nominee={nominee}
         />
       )}
       <div className='vertical-padding'></div>
