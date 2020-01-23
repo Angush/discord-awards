@@ -304,6 +304,26 @@ input.form-control-lg {
   margin-left: 0.25rem;
 }
 
+.submit-progress .spinner {
+  margin: 0 auto;
+  margin-top: 2px;
+}
+
+.submit-progress .spinner > div {
+  background-color: white !important;
+  width: 12px !important;
+  height: 12px !important;
+  margin: 2px !important;
+}
+
+.submitting-btn {
+  opacity: 1 !important;
+}
+
+.clear-nominees {
+  margin-bottom: 40px;
+}
+
 /* #image-load {
   position: absolute;
   z-index: 10;

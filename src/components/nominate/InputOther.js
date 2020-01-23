@@ -6,7 +6,7 @@ import validateURL from '../../functions/validateURL'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
-const InputOther = ({ category, save, disabled }) => {
+const InputOther = ({ category, save, disabled, submitting }) => {
   const [formData, setFormData] = useState({})
   const [imgValid, setImgValid] = useState({})
   const [blurred, setBlurred] = useState({})
@@ -134,7 +134,7 @@ const InputOther = ({ category, save, disabled }) => {
         )}
       </div>
 
-      <Submission tall disabled={!valid || disabled} />
+      <Submission tall disabled={!valid || disabled} submitting={submitting} />
     </Form>
   )
 }

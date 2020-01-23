@@ -12,6 +12,7 @@ const SelectCategory = ({
   selected = [],
   multiple = false,
   categories,
+  submitting,
   setDone,
   done
 }) => {
@@ -46,6 +47,11 @@ const SelectCategory = ({
 
   return (
     <div id='category-selection'>
+      {multiple && (
+        <p className='text-muted' style={{ margin: 0 }}>
+          You may select multiple.
+        </p>
+      )}
       <div className={'category-input' + (done ? '' : ' stick')}>
         <InputGroup size='lg'>
           <FormControl
@@ -102,6 +108,7 @@ const SelectCategory = ({
           tall
           disabled={done || selected.length === 0}
           onClick={() => setDone()}
+          submitting={submitting}
         />
       )}
     </div>

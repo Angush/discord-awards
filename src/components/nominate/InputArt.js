@@ -6,7 +6,7 @@ import LabelShrinkable from '../util/LabelShrinkable'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
-const InputArt = ({ save, disabled }) => {
+const InputArt = ({ save, disabled, submitting }) => {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
@@ -156,6 +156,7 @@ const InputArt = ({ save, disabled }) => {
         tall
         disabled={!loaded || !formData.artist || disabled}
         text='Continue'
+        submitting={submitting}
       />
     </Form>
   )

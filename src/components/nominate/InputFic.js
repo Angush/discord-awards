@@ -6,7 +6,7 @@ import FicManual from './FicManual'
 import PreviewCard from '../cards/PreviewCard'
 import shortenURL from '../../functions/shortenURL'
 
-const InputFic = ({ save, disabled }) => {
+const InputFic = ({ save, disabled, submitting }) => {
   const [manualInput, setManualInput] = useState({})
   const [selection, setSelection] = useState(null)
   const [manual, setManual] = useState(false)
@@ -57,6 +57,7 @@ const InputFic = ({ save, disabled }) => {
       ...ficData,
       links: ficData.links.map(url => shortenURL(url))
     }
+    if (!manual) editedData.approval = true
     save(editedData)
   }
 
@@ -91,7 +92,12 @@ const InputFic = ({ save, disabled }) => {
         )}
       </div>
 
-      <Submission tall disabled={!valid.all || disabled} text='Continue'>
+      <Submission
+        tall
+        disabled={!valid.all || disabled}
+        text='Continue'
+        submitting={submitting}
+      >
         {manual ? (
           <Button
             variant='link'

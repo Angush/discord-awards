@@ -5,8 +5,9 @@ const LoadingIndicator = ({
   id,
   timeout,
   children,
-  showSlow = true,
   noRise = false,
+  showSlow = true,
+  spinnerOnly = false,
   spinnerProps,
   className
 }) => {
@@ -40,14 +41,16 @@ const LoadingIndicator = ({
       id={id}
     >
       <Spinner {...spinnerProps} />
-      <div className='loading-children'>
-        {children ? children : <div className='shrink-me'></div>}
-        {slowLoad && (
-          <div className={noRise ? 'fade-in' : 'fade-rise'}>
-            This is taking a while, isn't it?
-          </div>
-        )}
-      </div>
+      {!spinnerOnly && (
+        <div className='loading-children'>
+          {children ? children : <div className='shrink-me'></div>}
+          {slowLoad && (
+            <div className={noRise ? 'fade-in' : 'fade-rise'}>
+              This is taking a while, isn't it?
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
