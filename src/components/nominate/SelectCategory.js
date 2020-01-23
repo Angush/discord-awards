@@ -20,19 +20,18 @@ const SelectCategory = ({
   const [matching, setMatching] = useState(categories)
 
   useEffect(() => {
-    const term = searchterm.toLowerCase().trim()
+    let term = searchterm.toLowerCase().trim()
     if (!term) setMatching(categories)
-    else
+    else {
       setMatching(
-        searchterm
-          ? categories.filter(
-              c =>
-                c.name.toLowerCase().includes(term) ||
-                c.description.toLowerCase().includes(term) ||
-                selected.some(s => s.id === c.id)
-            )
-          : categories
+        categories.filter(
+          c =>
+            c.name.toLowerCase().includes(term) ||
+            (c.description && c.description.toLowerCase().includes(term)) ||
+            selected.some(s => s.id === c.id)
+        )
       )
+    }
   }, [categories, searchterm, selected])
 
   const handleInputChange = e => {
@@ -52,19 +51,19 @@ const SelectCategory = ({
           You may select multiple.
         </p>
       )}
-      <div className={'category-input' + (done ? '' : ' stick')}>
+      <div className={'category-input' + (done || submitting ? '' : ' stick')}>
         <InputGroup size='lg'>
           <FormControl
             id={!done && 'input-clearable'}
             placeholder='Search for a category...'
-            disabled={done}
+            disabled={done || submitting}
             onChange={handleInputChange}
           />
           {searchterm && (
             <InputClear
               onClick={clearInput}
               selector='#input-clearable'
-              hidden={done}
+              hidden={done || submitting}
             />
           )}
         </InputGroup>
@@ -76,7 +75,7 @@ const SelectCategory = ({
           return (
             <SelectableCard
               key={category.id}
-              hidden={done}
+              hidden={done || submitting}
               selected={isSelected}
               onClick={e => {
                 e.preventDefault()
@@ -93,7 +92,10 @@ const SelectCategory = ({
         })}
         {matching.length > 0 && padWithEmptyElements(null, 4, 'contest-filler')}
         {matching.length === 0 && (
-          <div className='text-center mx-auto no-results'>
+          <div
+            className='text-center mx-auto no-results'
+            style={{ marginBottom: '10px' }}
+          >
             <h5>Uh-oh! No results!</h5>
             <h6 className='text-muted'>
               Double-check your search term,

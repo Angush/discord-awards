@@ -26,7 +26,6 @@ const NominationPage = props => {
 
   const populateCategories = useCallback(data => {
     // set category types
-    // TODO: work out a way to have it show the category sections instead of the type names
     let types = data.reduce((arr, { type, section }) => {
       let obj = { type, section }
       if (arr.some(existing => existing.type === type)) return arr
@@ -156,26 +155,6 @@ const NominationPage = props => {
       </LoadingIndicator>
     )
 
-  // const select = category => {
-  //   setSelectedCategory(category)
-  //   setClicked(true)
-  // }
-
-  // const deselect = () => {
-  //   setSelectedCategory(null)
-  //   setClicked(true)
-  //   window.scrollTo(0, 0)
-  // }
-
-  // const navigateTo = target => {
-  //   if (target === 'step1') setSelectedCategory(null)
-  //   else setPreselected(target)
-  // }
-
-  // TODO: add support for addition of "hidden" className to the GoBack / Step X part of the UI.
-  // - Perhaps best achieved by moving the GoBack / Step X elements to the NominateOther/NominateMain sections, and passing a back() function through as a prop?
-  // ! Best way to do hidden: move all components here, with data to infer hidden status
-
   return (
     <div className='nomination-flow'>
       <CategoryTypeSelect
@@ -275,7 +254,7 @@ const NominationPage = props => {
           {!done.stepThree && <JumpTo id='step-three' />}
           <h5>
             <GoBack
-              disabled={done.stepThree}
+              disabled={done.stepThree || done.submitting}
               onClick={() => {
                 setSelected({
                   ...selected,
@@ -307,7 +286,7 @@ const NominationPage = props => {
                 }}
                 type={selected.type}
                 category={selected.categories[0]}
-                disabled={done.stepThree}
+                disabled={done.stepThree || done.submitting}
                 submitting={done.submitting}
               />
             </>
