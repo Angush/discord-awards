@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
-import FicLinks from '../vote/FicLinks'
+import FicLinks from './FicLinks'
 
 const FicCard = ({ fic, className }) => {
   const classes = 'fic-card' + (className ? ' ' + className : '')

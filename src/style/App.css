@@ -689,33 +689,124 @@ input.form-control-lg {
   }
 }
 
-/* 
+.navbar {
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.navbar .container {
+  margin: 0.5rem auto;
+}
+
 #user {
   justify-self: end;
   align-items: center;
   display: flex;
-  background: rgb(35, 35, 35);
-  height: 80px;
-  padding: 0 24px 0 24px;
+  background: rgb(24, 24, 24);
+  position: relative;
+  height: 56px;
+  padding: 1rem;
+  margin: -1rem 0;
+  margin-left: auto;
+  color: white;
+  max-width: 260px;
 }
 
-#user img {
+#user:hover {
+  cursor: pointer;
+}
+
+#avatar {
   border-radius: 100%;
-  width: 42px;
-  height: 42px;
+  width: 32px;
+  height: 32px;
 }
 
-#user p {
-  font-weight: bold;
-  font-size: 1.3em;
-  margin: 0 16px 0 16px;
+#userinfo {
+  font-weight: 500;
+  margin: 0 10px;
+  overflow: hidden;
+  text-overflow: clip;
+  max-height: 48px;
 }
 
 #user #discriminator {
-  font-weight: normal;
+  font-weight: 300;
   color: rgb(170, 170, 170);
 }
-*/
+
+.logInOrOut {
+  transition: color 0.2s;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.logInOrOut:hover {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+
+.logInOrOut span {
+  margin-left: 2px;
+}
+
+.logInOrOut img {
+  height: 24px;
+  width: 24px;
+}
+
+@media (max-width: 767px) {
+  #user {
+    margin: 0;
+    position: relative;
+    width: 100%;
+    padding: 0.75rem 0;
+    bottom: -0.5rem;
+    z-index: 1;
+    background: none;
+  }
+
+  .collapse.show #user-backfill {
+    position: absolute;
+    background: rgb(24, 24, 24);
+    width: 200%;
+    left: -50%;
+    height: 56px;
+    z-index: 0;
+    bottom: 0;
+    transition: background 0.3s;
+  }
+
+  .logInOrOut span {
+    margin-left: 0;
+  }
+
+  #login {
+    width: 100%;
+  }
+
+  #user {
+    max-width: 100%;
+  }
+
+  #logout {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .expanded {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-overlay::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+}
 
 .bold {
   font-weight: bold;

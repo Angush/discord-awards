@@ -14,15 +14,12 @@ import './style/bootstrap.min.css'
 import './style/App.css'
 
 const App = () => {
+  const [userinfo, setUserinfo] = useState({})
   const [expanded, setExpanded] = useState(false)
   const [navlinks] = useState([
     {
       text: 'Vote',
       to: '/vote'
-    },
-    {
-      text: 'Nominate',
-      to: '/nominate'
     },
     {
       text: 'My Nominees',
@@ -33,6 +30,23 @@ const App = () => {
   useEffect(() => {
     window.addEventListener('click', handleClick)
     window.addEventListener('keydown', handleKeydown)
+
+    let cached = localStorage.userinfo
+    if (cached)
+      try {
+        setUserinfo(JSON.parse(cached))
+      } catch (e) {}
+
+    window
+      .fetch(`https://cauldron2019.wormfic.net/api/auth`, {
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        setUserinfo(data)
+        let stringified = JSON.stringify(data)
+        localStorage.userinfo = stringified
+      })
   }, [])
 
   const handleClick = event => {
@@ -90,17 +104,67 @@ const App = () => {
                 </NavLink>
               ))}
             </Nav>
+            <div
+              id='user'
+              onClick={e => {
+                if (userinfo.logged_in) {
+                  e.preventDefault()
+                  window.fetch(`https://cauldron2019.wormfic.net/logout`, {
+                    credentials: 'include',
+                    method: 'POST'
+                  })
+                  localStorage.removeItem('userinfo')
+                  setUserinfo({})
+                }
+              }}
+            >
+              {userinfo.logged_in && userinfo.user ? (
+                <>
+                  <img
+                    src={userinfo.user.avatar}
+                    alt={`${userinfo.user.username}'s avatar`}
+                    loading='lazy'
+                    height='32px'
+                    width='32px'
+                    id='avatar'
+                  />
+                  <div id='userinfo'>
+                    {userinfo.user.username}
+                    <span id='discriminator'>
+                      #{userinfo.user.discriminator}
+                    </span>
+                  </div>
+                  <div id='logout' className='logInOrOut'>
+                    <img src='images/logout.svg' alt='Logout' />
+                  </div>
+                </>
+              ) : (
+                <a
+                  id='login'
+                  className='logInOrOut'
+                  href={`https://cauldron2019.wormfic.net/login`}
+                >
+                  <span>Login</span>
+                  <img
+                    src='images/discord_logo.svg'
+                    style={{ marginLeft: '8px' }}
+                    alt='Login with Discord'
+                  />
+                </a>
+              )}
+            </div>
+            <div id='user-backfill'></div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      <Container>
+      <Container className={expanded ? 'nav-overlay' : ''}>
         <div id='top'>Jump to top.</div>
         <Router>
           <VotePage path='/vote' userData={null} />
           <NominationPage path='/nominate/*' />
           <MyNomineesPage path='/nominees' />
-          <Redirect from='/' to='/nominate' noThrow />
+          <Redirect from='/' to='/vote' noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
       </Container>

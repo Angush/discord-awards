@@ -16,13 +16,15 @@ const MyNomineesPage = () => {
   if (!nominees || nominees.length === 0 || !categories)
     return (
       <div className='fade-rise text-center pad-top'>
-        <h3>You haven't nominated anything yet!</h3>
+        <h3>You didn't nominate anything!</h3>
         <p style={{ marginTop: '20px' }}>
-          Or if you have, I can't retrieve the records.
+          Or if you have, I can't retrieve the records. Try visiting this page
+          again on the same device (and browser) that you used to make your
+          nominations.
         </p>
         <p>
-          Visit <Link to='/nominate'>the nomination page</Link> to nominate
-          something in one of our many categories!
+          Visit <Link to='/vote'>the vote page</Link> to register your votes for
+          the 2019 awards before they close!
         </p>
         <p>(This'll be improved for the 2020 awards.)</p>
       </div>
