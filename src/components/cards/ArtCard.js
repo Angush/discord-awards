@@ -32,10 +32,11 @@ const ArtCard = ({
     >
       <div className='card-img-parent'>
         <Card.Img
-          src={formData.url}
-          alt='Preview of your nomination'
           onLoad={onLoad}
           onError={onError}
+          src={formData.url}
+          alt={formData.identifier}
+          id={formData.key}
           className={formData.nsfw && 'nsfw-img'}
           // height={400 * (formData.height / formData.width)}
           // width={400}

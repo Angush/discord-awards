@@ -7,22 +7,20 @@ import ArtCard from '../cards/ArtCard'
 const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
   const className =
     'fade-rise entries' + (contest.single ? ' single-fields' : '')
-  const str = `c${contest.id}_e`
 
   if (contest.single) {
     let imageOnly = contest.fields[0].imageOnly
     return (
       <div className={className + (imageOnly ? ' image-only-fields' : '')}>
         {contest.entries.map(nominee => {
-          const id = `${str}${nominee.id}`
           return (
             <OtherCard
-              onClick={() => select(id, nominee.identifier)}
-              selected={isSelected(id)}
+              onClick={() => select(nominee.data.key, nominee.data.identifier)}
+              selected={isSelected(nominee.data.key)}
               imageOnly={imageOnly}
               data={nominee.data}
               single={true}
-              key={id}
+              key={nominee.data.key}
             />
           )
         })}
@@ -39,36 +37,35 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
           default: 4,
           1199: 3,
           991: 2,
-          575: 1
+          576: 1
         }}
       >
         {contest.entries.map(nominee => {
-          const id = `${str}${nominee.id}`
-          const selected = isSelected(id)
+          const selected = isSelected(nominee.data.key)
           const onClick = event => {
             let tag = event.target.tagName
             if (!['IMG', 'A'].includes(tag)) {
               event.preventDefault()
-              select(id, nominee.identifier)
+              select(nominee.data.key, nominee.data.identifier)
             }
           }
           return contest.type === 'other' ? (
             <OtherCard
-              key={id}
+              key={nominee.data.key}
               onClick={onClick}
               selected={selected}
               data={nominee.data}
             />
           ) : contest.type === 'art' ? (
             <ArtCard
-              key={id}
+              key={nominee.data.key}
               onClick={onClick}
               selected={selected}
               formData={nominee.data}
             />
           ) : (
             <FicCard
-              key={id}
+              key={nominee.data.key}
               onClick={onClick}
               selected={selected}
               fic={nominee.data}

@@ -14,7 +14,7 @@ const Contest = ({
   const [collapsedChanges, setCollapsedChanges] = useState(true)
   const [collapsed, setCollapsed] = useState(true)
   let count = contest.entries ? contest.entries.length : 0
-  let countText = `${count} nominee${count !== 1 && 's'}`
+  let countText = `${count} nominee${count === 1 ? '' : 's'}`
   let changeCount = changes.length
 
   const collapse = event => {

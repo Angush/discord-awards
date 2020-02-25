@@ -5,7 +5,7 @@ const DEFAULT_LINK = '#no-link'
 const DEFAULT_IMG = '/images/noimage.png'
 
 const OtherCard = ({
-  data: { name, link, description, owner, image },
+  data: { name, link, description, owner, image, identifier, key },
   imageOnly = false,
   single = false,
   className,
@@ -57,12 +57,16 @@ const OtherCard = ({
         </Card.Body>
       )}
       {image && (
-        <Card.Img
-          src={image}
-          variant='bottom'
-          {...imgProps}
-          className={imageOnly ? 'non-expandable-img' : ''}
-        />
+        <div className='card-img-parent'>
+          <Card.Img
+            id={key}
+            src={image}
+            variant='bottom'
+            alt={identifier}
+            {...imgProps}
+            className={imageOnly ? 'non-expandable-img' : ''}
+          />
+        </div>
       )}
     </Card>
   )

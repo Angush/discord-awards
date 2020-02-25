@@ -2,17 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import TableOfContents from '../components/util/TableOfContents'
 import SubmitVotes from '../components/vote/SubmitVotes'
+import Lightbox from '../components/util/Lightbox'
 import Contest from '../components/vote/Contest'
 import { Button } from 'react-bootstrap'
 // import { Link } from '@reach/router'
-
-// TODO: remove all the console.log()s because there's LOTS of 'em!
 
 const VotePage = ({ userData }) => {
   const [sections, setSections] = useState(null)
   const [submitting, setSubmitting] = useState(false)
   const [loadedCache, setLoadedCache] = useState(false)
   const [originalVotes, setOriginalVotes] = useState({ votes: {} })
+  const [lightboxData, setLightboxData] = useState(null)
   const [changedVotes, setChangedVotes] = useState({})
   const [changes, setChanges] = useState({ total: 0 })
   const [votes, setVotes] = useState({})
@@ -43,11 +43,9 @@ const VotePage = ({ userData }) => {
   const validateCachedChanges = useCallback((cachedVotes, contests) => {
     const newVotes = {}
     let validated = false
-    console.log(`Validating cached changes...`)
 
     for (const id in cachedVotes) {
       let vote = cachedVotes[id]
-      console.log(`Validating:`, { [id]: vote })
       try {
         if (vote === true || vote === false) {
           let cID = id.match(/^c(\d+)_/)[1]
@@ -60,18 +58,11 @@ const VotePage = ({ userData }) => {
       } catch (e) {}
     }
 
-    console.log(`Votes loaded from cache:`, newVotes)
     return { items: newVotes, valid: validated }
   }, [])
 
   const countCachedChanges = useCallback(
     (cachedVotes, contests) => {
-      console.log(
-        `Calculating change counts based on cached votes`,
-        cachedVotes
-      )
-      console.log(`Original votes are:`, originalVotes)
-
       let total = 0
       let newChanges = {}
 
@@ -88,7 +79,7 @@ const VotePage = ({ userData }) => {
           let type = cached === false ? 'Deselected' : 'Selected'
           let element = (
             <li key={`${id}-change`}>
-              {type} <span>{entry.identifier}</span>
+              {type} <span>{entry.data.identifier}</span>
             </li>
           ) // ! TODO: If we modify the changes format in selectEntry, also gotta make sure we modify it here to match. Otherwise it'll be borked.
 
@@ -98,10 +89,6 @@ const VotePage = ({ userData }) => {
         } catch (e) {}
       }
 
-      console.log(`Changes as calculated from cache:`, {
-        ...newChanges,
-        total: total
-      })
       setChanges({
         ...newChanges,
         total: total
@@ -112,21 +99,15 @@ const VotePage = ({ userData }) => {
 
   //= Validate the votes
   useEffect(() => {
-    let started = Date.now()
-    console.log(`Attempting to load unsubmitted changes from cache @`, started)
     let parsed = null
     try {
-      if (loadedCache)
-        return console.log(`FAILED! Cache has already been loaded.`)
-      if (!userData.logged_in)
-        return console.log(`FAILED! User is not logged in.`)
-      if (!sections.fetched)
-        return console.log(`FAILED! Latest data has not been fetched.`)
-      if (!originalVotes.fetched)
-        return console.log(`FAILED! Latest data has not been fetched.`)
+      if (loadedCache) return
+      if (!userData.logged_in) return
+      if (!sections.fetched) return
+      if (!originalVotes.fetched) return
       // if (loadedCache || !sections.fetched || !userData.logged_in) return
       let cached = localStorage.unsubmitted
-      if (!cached) return console.log(`FAILED! There's no cache.`)
+      if (!cached) return
       parsed = JSON.parse(cached)
     } catch (e) {}
 
@@ -134,13 +115,8 @@ const VotePage = ({ userData }) => {
 
     if (!parsed) {
       localStorage.unsubmitted = JSON.stringify({})
-      return console.log(`FAILED! Parsed unsubmitted votes is invalid.`)
+      return
     }
-
-    console.log(
-      `Load successful! Took ${Date.now() - started}ms. Now validating...`,
-      parsed
-    )
 
     // bit of a mess, but makes validating WAY easier
     let contests = {}
@@ -157,7 +133,6 @@ const VotePage = ({ userData }) => {
     let validated = validateCachedChanges(parsed, contests)
     if (!validated || !validated.valid) return
 
-    console.log(`Validation complete! Valid votes:`, validated)
     countCachedChanges(validated.items, contests)
     setChangedVotes(validated.items)
   }, [
@@ -213,11 +188,20 @@ const VotePage = ({ userData }) => {
 
         // add nominations to contest
         nom.categories.forEach(cID => {
-          if (!nomination.identifier) {
+          if (!nomination.data.identifier) {
             let contest = categories[cID]
-            nomination.identifier = createIdentifier(contest.type, nomination)
+            nomination.data.identifier = createIdentifier(
+              contest.type,
+              nomination
+            )
           }
-          categories[cID].entries.push(nomination)
+          categories[cID].entries.push({
+            id: nomination.id,
+            data: {
+              ...nomination.data,
+              key: `c${cID}_e${nomination.id}`
+            }
+          })
         })
       })
 
@@ -263,13 +247,17 @@ const VotePage = ({ userData }) => {
       classes.some(c => c.match(/card-img/))
     ) {
       event.preventDefault()
-      console.log(`clicked img with src:`, event.target.src)
+      let { id, src, alt } = event.target
+      setLightboxData({
+        identifier: alt,
+        key: id,
+        src
+      })
     }
   }, [])
 
   //= Get voteables data + set up lightbox event listener
   useEffect(() => {
-    console.log(`Fetching voteables @`, Date.now())
     window.addEventListener('click', lightboxHandler)
 
     const controller = new AbortController()
@@ -314,14 +302,6 @@ const VotePage = ({ userData }) => {
   useEffect(() => {
     if (!userData.logged_in) return
 
-    console.log(`Joining votes...`, {
-      originalVotes,
-      changedVotes,
-      newVotes: {
-        ...originalVotes.votes,
-        ...changedVotes
-      }
-    })
     setVotes({
       ...originalVotes.votes,
       ...changedVotes
@@ -340,7 +320,6 @@ const VotePage = ({ userData }) => {
           storeable[key] = changedVotes[key]
         }
       }
-      console.log(`Storing unsubmitted votes`, storeable)
       localStorage.unsubmitted = JSON.stringify(storeable)
     } catch (e) {}
   }, [originalVotes, changedVotes, userData])
@@ -349,14 +328,17 @@ const VotePage = ({ userData }) => {
     ? () => alert(`You need to log in to register votes!`)
     : (key, changeText) => {
         if (submitting) return
-
         //- Set changedVotes based on original and current vote status
         let originallySelected = originalVotes.votes[key] === true
         let currentlySelected = votes[key] === true
-        let cID = key.match(/^c(\d+)_/)[1]
+        let cID = (key.match(/^c(\d+)_/) || [])[1]
+        if (!cID)
+          return console.error(
+            `Invalid contest ID. This shouldn't ever happen.`,
+            cID
+          )
 
         let change = 0
-
         if (currentlySelected) {
           change = originallySelected ? 1 : -1
           setChangedVotes({
@@ -374,10 +356,10 @@ const VotePage = ({ userData }) => {
         //- Calculate the new number of changes
         let contestChanges = changes[cID]
         if (!contestChanges) contestChanges = {}
+        let type = currentlySelected ? 'Deselected' : 'Selected'
         if (change === -1) {
           delete contestChanges[key]
         } else {
-          let type = currentlySelected ? 'Deselected' : 'Selected'
           contestChanges[key] = (
             <li key={`${key}-change`}>
               {type} <span>{changeText}</span>
@@ -398,7 +380,7 @@ const VotePage = ({ userData }) => {
           total: total + change
         })
 
-        console.log(`Clicked entry card`, key)
+        console.log(`${type} entry with key ${key}, AKA.`, changeText)
       }
 
   const entryIsSelected = id => {
@@ -440,10 +422,11 @@ const VotePage = ({ userData }) => {
     }
 
     if (submissionData.length === 0)
-      return console.log(`Found no valid votes to submit.`)
+      return console.error(
+        `Found no valid votes to submit. Not sure how this happened.`
+      )
 
     setSubmitting(true)
-    console.log(`\n\n\n\nSubmitting votes. Wait 10 seconds...`, submissionData)
     window
       .fetch(`https://cauldron2019.wormfic.net/api/vote`, {
         method: 'POST',
@@ -454,7 +437,7 @@ const VotePage = ({ userData }) => {
       .then(res => {
         setSubmitting(false)
         if (res.status === 201) {
-          console.log(`Submission succeeded!`, res)
+          console.log(`Submission succeeded!`)
           return res.json()
         }
         console.error(`Submission failed status code ${res.status}!`, res)
@@ -464,7 +447,7 @@ const VotePage = ({ userData }) => {
       })
       .then(newVotes => {
         if (!newVotes) return
-        console.log(`Submitted! Committing changes...`, newVotes)
+        console.log(`Submitted! Committing changes and resyncing...`)
         setChanges({ total: 0 })
         setChangedVotes({})
         setOriginalVotes({
@@ -499,9 +482,7 @@ const VotePage = ({ userData }) => {
 
   //--- Things to do ---\\
 
-  //  TODO: Obviously, have to code the '/vote' endpoint for the API.
-
-  //  TODO: Implement lightbox functionality (with larger image, which should have a scrollable overflow if it's too tall to show all at once, plus the title/author data, and a button to select it).
+  //  TODO: Vet the full list of entries, assemble final list of everything (+ changes) and modify the rows in the DB to fit.
 
   //* TODO: Add little circular checkboxes that appear on hover (or always, on mobile) in the top-right corner of larger cards. (Maybe only draw it if an {onClick} prop exists, within the cards?) Clicking this is the same as clicking the card, and marks the checkbox.
 
@@ -518,6 +499,14 @@ const VotePage = ({ userData }) => {
 
   return (
     <>
+      {lightboxData && (
+        <Lightbox
+          data={lightboxData}
+          exit={() => setLightboxData(null)}
+          isSelected={entryIsSelected}
+          toggle={selectEntry}
+        />
+      )}
       <TableOfContents
         items={toc.items}
         isOpen={toc.expanded}
