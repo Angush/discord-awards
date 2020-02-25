@@ -1,18 +1,81 @@
 import React from 'react'
-import ContestEntry from './ContestEntry'
+import Masonry from 'react-masonry-css'
+import OtherCard from '../cards/OtherCard'
+import FicCard from '../cards/FicCard'
+import ArtCard from '../cards/ArtCard'
 
-const ContestEntries = ({ contest, nominations, toggleVote }) => {
-  let entries = nominations.map(nom => nom.contests.find(c => c.id === contest.id) ? nom : null)
-  let empty = entries.every(nom => !nom)
+const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
+  const className =
+    'fade-rise entries' + (contest.single ? ' single-fields' : '')
+  const str = `c${contest.id}_e`
+
+  if (contest.single) {
+    let imageOnly = contest.fields[0].imageOnly
+    return (
+      <div className={className + (imageOnly ? ' image-only-fields' : '')}>
+        {contest.entries.map(nominee => {
+          const id = `${str}${nominee.id}`
+          return (
+            <OtherCard
+              onClick={() => select(id, nominee.identifier)}
+              selected={isSelected(id)}
+              imageOnly={imageOnly}
+              data={nominee.data}
+              single={true}
+              key={id}
+            />
+          )
+        })}
+      </div>
+    )
+  }
+
   return (
-    <div className="entries">
-      {empty
-        ? <p className="no_entries">No entries yet! Add a nomination <a href={`/nominate/${contest.id}`}>here</a>!</p>
-        : entries.map((entry, index) => {
-          if (!entry) return null
-          return <ContestEntry key={`${contest.id}:${index}`} id={index} contestID={contest.id} item={entry} toggleVote={toggleVote}/>
-        })
-      }
+    <div className={className}>
+      <Masonry
+        className='masonry-grid'
+        columnClassName='masonry-column'
+        breakpointCols={{
+          default: 4,
+          1199: 3,
+          991: 2,
+          575: 1
+        }}
+      >
+        {contest.entries.map(nominee => {
+          const id = `${str}${nominee.id}`
+          const selected = isSelected(id)
+          const onClick = event => {
+            let tag = event.target.tagName
+            if (!['IMG', 'A'].includes(tag)) {
+              event.preventDefault()
+              select(id, nominee.identifier)
+            }
+          }
+          return contest.type === 'other' ? (
+            <OtherCard
+              key={id}
+              onClick={onClick}
+              selected={selected}
+              data={nominee.data}
+            />
+          ) : contest.type === 'art' ? (
+            <ArtCard
+              key={id}
+              onClick={onClick}
+              selected={selected}
+              formData={nominee.data}
+            />
+          ) : (
+            <FicCard
+              key={id}
+              onClick={onClick}
+              selected={selected}
+              fic={nominee.data}
+            />
+          )
+        })}
+      </Masonry>
     </div>
   )
 }

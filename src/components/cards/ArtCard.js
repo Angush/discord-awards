@@ -1,15 +1,35 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 
-const ArtCard = ({ formData, onLoad, onError, className }) => {
+const ArtCard = ({
+  formData,
+  onClick,
+  onLoad,
+  onError,
+  className,
+  selected
+}) => {
   const classes = 'art-card' + (className ? ' ' + className : '')
+  const props = !onClick
+    ? {}
+    : {
+        keyclickable: 'true',
+        onClick: onClick,
+        tabIndex: 0
+      }
   const artistInfo = (
     <>
       by <em>{formData.artist || 'Unknown'}</em>
     </>
   )
+
   return (
-    <Card bg='dark' text='white' className={classes}>
+    <Card
+      bg={selected ? 'primary' : 'dark'}
+      text='white'
+      className={classes}
+      {...props}
+    >
       <div className='card-img-parent'>
         <Card.Img
           src={formData.url}
@@ -17,7 +37,9 @@ const ArtCard = ({ formData, onLoad, onError, className }) => {
           onLoad={onLoad}
           onError={onError}
           className={formData.nsfw && 'nsfw-img'}
-          loading='lazy'
+          // height={400 * (formData.height / formData.width)}
+          // width={400}
+          // loading='lazy'
         />
       </div>
       <Card.Body>

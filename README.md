@@ -89,13 +89,13 @@ Requirements TBD. But perhaps support two display modes for voting categories:
   - Clicking to select will have to be handled carefully. The cards can't be greedy about it, because fic cards will have clickable links, and art cards will have support for a lightbox mode (which should also have a "Select" button in it), so clicking on those shouldn't select the card; you'd have to click on empty space or text. Maybe add a circular checkbox thingie to the corner (like Google Photos and whatnot) that appears on hover as a specific selection tap target (as well as a secondary selection indicator)?
 - **Tables**. A, uh... well, a table view. You know what this is. Hovering/selection is on a per-row basis. (Question: how to handle rows on narrow devices? Fic title + author + links might be too long to fit neatly.)
 
-Perhaps also have a Google Docs-style outline navigation thingie that people can pull in from the side (or, on desktop, which displays to the side by default) to more easily jump to the specific categories they have an interest in?
+**`DONE!`** - ~~Perhaps also have a Google Docs-style outline navigation thingie that people can pull in from the side (or, on desktop, which displays to the side by default) to more easily jump to the specific categories they have an interest in?~~
 
-Maybe also have categories be collapsible (and start in collapsed mode by default)?
+**`DONE!`** - ~~Maybe also have categories be collapsible (and start in collapsed mode by default)?~~
 
 Maybe use a virtualized list tool for performance purposes, too.
 
-And obviously the voting interface is only actually available if you're logged in. If you aren't logged in, you can view all the nominees, but you can't select them.
+**`DONE!`** - ~~And obviously the voting interface is only actually available if you're logged in. If you aren't logged in, you can view all the nominees, but you can't select them.~~
 
 ## Generic Requirements / Tooling
 

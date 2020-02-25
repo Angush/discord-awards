@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import jumpToId from '../../functions/jumpToID'
 
-const JumpTo = ({ id, offset, smooth }) => {
+const JumpTo = ({ id, offset, smooth, onJump }) => {
   useEffect(() => {
     jumpToId(id, {
       offset: offset,
       smooth: smooth
     })
-  }, [id, offset, smooth])
+    if (onJump) onJump()
+  }, [id, offset, smooth, onJump])
 
   return <></>
 }

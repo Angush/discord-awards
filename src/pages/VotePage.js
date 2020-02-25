@@ -1,65 +1,600 @@
-import React from 'react'
-// import Contest from '../components/Contest'
-// import axios from 'axios'
-import { Link } from '@reach/router'
+import React, { useState, useEffect, useCallback } from 'react'
+import LoadingIndicator from '../components/util/LoadingIndicator'
+import TableOfContents from '../components/util/TableOfContents'
+import SubmitVotes from '../components/vote/SubmitVotes'
+import Contest from '../components/vote/Contest'
+import { Button } from 'react-bootstrap'
+// import { Link } from '@reach/router'
+
+// TODO: remove all the console.log()s because there's LOTS of 'em!
 
 const VotePage = ({ userData }) => {
-  return (
-    <div className='vote-flow fade-rise text-center pad-top'>
-      <h3>Voting is not yet open!</h3>
-      <p>
-        Visit <Link to='/nominate'>the nomination page</Link> to nominate
-        something in one of our many categories!
-      </p>
-    </div>
+  const [sections, setSections] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [loadedCache, setLoadedCache] = useState(false)
+  const [originalVotes, setOriginalVotes] = useState({ votes: {} })
+  const [changedVotes, setChangedVotes] = useState({})
+  const [changes, setChanges] = useState({ total: 0 })
+  const [votes, setVotes] = useState({})
+  const [toc, setTOC] = useState(null)
+
+  //= Create the table of contents
+  const createTOC = useCallback(sectionData => {
+    if (!sectionData) return
+    let tableOfContests = []
+    sectionData.forEach(s => {
+      tableOfContests.push({
+        text: `${s.sectionName} Categories`,
+        anchor: `#${s.anchor}`,
+        children: s.contests.map(contest => {
+          return {
+            text: contest.name,
+            anchor: `#${contest.anchor}`
+          }
+        })
+      })
+    })
+    setTOC({
+      expanded: false,
+      items: tableOfContests
+    })
+  }, [])
+
+  const validateCachedChanges = useCallback((cachedVotes, contests) => {
+    const newVotes = {}
+    let validated = false
+    console.log(`Validating cached changes...`)
+
+    for (const id in cachedVotes) {
+      let vote = cachedVotes[id]
+      console.log(`Validating:`, { [id]: vote })
+      try {
+        if (vote === true || vote === false) {
+          let cID = id.match(/^c(\d+)_/)[1]
+          let eID = id.match(/_e(\d+)$/)[1]
+          if (contests[cID].entries[eID]) {
+            newVotes[id] = vote
+            validated = true
+          }
+        }
+      } catch (e) {}
+    }
+
+    console.log(`Votes loaded from cache:`, newVotes)
+    return { items: newVotes, valid: validated }
+  }, [])
+
+  const countCachedChanges = useCallback(
+    (cachedVotes, contests) => {
+      console.log(
+        `Calculating change counts based on cached votes`,
+        cachedVotes
+      )
+      console.log(`Original votes are:`, originalVotes)
+
+      let total = 0
+      let newChanges = {}
+
+      for (const id in cachedVotes) {
+        try {
+          let cached = cachedVotes[id]
+          let original = originalVotes.votes[id]
+          if (cached === original) continue
+          if (cached === false && !original) continue
+
+          let cID = id.match(/^c(\d+)_/)[1]
+          let eID = id.match(/_e(\d+)$/)[1]
+          let entry = contests[cID].entries[eID]
+          let type = cached === false ? 'Deselected' : 'Selected'
+          let element = (
+            <li key={`${id}-change`}>
+              {type} <span>{entry.identifier}</span>
+            </li>
+          ) // ! TODO: If we modify the changes format in selectEntry, also gotta make sure we modify it here to match. Otherwise it'll be borked.
+
+          if (!newChanges[cID]) newChanges[cID] = {}
+          newChanges[cID][id] = element
+          total++
+        } catch (e) {}
+      }
+
+      console.log(`Changes as calculated from cache:`, {
+        ...newChanges,
+        total: total
+      })
+      setChanges({
+        ...newChanges,
+        total: total
+      })
+    },
+    [originalVotes]
   )
-  // const [data, setData] = useState({})
 
-  // useEffect(() => {
-  //   axios.get(`http://10.0.0.65:3001/api/`)
-  //   .then(res => {
-  //     let rawData = res.data
-  //     rawData.nominations.forEach(nomination => {
-  //       nomination.contests.forEach(contest => {
-  //         contest.voted = contest.votes.includes(userData.id)
-  //         contest.votes = contest.votes.length
-  //       })
-  //     })
-  //     setData(rawData)
-  //   })
-  // }, [userData])
+  //= Validate the votes
+  useEffect(() => {
+    let started = Date.now()
+    console.log(`Attempting to load unsubmitted changes from cache @`, started)
+    let parsed = null
+    try {
+      if (loadedCache)
+        return console.log(`FAILED! Cache has already been loaded.`)
+      if (!userData.logged_in)
+        return console.log(`FAILED! User is not logged in.`)
+      if (!sections.fetched)
+        return console.log(`FAILED! Latest data has not been fetched.`)
+      if (!originalVotes.fetched)
+        return console.log(`FAILED! Latest data has not been fetched.`)
+      // if (loadedCache || !sections.fetched || !userData.logged_in) return
+      let cached = localStorage.unsubmitted
+      if (!cached) return console.log(`FAILED! There's no cache.`)
+      parsed = JSON.parse(cached)
+    } catch (e) {}
 
-  // const toggleVote = (contestID, nominationID) => {
-  //   if (!userData.id || !data.nominations) return
-  //   axios.post(`http://10.0.0.65:3001/api/vote_toggle/${userData.id}/${nominationID}/${contestID}`)
-  //   .then(res => {
-  //     console.log(data.nominations[nominationID])
-  //     let contest = data.nominations[nominationID].contests[contestID]
-  //     if (contest.voted) {
-  //       contest.voted = false
-  //       contest.votes--
-  //     } else {
-  //       contest.voted = true
-  //       contest.votes++
-  //     }
-  //     let updated = {...data}
-  //     updated.nominations[nominationID].contests[contestID] = contest
-  //     setData(updated)
-  //   })
-  // }
+    setLoadedCache(true)
 
+    if (!parsed) {
+      localStorage.unsubmitted = JSON.stringify({})
+      return console.log(`FAILED! Parsed unsubmitted votes is invalid.`)
+    }
+
+    console.log(
+      `Load successful! Took ${Date.now() - started}ms. Now validating...`,
+      parsed
+    )
+
+    // bit of a mess, but makes validating WAY easier
+    let contests = {}
+    sections.items.forEach(s => {
+      s.contests.forEach(c => {
+        let entries = {}
+        c.entries.forEach(e => {
+          entries[e.id] = e
+        })
+        contests[c.id] = { ...c, entries: entries }
+      })
+    })
+
+    let validated = validateCachedChanges(parsed, contests)
+    if (!validated || !validated.valid) return
+
+    console.log(`Validation complete! Valid votes:`, validated)
+    countCachedChanges(validated.items, contests)
+    setChangedVotes(validated.items)
+  }, [
+    sections,
+    userData,
+    validateCachedChanges,
+    countCachedChanges,
+    originalVotes,
+    loadedCache
+  ])
+
+  //= Format category data
+  const formatData = useCallback(
+    raw => {
+      let hasVotes = raw.votes ? true : false
+      let categories = raw.contests
+      for (const id in categories) {
+        categories[id].entries = []
+        categories[id].anchor = categories[id].name
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+        if (categories[id].fields) {
+          categories[id].fields = JSON.parse(categories[id].fields)
+          let fields = Object.values(categories[id].fields)
+          categories[id].single =
+            fields.length === 1 ||
+            fields.every(f => f.id === 'owner' || f.id === 'link')
+        }
+      }
+
+      const createIdentifier = (contestType, { id, data }) => {
+        if (contestType === 'other') {
+          let identifier = ''
+          if (data.name) identifier = data.name
+          else if (data.link) identifier = data.link
+          else if (data.image) identifier = data.image
+
+          if (data.owner) identifier += ` [${data.owner}]`
+
+          return identifier
+        } else if (contestType === 'fic') {
+          return `${data.title} by ${data.author}`
+        } else if (contestType === 'art') {
+          return `${data.title || 'Untitled'} by ${data.artist}`
+        } else return `Entry ID ${id}`
+      }
+
+      Object.values(raw.nominations).forEach(nom => {
+        let nomination = {
+          id: nom.id,
+          data: JSON.parse(nom.data)
+        }
+
+        // add nominations to contest
+        nom.categories.forEach(cID => {
+          if (!nomination.identifier) {
+            let contest = categories[cID]
+            nomination.identifier = createIdentifier(contest.type, nomination)
+          }
+          categories[cID].entries.push(nomination)
+        })
+      })
+
+      // create section list
+      let sectionData = {}
+      Object.values(raw.contests).forEach(contest => {
+        if (!sectionData[contest.section]) {
+          sectionData[contest.section] = {
+            sectionName: contest.section,
+            anchor: `${contest.section
+              .toLowerCase()
+              .replace(/\s+/g, '-')}-categories`,
+            contests: [categories[contest.id]]
+          }
+        } else {
+          sectionData[contest.section].contests.push(categories[contest.id])
+        }
+      })
+      sectionData = Object.values(sectionData)
+
+      createTOC(sectionData)
+      setSections({
+        items: sectionData,
+        fetched: true
+      })
+      if (hasVotes)
+        setOriginalVotes({
+          votes: raw.votes,
+          fetched: true
+        })
+      localStorage.voteables = JSON.stringify(sectionData)
+    },
+    [createTOC]
+  )
+
+  //= Open lightbox for image
+  const lightboxHandler = useCallback(event => {
+    // handle clicks on card images (for opening lightboxes)
+    let classes = Object.values(event.target.classList)
+    if (
+      event.target.tagName === 'IMG' &&
+      !classes.includes('non-expandable-img') &&
+      classes.some(c => c.match(/card-img/))
+    ) {
+      event.preventDefault()
+      console.log(`clicked img with src:`, event.target.src)
+    }
+  }, [])
+
+  //= Get voteables data + set up lightbox event listener
+  useEffect(() => {
+    console.log(`Fetching voteables @`, Date.now())
+    window.addEventListener('click', lightboxHandler)
+
+    const controller = new AbortController()
+    let cached = localStorage.voteables
+    if (cached)
+      try {
+        let parsed = JSON.parse(cached)
+        createTOC(parsed)
+        setSections({
+          items: parsed,
+          fetched: false
+        })
+      } catch (e) {}
+
+    window
+      .fetch(`https://cauldron2019.wormfic.net/api/voteables`, {
+        credentials: 'include',
+        signal: controller.signal
+      })
+      .then(response => response.json())
+      .then(resData => {
+        formatData(resData)
+      })
+      .catch(console.error)
+
+    return () => {
+      controller.abort()
+      window.removeEventListener('click', lightboxHandler)
+    }
+  }, [createTOC, formatData, lightboxHandler])
+
+  //= Discard vote data if user logs out
+  useEffect(() => {
+    if (!userData.logged_in) {
+      console.log(`Clearing votes due to logout`)
+      setOriginalVotes({ votes: {} })
+      setChangedVotes({})
+    }
+  }, [userData])
+
+  //= Spread changed votes over original votes whenever either change
+  useEffect(() => {
+    if (!userData.logged_in) return
+
+    console.log(`Joining votes...`, {
+      originalVotes,
+      changedVotes,
+      newVotes: {
+        ...originalVotes.votes,
+        ...changedVotes
+      }
+    })
+    setVotes({
+      ...originalVotes.votes,
+      ...changedVotes
+    })
+
+    if (!originalVotes.fetched) return
+    try {
+      //= Store changes in localStorage
+      let storeable = {}
+      for (const key in changedVotes) {
+        if (
+          originalVotes.votes[key] !== changedVotes[key] &&
+          !(!originalVotes.votes[key] && !changedVotes[key])
+        ) {
+          // only store votes that have actually changed
+          storeable[key] = changedVotes[key]
+        }
+      }
+      console.log(`Storing unsubmitted votes`, storeable)
+      localStorage.unsubmitted = JSON.stringify(storeable)
+    } catch (e) {}
+  }, [originalVotes, changedVotes, userData])
+
+  const selectEntry = !userData.logged_in
+    ? () => alert(`You need to log in to register votes!`)
+    : (key, changeText) => {
+        if (submitting) return
+
+        //- Set changedVotes based on original and current vote status
+        let originallySelected = originalVotes.votes[key] === true
+        let currentlySelected = votes[key] === true
+        let cID = key.match(/^c(\d+)_/)[1]
+
+        let change = 0
+
+        if (currentlySelected) {
+          change = originallySelected ? 1 : -1
+          setChangedVotes({
+            ...changedVotes,
+            [key]: false
+          })
+        } else {
+          change = originallySelected ? -1 : 1
+          setChangedVotes({
+            ...changedVotes,
+            [key]: true
+          })
+        }
+
+        //- Calculate the new number of changes
+        let contestChanges = changes[cID]
+        if (!contestChanges) contestChanges = {}
+        if (change === -1) {
+          delete contestChanges[key]
+        } else {
+          let type = currentlySelected ? 'Deselected' : 'Selected'
+          contestChanges[key] = (
+            <li key={`${key}-change`}>
+              {type} <span>{changeText}</span>
+            </li>
+          )
+          // TODO: perhaps change this to be an object?
+          // * { type: '(de)selected', identifier: {changeText}, voteID: {key} }
+          // * Then format it into the <li></li> in Contest.js
+          // ? This would enable us to:
+          //   - (a) store the data in localStorage, which might be a problem if we're creating React elements.
+          //   - (b) potentially let user click the <li></li> to undo that vote? Might be bad UX, unless we prompt with a confirmation box first.
+        }
+
+        let total = changes.total
+        setChanges({
+          ...changes,
+          [cID]: contestChanges,
+          total: total + change
+        })
+
+        console.log(`Clicked entry card`, key)
+      }
+
+  const entryIsSelected = id => {
+    if (votes[id] === true) return true
+    else return false
+  }
+
+  const numberOfVotes = id => {
+    let count = 0
+    let match = new RegExp(`^c${id}_e\\d+$`)
+    for (const vote in originalVotes.votes) {
+      if (match.test(vote) && originalVotes.votes[vote] === true) count++
+    }
+    return count
+  }
+
+  const submitVotes = event => {
+    if (!userData.logged_in) return
+    event.preventDefault()
+
+    let submissionData = []
+    for (const key in changedVotes) {
+      // parse contest and entry ids
+      let cID = (key.match(/^c(\d+)_/) || [])[1]
+      let eID = (key.match(/_e(\d+)$/) || [])[1]
+      if (
+        cID &&
+        eID &&
+        originalVotes.votes[key] !== changedVotes[key] &&
+        !(!originalVotes.votes[key] && !changedVotes[key])
+      ) {
+        // only submit votes that have actually changed
+        submissionData.push({
+          c: cID,
+          e: eID,
+          r: changedVotes[key] === false
+        })
+      }
+    }
+
+    if (submissionData.length === 0)
+      return console.log(`Found no valid votes to submit.`)
+
+    setSubmitting(true)
+    console.log(`\n\n\n\nSubmitting votes. Wait 10 seconds...`, submissionData)
+    window
+      .fetch(`https://cauldron2019.wormfic.net/api/vote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        credentials: 'include',
+        body: JSON.stringify(submissionData)
+      })
+      .then(res => {
+        setSubmitting(false)
+        if (res.status === 201) {
+          console.log(`Submission succeeded!`, res)
+          return res.json()
+        }
+        console.error(`Submission failed status code ${res.status}!`, res)
+        console.warn(`User may not be logged in. Forcing page reload...`)
+        return null
+        // window.location.reload()
+      })
+      .then(newVotes => {
+        if (!newVotes) return
+        console.log(`Submitted! Committing changes...`, newVotes)
+        setChanges({ total: 0 })
+        setChangedVotes({})
+        setOriginalVotes({
+          votes: newVotes,
+          fetched: true
+        })
+      })
+      .catch(console.error)
+  }
+
+  // - Voting not open indicator
   // return (
-  //   <div id="content">
-  //     {!data.contests
-  //       ? <div id="load_indicator">Loading...</div>
-  //       : <div id="contests">
-  //         {data.contests.map(contest =>
-  //           <Contest contest={contest} nominations={data.nominations} toggleVote={toggleVote} />
-  //         )}
-  //       </div>
-  //     }
+  //   <div className='vote-flow fade-rise text-center pad-top'>
+  //     <h3>Voting is not yet open!</h3>
+  //     <p>
+  //       Visit <Link to='/nominate'>the nomination page</Link> to nominate
+  //       something in one of our many categories!
+  //     </p>
   //   </div>
   // )
+
+  if (!sections || !toc)
+    return (
+      <>
+        <LoadingIndicator className='fade-rise'>
+          <h4>Just a moment!</h4>
+          <h6 className='text-muted'>We're fetching the entries for you.</h6>
+        </LoadingIndicator>
+        <TableOfContents />
+      </>
+    )
+
+  //--- Things to do ---\\
+
+  //  TODO: Obviously, have to code the '/vote' endpoint for the API.
+
+  //  TODO: Implement lightbox functionality (with larger image, which should have a scrollable overflow if it's too tall to show all at once, plus the title/author data, and a button to select it).
+
+  //* TODO: Add little circular checkboxes that appear on hover (or always, on mobile) in the top-right corner of larger cards. (Maybe only draw it if an {onClick} prop exists, within the cards?) Clicking this is the same as clicking the card, and marks the checkbox.
+
+  let submissionText
+  if (!userData.logged_in) submissionText = 'Log in to vote'
+  else if (!sections.fetched) submissionText = 'Syncing vote data...'
+  else
+    submissionText =
+      changes.total === 0
+        ? `Select an entry to vote!`
+        : changes.total === 1
+        ? `Lodge unsubmitted change`
+        : `Lodge ${changes.total} unsubmitted changes`
+
+  return (
+    <>
+      <TableOfContents
+        items={toc.items}
+        isOpen={toc.expanded}
+        closeMenu={() => {
+          setTOC({
+            ...toc,
+            expanded: false
+          })
+        }}
+        offsets={[
+          {
+            breakpoint: 576,
+            distance: 64
+          },
+          {
+            default: true,
+            distance: -12
+          }
+        ]}
+      />
+      <div id='content' className='vote-flow fade-rise'>
+        <div
+          className={toc.expanded ? 'toc-click expanded' : 'toc-click'}
+          onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
+        ></div>
+
+        {sections.items.map(section => (
+          <section
+            key={section.sectionName}
+            id={section.anchor}
+            className='contest_section'
+          >
+            <h3>{section.sectionName} Categories</h3>
+            {section.contests.map((contest, index) => (
+              <Contest
+                key={`cat-${contest.id}`}
+                changes={
+                  changes[contest.id] ? Object.values(changes[contest.id]) : []
+                }
+                votes={numberOfVotes(contest.id)}
+                isSelected={entryIsSelected}
+                select={selectEntry}
+                contest={contest}
+              />
+            ))}
+          </section>
+        ))}
+
+        <div id='controls'>
+          <Button
+            id='open-toc'
+            variant='light'
+            onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
+          >
+            <img
+              alt='Toggle table of contents'
+              fill='black'
+              src='/images/list.svg'
+              width='34px'
+              height='34px'
+            />
+            {/* TOC */}
+          </Button>
+          <SubmitVotes
+            onClick={submitVotes}
+            submitting={submitting}
+            disabled={
+              !userData.logged_in || !sections.fetched || changes.total < 1
+            }
+          >
+            {submissionText}
+          </SubmitVotes>
+        </div>
+        <div className='vertical-padding'></div>
+      </div>
+    </>
+  )
 }
 
 export default VotePage
