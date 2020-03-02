@@ -37,7 +37,7 @@ const ArtCard = ({
           src={formData.url}
           alt={formData.identifier}
           id={formData.key}
-          className={formData.nsfw && 'nsfw-img'}
+          className={(formData.nsfw || formData.spoiler) && 'nsfw-img'}
           // height={400 * (formData.height / formData.width)}
           // width={400}
           // loading='lazy'
@@ -45,6 +45,9 @@ const ArtCard = ({
       </div>
       <Card.Body>
         {formData.nsfw && <span className='nsfw-indicator'>NSFW</span>}
+        {formData.spoiler && (
+          <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>
+        )}
         <Card.Title>{formData.title || 'Untitled'}</Card.Title>
         <Card.Subtitle>
           {formData.artistURL ? (

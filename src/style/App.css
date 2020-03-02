@@ -545,7 +545,7 @@ input.form-control-lg {
 
 .nsfw-img:hover {
   filter: blur(0px);
-  transition: filter 3s ease-in;
+  transition: filter 1.5s ease-in;
 }
 
 .hidden .nsfw-img:hover {
@@ -577,6 +577,11 @@ input.form-control-lg {
 .fic-card .nsfw-indicator {
   float: right;
   padding-left: 1.25rem;
+}
+
+.spoiler-indicator,
+.bg-primary .spoiler-indicator {
+  color: rgb(255, 252, 75);
 }
 
 .fic-links {
