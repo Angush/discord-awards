@@ -44,7 +44,7 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
           const selected = isSelected(nominee.data.key)
           const onClick = event => {
             let tag = event.target.tagName
-            if (!['IMG', 'A'].includes(tag)) {
+            if (!['IMG', 'A', 'svg'].includes(tag)) {
               event.preventDefault()
               select(nominee.data.key, nominee.data.identifier)
             }
