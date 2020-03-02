@@ -208,6 +208,7 @@ const VotePage = ({ userData }) => {
       // create section list
       let sectionData = {}
       Object.values(raw.contests).forEach(contest => {
+        if (!contest.entries || contest.entries.length <= 1) return
         if (!sectionData[contest.section]) {
           sectionData[contest.section] = {
             sectionName: contest.section,
