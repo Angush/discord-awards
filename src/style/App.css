@@ -612,6 +612,7 @@ input.form-control-lg {
   display: flex;
   max-width: 400px;
   height: fit-content;
+  user-select: none;
 }
 
 .entries .art-card {
