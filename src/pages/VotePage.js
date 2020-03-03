@@ -5,7 +5,7 @@ import SubmitVotes from '../components/vote/SubmitVotes'
 import Lightbox from '../components/util/Lightbox'
 import Contest from '../components/vote/Contest'
 import { Button } from 'react-bootstrap'
-// import { Link } from '@reach/router'
+import { navigate } from '@reach/router'
 
 const VotePage = ({ userData }) => {
   const [sections, setSections] = useState(null)
@@ -399,7 +399,10 @@ const VotePage = ({ userData }) => {
   }
 
   const submitVotes = event => {
-    if (!userData.logged_in) return
+    if (!userData.logged_in) {
+      navigate('https://cauldron2019.wormfic.net/login')
+      return
+    }
     event.preventDefault()
 
     let submissionData = []
@@ -488,8 +491,10 @@ const VotePage = ({ userData }) => {
   //* TODO: Add little circular checkboxes that appear on hover (or always, on mobile) in the top-right corner of larger cards. (Maybe only draw it if an {onClick} prop exists, within the cards?) Clicking this is the same as clicking the card, and marks the checkbox.
 
   let submissionText
-  if (!userData.logged_in) submissionText = 'Log in to vote'
+  if (!userData.logged_in) submissionText = 'Log in to vote! Click here.'
   else if (!sections.fetched) submissionText = 'Syncing vote data...'
+  else if (!userData.user.isCauldron)
+    submissionText = "You're not a member of Cauldron!"
   else
     submissionText =
       changes.total === 0
@@ -575,7 +580,9 @@ const VotePage = ({ userData }) => {
             onClick={submitVotes}
             submitting={submitting}
             disabled={
-              !userData.logged_in || !sections.fetched || changes.total < 1
+              !sections.fetched ||
+              (userData.logged_in && changes.total < 1) ||
+              (userData.logged_in && !userData.user.isCauldron)
             }
           >
             {submissionText}
