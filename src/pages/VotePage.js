@@ -445,9 +445,11 @@ const VotePage = ({ userData }) => {
           return res.json()
         }
         console.error(`Submission failed status code ${res.status}!`, res)
-        console.warn(`User may not be logged in. Forcing page reload...`)
-        return null
-        // window.location.reload()
+        if (res.status === 401) {
+          console.warn(`User login expired. Forcing page reload...`)
+          navigate('https://cauldron2019.wormfic.net/login')
+          return null
+        }
       })
       .then(newVotes => {
         if (!newVotes) return
