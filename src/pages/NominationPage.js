@@ -14,8 +14,8 @@ const NominationPage = props => {
     <div className='fade-rise text-center pad-top'>
       <h3>Nominations are currently closed.</h3>
       <p>
-        Visit <Link to='/vote'>the vote page</Link> to register your votes for
-        the 2019 awards before they close!
+        They will reopen in January 2021 for the 2020 Cauldron Awards. Visit{' '}
+        <Link to='/results'>the results page</Link> to see 2019's results!
       </p>
     </div>
   )
