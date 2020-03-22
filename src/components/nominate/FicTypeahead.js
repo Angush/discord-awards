@@ -8,7 +8,7 @@ const FicTypeahead = ({ input, setInput, disabled }) => {
   const [typeahead, setTypeahead] = useState(null)
   const [fics, setFics] = useState(null)
 
-  import('../../json/2019-fic-options.json').then(options => {
+  import('../../json/typeahead-options/2020-fic-options.json').then(options => {
     setFics(options.default)
   })
 
