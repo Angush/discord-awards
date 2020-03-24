@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const ResultsHeader = ({ category }) => {
+const ResultsHeader = ({ year, category }) => {
   const [anchor] = useState(category.title.toLowerCase().replace(/\s+/g, '-'))
 
   const entries =
@@ -25,7 +25,7 @@ const ResultsHeader = ({ category }) => {
       id={anchor}
     >
       <img src='/images/g24.png' alt='Left' />
-      <small>Cauldron Awards 2019</small>
+      <small>Cauldron Awards {year}</small>
       <h2>{category.title}</h2>
       <small className='text-muted'>
         {entries}

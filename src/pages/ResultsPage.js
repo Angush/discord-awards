@@ -119,7 +119,7 @@ const ResultsPage = ({ userData, years, year }) => {
             {section.categories.map(category => {
               return (
                 <div key={category.title} className='results-category'>
-                  <ResultsHeader category={category} />
+                  <ResultsHeader year={year} category={category} />
                   <ResultsEntries category={category} />
                 </div>
               )
