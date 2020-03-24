@@ -548,6 +548,10 @@ input.form-control-lg {
   transition: filter 1.5s ease-in;
 }
 
+.img-parent > a:focus-within img {
+  filter: blur(0px);
+}
+
 .hidden .nsfw-img:hover {
   filter: blur(30px);
   transition: none;
@@ -1484,7 +1488,8 @@ input.form-control-lg {
   padding: 0.75rem;
 }
 
-.results-entries .img-parent:hover {
+.results-entries .img-parent:hover,
+.results-entries .img-parent:focus-within {
   transform: translateY(-3px);
 }
 
@@ -1526,11 +1531,11 @@ input.form-control-lg {
 }
 
 .extra-results > div {
-  padding: 4rem 0 1rem 0;
+  padding: 4rem 15px 1rem 15px;
 }
 
 .extra-results > div > div {
-  width: 60%;
+  width: 80%;
   max-width: 700px;
   margin: auto;
 }

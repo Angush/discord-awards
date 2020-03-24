@@ -55,6 +55,7 @@ const ResultsPage = () => {
           <div
             id={section.sectionName.toLowerCase().replace(/\s+/g, '-')}
             className='section-header'
+            tabIndex={-1}
           >
             <h2>{section.sectionName}</h2>
           </div>

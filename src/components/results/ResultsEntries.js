@@ -81,7 +81,7 @@ const ResultsEntries = ({
           </Button>
           {showExtras && (
             <div className='extra-results'>
-              <div>
+              <div className='container'>
                 {extras.map(entry => (
                   <Result
                     key={`c${id}_e${entry.id}`}
