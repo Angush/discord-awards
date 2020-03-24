@@ -48,6 +48,7 @@ const TableOfContents = ({ items, isOpen, closeMenu, offsets = [] }) => {
           id={target.replace(/^#/, '')}
           onJump={selectTOCItem}
           offset={offset}
+          focus={true}
         />
       )}
       <ul className={isOpen ? 'toc expanded' : 'toc'}>

@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import LoadingIndicator from '../components/util/LoadingIndicator'
-import TableOfContents from '../components/util/TableOfContents'
-import SubmitVotes from '../components/vote/SubmitVotes'
-import Lightbox from '../components/util/Lightbox'
-import Contest from '../components/vote/Contest'
-import { Button } from 'react-bootstrap'
-import { navigate } from '@reach/router'
+import React from 'react'
+// import React, { useState, useEffect, useCallback } from 'react'
+// import LoadingIndicator from '../components/util/LoadingIndicator'
+// import TableOfContents from '../components/util/TableOfContents'
+// import SubmitVotes from '../components/vote/SubmitVotes'
+// import Lightbox from '../components/util/Lightbox'
+// import Contest from '../components/vote/Contest'
+// import { Button } from 'react-bootstrap'
+// import { navigate } from '@reach/router'
+import { Link } from '@reach/router'
 
 const VotePage = ({ userData }) => {
   // - Voting not open indicator
@@ -13,9 +15,8 @@ const VotePage = ({ userData }) => {
     <div className='fade-rise text-center pad-top'>
       <h3>Voting is closed for 2019.</h3>
       <p>
-        It will reopen in January 2021 for the 2020 Cauldron Awards. Results for
-        2019 are currently being calculated. Check back in a few days!
-        {/* Visit <Link to='/results'>the results page</Link> to see 2019's results! */}
+        It will reopen in January 2021 for the 2020 Cauldron Awards. Visit{' '}
+        <Link to='/results'>the results page</Link> to see 2019's results!
       </p>
     </div>
   )
@@ -536,7 +537,7 @@ const VotePage = ({ userData }) => {
   //         }
   //       ]}
   //     />
-  //     <div id='content' className='vote-flow fade-rise'>
+  //     <div id='content' className='vote-flow left-indent-container fade-rise'>
   //       <div
   //         className={toc.expanded ? 'toc-click expanded' : 'toc-click'}
   //         onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}

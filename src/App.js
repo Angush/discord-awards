@@ -7,7 +7,7 @@ import AppNavBar from './components/util/AppNavBar'
 import NotFoundPage from './pages/NotFoundPage'
 import NominationPage from './pages/NominationPage'
 import MyNomineesPage from './pages/MyNomineesPage'
-// import ResultsPage from './pages/ResultsPage'
+import ResultsPage from './pages/ResultsPage'
 import VotePage from './pages/VotePage'
 
 // css sheets
@@ -15,11 +15,11 @@ import './style/bootstrap.min.css'
 import './style/App.css'
 
 const navlinks = [
-  {
-    to: '/vote',
-    text: 'Vote'
-    //   navClass: 'vote-nav'
-  }
+  // {
+  //   to: '/vote',
+  //   text: 'Vote',
+  //   navClass: 'vote-nav'
+  // }
   // {
   //   to: '/nominate',
   //   text: 'Nominate',
@@ -29,10 +29,11 @@ const navlinks = [
   //   to: '/nominees',
   //   text: 'My Nominees'
   // },
-  // {
-  //   to: '/results',
-  //   text: 'Results'
-  // }
+  {
+    to: '/results',
+    text: 'Results',
+    navClass: 'vote-nav'
+  }
 ]
 
 const App = () => {
@@ -97,7 +98,7 @@ const App = () => {
           <VotePage path='/vote' userData={userData} />
           <NominationPage path='/nominate/*' />
           <MyNomineesPage path='/nominees' />
-          {/* <ResultsPage path='/results' /> */}
+          <ResultsPage path='/results' />
           <Redirect from='/' to='/vote' noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
