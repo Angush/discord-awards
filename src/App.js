@@ -4,11 +4,12 @@ import { Container } from 'react-bootstrap'
 import AppNavBar from './components/util/AppNavBar'
 
 // router pages
+import VotePage from './pages/VotePage'
 import NotFoundPage from './pages/NotFoundPage'
 import NominationPage from './pages/NominationPage'
 import MyNomineesPage from './pages/MyNomineesPage'
+import ResultsListingsPage from './pages/ResultsListingsPage'
 import ResultsPage from './pages/ResultsPage'
-import VotePage from './pages/VotePage'
 
 // css sheets
 import './style/bootstrap.min.css'
@@ -30,11 +31,14 @@ const navlinks = [
   //   text: 'My Nominees'
   // },
   {
-    to: '/results',
+    to: '/results/latest',
+    root: '/results',
     text: 'Results',
     navClass: 'vote-nav'
   }
 ]
+
+const years = ['2019', '2018']
 
 const App = () => {
   const [userData, setUserData] = useState({})
@@ -98,8 +102,13 @@ const App = () => {
           <VotePage path='/vote' userData={userData} />
           <NominationPage path='/nominate/*' />
           <MyNomineesPage path='/nominees' />
-          <ResultsPage path='/results' />
-          <Redirect from='/' to='/vote' noThrow />
+          <ResultsListingsPage path='/results' years={years} />
+          <ResultsPage
+            path='/results/:year'
+            userData={userData}
+            years={years}
+          />
+          <Redirect from='/' to='/results/latest' noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
       </Container>

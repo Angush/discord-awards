@@ -706,6 +706,7 @@ input.form-control-lg {
 .loading-section.delayed {
   opacity: 0;
   padding-top: 10px;
+  visibility: hidden;
 }
 
 .btn-link:hover {
@@ -845,6 +846,10 @@ input.form-control-lg {
 }
 
 .contest_section > h3:first-child + .category {
+  margin-top: 2rem;
+}
+
+.results section:first-of-type .section-header {
   margin-top: 2rem;
 }
 
@@ -1336,6 +1341,7 @@ input.form-control-lg {
     'imgl subtitle imgr';
   margin: 6rem auto 1rem auto;
   max-width: 100%;
+  width: fit-content;
 }
 
 .results-header > h2 {
@@ -1549,11 +1555,12 @@ input.form-control-lg {
   all: unset;
 }
 
-.results a {
+.result a {
   transition: color 0.5s;
 }
 
-.results a:hover {
+.result a:hover,
+.result-years a {
   text-decoration: none;
 }
 
@@ -1620,6 +1627,75 @@ h4 .result-indicator::before {
 .results .hover-to-reveal {
   margin-top: 0.25rem;
   font-style: italic;
+}
+
+.results-goback {
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+.loading-children .results-goback {
+  margin-bottom: 0.75rem;
+}
+
+.result-years {
+  margin-top: 15vh;
+  text-align: center;
+}
+
+.result-years ol {
+  padding-left: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.result-years li,
+.latest {
+  margin: 0.5rem;
+  font-size: 24px;
+  background-color: rgb(224, 224, 224);
+  border-radius: 0.5rem;
+  width: fit-content;
+  transition: transform 0.2s, background-color 0.2s;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.result-years li a,
+.latest a {
+  padding: 1rem 3rem;
+  display: block;
+}
+
+.latest {
+  margin: 1.5rem auto 0 auto;
+}
+
+.latest a {
+  padding: 1rem 4rem;
+}
+
+.result-years .latest a::after {
+  content: 'latest';
+  font-size: 16px;
+  margin-top: -4px;
+  margin-right: -0.1em;
+  letter-spacing: 0.1em;
+  color: rgba(0, 50, 100, 0.8);
+  font-style: italic;
+  display: block;
+}
+
+.result-years li:hover,
+.latest:hover {
+  transform: translateY(-2px);
+  background-color: rgb(216, 216, 216);
+}
+
+.latest + * {
+  margin-top: 2rem;
 }
 
 /*=  Media queries  =*/
@@ -1691,7 +1767,7 @@ h4 .result-indicator::before {
   }
 
   .results-header > img {
-    max-height: calc(30px + 10vmin);
+    max-height: calc(15px + 10vw);
   }
 }
 
@@ -1908,7 +1984,7 @@ h4 .result-indicator::before {
   }
 
   .results-header > img {
-    max-height: calc(10px + 10vmin);
+    max-height: calc(10px + 10vw);
   }
 
   .results-header h2 {

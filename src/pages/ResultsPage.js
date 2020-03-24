@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from 'react'
+import LoadingIndicator from '../components/util/LoadingIndicator'
 import TableOfContents from '../components/util/TableOfContents'
 import ResultsEntries from '../components/results/ResultsEntries'
 import ResultsHeader from '../components/results/ResultsHeader'
 import { Button } from 'react-bootstrap'
-import data from '../json/results/2019'
+import { Link } from '@reach/router'
 
-const ResultsPage = () => {
+const ResultsPage = ({ userData, years, year }) => {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
   const [toc, setTOC] = useState({})
+  const [latest] = useState(
+    typeof year === 'string' && year.toLowerCase().trim() === 'latest'
+  )
 
   // TODO: add a heading section at the very top with overall stats, some descriptive text, etc. (see 2018 results page)
   // - Also have a "Log in to see what you voted for" line, and then stats about the user's voting habits when they ARE logged in. Though this obviously requires...
 
   // TODO: "You voted for this!" highlighting for every nominee, sourced from the server via a new endpoint (eg. "/api/votes/:year") which, if logged in, will mimic "/api/votes" but pull the data from a local static JSON file instead.
+
+  useEffect(() => {
+    const normalized = latest ? years[0] : year
+    if (years.includes(normalized)) {
+      import(`../json/results/${normalized}.json`)
+        .then(yearResults => {
+          setData(yearResults.default)
+          setLoading(false)
+        })
+        .catch(err => {
+          console.error(err)
+          setLoading(false)
+        })
+    } else setLoading(false)
+  }, [years, year, latest])
 
   useEffect(() => {
     if (!data) return
@@ -32,10 +53,44 @@ const ResultsPage = () => {
       expanded: false,
       items: contents
     })
-  }, [])
+  }, [data])
+
+  const SelectAnotherYear = (
+    <div className='results-goback'>
+      <Link to='/results'>View results for other years.</Link>
+    </div>
+  )
+
+  if (loading)
+    return (
+      <>
+        <LoadingIndicator timeout={1000} className='fade-rise'>
+          <h4>Just a moment!</h4>
+          <h6 className='text-muted'>
+            We're loading the {latest ? 'latest' : year} results for you.
+          </h6>
+          {SelectAnotherYear}
+        </LoadingIndicator>
+        <TableOfContents />
+      </>
+    )
+
+  if (!data)
+    return (
+      <div className='result-years fade-rise'>
+        <h4>Year not found!</h4>
+        <h4>
+          <small className='text-muted'>
+            I don't have any results for the year you were looking for. Sorry!
+          </small>
+        </h4>
+        <Link to='/results'>View years with available results.</Link>
+      </div>
+    )
 
   return (
-    <div className='results left-indent-container'>
+    <div className='results fade-rise left-indent-container'>
+      {SelectAnotherYear}
       <TableOfContents
         items={toc.items}
         isOpen={toc.expanded}
