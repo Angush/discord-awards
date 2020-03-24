@@ -58,17 +58,15 @@ const TableOfContents = ({ items, isOpen, closeMenu, offsets = [] }) => {
               <li
                 className='toc-entry fade-rise'
                 onClick={() => selectTOCItem(section.anchor)}
-              >
-                {section.text}
-              </li>
+                data-content={section.text}
+              ></li>
               <ol>
                 {section.children.map(child => (
                   <li
                     key={child.anchor}
                     onClick={() => selectTOCItem(child.anchor)}
-                  >
-                    {child.text}
-                  </li>
+                    data-content={child.text}
+                  ></li>
                 ))}
               </ol>
             </React.Fragment>

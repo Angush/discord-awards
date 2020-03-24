@@ -977,6 +977,10 @@ input.form-control-lg {
 
 /* Table of contents */
 
+.toc li[data-content]::before {
+  content: attr(data-content);
+}
+
 .toc {
   overflow-y: scroll;
   position: fixed;
