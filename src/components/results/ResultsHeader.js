@@ -31,6 +31,12 @@ const ResultsHeader = ({ category }) => {
         {entries}
         <span className='slash-divider'> | </span>
         {votes}
+        {category.voters > 0 && (
+          <>
+            <span className='slash-divider'> | </span>
+            {category.voters} voters
+          </>
+        )}
       </small>
       <img src='/images/g24.png' alt='Right' />
     </div>

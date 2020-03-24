@@ -1354,6 +1354,7 @@ input.form-control-lg {
   grid-area: title;
   padding: 0.5rem 1.5rem;
   margin: auto;
+  min-width: 340px;
 }
 
 .results-header > small {
@@ -1370,6 +1371,7 @@ input.form-control-lg {
 .results-header > small:last-child {
   text-transform: none;
   grid-area: subtitle;
+  word-break: keep-all;
 }
 
 .results-header > img {
@@ -1995,10 +1997,22 @@ h4 .result-indicator::before {
 
   .results-header h2 {
     font-size: 1.5em;
+    min-width: 0;
   }
 
   .results-header > small {
     font-size: 14px;
+  }
+
+  .results-header > small:last-of-type {
+    margin-top: 22px;
+  }
+
+  .results-header > small:last-of-type > span:first-of-type {
+    display: block;
+    visibility: hidden;
+    height: 0px;
+    margin-bottom: -42px;
   }
 
   .results-entries h4 {
