@@ -3,7 +3,7 @@ import Spinner from './Spinner'
 
 const LoadingIndicator = ({
   id,
-  timeout,
+  timeout = 0,
   children,
   noRise = false,
   showSlow = true,
@@ -11,7 +11,7 @@ const LoadingIndicator = ({
   spinnerProps,
   className
 }) => {
-  const [hidden, setHidden] = useState(timeout ? true : false)
+  const [hidden, setHidden] = useState(timeout > 0 ? true : false)
   const [slowLoad, setSlowLoad] = useState(false)
 
   // NOTE: the animation on a delayed appearance takes 1 second, so from the
@@ -36,7 +36,7 @@ const LoadingIndicator = ({
     <div
       className={
         (className ? className + ' ' : '') +
-        (hidden ? 'loading-section delayed' : 'loading-section')
+        (hidden || timeout > 0 ? 'loading-section delayed' : 'loading-section')
       }
       id={id}
     >

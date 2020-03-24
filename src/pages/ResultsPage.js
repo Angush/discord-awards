@@ -64,7 +64,7 @@ const ResultsPage = ({ userData, years, year }) => {
   if (loading)
     return (
       <>
-        <LoadingIndicator timeout={1000} className='fade-rise'>
+        <LoadingIndicator className='fade-rise'>
           <h4>Just a moment!</h4>
           <h6 className='text-muted'>
             We're loading the {latest ? 'latest' : year} results for you.
