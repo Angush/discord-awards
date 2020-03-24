@@ -1577,18 +1577,19 @@ input.form-control-lg {
   background-color: rgb(220, 220, 220);
 }
 
-.results .fic-links .misc-link-svg,
-.results .fic-links img {
+.results .fic-links a > * {
   width: 24px;
   height: 24px;
   fill: rgba(0, 0, 0, 0.6);
   transition: all 0.1s;
 }
 
-.results .fic-links a:hover > * {
-  width: 30px;
-  height: 30px;
-  margin: -3px;
+@media (hover: hover) {
+  .results .fic-links a:hover > * {
+    width: 30px;
+    height: 30px;
+    margin: -3px;
+  }
 }
 
 .results .fic-links a:last-child {
@@ -2026,6 +2027,15 @@ h4 .result-indicator::before {
     transform: translateX(-50%);
     left: 50%;
     margin-top: 32px;
+  }
+
+  .results .fic-links a > * {
+    width: 30px;
+    height: 30px;
+  }
+
+  .result + h6 {
+    margin-top: -0.5rem;
   }
 }
 
