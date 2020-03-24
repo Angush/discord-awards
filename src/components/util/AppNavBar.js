@@ -42,8 +42,9 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
             <Nav>
               {navlinks.map((link, index) => (
                 <NavLink
-                  to={link.to}
                   key={index}
+                  to={link.to}
+                  root={link.root}
                   onClick={() => setExpanded(false)}
                 >
                   {link.text}
@@ -68,7 +69,7 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
                     </span>
                   </div>
                   <div id='logout' className='logInOrOut'>
-                    <img src='images/logout.svg' alt='Logout' />
+                    <img src='/images/logout.svg' alt='Logout' />
                   </div>
                 </>
               ) : (
@@ -79,7 +80,7 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
                 >
                   <span>Login</span>
                   <img
-                    src='images/discord_logo.svg'
+                    src='/images/discord_logo.svg'
                     style={{ marginLeft: '8px' }}
                     alt='Login with Discord'
                   />
