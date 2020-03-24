@@ -31,8 +31,7 @@ const navlinks = [
   //   text: 'My Nominees'
   // },
   {
-    to: '/results/latest',
-    root: '/results',
+    to: '/results',
     text: 'Results',
     navClass: 'vote-nav'
   }

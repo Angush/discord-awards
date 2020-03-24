@@ -8,10 +8,8 @@ const NavLink = props => {
       {...props}
       className={classes}
       getProps={linkProps => {
-        if (
-          linkProps.isPartiallyCurrent ||
-          linkProps.location.pathname.startsWith(props.root)
-        )
+        console.log(linkProps)
+        if (linkProps.isCurrent || (linkProps.isPartiallyCurrent && props.root))
           return {
             className: classes + ' active'
           }
