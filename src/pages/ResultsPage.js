@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap'
 import { Link } from '@reach/router'
 
 const ResultsPage = ({ userData, years, year }) => {
+  // const [userVotes, setUserVotes] = useState({})
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
   const [toc, setTOC] = useState({})
@@ -71,7 +72,6 @@ const ResultsPage = ({ userData, years, year }) => {
           </h6>
           {SelectAnotherYear}
         </LoadingIndicator>
-        <TableOfContents />
       </>
     )
 
@@ -89,8 +89,7 @@ const ResultsPage = ({ userData, years, year }) => {
     )
 
   return (
-    <div className='results fade-rise left-indent-container'>
-      {SelectAnotherYear}
+    <div className='results left-indent-container'>
       <TableOfContents
         items={toc.items}
         isOpen={toc.expanded}
@@ -105,25 +104,29 @@ const ResultsPage = ({ userData, years, year }) => {
         className={toc.expanded ? 'toc-click expanded' : 'toc-click'}
         onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
       ></div>
-      {data.sections.map(section => (
-        <section key={section.sectionName}>
-          <div
-            id={section.sectionName.toLowerCase().replace(/\s+/g, '-')}
-            className='section-header'
-            // tabIndex={-1}
-          >
-            <h2>{section.sectionName}</h2>
-          </div>
-          {section.categories.map(category => {
-            return (
-              <div key={category.title} className='results-category'>
-                <ResultsHeader category={category} />
-                <ResultsEntries category={category} />
-              </div>
-            )
-          })}
-        </section>
-      ))}
+      <div className='fade-rise'>
+        {SelectAnotherYear}
+
+        {data.sections.map(section => (
+          <section key={section.sectionName}>
+            <div
+              id={section.sectionName.toLowerCase().replace(/\s+/g, '-')}
+              className='section-header'
+              // tabIndex={-1}
+            >
+              <h2>{section.sectionName}</h2>
+            </div>
+            {section.categories.map(category => {
+              return (
+                <div key={category.title} className='results-category'>
+                  <ResultsHeader category={category} />
+                  <ResultsEntries category={category} />
+                </div>
+              )
+            })}
+          </section>
+        ))}
+      </div>
       <div id='floating-toc-btn'>
         <Button
           id='open-toc'

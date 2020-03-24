@@ -32,8 +32,13 @@ const navlinks = [
   // },
   {
     to: '/results',
+    root: '/results',
     text: 'Results',
-    navClass: 'vote-nav'
+    navClass: 'vote-nav',
+    classOn: {
+      root: false,
+      children: true
+    }
   }
 ]
 

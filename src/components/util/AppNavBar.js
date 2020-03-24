@@ -19,11 +19,22 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
     })
   }, [])
 
-  const matchedNavLink = navlinks.filter(n => n.to === location.pathname)
-  const navClass =
-    matchedNavLink[0] && matchedNavLink[0].navClass
-      ? matchedNavLink[0].navClass
-      : ''
+  const getNavClass = link => {
+    let c = link.navClass || ''
+    if (!link.classOn) return c
+    if (link.classOn.root && link.to === location.pathname) return c
+    if (
+      link.classOn.children &&
+      location.pathname.startsWith(link.root) &&
+      link.to !== location.pathname
+    )
+      return c
+  }
+
+  const matchedNavLink = navlinks.filter(
+    l => l.to === location.pathname || location.pathname.startsWith(l.root)
+  )
+  const navClass = matchedNavLink[0] && getNavClass(matchedNavLink[0])
 
   return (
     <>
