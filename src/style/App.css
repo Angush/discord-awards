@@ -1645,6 +1645,45 @@ h4 .result-indicator::before {
   margin-bottom: 0.75rem;
 }
 
+.results-summary {
+  padding: 2rem 0;
+  border-radius: 0 0.3rem 0.3rem 0;
+  margin: auto;
+  margin-bottom: 4rem;
+  font-family: adobe-garamond-pro, serif;
+  font-size: 1rem;
+  line-height: 2.2em;
+  max-width: 80ch;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.results-summary h1 {
+  font-family: trajan-pro-3, serif;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 1.4em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: -1rem;
+  padding: 1rem 0;
+}
+
+.results-summary .para-primary {
+  font-size: 1.3rem;
+  line-height: 1.8em;
+  opacity: 0.9;
+}
+
+.results-summary .para-secondary {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.results-summary .results-goback {
+  text-align: left;
+}
+
 .result-years {
   margin-top: 15vh;
   text-align: center;
@@ -2054,6 +2093,23 @@ h4 .result-indicator::before {
 
   .result + h6 {
     margin-top: -0.5rem;
+  }
+
+  .results-summary {
+    font-size: 1rem;
+    line-height: 2.1em;
+  }
+
+  .results-summary h1 {
+    font-size: 1.6rem;
+    line-height: 1.6em;
+    padding-bottom: 1.2rem;
+  }
+
+  .results-summary .para-primary {
+    font-size: 1.2rem;
+    line-height: 2em;
+    margin-bottom: 1.5rem;
   }
 }
 

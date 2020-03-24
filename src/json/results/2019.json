@@ -1,4 +1,13 @@
 {
+  "header": {
+    "paragraphs": {
+      "secondary": [
+        "With 598 entries across 45 categories (emoji excluded), the 2019 Cauldron Awards showcase Cauldron's favorites of all the myriad fanworks that our fandom created throughout the year, as well as the many people, events, and moments within the Cauldron community that deserve a little honoring.",
+        "Many congratulations to the winners, runners-up, and all the nominees.",
+        "See you in 2020!"
+      ]
+    }
+  },
   "totals": {
     "categories": 46,
     "nominees": 718,
@@ -4335,6 +4344,84 @@
       "voters": 83,
       "categories": [
         {
+          "id": 63,
+          "votes": 147,
+          "voters": 62,
+          "type": "other",
+          "label": "new creator",
+          "title": "New Creator of the Year",
+          "description": "Another year, another wave of new authors and artists alike. Who were the best fandom creators to debut in 2019?",
+          "fields": [
+            {
+              "id": "name",
+              "name": "Name",
+              "placeholder": "The creator's name"
+            }
+          ],
+          "nominees": [
+            {
+              "id": 134,
+              "votes": 29,
+              "name": "glowspider"
+            },
+            {
+              "id": 352,
+              "votes": 26,
+              "name": "Wyldbown't"
+            },
+            {
+              "id": 320,
+              "votes": 21,
+              "name": "Oxto / OxfordOctopus"
+            },
+            {
+              "id": 135,
+              "votes": 11,
+              "name": "Relyet"
+            },
+            {
+              "id": 157,
+              "votes": 11,
+              "name": "Octobre"
+            },
+            {
+              "id": 354,
+              "votes": 11,
+              "name": "Benzimo"
+            },
+            {
+              "id": 128,
+              "votes": 9,
+              "name": "ElCuervo"
+            },
+            {
+              "id": 215,
+              "votes": 9,
+              "name": "reilgun"
+            },
+            {
+              "id": 275,
+              "votes": 7,
+              "name": "Nocturne"
+            },
+            {
+              "id": 182,
+              "votes": 6,
+              "name": "missbrainproblems"
+            },
+            {
+              "id": 159,
+              "votes": 4,
+              "name": "Drawlords"
+            },
+            {
+              "id": 158,
+              "votes": 3,
+              "name": "superwhitey"
+            }
+          ]
+        },
+        {
           "id": 50,
           "votes": 189,
           "voters": 65,
@@ -5805,84 +5892,6 @@
               "id": 492,
               "votes": 0,
               "image": "https://cdn.discordapp.com/emojis/637800563702235147.gif"
-            }
-          ]
-        },
-        {
-          "id": 63,
-          "votes": 147,
-          "voters": 62,
-          "type": "other",
-          "label": "new creator",
-          "title": "New Creator of the Year",
-          "description": "Another year, another wave of new authors and artists alike. Who were the best fandom creators to debut in 2019?",
-          "fields": [
-            {
-              "id": "name",
-              "name": "Name",
-              "placeholder": "The creator's name"
-            }
-          ],
-          "nominees": [
-            {
-              "id": 134,
-              "votes": 29,
-              "name": "glowspider"
-            },
-            {
-              "id": 352,
-              "votes": 26,
-              "name": "Wyldbown't"
-            },
-            {
-              "id": 320,
-              "votes": 21,
-              "name": "Oxto / OxfordOctopus"
-            },
-            {
-              "id": 135,
-              "votes": 11,
-              "name": "Relyet"
-            },
-            {
-              "id": 157,
-              "votes": 11,
-              "name": "Octobre"
-            },
-            {
-              "id": 354,
-              "votes": 11,
-              "name": "Benzimo"
-            },
-            {
-              "id": 128,
-              "votes": 9,
-              "name": "ElCuervo"
-            },
-            {
-              "id": 215,
-              "votes": 9,
-              "name": "reilgun"
-            },
-            {
-              "id": 275,
-              "votes": 7,
-              "name": "Nocturne"
-            },
-            {
-              "id": 182,
-              "votes": 6,
-              "name": "missbrainproblems"
-            },
-            {
-              "id": 159,
-              "votes": 4,
-              "name": "Drawlords"
-            },
-            {
-              "id": 158,
-              "votes": 3,
-              "name": "superwhitey"
             }
           ]
         },

@@ -3,6 +3,8 @@ import LoadingIndicator from '../components/util/LoadingIndicator'
 import TableOfContents from '../components/util/TableOfContents'
 import ResultsEntries from '../components/results/ResultsEntries'
 import ResultsHeader from '../components/results/ResultsHeader'
+import ResultsSummary from '../components/results/ResultsSummary'
+
 import { Button } from 'react-bootstrap'
 import { Link } from '@reach/router'
 
@@ -105,7 +107,9 @@ const ResultsPage = ({ userData, years, year }) => {
         onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
       ></div>
       <div className='fade-rise'>
-        {SelectAnotherYear}
+        <ResultsSummary year={year} header={data.header}>
+          {SelectAnotherYear}
+        </ResultsSummary>
 
         {data.sections.map(section => (
           <section key={section.sectionName}>
