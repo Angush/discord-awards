@@ -19,7 +19,7 @@ const ResultsHeader = ({ category }) => {
 
   return (
     <div
-      tabIndex={-1}
+      // tabIndex={-1}
       className='results-header'
       key={category.title}
       id={anchor}
