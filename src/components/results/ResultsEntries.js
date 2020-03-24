@@ -35,12 +35,17 @@ const ResultsEntries = ({
 
   if (!nominees || nominees.length === 0) return <div>No entries.</div>
 
-  const votePercentage = votes => (
-    <h6>
-      with {votes} votes{' '}
-      <span>({Math.ceil((votes / voters) * 100)}% of voters)</span>
-    </h6>
-  )
+  const votePercentage = (votes, ranked = true) =>
+    votes === 0 ? (
+      ranked ? null : (
+        <h6>with no votes</h6>
+      )
+    ) : (
+      <h6>
+        with {votes} vote{votes === 1 ? '' : 's'}{' '}
+        <span>({Math.ceil((votes / voters) * 100)}% of voters)</span>
+      </h6>
+    )
 
   return (
     <div
@@ -87,7 +92,7 @@ const ResultsEntries = ({
                     key={`c${id}_e${entry.id}`}
                     entry={entry}
                     type={type}
-                    votePercentage={votePercentage(entry.votes)}
+                    votePercentage={votePercentage(entry.votes, false)}
                   />
                 ))}
               </div>
