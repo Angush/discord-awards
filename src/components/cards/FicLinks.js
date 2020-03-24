@@ -1,26 +1,31 @@
 import React from 'react'
 import validateURL from '../../functions/validateURL'
 
-//! move this elsewhere... somewhere
+//! move this elsewhere... somewhere?
 const TYPE = {
   sb: {
     img: '/images/sb.png',
+    name: 'Space Battles',
     order: 1
   },
   sv: {
     img: '/images/sv.png',
+    name: 'Sufficient Velocity',
     order: 2
   },
   qq: {
     img: '/images/qq.png',
+    name: 'Questionable Questing',
     order: 3
   },
   ao3: {
     img: '/images/ao3.png',
+    name: 'Archive of Our Own',
     order: 4
   },
   ffn: {
     img: '/images/ffn.png',
+    name: 'Fanfiction dot net',
     order: 5
   },
   misc: {
@@ -47,6 +52,7 @@ const TYPE = {
         </defs>
       </svg>
     ),
+    name: 'Miscellaneous',
     order: 6
   }
 }
@@ -62,7 +68,6 @@ const getLinkType = link => {
 }
 
 const FicLinks = ({ links }) => {
-  //! move this sorting to the Submit stage (where shortening should also occur), and have database just store it as raw JSON
   const sorted = links
     .map(link => {
       return {
@@ -84,7 +89,12 @@ const FicLinks = ({ links }) => {
             rel='noopener noreferrer'
           >
             {link.element && link.element}
-            {link.img && <img src={link.img} alt='Destination website icon.' />}
+            {link.img && (
+              <img
+                src={link.img}
+                alt={`${link.name || `Destination`} link icon.`}
+              />
+            )}
           </a>
         )
       })}
