@@ -42,7 +42,7 @@ const navlinks = [
   }
 ]
 
-const years = ['2019', '2018']
+const years = ['2019']
 
 const App = () => {
   const [userData, setUserData] = useState({})
