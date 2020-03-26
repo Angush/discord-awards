@@ -9,6 +9,7 @@ import { Button } from 'react-bootstrap'
 import { Link } from '@reach/router'
 
 const ResultsPage = ({ userData, years, year }) => {
+  const [yearProper, setYearProper] = useState(year)
   const [userCategoryVotes, setUserCategoryVotes] = useState({})
   const [userVotes, setUserVotes] = useState({})
   const [loading, setLoading] = useState(true)
@@ -18,14 +19,10 @@ const ResultsPage = ({ userData, years, year }) => {
     typeof year === 'string' && year.toLowerCase().trim() === 'latest'
   )
 
-  // TODO: add a heading section at the very top with overall stats, some descriptive text, etc. (see 2018 results page)
-  // - Also have a "Log in to see what you voted for" line, and then stats about the user's voting habits when they ARE logged in. Though this obviously requires...
-
-  // TODO: "You voted for this!" highlighting for every nominee, sourced from the server via a new endpoint (eg. "/api/votes/:year") which, if logged in, will mimic "/api/votes" but pull the data from a local static JSON file instead.
-
   useEffect(() => {
-    const normalized = latest ? years[0] : year
     const controller = new AbortController()
+    const normalized = latest ? years[0] : year
+    setYearProper(normalized)
 
     if (!years.includes(normalized)) {
       setLoading(false)
@@ -98,7 +95,7 @@ const ResultsPage = ({ userData, years, year }) => {
         <LoadingIndicator className='fade-rise'>
           <h4>Just a moment!</h4>
           <h6 className='text-muted'>
-            We're loading the {latest ? 'latest' : year} results for you.
+            We're loading the {latest ? 'latest' : yearProper} results for you.
           </h6>
           {SelectAnotherYear}
         </LoadingIndicator>
@@ -147,7 +144,7 @@ const ResultsPage = ({ userData, years, year }) => {
       ></div>
       <div className='fade-rise'>
         <ResultsSummary
-          year={year}
+          year={yearProper}
           header={data.header}
           userVotes={Object.values(userVotes).length}
           userData={userData}
@@ -168,7 +165,7 @@ const ResultsPage = ({ userData, years, year }) => {
               return (
                 <div key={category.title} className='results-category'>
                   <ResultsHeader
-                    year={year}
+                    year={yearProper}
                     category={category}
                     userVoteCount={userCategoryVoteCount([category])}
                   />
