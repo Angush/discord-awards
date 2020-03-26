@@ -9,7 +9,8 @@ import { Button } from 'react-bootstrap'
 import { Link } from '@reach/router'
 
 const ResultsPage = ({ userData, years, year }) => {
-  // const [userVotes, setUserVotes] = useState({})
+  const [userCategoryVotes, setUserCategoryVotes] = useState({})
+  const [userVotes, setUserVotes] = useState({})
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
   const [toc, setTOC] = useState({})
@@ -24,17 +25,44 @@ const ResultsPage = ({ userData, years, year }) => {
 
   useEffect(() => {
     const normalized = latest ? years[0] : year
-    if (years.includes(normalized)) {
-      import(`../json/results/${normalized}.json`)
-        .then(yearResults => {
-          setData(yearResults.default)
-          setLoading(false)
-        })
-        .catch(err => {
-          console.error(err)
-          setLoading(false)
-        })
-    } else setLoading(false)
+    const controller = new AbortController()
+
+    if (!years.includes(normalized)) {
+      setLoading(false)
+      return
+    }
+
+    window
+      .fetch(`https://cauldron2019.wormfic.net/api/votes/${normalized}`, {
+        credentials: 'include',
+        signal: controller.signal
+      })
+      .then(response => response.json())
+      .then(resData => {
+        // convert userVotes to a list of category IDs for easy checking
+        let voteIDs = {}
+        let replacementRegex = /c|_e\d+/g
+        for (const key in resData) {
+          let categoryID = key.replace(replacementRegex, '')
+          if (voteIDs[categoryID] >= 1) voteIDs[categoryID] += 1
+          else voteIDs[categoryID] = 1
+        }
+        setUserCategoryVotes(voteIDs)
+        setUserVotes(resData)
+      })
+      .catch(console.error)
+
+    import(`../json/results/${normalized}.json`)
+      .then(yearResults => {
+        setData(yearResults.default)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        setLoading(false)
+      })
+
+    return () => controller.abort()
   }, [years, year, latest])
 
   useEffect(() => {
@@ -90,6 +118,17 @@ const ResultsPage = ({ userData, years, year }) => {
       </div>
     )
 
+  const userVotedFor = id => userVotes[id] === 1
+
+  const userCategoryVoteCount = (categories = []) => {
+    let voteCount = 0
+    categories.forEach(c => {
+      let categoryVotes = userCategoryVotes[c.id]
+      if (categoryVotes) voteCount += categoryVotes
+    })
+    return voteCount
+  }
+
   return (
     <div className='results left-indent-container'>
       <TableOfContents
@@ -107,7 +146,12 @@ const ResultsPage = ({ userData, years, year }) => {
         onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
       ></div>
       <div className='fade-rise'>
-        <ResultsSummary year={year} header={data.header}>
+        <ResultsSummary
+          year={year}
+          header={data.header}
+          userVotes={Object.values(userVotes).length}
+          userData={userData}
+        >
           {SelectAnotherYear}
         </ResultsSummary>
 
@@ -123,8 +167,15 @@ const ResultsPage = ({ userData, years, year }) => {
             {section.categories.map(category => {
               return (
                 <div key={category.title} className='results-category'>
-                  <ResultsHeader year={year} category={category} />
-                  <ResultsEntries category={category} />
+                  <ResultsHeader
+                    year={year}
+                    category={category}
+                    userVoteCount={userCategoryVoteCount([category])}
+                  />
+                  <ResultsEntries
+                    category={category}
+                    userVotedFor={userVotedFor}
+                  />
                 </div>
               )
             })}

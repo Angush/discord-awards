@@ -1,7 +1,7 @@
 import React from 'react'
 import FicLinks from '../cards/FicLinks'
 
-const Result = ({ entry, type, votePercentage = null }) => {
+const Result = ({ entry, type, votePercentage = null, votedFor }) => {
   const title = entry.title || entry.name
   const creator = entry.author || entry.artist || entry.owner
   const image = type === 'art' ? entry.url : entry.image
@@ -58,6 +58,7 @@ const Result = ({ entry, type, votePercentage = null }) => {
         </div>
       )}
       {type === 'fic' && <FicLinks links={entry.links} />}
+      {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
     </div>
   )

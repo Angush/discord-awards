@@ -1552,6 +1552,10 @@ input.form-control-lg {
   margin: auto;
 }
 
+.extra-results .result {
+  margin-bottom: 3rem;
+}
+
 .extra-results .result h6:last-child {
   margin-top: 1rem;
   margin-bottom: 2.5rem;
@@ -1742,6 +1746,25 @@ h4 .result-indicator::before {
 
 .latest + * {
   margin-top: 2rem;
+}
+
+.voted-for {
+  color: #17a2b8;
+  opacity: 1 !important;
+  margin: 1rem 0 0 0 !important;
+}
+
+.results-header + .voted-for {
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.8 !important;
+  margin: -0.5rem 0 1rem 0 !important;
+}
+
+.summary-votecount {
+  color: #17a2b8;
+  /* padding: 2px 4px;
+  border: 1px solid rgba(23, 162, 184, 0.25); */
 }
 
 /*=  Media queries  =*/
@@ -2052,6 +2075,11 @@ h4 .result-indicator::before {
     visibility: hidden;
     height: 0px;
     margin-bottom: -42px;
+  }
+
+  .results-header + .voted-for {
+    margin-top: 2rem !important;
+    font-size: 14px;
   }
 
   .results-entries h4 {

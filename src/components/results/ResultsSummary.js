@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ResultsSummary = ({ header, year, children }) => {
+const ResultsSummary = ({ header, year, userData, userVotes, children }) => {
   if (!header || !header.paragraphs) return children
   const { paragraphs } = header
   const hasPrimaryParagraphs =
@@ -21,6 +21,23 @@ const ResultsSummary = ({ header, year, children }) => {
         </p>
       ))}
       {children && <hr />}
+      {userData.logged_in ? (
+        <>
+          {userVotes === 0 ? (
+            <div>You didn't vote for anything in {year}!</div>
+          ) : (
+            <div>
+              You voted for{' '}
+              <span className='summary-votecount'>{userVotes}</span>{' '}
+              {userVotes === 1 ? 'entry' : 'entries'} in {year}!
+            </div>
+          )}
+        </>
+      ) : (
+        <a href={`https://cauldron2019.wormfic.net/login`}>
+          Login here to view what you voted for.
+        </a>
+      )}
       {children}
     </div>
   )

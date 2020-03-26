@@ -3,7 +3,8 @@ import Result from './Result'
 import { Button } from 'react-bootstrap'
 
 const ResultsEntries = ({
-  category: { id, type, nominees, voters, imageOnly }
+  category: { id, type, nominees, voters, imageOnly },
+  userVotedFor
 }) => {
   const [showExtras, setShowExtras] = useState(false)
   const [golds] = useState(
@@ -47,29 +48,55 @@ const ResultsEntries = ({
       </h6>
     )
 
+  const getVoteIdentifier = eID => `c${id}_e${eID}`
+
   return (
     <div
       className={imageOnly ? 'results-entries imageonly' : 'results-entries'}
     >
       <div className='results-gold'>
-        {golds.map(entry => (
-          <Result key={`c${id}_e${entry.id}`} entry={entry} type={type} />
-        ))}
+        {golds.map(entry => {
+          let voteID = getVoteIdentifier(entry.id)
+          return (
+            <Result
+              key={voteID}
+              entry={entry}
+              type={type}
+              votedFor={userVotedFor(voteID)}
+            />
+          )
+        })}
         {votePercentage(golds[0].votes)}
       </div>
       {silvers.length > 0 && (
         <div className='results-silver'>
-          {silvers.map(entry => (
-            <Result key={`c${id}_e${entry.id}`} entry={entry} type={type} />
-          ))}
+          {silvers.map(entry => {
+            let voteID = getVoteIdentifier(entry.id)
+            return (
+              <Result
+                key={voteID}
+                entry={entry}
+                type={type}
+                votedFor={userVotedFor(voteID)}
+              />
+            )
+          })}
           {votePercentage(silvers[0].votes)}
         </div>
       )}
       {bronzes.length > 0 && (
         <div className='results-bronze'>
-          {bronzes.map(entry => (
-            <Result key={`c${id}_e${entry.id}`} entry={entry} type={type} />
-          ))}
+          {bronzes.map(entry => {
+            let voteID = getVoteIdentifier(entry.id)
+            return (
+              <Result
+                key={voteID}
+                entry={entry}
+                type={type}
+                votedFor={userVotedFor(voteID)}
+              />
+            )
+          })}
           {votePercentage(bronzes[0].votes)}
         </div>
       )}
@@ -87,14 +114,18 @@ const ResultsEntries = ({
           {showExtras && (
             <div className='extra-results'>
               <div className='container'>
-                {extras.map(entry => (
-                  <Result
-                    key={`c${id}_e${entry.id}`}
-                    entry={entry}
-                    type={type}
-                    votePercentage={votePercentage(entry.votes, false)}
-                  />
-                ))}
+                {extras.map(entry => {
+                  let voteID = getVoteIdentifier(entry.id)
+                  return (
+                    <Result
+                      key={voteID}
+                      entry={entry}
+                      type={type}
+                      votedFor={userVotedFor(voteID)}
+                      votePercentage={votePercentage(entry.votes, false)}
+                    />
+                  )
+                })}
               </div>
             </div>
           )}
