@@ -4,12 +4,16 @@ import TableOfContents from '../components/util/TableOfContents'
 import ResultsEntries from '../components/results/ResultsEntries'
 import ResultsHeader from '../components/results/ResultsHeader'
 import ResultsSummary from '../components/results/ResultsSummary'
+import jumpToID from '../functions/jumpToID'
 
 import { Button } from 'react-bootstrap'
 import { Link } from '@reach/router'
 
-const ResultsPage = ({ userData, years, year }) => {
+const ResultsPage = ({ userData, years, year, '*': hash }) => {
   const [yearProper, setYearProper] = useState(year)
+  const [jumpTarget, setJumpTarget] = useState(
+    hash ? hash.toLowerCase().replace(/^[^\w-]*/, '') : null
+  )
   const [userCategoryVotes, setUserCategoryVotes] = useState({})
   const [userVotes, setUserVotes] = useState({})
   const [loading, setLoading] = useState(true)
@@ -82,6 +86,21 @@ const ResultsPage = ({ userData, years, year }) => {
       items: contents
     })
   }, [data])
+
+  useEffect(() => {
+    if (!jumpTarget) return
+    let element = document.querySelector(`#${jumpTarget}`)
+    if (!element) return
+    let timeout = setTimeout(() => {
+      console.log(`Scrolling now...`)
+      jumpToID(jumpTarget, {
+        offset: 100,
+        smooth: false,
+        onJump: () => setJumpTarget(null)
+      })
+    }, 500)
+    return () => clearTimeout(timeout)
+  })
 
   const SelectAnotherYear = (
     <div className='results-goback'>

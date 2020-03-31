@@ -108,7 +108,7 @@ const App = () => {
           <MyNomineesPage path='/nominees' />
           <ResultsListingsPage path='/results' years={years} />
           <ResultsPage
-            path='/results/:year'
+            path='/results/:year/*'
             userData={userData}
             years={years}
           />
