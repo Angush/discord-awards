@@ -1,5 +1,8 @@
+# Redirect API requests to the API url
+/api/*                                    https://cauldron2019.wormfic.net/:splat     200
+
 # React routing support
-/*                                      /index.html                       200
+/*                                        /index.html                                 200
 
 # Redirect default Netlify subdomain to primary domain
-https://cauldron-awards.netlify.com/*   https://cauldron.angu.sh/:splat   301!
+https://cauldron-awards.netlify.com/*     https://cauldron.angu.sh/:splat             301!
