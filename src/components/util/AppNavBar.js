@@ -87,7 +87,7 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
                 <a
                   id='login'
                   className='logInOrOut'
-                  href={`https://cauldron2019.wormfic.net/login`}
+                  href={`https://cauldron.angu.sh/api/login`}
                 >
                   <span>Login</span>
                   <img

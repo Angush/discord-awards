@@ -64,7 +64,7 @@ const App = () => {
       } catch (e) {}
 
     window
-      .fetch(`https://cauldron2019.wormfic.net/api/auth`, {
+      .fetch(`https://cauldron.angu.sh/api/api/auth`, {
         credentials: 'include'
       })
       .then(response => response.json())
@@ -78,7 +78,7 @@ const App = () => {
   const logout = event => {
     if (userData.logged_in) {
       event.preventDefault()
-      window.fetch(`https://cauldron2019.wormfic.net/logout`, {
+      window.fetch(`https://cauldron.angu.sh/api/logout`, {
         credentials: 'include',
         method: 'POST'
       })

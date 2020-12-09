@@ -34,7 +34,7 @@ const ResultsSummary = ({ header, year, userData, userVotes, children }) => {
           )}
         </>
       ) : (
-        <a href={`https://cauldron2019.wormfic.net/login`}>
+        <a href={`https://cauldron.angu.sh/api/login`}>
           Login here to view what you voted for.
         </a>
       )}

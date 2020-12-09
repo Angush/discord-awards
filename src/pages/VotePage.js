@@ -287,7 +287,7 @@ const VotePage = ({ userData }) => {
   //     } catch (e) {}
 
   //   window
-  //     .fetch(`https://cauldron2019.wormfic.net/api/voteables`, {
+  //     .fetch(`https://cauldron.angu.sh/api/api/voteables`, {
   //       credentials: 'include',
   //       signal: controller.signal
   //     })
@@ -413,7 +413,7 @@ const VotePage = ({ userData }) => {
 
   // const submitVotes = event => {
   //   if (!userData.logged_in) {
-  //     navigate('https://cauldron2019.wormfic.net/login')
+  //     navigate('https://cauldron.angu.sh/api/login')
   //     return
   //   }
   //   event.preventDefault()
@@ -445,7 +445,7 @@ const VotePage = ({ userData }) => {
 
   //   setSubmitting(true)
   //   window
-  //     .fetch(`https://cauldron2019.wormfic.net/api/vote`, {
+  //     .fetch(`https://cauldron.angu.sh/api/api/vote`, {
   //       method: 'POST',
   //       headers: { 'Content-Type': 'text/plain' },
   //       credentials: 'include',
@@ -460,7 +460,7 @@ const VotePage = ({ userData }) => {
   //       console.error(`Submission failed status code ${res.status}!`, res)
   //       if (res.status === 401) {
   //         console.warn(`User login expired. Forcing page reload...`)
-  //         navigate('https://cauldron2019.wormfic.net/login')
+  //         navigate('https://cauldron.angu.sh/api/login')
   //         return null
   //       }
   //     })
