@@ -52,7 +52,7 @@ const NominationPage = props => {
     let cached = localStorage.categories
     if (cached) populateCategories(JSON.parse(cached))
     window
-      .fetch(`https://cauldron.angu.sh/api/api/contests`)
+      .fetch(`https://cauldron.angu.sh/api/contests`)
       .then(response => response.json())
       .then(rawData => {
         let data = Object.values(rawData).map(c => {
@@ -93,7 +93,7 @@ const NominationPage = props => {
     }
 
     window
-      .fetch(`https://cauldron.angu.sh/api/api/nominate`, {
+      .fetch(`https://cauldron.angu.sh/api/nominate`, {
         method: 'POST',
         mode: 'cors',
         headers: {

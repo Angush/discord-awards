@@ -34,7 +34,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
     }
 
     window
-      .fetch(`https://cauldron.angu.sh/api/api/votes/${normalized}`, {
+      .fetch(`https://cauldron.angu.sh/api/votes/${normalized}`, {
         credentials: 'include',
         signal: controller.signal
       })

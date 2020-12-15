@@ -64,7 +64,7 @@ const App = () => {
       } catch (e) {}
 
     window
-      .fetch(`https://cauldron.angu.sh/api/api/auth`, {
+      .fetch(`https://cauldron.angu.sh/api/auth`, {
         credentials: 'include'
       })
       .then(response => response.json())

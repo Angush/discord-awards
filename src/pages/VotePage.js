@@ -287,7 +287,7 @@ const VotePage = ({ userData }) => {
   //     } catch (e) {}
 
   //   window
-  //     .fetch(`https://cauldron.angu.sh/api/api/voteables`, {
+  //     .fetch(`https://cauldron.angu.sh/api/voteables`, {
   //       credentials: 'include',
   //       signal: controller.signal
   //     })
@@ -445,7 +445,7 @@ const VotePage = ({ userData }) => {
 
   //   setSubmitting(true)
   //   window
-  //     .fetch(`https://cauldron.angu.sh/api/api/vote`, {
+  //     .fetch(`https://cauldron.angu.sh/api/vote`, {
   //       method: 'POST',
   //       headers: { 'Content-Type': 'text/plain' },
   //       credentials: 'include',
