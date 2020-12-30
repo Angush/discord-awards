@@ -1,13 +1,12 @@
-import React from 'react'
-// import React, { useState, useEffect, useCallback } from 'react'
-// import LoadingIndicator from '../components/util/LoadingIndicator'
-// import CategoryTypeSelect from '../components/nominate/CategoryTypeSelect'
-// import SelectCategory from '../components/nominate/SelectCategory'
-// import SubmitStep from '../components/nominate/SubmitStep'
-// import InputMain from '../components/nominate/InputMain'
-// import JumpTo from '../components/util/JumpTo'
-// import GoBack from '../components/util/GoBack'
-import { Link } from '@reach/router'
+import React, { useState, useEffect, useCallback } from 'react'
+import LoadingIndicator from '../components/util/LoadingIndicator'
+import CategoryTypeSelect from '../components/nominate/CategoryTypeSelect'
+import SelectCategory from '../components/nominate/SelectCategory'
+import SubmitStep from '../components/nominate/SubmitStep'
+import InputMain from '../components/nominate/InputMain'
+import JumpTo from '../components/util/JumpTo'
+import GoBack from '../components/util/GoBack'
+// import { Link } from '@reach/router'
 
 const NominationPage = props => {
   // return (
