@@ -10,16 +10,16 @@ import React from 'react'
 import { Link } from '@reach/router'
 
 const NominationPage = props => {
-  return (
-    <div className='fade-rise text-center pad-top'>
-      <h3>Nominations are currently closed.</h3>
-      <p>
-        They will reopen in January 2021 for the 2020 Cauldron Awards. Visit{' '}
-        <Link to='/results'>the results page</Link> to see 2019's results!
-      </p>
-    </div>
-  )
-  /*
+  // return (
+  //   <div className='fade-rise text-center pad-top'>
+  //     <h3>Nominations are currently closed.</h3>
+  //     <p>
+  //       They will reopen in January 2021 for the 2020 Cauldron Awards. Visit{' '}
+  //       <Link to='/results'>the results page</Link> to see 2019's results!
+  //     </p>
+  //   </div>
+  // )
+  
   const [categoryTypes, setCategoryTypes] = useState([])
   const [categories, setCategories] = useState([])
   const [nominee, setNominee] = useState(null)
@@ -349,7 +349,7 @@ const NominationPage = props => {
       <div className='vertical-padding'></div>
     </div>
   )
-  */
+
 }
 
 export default NominationPage
