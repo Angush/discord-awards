@@ -17,7 +17,7 @@ const CategoryTypeSelect = ({ types, selected, select, hidden }) => {
             selected={selected && type === selected}
             onClick={e => {
               e.preventDefault()
-              select(type)
+              select(type, section)
             }}
           >
             <Card.Body>

@@ -20,6 +20,7 @@ const NominationPage = props => {
   // )
   
   const [categoryTypes, setCategoryTypes] = useState([])
+  const [collections, setCollections] = useState({})
   const [categories, setCategories] = useState([])
   const [nominee, setNominee] = useState(null)
   const [selected, setSelected] = useState({
@@ -36,14 +37,44 @@ const NominationPage = props => {
   // const href = props['*']
 
   const populateCategories = useCallback(data => {
-    // set category types
+    //* set category types
     let types = data.reduce((arr, { type, section }) => {
       let obj = { type, section }
       if (arr.some(existing => existing.type === type)) return arr
       else return [...arr, obj]
     }, [])
     setCategoryTypes(types)
-    // set categories
+
+    //* set categories
+
+    // data.forEach(category => {
+    //   if (!category.collection) category.collection = "NO_OLL"
+    // })
+
+    let collections = {}
+    types.forEach(({ type, section }) => {
+      collections[section] = {}
+    })
+
+    data.forEach(category => {
+      if (!category.collection) return
+      collections[category.section][category.collection] = true
+    })
+
+    for (const section in collections) {
+      collections[section] = Object.keys(collections[section])
+    }
+
+    setCollections(collections)
+
+    // data.forEach(category => {
+    //   if (!category.collection) return categoriesData[category.section].general.push(category)
+    //   if (!categoriesData[category.section][category.collection]) categoriesData[category.section][category.collection] = []
+    //   categoriesData[category.section][category.collection].push(category)
+    // })
+
+    // setCategories(categoriesData)
+
     setCategories(data)
   }, [])
 
@@ -177,9 +208,10 @@ const NominationPage = props => {
         types={categoryTypes}
         hidden={selected.type ? true : false}
         selected={selected.type || null}
-        select={type => {
+        select={(type, section) => {
           setSelected({
             type: type,
+            section: section,
             categories: []
           })
         }}
@@ -216,6 +248,7 @@ const NominationPage = props => {
             <>
               <h4>Select a category</h4>
               <SelectCategory
+                collections={collections['other']}
                 categories={categories.filter(c => c.type === 'other')}
                 selected={selected.categories}
                 select={category => {
@@ -312,6 +345,7 @@ const NominationPage = props => {
               <h4>Select your nominee's categories</h4>
               <SelectCategory
                 multiple={true}
+                collections={collections[selected.section]}
                 categories={categories.filter(c => c.type === selected.type)}
                 selected={selected.categories}
                 select={category => {

@@ -12,6 +12,7 @@ const SelectCategory = ({
   selected = [],
   multiple = false,
   categories,
+  collections,
   submitting,
   setDone,
   done
@@ -26,6 +27,7 @@ const SelectCategory = ({
       setMatching(
         categories.filter(
           c =>
+            c.collection.includes(term) ||
             c.name.toLowerCase().includes(term) ||
             (c.description && c.description.toLowerCase().includes(term)) ||
             selected.some(s => s.id === c.id)
@@ -43,6 +45,9 @@ const SelectCategory = ({
     jumpToId('category-selection', { offset: 56, smooth: false })
     setSearchterm('')
   }
+
+  //  TODO: if there are more than one "Collection" types for a category, split up the card display, with a section for each Collection.
+  //! NOTE: currently, the Collection is included within the category cards themselves, rather than spliting cards into distinct groups. The latter option would be preferable, I think, but it's more complicated to implement, so for the time being, they're in the cards so that other more important functionality can be worked on first.
 
   return (
     <div id='category-selection'>
@@ -87,6 +92,7 @@ const SelectCategory = ({
                 <Card.Title>{category.name}</Card.Title>
                 <Card.Text>{category.description}</Card.Text>
               </Card.Body>
+              {category.collection && <Card.Text className="category-collection">{category.collection}</Card.Text>}
             </SelectableCard>
           )
         })}
