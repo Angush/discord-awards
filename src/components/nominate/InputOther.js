@@ -6,7 +6,8 @@ import validateURL from '../../functions/validateURL'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
-const InputOther = ({ category, save, disabled, submitting }) => {
+const InputOther = ({ category, save, disabled, submitting, nominee, setNominee }) => {
+  const [refilledData, setRefilledData] = useState(false)
   const [formData, setFormData] = useState({})
   const [imgValid, setImgValid] = useState({})
   const [blurred, setBlurred] = useState({})
@@ -15,6 +16,18 @@ const InputOther = ({ category, save, disabled, submitting }) => {
     link: false,
     all: false
   })
+
+  useEffect(() => {
+    if (refilledData) return
+    if (category.id === nominee.categoryId) {
+      setFormData(nominee.data)
+      setRefilledData(true)
+    }
+  }, [nominee.data, refilledData])
+
+  useEffect(() => {
+    setNominee({ categoryId: category.id, data: { ...formData } })
+  }, [formData, category, setNominee])
 
   const types = {}
   category.fields.forEach(field => (types[field.id] = field.name))
@@ -93,6 +106,7 @@ const InputOther = ({ category, save, disabled, submitting }) => {
                 }
                 id={item.id}
                 size='lg'
+                value={formData[item.id] || ''}
                 onChange={e => {
                   setFormData({ ...formData, [item.id]: e.target.value })
                   if (item.id === 'image')
@@ -133,7 +147,11 @@ const InputOther = ({ category, save, disabled, submitting }) => {
         )}
       </div>
 
-      <Submission tall disabled={!valid || disabled} submitting={submitting} />
+      <Submission
+        tall
+        disabled={!valid || disabled}
+        submitting={submitting}
+      />
     </Form>
   )
 }

@@ -3,40 +3,7 @@ import { Form, InputGroup, Col } from 'react-bootstrap'
 import LabelShrinkable from '../util/LabelShrinkable'
 import validateURL from '../../functions/validateURL'
 
-const LINK_TYPES = [
-  {
-    id: 'linkSB',
-    name: 'Spacebattles',
-    img: '/images/sb.png'
-  },
-  {
-    id: 'linkSV',
-    name: 'Sufficient Velocity',
-    img: '/images/sv.png'
-  },
-  {
-    id: 'linkQQ',
-    name: 'Questionable Questing',
-    img: '/images/qq.png'
-  },
-  {
-    id: 'linkAO3',
-    name: 'Archive Of Our Own',
-    img: '/images/ao3.png'
-  },
-  {
-    id: 'linkFFN',
-    name: 'Fanfiction.net',
-    img: '/images/ffn.png'
-  },
-  {
-    id: 'linkMisc',
-    name: 'Miscellaneous',
-    img: '/images/misc.png'
-  }
-]
-
-const FicManual = ({ input, setInput, disabled }) => {
+const FicManual = ({ input, setInput, disabled, LINK_TYPES }) => {
   const [blurred, setBlurred] = useState({})
   const [invalidLinkString, setInvalidLinkString] = useState('')
 

@@ -6,18 +6,85 @@ import FicManual from './FicManual'
 import PreviewCard from '../cards/PreviewCard'
 import shortenURL from '../../functions/shortenURL'
 
-const InputFic = ({ save, disabled, submitting }) => {
+const LINK_TYPES = [
+  {
+    id: 'linkSB',
+    name: 'Spacebattles',
+    img: '/images/sb.png',
+    regex: /forum\.spacebattles\.com/i
+  },
+  {
+    id: 'linkSV',
+    name: 'Sufficient Velocity',
+    img: '/images/sv.png',
+    regex: /forums\.sufficientvelocity\.com/i
+  },
+  {
+    id: 'linkQQ',
+    name: 'Questionable Questing',
+    img: '/images/qq.png',
+    regex: /forum\.questionablequesting\.com/i
+  },
+  {
+    id: 'linkAO3',
+    name: 'Archive Of Our Own',
+    img: '/images/ao3.png',
+    regex: /archiveofourown\.org/i
+  },
+  {
+    id: 'linkFFN',
+    name: 'Fanfiction.net',
+    img: '/images/ffn.png',
+    regex: /fanfiction\.net/i
+  },
+  {
+    id: 'linkMisc',
+    name: 'Miscellaneous',
+    img: '/images/misc.png'
+  }
+]
+
+const InputFic = ({ save, nominee, setNominee, disabled, submitting }) => {
   const [manualInput, setManualInput] = useState({})
-  const [selection, setSelection] = useState(null)
-  const [manual, setManual] = useState(false)
-  const [ficData, setFicData] = useState({})
+  const [refilledData, setRefilledData] = useState(false)
+  const [selection, setSelection] = useState(nominee.MANUAL_INPUT === false ? nominee : null)
   const [valid, setValid] = useState({ all: false })
+  const [manual, setManual] = useState(nominee.MANUAL_INPUT ? true : false)
+  // const [nominee, setNominee] = useState({})
 
   useEffect(() => {
     if (manual) return
     setValid(selection ? { all: true } : { all: false })
-    setFicData(selection ? selection : {})
-  }, [manual, selection])
+    if (selection && Object.values(selection).length > 0) {
+      setNominee({ ...selection, MANUAL_INPUT: false })
+    } else {
+      setNominee({})
+    }
+  }, [manual, selection, setNominee])
+
+  useEffect(() => {
+    if (!nominee.MANUAL_INPUT || refilledData) return
+
+    let linksArray = nominee.links
+    let nomineeData = {...nominee}
+    let nomineeLinks = {}
+
+    linksArray.forEach(link => {
+      let matched = false
+      LINK_TYPES.slice(0, LINK_TYPES.length - 1).forEach(type => {
+        if (!matched && link.match(type.regex)) {
+          nomineeLinks[type.id] = link
+          matched = true
+        }
+      })
+      if (!matched) nomineeLinks.linkMisc = link
+    })
+
+    nomineeData.links = nomineeLinks
+    setManualInput(nomineeData)
+    setRefilledData(true)
+  }, [nominee, refilledData])
+
 
   useEffect(() => {
     if (!manual) return
@@ -25,7 +92,7 @@ const InputFic = ({ save, disabled, submitting }) => {
     let allEmpty = values.every(v => !v || v.length === 0)
     if (values.length === 0 || allEmpty) {
       setValid({ all: false })
-      setFicData({})
+      setNominee({})
     } else {
       let title = manualInput.title
       let author = manualInput.author
@@ -42,20 +109,21 @@ const InputFic = ({ save, disabled, submitting }) => {
         links: validLinks,
         all: validTitle && validAuthor && validLinks
       })
-      setFicData({
-        title: title || 'Untitled',
-        author: author || 'Unknown',
+      setNominee({
+        title: title,
+        author: author,
         links: links,
-        nsfw: manualInput.nsfw
+        nsfw: manualInput.nsfw,
+        MANUAL_INPUT: true
       })
     }
-  }, [manual, manualInput])
+  }, [manual, manualInput, setNominee])
 
   const handleSubmit = e => {
     e.preventDefault()
     let editedData = {
-      ...ficData,
-      links: ficData.links.map(url => shortenURL(url))
+      ...nominee,
+      links: nominee.links.map(url => shortenURL(url))
     }
     if (!manual) editedData.approval = true
     save(editedData)
@@ -68,6 +136,7 @@ const InputFic = ({ save, disabled, submitting }) => {
           input={manualInput}
           setInput={setManualInput}
           disabled={disabled}
+          LINK_TYPES={LINK_TYPES}
         />
       ) : (
         <FicTypeahead
@@ -78,16 +147,16 @@ const InputFic = ({ save, disabled, submitting }) => {
       )}
 
       <div className='preview mx-auto'>
-        {Object.values(ficData).length === 0 && (
+        {(!nominee || Object.values(nominee).length === 0) && (
           <span className='text-muted '>
             {manual ? 'Enter some fic data' : 'Select a fic'} to continue.
           </span>
         )}
-        {ficData && (
+        {nominee && (
           <PreviewCard
             type='fic'
-            fic={ficData}
-            hide={Object.values(ficData).length === 0}
+            fic={nominee}
+            hide={Object.values(nominee).length === 0}
           />
         )}
       </div>
@@ -95,7 +164,7 @@ const InputFic = ({ save, disabled, submitting }) => {
       <Submission
         tall
         disabled={!valid.all || disabled}
-        text='Continue'
+        // text='Continue'
         submitting={submitting}
       >
         {manual ? (

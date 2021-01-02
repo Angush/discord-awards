@@ -114,6 +114,7 @@ const SelectCategory = ({
       {multiple && (
         <Submission
           tall
+          text="Continue"
           disabled={done || selected.length === 0}
           onClick={() => setDone()}
           submitting={submitting}

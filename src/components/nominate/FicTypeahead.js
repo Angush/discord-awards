@@ -35,7 +35,7 @@ const FicTypeahead = ({ input, setInput, disabled }) => {
         id='typeahead'
         bsSize='lg'
       />
-      {searchterm && (
+      {(searchterm || input) && (
         <InputClear
           onClick={() => {
             typeahead.getInstance().clear()

@@ -7,20 +7,39 @@ const InputMain = ({
   save,
   type,
   category,
-  submitting = false,
-  disabled = false
+  nominee,
+  setNominee,
+  disabled = false,
+  submitting = false
 }) => {
   const INPUT_SELECTOR = {
-    other: (
+    other:
       <InputOther
         save={save}
         category={category}
         disabled={disabled}
         submitting={submitting}
+        setNominee={setNominee}
+        nominee={nominee}
+      />,
+
+    art: 
+      <InputArt
+        save={save}
+        nominee={nominee}
+        setNominee={setNominee}
+        disabled={disabled}
+        submitting={submitting}
+      />,
+
+    fic:
+      <InputFic
+        save={save}
+        nominee={nominee}
+        setNominee={setNominee}
+        disabled={disabled}
+        submitting={submitting}
       />
-    ),
-    art: <InputArt save={save} disabled={disabled} submitting={submitting} />,
-    fic: <InputFic save={save} disabled={disabled} submitting={submitting} />
   }
 
   return INPUT_SELECTOR[type] || INPUT_SELECTOR.other

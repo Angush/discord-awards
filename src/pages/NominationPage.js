@@ -22,9 +22,10 @@ const NominationPage = props => {
   const [categoryTypes, setCategoryTypes] = useState([])
   const [collections, setCollections] = useState({})
   const [categories, setCategories] = useState([])
-  const [nominee, setNominee] = useState(null)
+  const [nominee, setNominee] = useState({})
   const [selected, setSelected] = useState({
     type: null,
+    section: null,
     categories: []
   })
   const [done, setDone] = useState({
@@ -103,7 +104,7 @@ const NominationPage = props => {
   }
 
   const submit = nomineeData => {
-    if (!nominee && !nomineeData) return
+    if (!nomineeData && (!nominee || Object.values(nominee).length === 0)) return
     setDone({
       ...done,
       submitting: true
@@ -111,10 +112,12 @@ const NominationPage = props => {
 
     let approval = 0 // 0 indicating unvetted manual input
     let editedData = nomineeData || nominee
-    if (editedData.approval) {
+    if (editedData.MANUAL_INPUT === false) {
       delete editedData.approval
+      delete editedData.MANUAL_INPUT
       approval = 2 // 2 indicating it was not manual input
     }
+
 
     let dataToSubmit = {
       categories: selected.categories.map(c => c.id),
@@ -167,9 +170,10 @@ const NominationPage = props => {
   }
 
   const reset = () => {
-    setNominee(null)
+    setNominee({})
     setSelected({
-      type: null,
+      type: selected.type,
+      section: selected.section,
       categories: []
     })
     setDone({
@@ -214,6 +218,7 @@ const NominationPage = props => {
             section: section,
             categories: []
           })
+          setNominee({})
         }}
       />
 
@@ -223,8 +228,7 @@ const NominationPage = props => {
           id='step-two'
           className={
             'fade-rise' +
-            (done.stepTwo ? ' hidden' : '') +
-            (selected.type === 'other' ? '' : ' max-width')
+            (done.stepTwo ? ' hidden' : '')
           }
         >
           {selected.categories.length === 0 && !done.stepTwo && (
@@ -236,57 +240,55 @@ const NominationPage = props => {
               onClick={() => {
                 setSelected({
                   type: null,
+                  section: null,
                   categories: []
                 })
               }}
             />
             <small className='text-muted'>Step 2</small>
           </h5>
-
-          {selected.type === 'other' ? (
-            // * Step 2 for Other nomination: category selection
-            <>
-              <h4>Select a category</h4>
-              <SelectCategory
-                collections={collections['other']}
-                categories={categories.filter(c => c.type === 'other')}
-                selected={selected.categories}
-                select={category => {
-                  setSelected({
-                    ...selected,
-                    categories: [category]
-                  })
-                  setDone({
-                    ...done,
-                    stepTwo: true
-                  })
-                }}
-                deselect={category => {
-                  setSelected({
-                    ...selected,
-                    categories: []
-                  })
-                }}
-                done={done.stepTwo}
-              />
-            </>
-          ) : (
-            // * Step 2 for Fic/Art nomination: data entry
-            <>
-              <h4>Enter your {selected.type} nominee</h4>
-              <InputMain
-                save={args => {
-                  save(args)
-                  setDone({
-                    ...done,
-                    stepTwo: true
-                  })
-                }}
-                type={selected.type}
-                disabled={done.stepTwo}
-              />
-            </>
-          )}
+          
+          <h4>Select a category</h4>
+          <SelectCategory
+            multiple={selected.type === 'other' ? false : true}
+            collections={collections[selected.section]}
+            categories={categories.filter(c => c.type === selected.type)}
+            selected={selected.categories}
+            select={category => {
+              if (selected.type === 'other') {
+                setSelected({
+                  ...selected,
+                  categories: [category]
+                })
+                setDone({
+                  ...done,
+                  stepTwo: true
+                })
+              } else {
+                setSelected({
+                  ...selected,
+                  categories: [...selected.categories, category]
+                })
+              }
+            }}
+            deselect={category => {
+              if (selected.type === 'other') {
+                setSelected({
+                  ...selected,
+                  categories: []
+                })
+              } else {
+                setSelected({
+                  ...selected,
+                  categories: selected.categories.filter(
+                    c => c.id !== category.id
+                  )
+                })
+              }
+            }}
+            done={done.stepTwo}
+            setDone={() => setDone({ ...done, stepTwo: true })}
+          />
         </div>
       )}
 
@@ -295,9 +297,8 @@ const NominationPage = props => {
         <div
           id='step-three'
           className={
-            'fade-rise' +
-            (done.stepThree ? ' hidden' : '') +
-            (selected.type === 'other' ? ' max-width' : '')
+            'fade-rise max-width' +
+            (done.stepThree ? ' hidden' : '')
           }
         >
           {!done.stepThree && <JumpTo id='step-three' />}
@@ -305,10 +306,7 @@ const NominationPage = props => {
             <GoBack
               disabled={done.stepThree || done.submitting}
               onClick={() => {
-                setSelected({
-                  ...selected,
-                  categories: []
-                })
+                if (selected.type === 'other') setSelected({ ...selected, categories: [] })
                 setDone({
                   ...done,
                   stepTwo: false
@@ -318,56 +316,27 @@ const NominationPage = props => {
             <small className='text-muted'>Step 3</small>
           </h5>
 
-          {selected.type === 'other' ? (
-            // * Step 3 for Other nomination: data entry
-            <>
-              <h4>
-                Enter your{' '}
-                {selected.categories[0].title
-                  ? `${selected.categories[0].title} `
-                  : ''}
-                nominee
-              </h4>
-              <InputMain
-                save={dataToSave => {
-                  save(dataToSave)
-                  submit(dataToSave)
-                }}
-                type={selected.type}
-                category={selected.categories[0]}
-                disabled={done.stepThree}
-                submitting={done.submitting}
-              />
-            </>
-          ) : (
-            // * Step 3 for Fic/Art nomination: category selection(s)
-            <>
-              <h4>Select your nominee's categories</h4>
-              <SelectCategory
-                multiple={true}
-                collections={collections[selected.section]}
-                categories={categories.filter(c => c.type === selected.type)}
-                selected={selected.categories}
-                select={category => {
-                  setSelected({
-                    ...selected,
-                    categories: [...selected.categories, category]
-                  })
-                }}
-                deselect={category => {
-                  setSelected({
-                    ...selected,
-                    categories: selected.categories.filter(
-                      c => c.id !== category.id
-                    )
-                  })
-                }}
-                done={done.stepThree}
-                setDone={() => submit()}
-                submitting={done.submitting}
-              />
-            </>
-          )}
+          <h4>
+            Enter your{' '}
+            {selected.type === 'other' ?
+              (selected.categories[0].title
+                ? `${selected.categories[0].title} `
+                : '')
+              : selected.type}{' '}
+            nominee
+          </h4>
+          <InputMain
+            save={dataToSave => {
+              save(dataToSave)
+              submit(dataToSave)
+            }}
+            nominee={nominee}
+            setNominee={setNominee}
+            type={selected.type}
+            category={selected.categories[0]}
+            disabled={done.stepThree}
+            submitting={done.submitting}
+          />
         </div>
       )}
 
