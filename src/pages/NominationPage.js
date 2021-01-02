@@ -118,7 +118,6 @@ const NominationPage = props => {
       approval = 2 // 2 indicating it was not manual input
     }
 
-
     let dataToSubmit = {
       categories: selected.categories.map(c => c.id),
       data: editedData,
@@ -154,7 +153,8 @@ const NominationPage = props => {
         } else {
           setDone({
             ...done,
-            stepThree: 'error',
+            stepThree: true,
+            submitFailure: true,
             submitting: false
           })
         }
@@ -163,7 +163,8 @@ const NominationPage = props => {
         console.error(`POST to /api/nominate failed!`, err)
         setDone({
           ...done,
-          stepThree: 'error',
+          stepThree: true,
+          submitFailure: true,
           submitting: false
         })
       })
@@ -344,7 +345,7 @@ const NominationPage = props => {
         <SubmitStep
           reset={reset}
           selected={selected}
-          error={done.stepThree === 'error'}
+          error={done.submitFailure}
           nominee={nominee}
         />
       )}
