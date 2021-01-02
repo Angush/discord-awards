@@ -68,6 +68,8 @@ const getLinkType = link => {
 }
 
 const FicLinks = ({ links }) => {
+  if (!links || links.length === 0) return <div className='fic-links'>No links.</div>
+
   const sorted = links
     .map(link => {
       return {

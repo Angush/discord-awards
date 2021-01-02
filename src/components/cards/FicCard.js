@@ -21,12 +21,12 @@ const FicCard = ({ fic, className, onClick, selected }) => {
     >
       <Card.Body>
         <Card.Title>
-          {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>} {fic.title}
+          {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>} {fic.title || "Untitled"}
         </Card.Title>
         <Card.Subtitle>
-          by <em>{fic.author}</em>
+          by <em>{fic.author || "Unknown"}</em>
         </Card.Subtitle>
-        {fic.links ? <FicLinks links={fic.links} /> : 'No links.'}
+        <FicLinks links={fic.links} />
       </Card.Body>
     </Card>
   )
