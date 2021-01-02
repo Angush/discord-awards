@@ -19,6 +19,7 @@ const NominationPage = props => {
   //   </div>
   // )
   
+  const [errorCode, setErrorCode] = useState(null)
   const [categoryTypes, setCategoryTypes] = useState([])
   const [collections, setCollections] = useState({})
   const [categories, setCategories] = useState([])
@@ -151,6 +152,7 @@ const NominationPage = props => {
             { ...dataToSubmit }
           ])
         } else {
+          setErrorCode(res.status)
           setDone({
             ...done,
             stepThree: true,
@@ -182,6 +184,7 @@ const NominationPage = props => {
       stepThree: false,
       submitting: false
     })
+    setErrorCode(null)
   }
 
   // useEffect(() => {
@@ -346,6 +349,7 @@ const NominationPage = props => {
           reset={reset}
           selected={selected}
           error={done.submitFailure}
+          errorCode={errorCode}
           nominee={nominee}
         />
       )}
