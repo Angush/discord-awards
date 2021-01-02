@@ -53,7 +53,7 @@ const SelectCategory = ({
     <div id='category-selection'>
       {multiple && (
         <p className='text-muted' style={{ margin: 0 }}>
-          You may select multiple.
+          You may select multiple. Note that when searching, selected categories are always included in results.
         </p>
       )}
       <div className={'category-input' + (done || submitting ? '' : ' stick')}>
