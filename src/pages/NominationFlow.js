@@ -198,6 +198,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
 
   const updateExtraCategoryData = props => {
     setExtraCategoryData(props)
+    console.log(`User entered extra category data:`, extraCategoryData)
     setDone({ ...done, extraFields: true })
     submit(null, props)
   }
