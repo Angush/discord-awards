@@ -165,4 +165,6 @@ const InputOther = ({
   )
 }
 
+// InputOther.whyDidYouRender = true
+
 export default InputOther

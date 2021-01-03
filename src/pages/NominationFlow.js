@@ -368,4 +368,6 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
 
 }
 
+// NominationFlow.whyDidYouRender = true
+
 export default NominationFlow

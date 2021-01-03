@@ -69,4 +69,6 @@ const InputExtraFields = ({ categories, setExtraCategoryData, disabled, submitti
   )
 }
 
+// InputExtraFields.whyDidYouRender = true
+
 export default InputExtraFields
