@@ -14,7 +14,7 @@ const Submission = ({
     (tall ? 'height-lg' : '') + (submitting ? ' submitting-btn' : '')
 
   return (
-    <div className='submission-options'>
+    <div className={'submission-options' + (disabled ? '' : ' can-be-submitted')}>
       <Button
         type='submit'
         className={classes}
