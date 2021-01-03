@@ -37,6 +37,7 @@ const NominationPage = () => {
   }, [])
 
   useEffect(() => {
+    if (process.env.REACT_APP_NOMINATIONS_CLOSED) return
     let cached = localStorage.categories
     if (cached) populateCategories(JSON.parse(cached))
     window
@@ -55,6 +56,18 @@ const NominationPage = () => {
         }
       })
   }, [populateCategories])
+
+  //* Render the components, or the message about nominations being closed
+  if (process.env.REACT_APP_NOMINATIONS_CLOSED)
+    return (
+      <div className='fade-rise text-center pad-top'>
+        <h3>Nominations are currently closed.</h3>
+        <p>
+          They will reopen in January for the next Cauldron Awards. Visit{' '}
+          <Link to='/results'>the results page</Link> to see the results of past years!
+        </p>
+      </div>
+    )  
 
   return (
     <NominationFlow
