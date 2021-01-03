@@ -44,13 +44,22 @@ const LINK_TYPES = [
   }
 ]
 
-const InputFic = ({ save, nominee, setNominee, disabled, submitting }) => {
+const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset }) => {
   const [manualInput, setManualInput] = useState({})
-  const [refilledData, setRefilledData] = useState(false)
+  const [refilledData, setRefilledData] = useState(reset ? true : false)
   const [selection, setSelection] = useState(nominee.MANUAL_INPUT === false ? nominee : null)
   const [valid, setValid] = useState({ all: false })
   const [manual, setManual] = useState(nominee.MANUAL_INPUT ? true : false)
   // const [nominee, setNominee] = useState({})
+
+  useEffect(() => {
+    if (reset === true) {
+      setManualInput({})
+      setRefilledData(true)
+      setSelection(null)
+      setValid({ all: false })
+    }
+  }, [reset])
 
   useEffect(() => {
     if (manual) return
@@ -143,6 +152,7 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting }) => {
           input={selection}
           setInput={setSelection}
           disabled={disabled}
+          reset={reset}
         />
       )}
 

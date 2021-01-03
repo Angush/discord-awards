@@ -5,13 +5,14 @@ import InputFic from './InputFic'
 
 const InputMain = ({
   save,
-  type,
-  category,
+  selected,
   nominee,
   setNominee,
   disabled = false,
   submitting = false
 }) => {
+  let category = selected.categories[0]
+
   const INPUT_SELECTOR = {
     other:
       <InputOther
@@ -21,6 +22,7 @@ const InputMain = ({
         submitting={submitting}
         setNominee={setNominee}
         nominee={nominee}
+        reset={selected.RESET}
       />,
 
     art: 
@@ -30,6 +32,7 @@ const InputMain = ({
         setNominee={setNominee}
         disabled={disabled}
         submitting={submitting}
+        reset={selected.RESET}
       />,
 
     fic:
@@ -39,10 +42,11 @@ const InputMain = ({
         setNominee={setNominee}
         disabled={disabled}
         submitting={submitting}
+        reset={selected.RESET}
       />
   }
 
-  return INPUT_SELECTOR[type] || INPUT_SELECTOR.other
+  return INPUT_SELECTOR[selected.type] || INPUT_SELECTOR.other
 }
 
 export default InputMain

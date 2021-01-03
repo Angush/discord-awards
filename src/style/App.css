@@ -348,6 +348,20 @@ input.form-control-lg {
   margin-bottom: 40px;
 }
 
+#submit-step {
+  padding-top: 1rem;
+}
+
+#submit-step button.btn {
+  padding: 12px;
+  margin-top: 10px;
+  margin-right: 16px;
+}
+
+.primary-text-color {
+  color: #007bff;
+}
+
 /* #image-load {
   position: absolute;
   z-index: 10;

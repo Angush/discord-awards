@@ -119,6 +119,8 @@ const NominationPage = props => {
       approval = 2 // 2 indicating it was not manual input
     }
 
+    if (selected.type === 'fic') editedData.links.filter(l => l && l.length > 0)
+
     let dataToSubmit = {
       categories: selected.categories.map(c => c.id),
       data: editedData,
@@ -172,20 +174,44 @@ const NominationPage = props => {
       })
   }
 
-  const reset = () => {
-    setNominee({})
-    setSelected({
-      type: selected.type,
-      section: selected.section,
-      categories: []
-    })
-    setDone({
+  const reset = (resetTo = "category") => {
+    if (nominee.MANUAL_INPUT) setNominee({ MANUAL_INPUT: true })
+    else setNominee({})
+
+    setErrorCode(null)
+    let newDone = {
       stepTwo: false,
       stepThree: false,
       submitting: false
-    })
-    setErrorCode(null)
+    }
+    
+    switch (resetTo) {
+      case "sectionSelect": {
+        setSelected({ type: null, section: null, categories: [] })
+        break
+      }
+
+      case "nomineeData": {
+        setSelected({ ...selected, RESET: true })
+        setTimeout(() => {
+          setDone({ ...newDone, stepTwo: true })
+        }, 10)
+        break
+      }
+      
+      case "category":
+      default: {
+        setSelected({
+          type: selected.type,
+          section: selected.section,
+          categories: []
+        })
+        break
+      }
+    }
+    setDone(newDone)
   }
+
 
   // useEffect(() => {
   //   let category = selected.category
@@ -336,8 +362,7 @@ const NominationPage = props => {
             }}
             nominee={nominee}
             setNominee={setNominee}
-            type={selected.type}
-            category={selected.categories[0]}
+            selected={selected}
             disabled={done.stepThree}
             submitting={done.submitting}
           />

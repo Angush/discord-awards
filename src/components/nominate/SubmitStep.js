@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import JumpTo from '../util/JumpTo'
 
-const SubmitStep = ({ reset, nominee, error, selected }) => {
+const SubmitStep = ({ reset, nominee, error, errorCode, selected }) => {
   return (
     <div id='submit-step'>
       <JumpTo id='submit-step' />
@@ -13,8 +13,19 @@ const SubmitStep = ({ reset, nominee, error, selected }) => {
           </h5>
           <h4>Sorry, something went wrong.</h4>
           <h6 style={{ margin: '20px 0' }}>
-            Your {selected.categories[0].section.toLowerCase()} nominee could
-            not be submitted at this time. Try again later, or contact Angush.
+            {
+              errorCode === 403 ? 
+                <>
+                  Wait a minute... Nominations aren't actually open right now! Whoops! 😬
+                  <br /><br />
+                  Either this page isn't meant to be accessible, or someone forgot to open things on the back-end. Either way, contact Angush.
+                </> :
+                <>
+                  Your <span className='primary-text-color'>{selected.section}</span> nominee could not be submitted at this time. 😔
+                  <br /><br />
+                  Try again later, or contact Angush. This probably should not have happened.
+                </>
+            }
           </h6>
         </>
       ) : (
@@ -24,8 +35,7 @@ const SubmitStep = ({ reset, nominee, error, selected }) => {
           </h5>
           <h4>Nominee submitted!</h4>
           <h6 style={{ margin: '20px 0' }}>
-            Your {selected.categories[0].section.toLowerCase()} nominee was
-            submitted in{' '}
+            Your <span className='primary-text-color'>{selected.section}</span> nominee was submitted in{' '}
             {selected.categories.length > 1
               ? 'these categories'
               : 'this category'}
@@ -46,13 +56,14 @@ const SubmitStep = ({ reset, nominee, error, selected }) => {
         </>
       )}
 
-      <Button
-        className='height-lg'
-        variant={error ? 'outline-danger' : 'outline-primary'}
-        onClick={reset}
-        style={{ marginTop: '10px' }}
-      >
-        Nominate something else
+      <Button variant={error ? 'danger' : 'primary'} onClick={reset}>
+        Nominate something for <strong>{selected.type === "other" ? "a new category" : "some new categories"}</strong>!
+      </Button>
+      <Button variant='outline-dark' onClick={() => reset("nomineeData")}>
+        Nominate something for <strong>the same {selected.type === "other" ? "category" : "categories"}</strong>!
+      </Button>
+      <Button variant='outline-dark' onClick={() => reset("sectionSelect")}>
+        Nominate <strong>something different entirely</strong>!
       </Button>
     </div>
   )

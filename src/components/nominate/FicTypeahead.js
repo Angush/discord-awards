@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { InputGroup } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
 import InputClear from '../util/InputClear'
 
-const FicTypeahead = ({ input, setInput, disabled }) => {
+const FicTypeahead = ({ input, setInput, disabled, reset }) => {
   const [searchterm, setSearchterm] = useState('')
   const [typeahead, setTypeahead] = useState(null)
   const [fics, setFics] = useState(null)
+
+  useEffect(() => {
+    if (reset === true && typeahead) {
+      setSearchterm('')
+      typeahead.getInstance().clear()
+    }
+  }, [reset, typeahead])
 
   import('../../json/typeahead-options/2020-fic-options.json').then(options => {
     setFics(options.default)
