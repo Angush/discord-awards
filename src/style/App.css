@@ -354,7 +354,7 @@ input.form-control-lg {
   z-index: 30;
 }
 
-.submission-options.can-be-submitted button {
+#category-selection .submission-options.can-be-submitted button {
   border: 1px rgba(0,0,0,0.5) solid;
 }
 
