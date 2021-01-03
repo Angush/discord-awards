@@ -23,7 +23,7 @@ const InputOther = ({ category, save, disabled, submitting, nominee, setNominee 
       setFormData(nominee.data)
       setRefilledData(true)
     }
-  }, [nominee.data, refilledData])
+  }, [nominee, category, refilledData])
 
   useEffect(() => {
     setNominee({ categoryId: category.id, data: { ...formData } })
