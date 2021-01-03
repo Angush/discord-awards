@@ -44,20 +44,20 @@ const LINK_TYPES = [
   }
 ]
 
-const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset }) => {
+const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extraFields }) => {
   const [manualInput, setManualInput] = useState({})
   const [refilledData, setRefilledData] = useState(reset ? true : false)
   const [selection, setSelection] = useState(nominee.MANUAL_INPUT === false ? nominee : null)
-  const [valid, setValid] = useState({ all: false })
   const [manual, setManual] = useState(nominee.MANUAL_INPUT ? true : false)
-  // const [nominee, setNominee] = useState({})
+  const [valid, setValid] = useState({ all: false })
 
+  //* Forcibly reset data
   useEffect(() => {
     if (reset === true) {
       setManualInput({})
       setRefilledData(true)
-      setSelection(null)
       setValid({ all: false })
+      setSelection(null)
     }
   }, [reset])
 
@@ -71,10 +71,11 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset }) =>
     }
   }, [manual, selection, setNominee])
 
+  //* Refill manual input data from global nominee data
   useEffect(() => {
     if (!nominee.MANUAL_INPUT || refilledData) return
 
-    let linksArray = nominee.links
+    let linksArray = nominee.links || []
     let nomineeData = {...nominee}
     let nomineeLinks = {}
 
@@ -94,7 +95,7 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset }) =>
     setRefilledData(true)
   }, [nominee, refilledData])
 
-
+  //* Update global nominee data with local data on change
   useEffect(() => {
     if (!manual) return
     let values = Object.values(manualInput)
@@ -170,11 +171,11 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset }) =>
           />
         )}
       </div>
-
+      
       <Submission
         tall
         disabled={!valid.all || disabled}
-        // text='Continue'
+        text={extraFields ? 'Continue' : 'Submit'}
         submitting={submitting}
       >
         {manual ? (

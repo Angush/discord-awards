@@ -9,7 +9,9 @@ const InputMain = ({
   nominee,
   setNominee,
   disabled = false,
-  submitting = false
+  submitting = false,
+  extraFields = false
+  
 }) => {
   let category = selected.categories[0]
 
@@ -43,6 +45,7 @@ const InputMain = ({
         disabled={disabled}
         submitting={submitting}
         reset={selected.RESET}
+        extraFields={extraFields}
       />
   }
 

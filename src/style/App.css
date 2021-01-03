@@ -224,15 +224,15 @@ input::placeholder {
   margin-bottom: 36px;
 }
 
-#other-input .form-group {
+.other-input .form-group {
   margin-bottom: 24px;
 }
 
-#other-input .preview {
+.other-input .preview {
   margin: 36px 0;
 }
 
-#other-input > :first-child,
+.other-input > :first-child,
 .nomination-flow .form-row > div {
   margin-top: 24px;
 }
@@ -346,6 +346,17 @@ input.form-control-lg {
 
 .clear-nominees {
   margin-bottom: 40px;
+}
+
+/* .extra-field-header {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  font-weight: normal;
+  border-top: 1px solid rgba(0,0,0,0.1);
+} */
+
+.extra-field-header + p {
+  margin-bottom: 2rem;
 }
 
 #step-two:not(.hidden) .submission-options.can-be-submitted {
