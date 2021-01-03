@@ -130,10 +130,8 @@ const NominationPage = props => {
     window
       .fetch(`https://cauldron.angu.sh/api/nominate`, {
         method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'text/plain'
-        },
+        headers: { 'Content-Type': 'text/plain' },
+        credentials: 'include',
         body: JSON.stringify(dataToSubmit)
       })
       .then(res => {
