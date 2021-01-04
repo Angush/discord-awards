@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import envVarIsTrue from '../functions/envVarIsTrue'
 import NominationFlow from './NominationFlow'
 import { Link } from '@reach/router'
 
@@ -37,7 +38,7 @@ const NominationPage = () => {
   }, [])
 
   useEffect(() => {
-    if (process.env.REACT_APP_NOMINATIONS_CLOSED) return
+    if (envVarIsTrue(`NOMINATIONS_CLOSED`)) return
     let cached = localStorage.categories
     if (cached) populateCategories(JSON.parse(cached))
     window
@@ -58,16 +59,14 @@ const NominationPage = () => {
   }, [populateCategories])
 
   //* Render the components, or the message about nominations being closed
-  if (process.env.REACT_APP_NOMINATIONS_CLOSED)
+  if (envVarIsTrue(`NOMINATIONS_CLOSED`))
     return (
-      <div className='fade-rise text-center pad-top'>
+      <div className='fade-rise text-center pad-top closed-page-indicator'>
         <h3>Nominations are currently closed.</h3>
-        <p>
-          They will reopen in January for the next Cauldron Awards. Visit{' '}
-          <Link to='/results'>the results page</Link> to see the results of past years!
-        </p>
+        <p>They will reopen in January for the next Cauldron Awards.</p>
+        <p>Visit <Link to='/results'>the results page</Link> to see the results of past years!</p>
       </div>
-    )  
+    )
 
   return (
     <NominationFlow

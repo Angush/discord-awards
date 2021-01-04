@@ -14,35 +14,44 @@ import ResultsPage from './pages/ResultsPage'
 // css sheets
 import './style/bootstrap.min.css'
 import './style/App.css'
+import envVarIsTrue from './functions/envVarIsTrue'
 
+const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
+const NOMINATIONS_CLOSED = envVarIsTrue(`NOMINATIONS_CLOSED`)
+
+const years = ['2019']
 const navlinks = [
-  // {
-  //   to: '/vote',
-  //   text: 'Vote',
-  //   navClass: 'vote-nav'
-  // }
-  // {
-  //   to: '/nominate',
-  //   text: 'Nominate',
-  //   navClass: 'nominate-nav'
-  // },
-  // {
-  //   to: '/nominees',
-  //   text: 'My Nominees'
-  // },
   {
     to: '/results',
     root: '/results',
-    text: 'Results',
+    text: 'Past Results',
     navClass: 'vote-nav',
     classOn: {
       root: false,
       children: true
     }
-  }
-]
-
-const years = ['2019']
+  },
+  (
+    VOTING_CLOSED ? null : {
+      to: '/vote',
+      text: 'Vote',
+      navClass: 'vote-nav'
+    }
+  ),
+  (
+    NOMINATIONS_CLOSED ? null : {
+      to: '/nominate',
+      text: 'Nominate',
+      navClass: 'nominate-nav'
+    }
+  ),
+  (
+    NOMINATIONS_CLOSED && VOTING_CLOSED ? null : {
+      to: '/nominees',
+      text: 'My Nominees'
+    }
+  )
+].filter(navlink => navlink)
 
 const App = () => {
   const [userData, setUserData] = useState({})
@@ -87,6 +96,11 @@ const App = () => {
     }
   }
 
+  const redirectLocation = process.env.REACT_APP_DEFAULT_REDIRECT ||
+    (NOMINATIONS_CLOSED && VOTING_CLOSED ? '/results/latest' :
+      (!NOMINATIONS_CLOSED ? '/nominate' : (!VOTING_CLOSED ? '/vote' : '/results/latest'))
+    )
+
   return (
     <div className='App'>
       <Location>
@@ -112,7 +126,7 @@ const App = () => {
             userData={userData}
             years={years}
           />
-          <Redirect from='/' to='/results/latest' noThrow />
+          <Redirect from='/' to={redirectLocation} noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
       </Container>

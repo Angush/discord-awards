@@ -348,6 +348,10 @@ input.form-control-lg {
   margin-bottom: 40px;
 }
 
+.closed-page-indicator > h3 {
+  margin-bottom: 1rem;
+}
+
 /* .extra-field-header {
   margin-top: 2rem;
   padding-top: 2rem;
