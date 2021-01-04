@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import envVarIsTrue from '../functions/envVarIsTrue'
-import NominationFlow from './NominationFlow'
+import NominationFlow from '../flows/NominationFlow'
 import { Link } from '@reach/router'
 
 const NominationPage = () => {

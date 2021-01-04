@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import VoteFlow from './VoteFlow'
+import VoteFlow from '../flows/VoteFlow'
 import envVarIsTrue from '../functions/envVarIsTrue'
 
 const VotePage = (props) => {
