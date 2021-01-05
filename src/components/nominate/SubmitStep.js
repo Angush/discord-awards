@@ -37,7 +37,7 @@ const SubmitStep = ({ reset, nominee, error, errorCode, selected }) => {
           <h6 style={{ margin: '20px 0' }}>
             Your <span className='primary-text-color'>{selected.section}</span> nominee was submitted in{' '}
             {selected.categories.length > 1
-              ? 'these categories'
+              ? `these ${selected.categories.length} categories`
               : 'this category'}
             :
           </h6>
