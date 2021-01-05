@@ -42,7 +42,7 @@ const SubmitStep = ({ reset, nominee, error, errorCode, selected }) => {
             :
           </h6>
           <ol>
-            {selected.categories.map(category => (
+            {selected.categories.sort((a, b) => a.id - b.id).map(category => (
               <li
                 style={{ paddingLeft: '10px', marginLeft: '-10px' }}
                 key={category.name}
