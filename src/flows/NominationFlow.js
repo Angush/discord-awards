@@ -226,6 +226,8 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
             categories: []
           })
           setNominee({})
+          setExtraFields([])
+          setExtraCategoryData(null)
         }}
       />
 
@@ -250,6 +252,8 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
                   section: null,
                   categories: []
                 })
+                setExtraFields([])
+                setExtraCategoryData(null)
               }}
             />
             <small className='text-muted'>Step 2</small>
