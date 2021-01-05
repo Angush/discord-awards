@@ -383,6 +383,10 @@ input.form-control-lg {
   margin-right: 16px;
 }
 
+#submit-step ol li {
+  margin-bottom: 8px;
+}
+
 .primary-text-color {
   color: #007bff;
 }
