@@ -38,6 +38,8 @@
     ]
   },
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "node-fetch": "^2.6.1",
     "purgecss": "^1.4.2",
     "webpack-bundle-analyzer": "^3.6.0"
   }
