@@ -1,9 +1,9 @@
+// NOTE: This script requires the following dev dependencies, and won't work outside a dev environment.
 const fetch = require('node-fetch')
 const cheerio = require('cheerio')
 const fs = require('fs')
 
 const baseURL = `https://wormstorysearch.com`
-const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const shortenURL = url => url
   .replace(/(\.com)\/threads\/\S+\.\d+\/\S*post-(\d+)$/i, '$1/posts/$2')
   .replace(/(\.com)\/threads\/\S+\.(\d+)\/?$/i, '$1/threads/$2')
@@ -13,7 +13,7 @@ const shortenURL = url => url
 
 const currentYear = new Date().getFullYear()
 const endOfPreviousYear = currentYear - 2
-const pageLoadInterval = 1000 // milliseconds
+const pageLoadInterval = 1000 // In milliseconds.
 
 let results = []
 let fetchedNSFWFics = null // Set to false to enable NSFW fic scraping. Anything else will disable.
@@ -51,20 +51,20 @@ const loadPage = async (url, isNSFW = false) => {
   console.log(`Finished scraping${isNSFW ? ' NSFW' : ''} Page ${pageNumber}... ${results.length} fics stored...`)
 
   if (nextPageURL) {
-    //! Fetch the next page of results
+    //! Fetch the next page of results.
     setTimeout(() => {
       loadPage(nextPageURL, isNSFW)
     }, pageLoadInterval)
   } else {
     if (fetchedNSFWFics === false) {
-      //! If fetching NSFW fics is enabled, do that before saving
+      //! If fetching NSFW fics is enabled, do that before saving.
       fetchedNSFWFics = true
       console.log(`\n= STARTING TO SCRAPE NSFW FICS ONLY =`)
       setTimeout(() => {
         loadPage(`/?updated_after_filter=12%2F31%2F${endOfPreviousYear}&updated_before_filter=01%2F01%2F${currentYear}&is_nsfw_eq=true&page=1&limit=20&sort=stories.story_updated_at&direction=desc&searching=true`, true)
       }, pageLoadInterval)
     } else {
-      //! Save data to file if we're all finished
+      //! Save data to file if we're all finished.
       let filename = `${currentYear - 1}-fic-options.json`
       console.log(`\n= FINISHED SCRAPING ${results.length} FICS OVER ${totalPages} PAGES =`)
       console.log(`= NOW SAVING DATA TO FILE: ${filename} =`)
@@ -73,6 +73,6 @@ const loadPage = async (url, isNSFW = false) => {
   }
 }
 
-// loadPage(`https://wormstorysearch.com/`)
 console.log(`= SCRAPING FICS UPDATED BETWEEN ${endOfPreviousYear} and ${currentYear} =\n`)
+
 loadPage(`/?updated_after_filter=12%2F31%2F${endOfPreviousYear}&updated_before_filter=01%2F01%2F${currentYear}&page=1&limit=20&sort=stories.story_updated_at&direction=desc&searching=true`)
