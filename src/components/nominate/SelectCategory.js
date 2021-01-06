@@ -27,7 +27,7 @@ const SelectCategory = ({
       setMatching(
         categories.filter(
           c =>
-            c.collection.includes(term) ||
+            (c.collection && c.collection.includes(term)) ||
             c.name.toLowerCase().includes(term) ||
             (c.description && c.description.toLowerCase().includes(term)) ||
             selected.some(s => s.id === c.id)
