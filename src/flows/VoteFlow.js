@@ -151,9 +151,9 @@ const VoteFlow = ({ userData }) => {
       let categories = raw.contests
       for (const id in categories) {
         categories[id].entries = []
-        categories[id].anchor = categories[id].name
-          .toLowerCase()
-          .replace(/\s+/g, '-')
+        categories[id].anchor = encodeURIComponent(
+          categories[id].name.toLowerCase().replace(/[\s\/\\]+/g, '-')
+        )
         if (categories[id].fields) {
           categories[id].fields = JSON.parse(categories[id].fields)
           let fields = Object.values(categories[id].fields)
@@ -212,9 +212,7 @@ const VoteFlow = ({ userData }) => {
         if (!sectionData[contest.section]) {
           sectionData[contest.section] = {
             sectionName: contest.section,
-            anchor: `${contest.section
-              .toLowerCase()
-              .replace(/\s+/g, '-')}-categories`,
+            anchor: `${encodeURIComponent(contest.section.toLowerCase().replace(/[\s\/\\]+/g, '-'))}-categories`,
             contests: [categories[contest.id]]
           }
         } else {

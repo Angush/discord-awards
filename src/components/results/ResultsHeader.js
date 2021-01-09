@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 
 const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
-  const [anchor] = useState(category.title.toLowerCase().replace(/\s+/g, '-'))
+  const [anchor] = useState(
+    encodeURIComponent(category.title.toLowerCase().replace(/[\s\/\\]+/g, '-'))
+  )
 
   const entries =
     category.nominees.length === 0
