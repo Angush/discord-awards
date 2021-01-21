@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
+import makeSafeForURL from '../../functions/makeSafeForURL'
 
 const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
-  const [anchor] = useState(
-    encodeURIComponent(category.title.toLowerCase().replace(/[\s/\\]+/g, '-'))
-  )
+  const [anchor] = useState(makeSafeForURL(category.title))
 
   const entries =
     category.nominees.length === 0

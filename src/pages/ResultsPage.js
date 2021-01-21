@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import makeSafeForURL from '../functions/makeSafeForURL'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import TableOfContents from '../components/util/TableOfContents'
 import ResultsEntries from '../components/results/ResultsEntries'
@@ -72,11 +73,11 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
     data.sections.forEach(s => {
       contents.push({
         text: `${s.sectionName} Categories`,
-        anchor: `#${encodeURIComponent(s.sectionName.toLowerCase().replace(/[\s/\\]+/g, '-'))}`,
+        anchor: `#${makeSafeForURL(s.sectionName)}`,
         children: s.categories.map(c => {
           return {
             text: c.title,
-            anchor: `#${encodeURIComponent(c.title.toLowerCase().replace(/[\s/\\]+/g, '-'))}`
+            anchor: `#${makeSafeForURL(c.title)}`
           }
         })
       })
@@ -174,7 +175,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
         {data.sections.map(section => (
           <section key={section.sectionName}>
             <div
-              id={encodeURIComponent(section.sectionName.toLowerCase().replace(/[\s/\\]+/g, '-'))}
+              id={makeSafeForURL(section.sectionName)}
               className='section-header'
               // tabIndex={-1}
             >

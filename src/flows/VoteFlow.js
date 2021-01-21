@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import makeSafeForURL from '../functions/makeSafeForURL'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import TableOfContents from '../components/util/TableOfContents'
 import SubmitVotes from '../components/vote/SubmitVotes'
@@ -151,9 +152,7 @@ const VoteFlow = ({ userData }) => {
       let categories = raw.contests
       for (const id in categories) {
         categories[id].entries = []
-        categories[id].anchor = encodeURIComponent(
-          categories[id].name.toLowerCase().replace(/[\s/\\]+/g, '-')
-        )
+        categories[id].anchor = makeSafeForURL(categories[id].name)
         if (categories[id].fields) {
           categories[id].fields = JSON.parse(categories[id].fields)
           let fields = Object.values(categories[id].fields)
@@ -212,7 +211,7 @@ const VoteFlow = ({ userData }) => {
         if (!sectionData[contest.section]) {
           sectionData[contest.section] = {
             sectionName: contest.section,
-            anchor: `${encodeURIComponent(contest.section.toLowerCase().replace(/[\s/\\]+/g, '-'))}-categories`,
+            anchor: `${makeSafeForURL(contest.section)}-categories`,
             contests: [categories[contest.id]]
           }
         } else {
