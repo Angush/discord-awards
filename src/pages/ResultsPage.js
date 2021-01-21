@@ -72,11 +72,11 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
     data.sections.forEach(s => {
       contents.push({
         text: `${s.sectionName} Categories`,
-        anchor: `#${encodeURIComponent(s.sectionName.toLowerCase().replace(/[\s\/\\]+/g, '-'))}`,
+        anchor: `#${encodeURIComponent(s.sectionName.toLowerCase().replace(/[\s/\\]+/g, '-'))}`,
         children: s.categories.map(c => {
           return {
             text: c.title,
-            anchor: `#${encodeURIComponent(c.title.toLowerCase().replace(/[\s\/\\]+/g, '-'))}`
+            anchor: `#${encodeURIComponent(c.title.toLowerCase().replace(/[\s/\\]+/g, '-'))}`
           }
         })
       })
@@ -174,7 +174,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
         {data.sections.map(section => (
           <section key={section.sectionName}>
             <div
-              id={encodeURIComponent(section.sectionName.toLowerCase().replace(/[\s\/\\]+/g, '-'))}
+              id={encodeURIComponent(section.sectionName.toLowerCase().replace(/[\s/\\]+/g, '-'))}
               className='section-header'
               // tabIndex={-1}
             >

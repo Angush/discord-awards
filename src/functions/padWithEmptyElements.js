@@ -9,7 +9,7 @@ const padWithEmptyElements = (array, MAX_PER_ROW, className) => {
     elements.push(
       <div
         className={className}
-        key={`${className.replace(/[\s\/\\]+/g, '-')}-${el}`}
+        key={`${className.replace(/[\s/\\]+/g, '-')}-${el}`}
       ></div>
     )
   }
