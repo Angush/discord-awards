@@ -11,10 +11,10 @@ import MyNomineesPage from './pages/MyNomineesPage'
 import ResultsListingsPage from './pages/ResultsListingsPage'
 import ResultsPage from './pages/ResultsPage'
 
-// css sheets
+// css sheets & functions
+import envVarIsTrue from './functions/envVarIsTrue'
 import './style/bootstrap.min.css'
 import './style/App.css'
-import envVarIsTrue from './functions/envVarIsTrue'
 
 const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
 const NOMINATIONS_CLOSED = envVarIsTrue(`NOMINATIONS_CLOSED`)
@@ -69,6 +69,7 @@ const App = () => {
     if (cached)
       try {
         setUserData(JSON.parse(cached))
+        setUserData({ ...JSON.parse(cached), LOADED_FROM_CACHE: true })
         // setUserData({ ...JSON.parse(cached), logged_in: false })
       } catch (e) {}
 
