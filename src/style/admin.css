@@ -1,0 +1,100 @@
+.admin-vetting-page {
+  width: 100vw;
+  max-width: 100vw;
+  height: calc(100vh - 56px);
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 56px;
+  display: grid;
+  grid-template-areas: 'list1 list2 data';
+  grid-template-columns: 400px 400px auto;
+}
+
+.item-list {
+  /* position: relative; */
+  height: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
+  background-color: white;
+  max-width: 400px;
+  width: 400px;
+  display: inline-block;
+}
+
+.item-list-element {
+  padding: 1rem;
+  padding-top: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.item-list-element h1 {
+  font-size: 1.2em;
+}
+
+.item-list-element h2 {
+  font-size: 1em;
+}
+
+.item-list-element:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+.selected-list-element {
+  background-color: #007bff;
+}
+
+.selected-list-element:hover {
+  background-color: #0075f1;
+}
+
+.selected-list-element h1 {
+  color: white;
+}
+
+.selected-list-element h2 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.selected-list-element .slash-divider {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.item-list.list-1 {
+  grid-area: list1;
+}
+
+.item-list.list-2 {
+  z-index: 10;
+  grid-area: list2;
+}
+
+.breadcrumbs {
+  background-color: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: .8em;
+  letter-spacing: .1em;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.nominee-vet-ui {
+  grid-area: data;
+}
+
+.list-1 + .nominee-vet-ui {
+  grid-column-start: list2;
+}
+
+.nominee-vet-ui.no-nominee-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+

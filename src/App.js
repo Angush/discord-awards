@@ -10,6 +10,7 @@ import NominationPage from './pages/NominationPage'
 import MyNomineesPage from './pages/MyNomineesPage'
 import ResultsListingsPage from './pages/ResultsListingsPage'
 import ResultsPage from './pages/ResultsPage'
+import AdminVettingPageWrapper from './pages/AdminVettingPageWrapper'
 
 // css sheets & functions
 import envVarIsTrue from './functions/envVarIsTrue'
@@ -122,6 +123,7 @@ const App = () => {
           <NominationPage path='/nominate/*' />
           <MyNomineesPage path='/nominees' />
           <ResultsListingsPage path='/results' years={years} />
+          <AdminVettingPageWrapper path='/admin/vetting' userData={userData} />
           <ResultsPage
             path='/results/:year/*'
             userData={userData}
