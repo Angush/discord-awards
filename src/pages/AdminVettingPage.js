@@ -104,6 +104,12 @@ const AdminVettingPage = ({ userData }) => {
       {categoriesList &&
         <ItemList items={categoriesList} select={selectCategory} selectedItem={selectedCategory} />
       }
+      {selectedCategory && <div className='list-blocker'></div>}
+      {selectedCategory &&
+        <button className='hidden-button' onClick={() => selectCategory()}>
+          {'< Select a different category'}
+        </button>
+      }
       {categoryNomineesList &&
         <ItemList items={categoryNomineesList} select={selectNominee} selectedItem={selectedNominee} depth={2} />
       }

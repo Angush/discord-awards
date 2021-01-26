@@ -2,7 +2,7 @@ import React from 'react'
 
 const ItemList = ({ items, select, selectedItem, depth = 1 }) => {
   return (
-    <div className={`item-list list-${depth}`}>
+    <div className={`item-list list-${depth}${selectedItem ? ' selected-list' : ''}`}>
       {items.map(item => (
         <div
           key={item.id}
