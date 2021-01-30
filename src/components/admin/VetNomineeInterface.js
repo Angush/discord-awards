@@ -32,7 +32,12 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
     return getNomineeData(dupe)
   })
 
-  const CATEGORIES = Object.keys(nominee.statuses || {}).filter(cat => cat !== category.id).map(cat => data.categories[cat])
+  const CATEGORIES = Object.keys(nominee.statuses || {})
+    .filter(cat => {
+      if (Number.isInteger(cat)) return cat !== category.id
+      return parseInt(cat) !== category.id
+    })
+    .map(cat => data.categories[cat])
   
   return (
     <div className='nominee-vet-ui'>
