@@ -111,6 +111,165 @@
   background-color: black;
 }
 
+.nominee-vet-ui {
+  display: grid;
+  grid-template-areas:
+    'controls controls'
+    'main     main'
+    'json     json'
+  ;
+  grid-template-columns: minmax(500px, 2fr) minmax(600px, 4fr);
+  grid-template-rows: repeat(3, min-content);
+  overflow-y: scroll;
+}
+
+.nominee-card {
+  grid-area: card;
+  margin: 1.5rem;
+  margin-left: 1rem;
+}
+
+.nominee-card .card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.nominee-json {
+  grid-area: json;
+  padding-bottom: 6rem;
+}
+
+.nominee-vet-ui .react-json-view,
+.nominee-vet-ui p:not(.card-text) {
+  margin: 0 1rem;
+}
+
+.nominee-controls {
+  display: flex;
+  align-items: center;
+  grid-area: controls;
+  max-height: 100px;
+  height: 100px;
+  padding: 2rem;
+  background-color: #dfdfdf;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
+.nominee-buttons {
+  margin-left: auto;
+}
+
+.nominee-header-text h2 {
+  font-size: 1.5em;
+  margin: 4px 0;
+}
+
+.nominee-header-text h3 {
+  font-size: 1.2em;
+}
+
+.section-head {
+  margin: 2rem .5rem 1rem 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  /* position: sticky; */
+}
+
+.section-head h3 {
+  font-size: 1em;
+  padding: .5rem 1rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.nominee-left-column,
+.nominee-json {
+  margin-left: .5rem;
+}
+
+.section-head button {
+  /* margin-left: auto; */
+}
+
+
+/** ListOfDuplicates styling **/
+
+.nominee-duplicates li,
+.nominee-categories li {
+  list-style: none;
+}
+
+.nominee-categories,
+.nominee-duplicates ol {
+  padding-left: 0;
+}
+
+.duplicates-list,
+.nominee-categories {
+  margin: 0 1rem 0 .5rem;
+}
+
+.duplicates-categories-list {
+  margin-top: 1rem;
+}
+
+.duplicates-list li,
+.nominee-categories li {
+  border-radius: .25rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.duplicates-list > li,
+.nominee-categories > li {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255);
+  margin-bottom: .5rem;
+}
+
+.nominee-categories > li {
+  padding: .75rem 1rem;
+}
+
+.duplicates-categories-list > li {
+  padding: 6px 12px;
+  background-color: rgba(0, 0, 0, 0.025);
+  margin-top: 6px;
+}
+
+.admin-vetting-page li code,
+.admin-vetting-page .item-list code {
+  margin-right: 4px;
+}
+
+.nominee-duplicates > p {
+  padding-bottom: 1rem;
+}
+
+/** Badges **/
+
+.vet-badge {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  height: 28px;
+  width: 28px;
+  justify-content: center;
+  align-items: center;
+  border-radius: .75rem;
+  margin: 0 .5rem;
+}
+
+.status-badge {
+  
+}
+
 @media (max-width: 1920px) {
   .nominee-vet-ui {
     grid-column-start: list2;
