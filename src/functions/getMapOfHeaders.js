@@ -17,14 +17,31 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
     return returnObject
   })
 
-  if (type === "categories") return data.map(cat => {
-    return {
-      id: cat.id,
-      header: cat.name,
-      subheader: <>{cat.nominees.length} nominees <span className="slash-divider">|</span> x duplicates</>
-      // TODO: how to calculate the number of duplicates per category?
-    }
-  })
+  if (type === "categories") {
+    let returnData = []
+    let sections = {}
+    data.forEach(cat => {
+      if (!sections[cat.section]) {
+        sections[cat.section] = true
+        returnData.push({
+          IS_HEADER: true,
+          header: cat.section
+        })
+      }
+      returnData.push({
+        id: cat.id,
+        header: cat.name,
+        subheader: cat.collection ?
+          <>
+            {cat.nominees.length} nominees{' '}
+            <span className="slash-divider">|</span>{' '}
+            {cat.collection.toLowerCase()} collection
+          </> : `${cat.nominees.length} nominees`
+        // TODO: how to calculate the number of duplicates per category?
+      })
+    })
+    return returnData
+  }
 
   return []
 }
