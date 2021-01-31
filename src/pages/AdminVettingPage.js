@@ -49,7 +49,7 @@ const AdminVettingPage = ({ userData }) => {
   useEffect(() => {
     if (!vettingData || !vettingData.categories) return
     let categories = Object.values(vettingData.categories)
-    setCategoriesList(getMapOfHeaders("categories", categories))
+    setCategoriesList(getMapOfHeaders("categories", categories, vettingData.nominees))
   }, [vettingData])
 
 
