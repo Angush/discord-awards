@@ -21,27 +21,33 @@ const StatusDropdown = ({ id, catId, status, select, size = "sm", classes = '' }
   const idPacket = { id, catId }
 
   return (
-    <Dropdown size={size} className={`status-dropdown status-${current} ${classes}`}>
+    <Dropdown
+      size={size}
+      className={`status-dropdown status-${current} ${classes}`}
+      onClick={e => e.stopPropagation()}
+    >
       <Dropdown.Toggle>
         {SVGs[current]}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         {includedOptions.map(option => {
+          const selectFunction = e => select(idPacket, option)
+
           if (option === "approve") return (
-            <Dropdown.Item key="approve" onClick={() => select(idPacket, "approve")} className='option-approve'>
+            <Dropdown.Item key="approve" onClick={selectFunction} className='option-approve'>
               <span>{SVGs.approve}</span> Mark Approved
             </Dropdown.Item>
           )
 
           if (option === "reject") return (
-            <Dropdown.Item key="reject" onClick={() => select(idPacket, "reject")} className='option-reject'>
+            <Dropdown.Item key="reject" onClick={selectFunction} className='option-reject'>
               <span>{SVGs.reject}</span> Mark Rejected
             </Dropdown.Item>
           )
           
           return (
-            <Dropdown.Item key="reset" onClick={() => select(idPacket, "reset")} className='option-reset'>
+            <Dropdown.Item key="reset" onClick={selectFunction} className='option-reset'>
               <span>{SVGs.reset}</span> Mark Unvetted
             </Dropdown.Item>
           )

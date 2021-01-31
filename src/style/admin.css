@@ -21,21 +21,38 @@
   width: 400px;
 }
 
+.item-list-header {
+  flex-basis: 100%;
+  align-items: flex-end;
+  display: flex;
+}
+
+.list-1 .item-list-header {
+  align-items: flex-start;
+}
+
 .item-list-element,
 .item-list-section {
-  padding: 1rem;
-  padding-top: 1.25rem;
+  padding: 1.25rem 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.item-list-element h1,
-.item-list-section h1 {
+.item-list.list-2 .item-list-element {
+  padding: 1rem;
+}
+
+.item-list-element h1 {
   font-size: 1.2em;
+  margin-bottom: .5rem;
 }
 
-.item-list-element h2,
-.item-list-section h2 {
+.item-list-element h2 {
   font-size: 1em;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.25rem;
 }
 
 .item-list-element:hover {
@@ -53,8 +70,10 @@
   padding: 1.25rem 1rem;
 }
 
-.item-list-element code {
-  float: right;
+.item-badges {
+  margin-left: auto;
+  /* flex-basis: 100%; */
+  /* TODO: Make this align-right properly! */
 }
 
 .uncolored-code {
@@ -82,7 +101,7 @@
   color: white;
 }
 
-.selected-list-element h2 {
+.selected-list-element h2 .text-muted {
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
@@ -127,18 +146,8 @@
 }
 
 .hidden-button {
-  all: unset;
-  grid-area: list1;
-  padding: .5rem 1rem;
   display: none;
-  color: white;
-  height: 30px;
-  cursor: pointer;
-  background-color: rgb(26, 26, 26);
-}
-
-.hidden-button:hover {
-  background-color: black;
+  all: unset;
 }
 
 .nominee-vet-ui {
@@ -298,8 +307,7 @@
   align-items: center;
 }
 
-.admin-vetting-page li code,
-.admin-vetting-page .item-list code {
+.admin-vetting-page li code {
   margin-right: 4px;
 }
 
@@ -320,21 +328,6 @@
   margin: 0 !important;
   color: #0075f1;
 }
-
-
-/** Badges **/
-
-.vet-badge {
-  background-color: rgba(0, 0, 0, 0.1);
-  display: inline-flex;
-  height: 28px;
-  width: 28px;
-  justify-content: center;
-  align-items: center;
-  border-radius: .75rem;
-  margin: 0 .5rem;
-}
-
 
 /** Approval status dropdown selector **/
 
@@ -363,7 +356,7 @@
   align-items: center;
 }
 
-.status-dropdown:not(.primary-status-dropdown) .dropdown-toggle {
+.status-dropdown:not(.primary-status-dropdown):not(.item-list-dropdown) .dropdown-toggle {
   border: none;
   border-right: 1px solid #D4D4D4 !important;
   border-bottom-right-radius: 0;
@@ -424,7 +417,7 @@ code.status-rejected,
 }
 
 .status-dropdown .option-reset:hover {
-  background-color: rgb(244, 247, 250) !important;
+  background-color: rgb(245, 245, 245) !important;
 }
 
 .primary-status-dropdown .dropdown-toggle {
@@ -443,6 +436,85 @@ code.status-rejected,
   width: 40px;
 }
 
+/** Badges **/
+
+.vet-list-badge {
+  display: inline-flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+}
+
+.vet-list-badge > * {
+  display: inline-flex;
+  width: fit-content;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 117, 241, .1);
+  height: 24px;
+  padding: 2px 8px;
+  border-radius: .75rem;
+  /* font-weight: bold; */
+  color: #0075f1 !important;
+  margin-right: .5rem;
+}
+
+.selected-list-element .vet-list-badge > * {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.selected-list-element .vet-list-badge > * {
+  color: #cad6e0 !important;
+  color: rgba(179, 224, 250, .9) !important;
+}
+
+.collection-badge {
+  margin-left: auto;
+  margin-right: 0;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0;
+  height: auto;
+}
+
+.collection-badge > span {
+  margin: 0;
+  margin-left: .5rem;
+  padding: 4px 8px !important;
+}
+
+/** Item List dropdown **/
+.item-list-dropdown {
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
+.item-list-dropdown .dropdown-toggle {
+  padding: 5px !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  transform: translateY(-2px);
+}
+
+.item-list-dropdown.status-reset .dropdown-toggle:hover {
+  background-color: rgb(234, 238, 238) !important;
+}
+
+.item-list-dropdown .dropdown-toggle::after {
+  content: none;
+}
+
+.selected-list-element .item-list-dropdown .dropdown-toggle {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.item-list-dropdown .dropdown-menu.show {
+  background-color: white;
+  border-color: rgba(0, 0, 0, 0.4) !important;
+}
 
 /** Media queries **/
 
@@ -463,5 +535,15 @@ code.status-rejected,
     z-index: 15;
     display: block;
     position: relative;
+    grid-area: list1;
+    padding: .5rem 1rem;
+    color: white;
+    height: 50px;
+    cursor: pointer;
+    background-color: rgb(26, 26, 26);
+  }
+
+  .hidden-button:hover {
+    background-color: black;
   }
 }

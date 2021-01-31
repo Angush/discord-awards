@@ -30,7 +30,7 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
       }
 
       let duplicates = cat.nominees.reduce((dupeCount, nomineeId) => {
-        let nomineeDuplicates = allNominees[nomineeId]?.duplicates.length
+        let nomineeDuplicates = allNominees[nomineeId]?.duplicates?.length
         if (!nomineeDuplicates) return dupeCount
         return dupeCount + nomineeDuplicates
       }, 0)
@@ -46,7 +46,7 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
         // TODO: how to calculate the number of duplicates per category?
       }
 
-      if (cat.collection) returnObject.badges = {
+      if (cat.collection && !skipBadges) returnObject.badges = {
         collection: cat.collection
       }
 

@@ -105,6 +105,26 @@ const AdminVettingPage = ({ userData }) => {
     console.timeEnd(`update nominee ${nomineeId} data`)
   }
 
+  const updateStatus = ({ id, catId }, status) => {
+    const getStatusValue = change => {
+      if (change === "approve") return 1
+      if (change === "reject") return -1
+      if (change === "reset") return 0
+    }
+
+    let newData = vettingData.nominees[id]
+    if (!Number.isInteger(newData.statuses[catId])) return
+    
+    let newStatusValue = getStatusValue(status)
+    newData.statuses[catId] = newStatusValue
+
+    delete newData.header
+    delete newData.subheader
+    delete newData.badges
+    
+    updateNomineeData(id, newData)
+  }
+
   
   return (
     <div className='admin-vetting-page fade-rise'>
@@ -127,6 +147,8 @@ const AdminVettingPage = ({ userData }) => {
           items={categoryNomineesList || []}
           select={selectNominee}
           selectedItem={selectedNominee}
+          parentId={selectedCategory.id}
+          updateStatus={updateStatus}
           depth={2}
         />
       }
