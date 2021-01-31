@@ -109,7 +109,12 @@ const AdminVettingPage = ({ userData }) => {
   return (
     <div className='admin-vetting-page fade-rise'>
       {categoriesList &&
-        <ItemList items={categoriesList} select={selectCategory} selectedItem={selectedCategory} />
+        <ItemList
+          key="categories"
+          items={categoriesList}
+          select={selectCategory}
+          selectedItem={selectedCategory}
+        />
       }
       {selectedCategory &&
         <button className='hidden-button' onClick={() => selectCategory()}>
@@ -117,7 +122,13 @@ const AdminVettingPage = ({ userData }) => {
         </button>
       }
       {selectedCategory &&
-        <ItemList items={categoryNomineesList || []} select={selectNominee} selectedItem={selectedNominee} depth={2} />
+        <ItemList
+          key="cat-nominees"
+          items={categoryNomineesList || []}
+          select={selectNominee}
+          selectedItem={selectedNominee}
+          depth={2}
+        />
       }
       <VetNomineeInterface
         nominee={selectedNominee}
