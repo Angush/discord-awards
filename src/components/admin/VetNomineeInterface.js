@@ -8,11 +8,22 @@ import ListOfDuplicates from './ListOfDuplicates'
 import ListOfOtherCategories from './ListOfOtherCategories'
 
 const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNomineeData }) => {
-  if (!nominee?.data || !data?.nominees) return (
-    <div className='nominee-vet-ui no-nominee-selected'>
-      <h1>Select a category & nominee to vet it!</h1>
-    </div>
-  )
+  if (!nominee?.data || !data?.nominees) {
+    if (!category) return (
+      <div className='nominee-vet-ui no-nominee-selected'>
+        <h1>Select a category & nominee to vet it!</h1>
+      </div>
+    )
+    
+    return (
+      <div className='nominee-vet-ui no-nominee-selected'>
+        <div>
+          <h1>You've selected <span className='text-muted bold'>{category.name}</span>.</h1>
+          <h2>Now select a nominee to vet it!</h2>
+        </div>
+      </div>
+    )
+  }
 
   //* Functions
   const getApprovalStatus = number => {
