@@ -5,6 +5,7 @@ import FicCard from '../cards/FicCard'
 import ArtCard from '../cards/ArtCard'
 import StatusDropdown from './StatusDropdown'
 import ListOfDuplicates from './ListOfDuplicates'
+import ListOfOtherCategories from './ListOfOtherCategories'
 
 const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNomineeData }) => {
   if (!nominee?.data || !data?.nominees) return (
@@ -110,18 +111,16 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
             <h3>Other categories</h3>
           </div>
           <ol className='nominee-categories'>
-            {CATEGORIES.length > 0 && CATEGORIES.map(cat => (
-              <li key={cat.name}>
-                <StatusDropdown
-                  status={nominee.statuses[cat.id]}
-                  select={updateStatus}
-                  catId={cat.id}
-                  id={nominee.id}
-                />
-                <code>{cat.id}</code> {cat.name}
-              </li>
-            ))}
-            {CATEGORIES.length === 0 && <p style={{ marginLeft: '8px' }}>This nominee was not entered into any other categories.</p>}
+            {CATEGORIES.length > 0 && (
+              <ListOfOtherCategories
+                nominee={nominee}
+                categories={CATEGORIES}
+                updateStatus={updateStatus}
+              />
+            )}
+            {CATEGORIES.length === 0 && (
+              <p style={{ marginLeft: '8px' }}>This nominee was not entered into any other categories.</p>
+            )}
           </ol>
         </div>
 
