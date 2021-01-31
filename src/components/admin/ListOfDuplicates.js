@@ -5,8 +5,17 @@ import getMapOfHeaders from '../../functions/getMapOfHeaders'
 const ListOfDuplicates = ({ duplicates, validCategories, allCategories, updateStatus }) => {
 
   const duplicateNominee = dupe => {
-    let data = (dupe.header && dupe.subheader) ? dupe
+    const data = (dupe.header && dupe.subheader) ? dupe
       : getMapOfHeaders("nominees", { nominees: [dupe.id] }, { [dupe.id]: dupe }, true)[0]
+
+    const dupeCategories = []
+    const invalidCategories = []
+
+    Object.keys(dupe.statuses).forEach(categoryId => {
+      let category = allCategories[categoryId]
+      if (Number.isInteger(validCategories[categoryId])) dupeCategories.push(category)
+      else invalidCategories.push(category)
+    })
 
     return (
       <li key={dupe.id}>
@@ -14,24 +23,25 @@ const ListOfDuplicates = ({ duplicates, validCategories, allCategories, updateSt
         <span className="slash-divider">|</span>{' '}
         <span className="text-muted">{data.subheader}</span>
         <ol className="duplicates-categories-list">
-          {Object.keys(dupe.statuses)
-            .filter(categoryId => Number.isInteger(validCategories[categoryId]))
-            .map(categoryId => {
-              let category = allCategories[categoryId]
-              return (
-                <li key={`${dupe.id}-${categoryId}`}>
-                  <StatusDropdown
-                    status={dupe.statuses[categoryId]}
-                    select={updateStatus}
-                    catId={categoryId}
-                    id={dupe.id}
-                  />
-                  <code>{category.id}</code> {category.name}
-                </li>
-              )
-            })
-          }
+          {dupeCategories.map(category => {
+            return (
+              <li key={`${dupe.id}-${category.id}`}>
+                <StatusDropdown
+                  status={dupe.statuses[category.id]}
+                  select={updateStatus}
+                  catId={category.id}
+                  id={dupe.id}
+                />
+                <code>{category.id}</code> {category.name}
+              </li>
+            )
+          })}
         </ol>
+        {invalidCategories.length > 0 && (
+          <div className="non-duplicate-categories">
+            Also in <code>{invalidCategories.length}</code> categories not shared with this nominee.
+          </div>
+        )}
       </li>
     )
   }

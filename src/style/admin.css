@@ -184,7 +184,7 @@
   grid-area: controls;
   max-height: 100px;
   height: 100px;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #dfdfdf;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: sticky;
@@ -193,7 +193,7 @@
 }
 
 .nominee-buttons {
-  margin-left: auto;
+  margin-right: 1.5rem;
 }
 
 .nominee-header-text h2 {
@@ -312,6 +312,15 @@
   padding-bottom: 1rem;
 }
 
+.non-duplicate-categories {
+  margin-top: .75rem;
+}
+
+.non-duplicate-categories code {
+  margin: 0 !important;
+  color: #0075f1;
+}
+
 
 /** Badges **/
 
@@ -336,10 +345,6 @@
   font-weight: 500;
 }
 
-.status-dropdown .dropdown-menu {
-  /* background-color: #F0F0F0; */
-}
-
 .status-dropdown .dropdown-item svg {
   width: 24px;
   height: 24px;
@@ -352,7 +357,7 @@
 }
 
 .status-dropdown .dropdown-toggle {
-  background-color: #e9e9e9 !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
   padding: 6px 10px;
   display: flex;
   align-items: center;
@@ -367,7 +372,7 @@
 }
 
 .status-dropdown .dropdown-toggle:hover {
-  background-color: #f3f3f3 !important;
+  background-color: rgba(255, 255, 255) !important;
 }
 
 .status-dropdown .dropdown-toggle svg {
@@ -423,12 +428,14 @@ code.status-rejected,
 }
 
 .primary-status-dropdown .dropdown-toggle {
+  background-color: rgba(255, 255, 255, 0.7) !important;
   border-color: rgba(0, 0, 0, 0.3);
   border-radius: 16px;
 }
 
 .primary-status-dropdown .dropdown-toggle:hover {
   border-color: rgba(0, 0, 0, 0.5);
+  background-color: white !important;
 }
 
 .primary-status-dropdown .dropdown-toggle svg {
