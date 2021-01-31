@@ -147,7 +147,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
             </>
           )}
           {DUPLICATES.length === 0 && <>
-            <p>No identical duplicates were found for this nominee.</p>
+            <p>No identical duplicates were found to share categories with this nominee.</p>
             <p>You'll have to manually check other nominees for non-identical duplicates.</p>
           </>}
         </div>
