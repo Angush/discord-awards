@@ -74,6 +74,16 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
   return (
     <div className='nominee-vet-ui'>
       <div className='nominee-controls'>
+        <div className='nominee-buttons'>
+          <StatusDropdown
+            status={nominee.statuses[category.id]}
+            select={updateStatus}
+            catId={category.id}
+            id={nominee.id}
+            size='lg'
+            classes='primary-status-dropdown'
+          />
+        </div>
         <div className='nominee-header-text'>
           <h2>Viewing nominee <code>{nominee.id}</code> in <code>{category.name}</code></h2>
           <h3 className='text-muted'>
@@ -85,16 +95,6 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
               {approvalStatus}
             </code>
           </h3>
-        </div>
-        <div className='nominee-buttons'>
-          <StatusDropdown
-            status={nominee.statuses[category.id]}
-            select={updateStatus}
-            catId={category.id}
-            id={nominee.id}
-            size='lg'
-            classes='primary-status-dropdown'
-          />
         </div>
       </div>
 
