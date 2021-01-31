@@ -169,6 +169,10 @@
   padding-bottom: 6rem;
 }
 
+.nominee-json .react-json-view .string-value {
+  color: #007bff;
+}
+
 .nominee-vet-ui .react-json-view,
 .nominee-vet-ui p:not(.card-text) {
   margin: 0 1rem;
@@ -193,12 +197,23 @@
 }
 
 .nominee-header-text h2 {
-  font-size: 1.5em;
+  font-size: 1.4em;
   margin: 4px 0;
 }
 
 .nominee-header-text h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  font-weight: normal;
+  margin-top: .5rem;
+}
+
+.nominee-header-text code {
+  color: #007bff;
+  margin: 0 .25rem;
+}
+
+.nominee-header-text h3 code {
+  font-size: 1.05em;
 }
 
 .section-head {
@@ -269,9 +284,10 @@
 }
 
 .duplicates-categories-list > li {
-  padding: 6px 12px;
   background-color: rgba(0, 0, 0, 0.025);
   margin-top: 6px;
+  display: flex;
+  align-items: center;
 }
 
 .admin-vetting-page li code,
@@ -279,9 +295,14 @@
   margin-right: 4px;
 }
 
+.duplicates-categories-list > li code {
+  margin-right: 8px;
+}
+
 .nominee-duplicates > p {
   padding-bottom: 1rem;
 }
+
 
 /** Badges **/
 
@@ -296,11 +317,99 @@
   margin: 0 .5rem;
 }
 
-.status-badge {
-  
+
+/** Approval status dropdown selector **/
+
+.status-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: .5rem 1.5rem .5rem 1rem;
+  font-weight: 500;
 }
 
+.status-dropdown .dropdown-menu {
+  /* background-color: #F0F0F0; */
+}
+
+.status-dropdown .dropdown-item svg {
+  width: 24px;
+  height: 24px;
+  margin-right: .75rem;
+}
+
+.status-dropdown {
+  height: 100%;
+  /* margin-right: auto; */
+}
+
+.status-dropdown .dropdown-toggle {
+  border: none;
+  border-right: 1px solid #D4D4D4 !important;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #e9e9e9 !important;
+  margin-right: 12px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.status-dropdown .dropdown-toggle:hover {
+  background-color: #f3f3f3 !important;
+}
+
+.status-dropdown .dropdown-toggle svg {
+  height: 24px;
+  width: 24px;
+  color: #404040;
+}
+
+.status-dropdown .dropdown-toggle::after {
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.7);
+  transition: color .15s ease-in-out;
+}
+
+.status-dropdown .dropdown-toggle:hover::after {
+  color: rgba(0, 0, 0, 1);
+}
+
+.status-approve .dropdown-toggle svg {
+  color: green;
+}
+
+.status-reject .dropdown-toggle svg {
+  color: red;
+}
+
+.status-dropdown .option-approve,
+.status-approve .dropdown-toggle {
+  color: green;
+  background-color: rgb(231, 255, 231) !important;
+}
+
+.status-dropdown .option-reject,
+.status-reject .dropdown-toggle {
+  color: red;
+  background-color: rgb(255, 235, 235) !important;
+}
+
+.status-dropdown .option-approve:hover,
+.status-approve .dropdown-toggle:hover {
+  background-color: rgb(246, 255, 246) !important;
+}
+
+.status-dropdown .option-reject:hover,
+.status-reject .dropdown-toggle:hover {
+  background-color: rgb(255, 245, 245) !important;
+}
+
+
+
+/** Media queries **/
+
 @media (max-width: 1920px) {
+  /* Hide the category selection list at sub-1080p */
   .nominee-vet-ui {
     grid-column-start: list2;
   }

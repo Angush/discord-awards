@@ -5,13 +5,13 @@ import FicCard from '../cards/FicCard'
 import ArtCard from '../cards/ArtCard'
 import ListOfDuplicates from './ListOfDuplicates'
 
-const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
+const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNomineeData }) => {
   if (!nominee?.data || !data?.nominees) return (
     <div className='nominee-vet-ui no-nominee-selected'>
       <h1>Select a category & nominee to vet it!</h1>
     </div>
   )
-  
+
   const type = nominee.data.artist ? 'art' : nominee.data.links ? 'fic' : 'other'
   const CARD = type === 'other' ? (
     <OtherCard data={nominee.data} />
@@ -20,7 +20,16 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
   ) : (
     <FicCard fic={nominee.data} />
   )
+  const DUPLICATES = (nominee.duplicates || []).map(getNomineeData)
+  const CATEGORIES = Object.keys(nominee.statuses || {})
+    .filter(cat => {
+      if (Number.isInteger(cat)) return cat !== category.id
+      return parseInt(cat) !== category.id
+    })
+    .map(cat => data.categories[cat])
 
+
+  //* Functions
   const getApprovalStatus = number => {
     if (number === -1) return 'Rejected'
     if (number === 0) return 'Unvetted'
@@ -28,17 +37,30 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
     if (number === 2) return 'Selected via typeahead'
   }
 
-  const DUPLICATES = (nominee.duplicates || []).map(dupe => {
-    return getNomineeData(dupe)
-  })
+  const getStatusValue = change => {
+    if (change === "approve") return 1
+    if (change === "reject") return -1
+    if (change === "reset") return 0
+  }
 
-  const CATEGORIES = Object.keys(nominee.statuses || {})
-    .filter(cat => {
-      if (Number.isInteger(cat)) return cat !== category.id
-      return parseInt(cat) !== category.id
-    })
-    .map(cat => data.categories[cat])
-  
+  const getDataOfNomineeToUpdate = id => {
+    let nomineeToUpdate = (id === nominee.id || !id) ? nominee
+      : DUPLICATES.find(dupe => dupe.id === id)
+    return { ...nomineeToUpdate }
+  }
+
+  const updateStatus = ({ id, catId }, status) => {
+    let newData = getDataOfNomineeToUpdate(id)
+    let newStatusValue = getStatusValue(status)
+    newData.statuses[catId] = newStatusValue
+
+    delete newData.header
+    delete newData.subheader
+    delete newData.badges
+    
+    updateNomineeData(id, newData)
+  }
+
   return (
     <div className='nominee-vet-ui'>
       <div className='nominee-controls'>
@@ -69,7 +91,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
                 <code>{cat.id}</code> {cat.name}
               </li>
             ))}
-            {CATEGORIES.length === 0 && <p>This nominee was not entered into any other categories.</p>}
+            {CATEGORIES.length === 0 && <p style={{ marginLeft: '8px' }}>This nominee was not entered into any other categories.</p>}
           </ol>
         </div>
 
@@ -90,6 +112,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
               <ListOfDuplicates
                 validCategories={nominee.statuses}
                 allCategories={data.categories}
+                updateStatus={updateStatus}
                 duplicates={DUPLICATES}
               />
             </>
@@ -109,10 +132,6 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData }) => {
           src={nominee.data}
           displayDataTypes={false}
           enableClipboard={false}
-          onEdit={() => true}
-          // onSelect={selected => {
-          //   if (selected.type === "string" && validateURL(selected.value)) navigate(selected.value)
-          // }}
           quotesOnKeys={false}
           name={null}
         />

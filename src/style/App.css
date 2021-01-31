@@ -2248,7 +2248,7 @@ h4 .result-indicator::before {
   width: 100%;
 }
 
-li .dropdown-item {
+#typeahead-container li .dropdown-item {
   font-weight: bold;
 }
 

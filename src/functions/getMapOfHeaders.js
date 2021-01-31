@@ -10,7 +10,7 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
       subheader: (nominee.name && nominee.title) ? nominee.title
         : (nominee.author || nominee.artist || nominee.owner)
     }
-    if (skipBadges) returnObject.badges = {
+    if (!skipBadges) returnObject.badges = {
       duplicates: duplicates.length,
       currentStatus: statuses[data.id]
     }

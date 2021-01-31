@@ -22,14 +22,11 @@ const AdminVettingPage = ({ userData }) => {
     
     const prepareData = (resData, fetched = true) => {
       setVettingData(resData)
-      let categories = Object.values(resData.categories)
-      setCategoriesList(getMapOfHeaders("categories", categories))
       if (fetched) localStorage.vettables = JSON.stringify(resData)
     }
     
     let cached = localStorage.vettables
-    if (cached)
-    try {
+    if (cached) try {
       let parsed = JSON.parse(cached)
       prepareData(parsed, false)
     } catch (e) {}
@@ -48,6 +45,14 @@ const AdminVettingPage = ({ userData }) => {
   }, [userData])
 
 
+  //* Assemble list of categories when vettingData changes
+  useEffect(() => {
+    if (!vettingData || !vettingData.categories) return
+    let categories = Object.values(vettingData.categories)
+    setCategoriesList(getMapOfHeaders("categories", categories))
+  }, [vettingData])
+
+
   //* Prepare list of nominees upon category selection
   useEffect(() => {
     if (!selectedCategory || !vettingData.nominees) return
@@ -56,16 +61,12 @@ const AdminVettingPage = ({ userData }) => {
   }, [selectedCategory, vettingData])
 
 
-  // TODO: Make edits to nominees (ie. changes to status and data) reflect in...
-  // TODO:  (a) vettingData, (b) selectedNominee, (c) categoryNomineesList, (d) categoriesList
-  // TODO: Obviously, also need to add edit functionality first.
-
-
+  //* Early returns on invalid auth or data
   if (!userData.canVet && !userData.LOADED_FROM_CACHE) return (
     <Redirect from='/admin/vetting' to='/unauthorized' noThrow />
   )
 
-  if (!vettingData) return (
+  if (!vettingData || !categoriesList) return (
     <div className='admin-vetting-page fade-rise'>
       <ItemList items={[]} />
       <div className='nominee-vet-ui no-nominee-selected'>
@@ -96,6 +97,14 @@ const AdminVettingPage = ({ userData }) => {
     else setSelectedNominee(null)
   }
 
+  const updateNomineeData = (nomineeId, newData) => {
+    console.time(`update nominee ${nomineeId} data`)
+    let newVettingData = { ...vettingData }
+    newVettingData.nominees[nomineeId] = newData
+    setVettingData(newVettingData)
+    console.timeEnd(`update nominee ${nomineeId} data`)
+  }
+
   
   return (
     <div className='admin-vetting-page fade-rise'>
@@ -114,6 +123,7 @@ const AdminVettingPage = ({ userData }) => {
         nominee={selectedNominee}
         category={selectedCategory}
         getNomineeData={getNomineeData}
+        updateNomineeData={updateNomineeData}
         data={vettingData}
       />
     </div>
