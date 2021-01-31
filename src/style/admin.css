@@ -280,7 +280,15 @@
 }
 
 .nominee-categories > li {
-  padding: .75rem 1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.nominee-categories > li .dropdown-toggle {
+  height: 44px;
+  padding: 6px 12px 6px 14px;
 }
 
 .duplicates-categories-list > li {
@@ -295,7 +303,8 @@
   margin-right: 4px;
 }
 
-.duplicates-categories-list > li code {
+.duplicates-categories-list > li code,
+.nominee-categories > li code {
   margin-right: 8px;
 }
 
@@ -343,15 +352,18 @@
 }
 
 .status-dropdown .dropdown-toggle {
+  background-color: #e9e9e9 !important;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.status-dropdown:not(.primary-status-dropdown) .dropdown-toggle {
   border: none;
   border-right: 1px solid #D4D4D4 !important;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  background-color: #e9e9e9 !important;
   margin-right: 12px;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
 }
 
 .status-dropdown .dropdown-toggle:hover {
@@ -374,10 +386,12 @@
   color: rgba(0, 0, 0, 1);
 }
 
+code.status-approved,
 .status-approve .dropdown-toggle svg {
   color: green;
 }
 
+code.status-rejected,
 .status-reject .dropdown-toggle svg {
   color: red;
 }
@@ -404,6 +418,23 @@
   background-color: rgb(255, 245, 245) !important;
 }
 
+.status-dropdown .option-reset:hover {
+  background-color: rgb(244, 247, 250) !important;
+}
+
+.primary-status-dropdown .dropdown-toggle {
+  border-color: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+}
+
+.primary-status-dropdown .dropdown-toggle:hover {
+  border-color: rgba(0, 0, 0, 0.5);
+}
+
+.primary-status-dropdown .dropdown-toggle svg {
+  height: 40px;
+  width: 40px;
+}
 
 
 /** Media queries **/

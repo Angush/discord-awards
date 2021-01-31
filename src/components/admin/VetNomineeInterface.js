@@ -3,6 +3,7 @@ import ReactJson from 'react-json-view'
 import OtherCard from '../cards/OtherCard'
 import FicCard from '../cards/FicCard'
 import ArtCard from '../cards/ArtCard'
+import StatusDropdown from './StatusDropdown'
 import ListOfDuplicates from './ListOfDuplicates'
 
 const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNomineeData }) => {
@@ -11,23 +12,6 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
       <h1>Select a category & nominee to vet it!</h1>
     </div>
   )
-
-  const type = nominee.data.artist ? 'art' : nominee.data.links ? 'fic' : 'other'
-  const CARD = type === 'other' ? (
-    <OtherCard data={nominee.data} />
-  ) : type === 'art' ? (
-    <ArtCard formData={nominee.data} />
-  ) : (
-    <FicCard fic={nominee.data} />
-  )
-  const DUPLICATES = (nominee.duplicates || []).map(getNomineeData)
-  const CATEGORIES = Object.keys(nominee.statuses || {})
-    .filter(cat => {
-      if (Number.isInteger(cat)) return cat !== category.id
-      return parseInt(cat) !== category.id
-    })
-    .map(cat => data.categories[cat])
-
 
   //* Functions
   const getApprovalStatus = number => {
@@ -61,6 +45,31 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     updateNomineeData(id, newData)
   }
 
+  const updateData = (values) => {
+    let newData = getDataOfNomineeToUpdate()
+    // newData.data = values
+    console.log(`Updating data for nominee ${newData.id}`, { editValues: values, existingData: newData })
+  }
+
+  //* Calculated values
+  const approvalStatus = getApprovalStatus(nominee.statuses[category.id])
+  const type = nominee.data.artist ? 'art' : nominee.data.links ? 'fic' : 'other'
+  const CARD = type === 'other' ? (
+    <OtherCard data={nominee.data} />
+  ) : type === 'art' ? (
+    <ArtCard formData={nominee.data} />
+  ) : (
+    <FicCard fic={nominee.data} />
+  )
+  const DUPLICATES = (nominee.duplicates || []).map(getNomineeData)
+  const CATEGORIES = Object.keys(nominee.statuses || {})
+    .filter(cat => {
+      if (Number.isInteger(cat)) return cat !== category.id
+      return parseInt(cat) !== category.id
+    })
+    .map(cat => data.categories[cat])
+
+
   return (
     <div className='nominee-vet-ui'>
       <div className='nominee-controls'>
@@ -68,8 +77,23 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
           <h2>Viewing nominee <code>{nominee.id}</code> in <code>{category.name}</code></h2>
           <h3 className='text-muted'>
             Current approval status:{' '}
-            <code>{getApprovalStatus(nominee.statuses[category.id])}</code>
+            <code
+              className={approvalStatus === 'Rejected' ? 'status-rejected' :
+              (approvalStatus === 'Approved' ? 'status-approved' : 'status-unvetted')}
+            >
+              {approvalStatus}
+            </code>
           </h3>
+        </div>
+        <div className='nominee-buttons'>
+          <StatusDropdown
+            status={nominee.statuses[category.id]}
+            select={updateStatus}
+            catId={category.id}
+            id={nominee.id}
+            size='lg'
+            classes='primary-status-dropdown'
+          />
         </div>
       </div>
 
@@ -88,6 +112,12 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
           <ol className='nominee-categories'>
             {CATEGORIES.length > 0 && CATEGORIES.map(cat => (
               <li key={cat.name}>
+                <StatusDropdown
+                  status={nominee.statuses[cat.id]}
+                  select={updateStatus}
+                  catId={cat.id}
+                  id={nominee.id}
+                />
                 <code>{cat.id}</code> {cat.name}
               </li>
             ))}
@@ -133,6 +163,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
           displayDataTypes={false}
           enableClipboard={false}
           quotesOnKeys={false}
+          onEdit={updateData}
           name={null}
         />
       </div>
