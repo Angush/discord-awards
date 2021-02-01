@@ -53,6 +53,4 @@ const ListOfDuplicates = ({ duplicates, validCategories, allCategories, updateSt
   )
 }
 
-// TODO: Similar interface for the Categories list.
-
 export default ListOfDuplicates

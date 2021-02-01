@@ -3,12 +3,14 @@ import React from 'react'
 const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => {
   
   if (type === "nominees" && allNominees) return data.nominees.map(nomineeId => {
-    let { data: nominee, duplicates, statuses } = allNominees[nomineeId]
+    const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
+    const { name, title, author, artist, owner } = nomineeData
+
     let returnObject = {
       id: nomineeId,
-      header: nominee.name || nominee.title || "Unknown",
-      subheader: (nominee.name && nominee.title) ? nominee.title
-        : (nominee.author || nominee.artist || nominee.owner)
+      header: name || title || "Unknown",
+      subheader: ((name && title) ? title
+        : (author || artist || owner)) || "Unknown"
     }
     if (!skipBadges) returnObject.badges = {
       duplicates: duplicates.length,
@@ -29,21 +31,31 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
         })
       }
 
-      let duplicates = cat.nominees.reduce((dupeCount, nomineeId) => {
-        let nomineeDuplicates = allNominees[nomineeId]?.duplicates?.length
-        if (!nomineeDuplicates) return dupeCount
-        return dupeCount + nomineeDuplicates
-      }, 0)
+      let vetted = 0
+      let duplicates = 0
+      cat.nominees.forEach(nomineeId => {
+        let nominee = allNominees[nomineeId]
+        if (!nominee) return
+
+        let status = nominee?.statuses[cat.id]
+        if (!Number.isInteger(status)) return
+        if (status < 0 || status === 1) vetted++
+
+        let duplicatesCount = nominee?.duplicates?.length
+        if (duplicatesCount) duplicates += duplicatesCount
+      })
+      let vettedClassName = `status-${vetted === cat.nominees.length ? 'approved' : 'rejected'} vetted-count`
 
       let returnObject = {
         id: cat.id,
         header: cat.name,
         subheader: <>
-          {cat.nominees.length} nominees{' '}
+          <code className={vettedClassName}>{vetted}</code>{' '}
+          <span className="slash-divider">/</span>{' '}
+          <code>{cat.nominees.length}</code> vetted{' '}
           <span className="slash-divider">|</span>{' '}
-          {duplicates} duplicates
+          <code>{duplicates}</code> dupe{duplicates === 1 ? '' : 's'}
         </>
-        // TODO: how to calculate the number of duplicates per category?
       }
 
       if (cat.collection && !skipBadges) returnObject.badges = {

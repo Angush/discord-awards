@@ -12,6 +12,10 @@
   grid-template-columns: 400px 400px auto;
 }
 
+.admin-vetting-page .slash-divider {
+  font-weight: normal;
+}
+
 .item-list {
   height: 100%;
   max-height: 100%;
@@ -60,6 +64,11 @@
   cursor: pointer;
 }
 
+.item-list-element:hover .vetted-count {
+  border-color: rgba(0, 0, 0, 0.25);
+  color: black !important;
+}
+
 .item-list-section {
   font-size: 1.2em;
   font-weight: bold;
@@ -72,8 +81,6 @@
 
 .item-badges {
   margin-left: auto;
-  /* flex-basis: 100%; */
-  /* TODO: Make this align-right properly! */
 }
 
 .uncolored-code {
@@ -105,8 +112,30 @@
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
+.item-list-element h2 .text-muted code {
+  color: #0075f1;
+  font-weight: 600;
+}
+
+.selected-list-element h2 .text-muted code {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.vetted-count {
+  padding: 3px 7px;
+  border-radius: 100%;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, .8) !important;
+}
+
+.item-list-element .slash-divider {
+  color: #afd0f3;
+}
+
 .selected-list-element .slash-divider {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .item-list.list-1 {
@@ -146,8 +175,11 @@
   flex-wrap: wrap;
 }
 
+.no-nominee-selected > div > * {
+  margin-bottom: 2rem;
+}
+
 .no-nominee-selected h2 {
-  padding-top: 1rem;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -156,8 +188,8 @@
 }
 
 .hidden-button {
-  display: none;
   all: unset;
+  display: none;
 }
 
 .nominee-vet-ui {
@@ -405,12 +437,14 @@ code.status-rejected,
 }
 
 .status-dropdown .option-approve,
+.item-list-element h2 .text-muted code.status-approved,
 .status-approve .dropdown-toggle {
   color: green;
   background-color: rgb(231, 255, 231) !important;
 }
 
 .status-dropdown .option-reject,
+.item-list-element h2 .text-muted code.status-rejected,
 .status-reject .dropdown-toggle {
   color: red;
   background-color: rgb(255, 235, 235) !important;
@@ -480,7 +514,7 @@ code.status-rejected,
 
 .collection-badge {
   margin-left: auto;
-  margin-right: 0;
+  margin-right: -6px;
   text-transform: uppercase;
   font-size: 0.85em;
   font-weight: 500;
