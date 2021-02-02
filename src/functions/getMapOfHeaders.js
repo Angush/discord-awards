@@ -1,23 +1,25 @@
 import React from 'react'
 
 const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => {
-  
-  if (type === "nominees" && allNominees) return data.nominees.map(nomineeId => {
-    const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
-    const { name, title, author, artist, owner } = nomineeData
+  if (type === "nominees" && allNominees) {
+    let returnData = data.nominees.map(nomineeId => {
+      const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
+      const { name, title, author, artist, owner } = nomineeData
 
-    let returnObject = {
-      id: nomineeId,
-      header: name || title || "Unknown",
-      subheader: ((name && title) ? title
-        : (author || artist || owner)) || "Unknown"
-    }
-    if (!skipBadges) returnObject.badges = {
-      duplicates: duplicates.length,
-      currentStatus: statuses[data.id]
-    }
-    return returnObject
-  })
+      let returnObject = {
+        id: nomineeId,
+        header: name || title || "Unknown",
+        subheader: ((name && title) ? title
+          : (author || artist || owner)) || "Unknown"
+      }
+      if (!skipBadges) returnObject.badges = {
+        duplicates: duplicates.length,
+        currentStatus: statuses[data.id]
+      }
+      return returnObject
+    })
+    return returnData
+  }
 
   if (type === "categories") {
     let returnData = []

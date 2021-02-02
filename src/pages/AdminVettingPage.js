@@ -47,19 +47,11 @@ const AdminVettingPage = ({ userData }) => {
 
   //* Assemble list of categories when vettingData changes
   useEffect(() => {
-    if (!vettingData || !vettingData.categories) return
+    if (!vettingData || !vettingData.categories || !vettingData.nominees) return
     let categories = Object.values(vettingData.categories)
     setCategoriesList(getMapOfHeaders("categories", categories, vettingData.nominees))
   }, [vettingData])
-
-
-  //* Prepare list of nominees upon category selection
-  useEffect(() => {
-    if (!selectedCategory || !vettingData.nominees) return
-    let calculatedList = getMapOfHeaders("nominees", selectedCategory, vettingData.nominees)
-    setCategoryNomineesList(calculatedList)
-  }, [selectedCategory, vettingData])
-
+  
 
   //* Early returns on invalid auth or data
   if (!userData.canVet && !userData.LOADED_FROM_CACHE) return (
@@ -84,8 +76,11 @@ const AdminVettingPage = ({ userData }) => {
   }
 
   const selectCategory = id => {
-    if (id) setSelectedCategory(vettingData.categories[id])
-    else {
+    if (id) {
+      let calculatedList = getMapOfHeaders("nominees", vettingData.categories[id], vettingData.nominees)
+      setSelectedCategory(vettingData.categories[id])
+      setCategoryNomineesList(calculatedList)
+    } else {
       setSelectedCategory(null)
       setCategoryNomineesList(null)
     }
