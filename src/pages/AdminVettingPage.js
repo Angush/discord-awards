@@ -12,7 +12,7 @@ const AdminVettingPage = ({ userData }) => {
   const [vettingData, setVettingData] = useState(null)
   const [categoriesList, setCategoriesList] = useState(null)
   const [categoryNomineesList, setCategoryNomineesList] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState({})
   const [selectedNominee, setSelectedNominee] = useState(null)
 
   
@@ -50,7 +50,14 @@ const AdminVettingPage = ({ userData }) => {
     if (!vettingData || !vettingData.categories || !vettingData.nominees) return
     let categories = Object.values(vettingData.categories)
     setCategoriesList(getMapOfHeaders("categories", categories, vettingData.nominees))
-  }, [vettingData])
+    
+    //* Also make sure the derived state is all up-to-date with the new vettingData
+    const id = selectedCategory.id
+    if (!!id && Number.isInteger(id)) {
+      setCategoryNomineesList(getMapOfHeaders("nominees", vettingData.categories[id], vettingData.nominees))
+      setSelectedCategory(vettingData.categories[id])
+    }
+  }, [vettingData, selectedCategory.id])
   
 
   //* Early returns on invalid auth or data
@@ -81,7 +88,7 @@ const AdminVettingPage = ({ userData }) => {
       setSelectedCategory(vettingData.categories[id])
       setCategoryNomineesList(calculatedList)
     } else {
-      setSelectedCategory(null)
+      setSelectedCategory({})
       setCategoryNomineesList(null)
     }
     setSelectedNominee(null)
@@ -162,9 +169,11 @@ const AdminVettingPage = ({ userData }) => {
     updateNomineeData([nomineeToUpdate])
   }
 
+  const hasSelectedCategory = Object.values(selectedCategory).length > 0
+
   //* render the interface if we have an interface to render, else render instructions
   const renderVetNomineeInterface = () => {
-    if (!selectedCategory || !vettingData?.nominees) return (
+    if (!hasSelectedCategory || !vettingData?.nominees) return (
       <div className='nominee-vet-ui no-nominee-selected'>
         <h1>Select a category & nominee to vet it!</h1>
       </div>
@@ -202,12 +211,12 @@ const AdminVettingPage = ({ userData }) => {
           selectedItem={selectedCategory}
         />
       }
-      {selectedCategory &&
+      {hasSelectedCategory &&
         <button className='hidden-button' onClick={() => selectCategory()}>
           {'< Select a different category'}
         </button>
       }
-      {selectedCategory &&
+      {hasSelectedCategory &&
         <ItemList
           key="cat-nominees"
           items={categoryNomineesList || []}
