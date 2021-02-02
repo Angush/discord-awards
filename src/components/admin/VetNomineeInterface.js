@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { updatedDiff, addedDiff, detailedDiff } from 'deep-object-diff'
+import { addedDiff, detailedDiff } from 'deep-object-diff'
 import { Button } from 'react-bootstrap'
 import ReactJson from 'react-json-view'
-import validateURL from '../../functions/validateURL'
 import ListOfOtherCategories from './ListOfOtherCategories'
 import ListOfDuplicates from './ListOfDuplicates'
 import StatusDropdown from './StatusDropdown'
@@ -12,7 +11,7 @@ import ArtCard from '../cards/ArtCard'
 
 const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNomineeData }) => {
   const [nomineeBeingEdited, setNomineeBeingEdited] = useState(nominee.id)
-  const [containsNullValue, setContainsNullValue] = useState(false)
+  const [containsNullValue] = useState(false)
   const [nomineeEdits, setNomineeEdits] = useState(null)
 
   useEffect(() => {
@@ -26,8 +25,6 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
       setNomineeEdits(null)
     }
   }, [nominee, nomineeBeingEdited])
-
-  useEffect(() => console.log(`containsNullValue has been set to`, containsNullValue), [containsNullValue])
 
   //* Utility functions
   const getApprovalStatus = number => {
@@ -58,14 +55,9 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     updateNomineeData([nomineeToUpdate], 'status')
   }
 
-  const updateMultipleStatuses = () => {
-    // TODO: this.
-  }
-
   const updateData = event => {
     let nomineeToUpdate = getDataOfNomineeToUpdate()
     let newData = { ...nomineeToUpdate, data: nomineeEdits || nomineeToUpdate.data }
-    console.log(`Updating data for nominee ${newData.id}`, { editValues: newData, existingData: nomineeToUpdate })
     updateNomineeData([newData], 'data')
   }
 
@@ -78,9 +70,6 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     DUPLICATES.forEach(dupe => {
       nomineesBeingUpdated.push(formatNomineeData(dupe))
     })
-
-    let nomineeIdsUpdating = nomineesBeingUpdated.map(nom => nom.id)
-    console.log(`Updating data for nominees: `, nomineeIdsUpdating)
 
     updateNomineeData(nomineesBeingUpdated, 'data')
   }
@@ -97,19 +86,14 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
 
     const originalDataDiff = detailedDiff(originalData, newNominee)
     const originalDataChanges = Object.values(originalDataDiff).reduce(calculateTotalDifferenceCount, 0)
-    // console.log(`original data diff`, originalDataDiff) //! REMOVE
     if (originalDataChanges === 0) {
-      console.log(`The data has been edited such that it is identical to the original data`, true)
       setNomineeEdits(null)
       return true
     }
-    // console.log(`nomineeEdits:`, nomineeEdits)
-    // console.log(`newNominee:`, newNominee)
+
     const previousEditDiff = detailedDiff(nomineeEdits, newNominee)
     const previousEditChanges = Object.values(previousEditDiff).reduce(calculateTotalDifferenceCount, 0)
-    // console.log(`previous edit diff`, previousEditDiff) //! REMOVE
     if (previousEditChanges === 0) { 
-      console.log(`An edit that made no actual changes was made`, true)
       return true
     }
 
@@ -120,7 +104,6 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     let newData = { ...(nomineeEdits ? nomineeEdits : nominee?.data) }
     if (newData.hasOwnProperty(key) && newData[key] !== false) delete newData[key]
     else newData[key] = true
-    // console.log(`Toggling boolean "${key}":`, newData)
     makeEdit(newData, true)
   }
 
