@@ -3,7 +3,7 @@ import envVarIsTrue from '../functions/envVarIsTrue'
 import NominationFlow from '../flows/NominationFlow'
 import { Link } from '@reach/router'
 
-const NominationPage = () => {
+const NominationPage = ({ userData }) => {
   const [categories, setCategories] = useState([])
   const [collections, setCollections] = useState({})
   const [categoryTypes, setCategoryTypes] = useState([])
@@ -42,7 +42,7 @@ const NominationPage = () => {
     let cached = localStorage.categories
     if (cached) populateCategories(JSON.parse(cached))
     window
-      .fetch(`https://cauldron.angu.sh/api/contests`)
+      .fetch(`https://cauldron.angu.sh/api/contests`, { credentials: 'include' })
       .then(response => response.json())
       .then(rawData => {
         let data = Object.values(rawData).map(c => {
@@ -59,7 +59,7 @@ const NominationPage = () => {
   }, [populateCategories])
 
   //* Render the components, or the message about nominations being closed
-  if (envVarIsTrue(`NOMINATIONS_CLOSED`))
+  if (envVarIsTrue(`NOMINATIONS_CLOSED`) && !userData.canNominate)
     return (
       <div className='fade-rise text-center pad-top closed-page-indicator'>
         <h3>Nominations are currently closed.</h3>

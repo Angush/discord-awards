@@ -125,15 +125,11 @@ const App = () => {
         <div id='top'>Jump to top.</div>
         <Router>
           <VotePage path='/vote' userData={userData} />
-          <NominationPage path='/nominate/*' />
+          <NominationPage path='/nominate/*' userData={userData} />
           <MyNomineesPage path='/nominees' />
           <ResultsListingsPage path='/results' years={years} />
           <AdminVettingPageWrapper path='/admin/vetting' userData={userData} />
-          <ResultsPage
-            path='/results/:year/*'
-            userData={userData}
-            years={years}
-          />
+          <ResultsPage path='/results/:year/*' userData={userData} years={years} />
           <Redirect from='/' to={redirectLocation} noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
