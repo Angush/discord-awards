@@ -48,6 +48,8 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
   }
 
   //* Update data functions
+  const clearEdits = () => setNomineeEdits(null)
+
   const updateStatus = ({ id, catId }, status) => {
     let nomineeToUpdate = getDataOfNomineeToUpdate(id)
     let newStatusValue = getStatusValue(status)
@@ -85,7 +87,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
   const updateData = event => {
     let nomineeToUpdate = getDataOfNomineeToUpdate()
     let newData = { ...nomineeToUpdate, data: nomineeEdits || nomineeToUpdate.data }
-    updateNomineeData([newData], 'data')
+    updateNomineeData([newData], 'data', clearEdits)
   }
 
   const updateDataIncludingDuplicates = event => {
@@ -98,7 +100,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
       nomineesBeingUpdated.push(formatNomineeData(dupe))
     })
 
-    updateNomineeData(nomineesBeingUpdated, 'data')
+    updateNomineeData(nomineesBeingUpdated, 'data', clearEdits)
   }
 
   //* Make an edit

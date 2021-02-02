@@ -111,7 +111,7 @@ const AdminVettingPage = ({ userData }) => {
     console.log(`POST'd data to /api/edit-nominee!\n${nomineesArray.length} nominee${nomineesArray.length === 1 ? '' : 's'} are being edited:`, nomineesArray)
   }
   
-  const updateNomineeData = (nomineesArray, type = 'status') => {
+  const updateNomineeData = (nomineesArray, type = 'status', callback) => {
     let newVettingData = { ...vettingData }
     let newSelectedNominee = null
     let correctedNominees = []
@@ -151,6 +151,7 @@ const AdminVettingPage = ({ userData }) => {
     try { localStorage.vettables = JSON.stringify(newVettingData) } catch (e) {}
     if (newSelectedNominee) setSelectedNominee(newSelectedNominee)
     if (correctedNominees.length > 0) sendUpdatedNomineeData(correctedNominees)
+    if (callback) callback()
   }
 
   const updateStatus = ({ id, catId }, status) => {
