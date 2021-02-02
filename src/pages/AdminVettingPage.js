@@ -148,6 +148,7 @@ const AdminVettingPage = ({ userData }) => {
     })
 
     setVettingData(newVettingData)
+    try { localStorage.vettables = JSON.stringify(newVettingData) } catch (e) {}
     if (newSelectedNominee) setSelectedNominee(newSelectedNominee)
     if (correctedNominees.length > 0) sendUpdatedNomineeData(correctedNominees)
   }
