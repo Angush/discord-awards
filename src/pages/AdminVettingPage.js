@@ -106,11 +106,12 @@ const AdminVettingPage = ({ userData }) => {
       body: JSON.stringify(nomineesArray)
     })
 
-    console.log(`POST data to /api/edit-nominee - ${nomineesArray.length} nominee${nomineesArray.length === 1 ? '' : 's'} being changed:`, nomineesArray)
+    console.log(`POST'd data to /api/edit-nominee!\n${nomineesArray.length} nominee${nomineesArray.length === 1 ? '' : 's'} are being edited:`, nomineesArray)
   }
   
   const updateNomineeData = (nomineesArray, type = 'status') => {
     let newVettingData = { ...vettingData }
+    let newSelectedNominee = null
     let correctedNominees = []
 
     nomineesArray.forEach(nomineeData => {
@@ -132,10 +133,20 @@ const AdminVettingPage = ({ userData }) => {
       delete nomineeData.header
       delete nomineeData.subheader
       delete nomineeData.statusChanges
+
       newVettingData.nominees[nomineeData.id] = nomineeData
+      if (selectedNominee && selectedNominee.id === nomineeData.id) {
+        let headers = getMapOfHeaders(
+          "nominees",
+          { nominees: [nomineeData.id] },
+          { [nomineeData.id]: nomineeData }
+        )[0]
+        newSelectedNominee = { ...headers, ...nomineeData }
+      }
     })
 
     setVettingData(newVettingData)
+    if (newSelectedNominee) setSelectedNominee(newSelectedNominee)
     if (correctedNominees.length > 0) sendUpdatedNomineeData(correctedNominees)
   }
 

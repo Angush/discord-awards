@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import ReactJson from 'react-json-view'
 import ListOfOtherCategories from './ListOfOtherCategories'
 import ListOfDuplicates from './ListOfDuplicates'
-import StatusDropdown from './StatusDropdown'
+import StatusDropdown, { MultiStatusDropdown } from './StatusDropdown'
 import OtherCard from '../cards/OtherCard'
 import FicCard from '../cards/FicCard'
 import ArtCard from '../cards/ArtCard'
@@ -32,13 +32,14 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     if (number === 0) return 'Unvetted'
     if (number === 1) return 'Approved'
     if (number === 2) return 'Selected via typeahead'
-    return 'Unvetted'
+    return 'Unvetted' // default fallback 
   }
 
   const getStatusValue = change => {
     if (change === "approve") return 1
     if (change === "reject") return -1
     if (change === "reset") return 0
+    return 0 // default fallback
   }
 
   const getDataOfNomineeToUpdate = id => {
@@ -53,6 +54,32 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     nomineeToUpdate.statuses[catId] = newStatusValue
     nomineeToUpdate.statusChanges = [{ category: catId, status: newStatusValue }]
     updateNomineeData([nomineeToUpdate], 'status')
+  }
+
+  const updateAllStatuses = (status, duplicates = false) => {
+    let newStatusValue = getStatusValue(status)
+    let nomineeCategories = Object.keys(nominee.statuses)
+    let nomineesWithStatuses = []
+
+    const getStatusChanges = key => ({ category: parseInt(key), status: newStatusValue })
+    const loopOverNominees = (array, filterFunction) => {
+      array.forEach(item => {
+        let statuses = { ...item.statuses }
+        let statusChanges = Object.keys(item.statuses)
+          .filter(filterFunction)
+          .map(getStatusChanges)
+        statusChanges.forEach(change => statuses[change.category] = newStatusValue)
+        nomineesWithStatuses.push({  ...item, statuses, statusChanges })
+      })
+    }
+
+    // if "duplicates" is false:  Update all non-current statuses for the current nominee.
+    if (!duplicates) loopOverNominees([nominee], key => key !== `${category.id}`)
+    // if "duplicates" is true:   Update all shared statuses for detected duplicates.
+    else loopOverNominees(DUPLICATES, key => nomineeCategories.includes(key))
+
+    if (nomineesWithStatuses.length === 0) return
+    updateNomineeData(nomineesWithStatuses, 'status')
   }
 
   const updateData = event => {
@@ -167,6 +194,9 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
         <div>
           <div className='section-head'>
             <h3>Other categories</h3>
+            {CATEGORIES.length > 0 && (
+              <MultiStatusDropdown select={statusChange => updateAllStatuses(statusChange)} />
+            )}
           </div>
           <ol className='nominee-categories'>
             {CATEGORIES.length > 0 && (
@@ -195,6 +225,9 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
         <div className='nominee-duplicates'>
           <div className='section-head'>
             <h3>Duplicates</h3>
+            {DUPLICATES.length > 0 && (
+              <MultiStatusDropdown select={statusChange => updateAllStatuses(statusChange, true)} />
+            )}
           </div>
           {DUPLICATES.length > 0 && (
             <>

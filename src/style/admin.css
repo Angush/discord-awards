@@ -465,11 +465,6 @@
   margin-left: .5rem;
 }
 
-.section-head button {
-  /* margin-left: auto; */
-}
-
-
 /** ListOfDuplicates styling **/
 
 .nominee-duplicates li,
@@ -652,6 +647,33 @@ code.status-rejected,
 .primary-status-dropdown .dropdown-toggle svg {
   height: 40px;
   width: 40px;
+}
+
+.multi-status-dropdown {
+  margin-left: auto;
+}
+
+.section-head .multi-status-dropdown.status-dropdown .dropdown-toggle {
+  margin: 0 !important;
+  padding: 6px 16px;
+  border: none !important;
+  border-bottom-right-radius: 4px !important;
+  border-top-right-radius: 4px !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  background-color: #454647 !important;
+}
+
+.section-head .multi-status-dropdown.status-dropdown .dropdown-toggle:hover {
+  background-color: #1d2124 !important;
+}
+
+.multi-status-dropdown .dropdown-toggle::after {
+  color: rgb(233, 233, 233) !important;
+}
+
+.multi-status-dropdown .dropdown-toggle:hover::after {
+  color: white !important;
 }
 
 /** Badges **/
