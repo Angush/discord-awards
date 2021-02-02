@@ -84,6 +84,11 @@ const App = () => {
         let stringified = JSON.stringify(data)
         localStorage.userData = stringified
       })
+      .catch(err => {
+        console.error(`Failed to fetch login data! That's weird...`, err)
+        setUserData({})
+        delete localStorage.userData
+      })
   }, [handleKeydown])
 
   const logout = event => {
