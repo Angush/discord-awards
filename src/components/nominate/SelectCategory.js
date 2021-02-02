@@ -92,7 +92,10 @@ const SelectCategory = ({
                 <Card.Title>{category.name}</Card.Title>
                 <Card.Text>{category.description}</Card.Text>
               </Card.Body>
-              {category.collection && <Card.Text className="category-collection">{category.collection}</Card.Text>}
+              <div className='card-bottom-tags'>
+                {category.collection && <Card.Text className="category-collection">{category.collection}</Card.Text>}
+                {category.closed && <Card.Text className="category-collection category-closed">Not Public</Card.Text>}
+              </div>
             </SelectableCard>
           )
         })}

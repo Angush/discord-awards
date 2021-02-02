@@ -60,13 +60,25 @@ body {
 
 .category-collection {
   font-size: .9em;
+  display: inline-block;
+  width: fit-content !important;
   color: rgba(0, 0, 0, 0.5);
   padding: 0 20px 16px 20px;
   text-transform: uppercase;
+  margin: 0;
 }
 
 .text-white .category-collection {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.card-bottom-tags {
+  display: flex;
+}
+
+.category-closed {
+  margin-left: auto;
+  color: #007bff;
 }
 
 .contest-filler {
