@@ -127,7 +127,7 @@
   font-weight: 600;
   border: 1px solid rgba(0, 0, 0, 0.15);
   background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, .8) !important;
+  color: rgba(0, 0, 0, 1) !important;
 }
 
 .item-list-element .slash-divider {
