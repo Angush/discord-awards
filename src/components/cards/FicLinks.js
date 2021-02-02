@@ -72,6 +72,7 @@ const FicLinks = ({ links }) => {
 
   const sorted = links
     .map(link => {
+      if (!link) return { url: '' }
       return {
         ...getLinkType(link),
         url: link
@@ -82,10 +83,10 @@ const FicLinks = ({ links }) => {
 
   return (
     <div className='fic-links'>
-      {sorted.map(link => {
+      {sorted.map((link, index) => {
         return (
           <a
-            key={link.url}
+            key={`${index}-${link.url}`}
             href={link.url}
             target='_blank'
             rel='noopener noreferrer'

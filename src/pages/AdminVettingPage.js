@@ -13,7 +13,7 @@ const AdminVettingPage = ({ userData }) => {
   const [categoriesList, setCategoriesList] = useState(null)
   const [categoryNomineesList, setCategoryNomineesList] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
-  const [selectedNominee, setSelectedNominee] = useState(null)  
+  const [selectedNominee, setSelectedNominee] = useState(null)
 
   
   //* Fetching and preparing vettables data
@@ -97,12 +97,46 @@ const AdminVettingPage = ({ userData }) => {
     else setSelectedNominee(null)
   }
 
-  const updateNomineeData = (nomineeId, newData) => {
-    console.time(`update nominee ${nomineeId} data`)
+  //* update vettingData on status/data changes and handle POSTing to API
+  const sendUpdatedNomineeData = nomineesArray => {
+    window.fetch(`https://cauldron.angu.sh/api/edit-nominee`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(nomineesArray)
+    })
+
+    console.log(`POST data to /api/edit-nominee - ${nomineesArray.length} nominee${nomineesArray.length === 1 ? '' : 's'} being changed:`, nomineesArray)
+  }
+  
+  const updateNomineeData = (nomineesArray, type = 'status') => {
     let newVettingData = { ...vettingData }
-    newVettingData.nominees[nomineeId] = newData
+    let correctedNominees = []
+
+    nomineesArray.forEach(nomineeData => {
+      let statusChanges = nomineeData.statusChanges
+
+      if (type === 'status' && statusChanges) {
+        correctedNominees.push({
+          id: nomineeData.id,
+          statuses: statusChanges
+        })
+      } else if (type === 'data') {
+        correctedNominees.push({
+          id: nomineeData.id,
+          data: nomineeData.data
+        })
+      }
+
+      delete nomineeData.badges
+      delete nomineeData.header
+      delete nomineeData.subheader
+      delete nomineeData.statusChanges
+      newVettingData.nominees[nomineeData.id] = nomineeData
+    })
+
     setVettingData(newVettingData)
-    console.timeEnd(`update nominee ${nomineeId} data`)
+    if (correctedNominees.length > 0) sendUpdatedNomineeData(correctedNominees)
   }
 
   const updateStatus = ({ id, catId }, status) => {
@@ -112,19 +146,45 @@ const AdminVettingPage = ({ userData }) => {
       if (change === "reset") return 0
     }
 
-    let newData = vettingData.nominees[id]
-    if (!Number.isInteger(newData.statuses[catId])) return
-    
-    let newStatusValue = getStatusValue(status)
-    newData.statuses[catId] = newStatusValue
+    let nomineeToUpdate = vettingData.nominees[id]
+    if (!Number.isInteger(nomineeToUpdate.statuses[catId])) return
 
-    delete newData.header
-    delete newData.subheader
-    delete newData.badges
-    
-    updateNomineeData(id, newData)
+    let newStatusValue = getStatusValue(status)
+    nomineeToUpdate.statuses[catId] = newStatusValue
+    nomineeToUpdate.statusChanges = [{ category: catId, status: newStatusValue }]
+
+    updateNomineeData([nomineeToUpdate])
   }
 
+  //* render the interface if we have an interface to render, else render instructions
+  const renderVetNomineeInterface = () => {
+    if (!selectedCategory || !vettingData?.nominees) return (
+      <div className='nominee-vet-ui no-nominee-selected'>
+        <h1>Select a category & nominee to vet it!</h1>
+      </div>
+    )
+
+    if (!selectedNominee?.data) {
+      return (
+        <div className='nominee-vet-ui no-nominee-selected'>
+          <div>
+            <h1>You've selected <span className='text-muted bold'>{selectedCategory.name}</span>.</h1>
+            <h2>Now select a nominee to vet it!</h2>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <VetNomineeInterface
+        nominee={selectedNominee}
+        category={selectedCategory}
+        getNomineeData={getNomineeData}
+        updateNomineeData={updateNomineeData}
+        data={vettingData}
+      />
+    )
+  }
   
   return (
     <div className='admin-vetting-page fade-rise'>
@@ -152,13 +212,7 @@ const AdminVettingPage = ({ userData }) => {
           depth={2}
         />
       }
-      <VetNomineeInterface
-        nominee={selectedNominee}
-        category={selectedCategory}
-        getNomineeData={getNomineeData}
-        updateNomineeData={updateNomineeData}
-        data={vettingData}
-      />
+      {renderVetNomineeInterface()}
     </div>
   )
 }

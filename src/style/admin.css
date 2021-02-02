@@ -205,7 +205,10 @@
 }
 
 .nominee-card {
-  grid-area: card;
+  margin-top: auto;
+}
+
+.nominee-card > .card {
   margin: 1.5rem;
   margin-left: 1rem;
 }
@@ -213,6 +216,12 @@
 .nominee-card .card:hover {
   transform: none !important;
   box-shadow: none !important;
+}
+
+.unsaved-edits-alert {
+  color: #e22437 !important;
+  letter-spacing: 0.025em !important;
+  margin-left: auto !important;
 }
 
 .nominee-json {
@@ -224,10 +233,170 @@
   color: #007bff;
 }
 
-.nominee-vet-ui .react-json-view,
+.nominee-json .string-value,
+.nominee-json .object-key {
+  font-size: 1.15em;
+}
+
+.nominee-vet-ui .react-json-view {
+  padding: 1rem;
+  margin: 1.5rem;
+  margin-left: 1rem;
+  background-color: white !important;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
 .nominee-vet-ui p:not(.card-text) {
   margin: 0 1rem;
 }
+
+/** react-json-view styling overwrites **/
+
+.nominee-json .variable-row {
+  padding: 8px 0;
+}
+
+.nominee-json .variable-value {
+  width: 80%;
+  /* display: flex !important; */
+}
+
+.nominee-json .variable-editor {
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.15em;
+  background-color: #f0f0f0 !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+}
+
+.nominee-json .variable-editor + div {
+  display: flex !important;
+  align-items: center;
+  flex-direction: row;
+}
+
+.nominee-json .variable-editor + div > div > div > div {
+  background-color: rgba(255, 255, 255, .75);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 4px 6px 2px 10px; /* top, right, bottom, left */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.2em;
+  margin-left: .5rem;
+}
+
+/* jesus */
+.nominee-json .variable-editor + div > div svg,
+.nominee-json .variable-editor + div > div > div > div > div {
+  color: #0075f1 !important;
+}
+
+.nominee-json .click-to-edit svg {
+  height: 1.5em !important;
+  width: 1.5em !important;
+}
+
+.nominee-json .click-to-edit {
+  float: left;
+  position: relative;
+  /* left: 0; */
+  left: -30px;
+  margin-right: -30px;
+}
+
+.nominee-json .edit-check svg,
+.nominee-json .edit-cancel svg {
+  height: 2em !important;
+  width: 2em !important;
+}
+
+.nominee-json .key-modal-request {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 8px;
+  backdrop-filter: blur(2px);
+}
+
+.nominee-json .key-modal-request > div {
+  margin: 2rem !important;
+  min-width: 300px !important;
+  width: 40% !important;
+  background-color: rgb(199, 237, 255) !important;
+  border-radius: 8px !important;
+}
+
+.nominee-json .key-modal-request > div > div {
+  font-size: 1.5em !important;
+  color: #065ab4 !important;
+}
+
+.nominee-json .key-modal-request > div > div:last-of-type {
+  display: flex;
+  align-items: center;
+}
+
+.nominee-json .key-modal-request input {
+  font-weight: 600;
+  padding: 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.nominee-json .key-modal-submit {
+  width: 0;
+  height: 2.5em;
+  position: relative;
+  right: 8px;
+  top: 3px;
+}
+
+.nominee-json .key-modal-request > div > span {
+  border-top-right-radius: 6px !important;
+  border-bottom-left-radius: 8px !important;
+}
+
+.nominee-json .key-modal-submit svg,
+.nominee-json .key-modal-cancel svg,
+.nominee-json .key-modal-request > div > span {
+  width: 2.5em !important;
+  height: 2.5em !important;
+}
+
+.nominee-json .key-modal-cancel svg {
+  position: relative;
+  right: 2px !important;
+  bottom: 3px !important;
+}
+
+.nominee-json .key-modal-request > div > span:hover {
+  background-color: rgb(233, 43, 10) !important;
+}
+
+.nominee-json .edit-cancel:hover svg {
+  color: rgb(233, 43, 10) !important;
+}
+
+.nominee-json .edit-check:hover svg,
+.nominee-json .key-modal-submit:hover svg {
+  color: rgb(3, 194, 76) !important;
+}
+
+.nominee-json .variable-editor + div > div .edit-check:hover svg {
+  color: #3898ff !important;
+}
+
+.nominee-json .variable-editor + div > span.edit-check {
+  order: -1;
+  margin-right: .25rem;
+}
+
+
+/** Other nominee UI styles **/
 
 .nominee-controls {
   display: flex;
@@ -284,6 +453,11 @@
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.6);
   margin: 0;
+}
+
+.nominee-left-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .nominee-left-column,
@@ -558,6 +732,37 @@ code.status-rejected,
 .item-list-dropdown .dropdown-menu.show {
   background-color: white;
   border-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/** Nominee JSON buttons **/
+
+.json-edit-buttons,
+.json-submit-buttons {
+  margin: 1.5rem 1rem;
+  margin-top: .5rem;
+}
+
+.json-edit-buttons > button {
+  margin-right: 1rem;
+  margin-top: .55rem;
+  background-color: #174472;
+  color: rgb(230, 242, 255);
+}
+
+.json-edit-buttons > button:hover {
+  background-color: #1265b8;
+  border-color: #10508f;
+  color: white;
+}
+
+.nominee-json button code {
+  color: #fdb5ff;
+  padding: 0 2px;
+}
+
+.json-submit-buttons > button {
+  margin-right: 1rem;
+  padding: 12px 24px;
 }
 
 /** Media queries **/

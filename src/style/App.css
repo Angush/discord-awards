@@ -642,6 +642,13 @@ input.form-control-lg {
   color: rgb(255, 252, 75);
 }
 
+.nsfw-indicator + .spoiler-indicator {
+  right: 0;
+  left: auto;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0.25rem;
+}
+
 .fic-links {
   margin-top: 10px;
 }

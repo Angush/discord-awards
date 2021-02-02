@@ -4,7 +4,7 @@ import StatusDropdown from './StatusDropdown'
 
 const ItemList = ({ items, select, selectedItem, updateStatus, parentId, depth = 1 }) => {
   return (
-    <div className={`item-list list-${depth}${selectedItem ? ' selected-list' : ''}`}>
+    <div className={`item-list list-${depth}${selectedItem?.id ? ' selected-list' : ''}`}>
       {items.map(item => {
         if (item.IS_HEADER) return (
           <div className='item-list-section' key={`${item.header}-HEADER`}>
@@ -63,5 +63,7 @@ const ItemList = ({ items, select, selectedItem, updateStatus, parentId, depth =
     </div>
   )
 }
+
+//TODO:  Add a filter system & search box!  Give it position:sticky; and put it at the top of the ItemList, then add a useState() variable to store the filtered list, as well as one for the search input, and then use a useEffect() to filter the list whenever the search input changes (by id/header/subheader if it's a string).
 
 export default ItemList
