@@ -4,6 +4,7 @@ import NominationFlow from '../flows/NominationFlow'
 import { Link } from '@reach/router'
 
 const NominationPage = ({ userData }) => {
+  const [nominationsClosed, setNominationsClosed] = useState(envVarIsTrue(`NOMINATIONS_CLOSED`) && !userData.canNominate)
   const [categories, setCategories] = useState([])
   const [collections, setCollections] = useState({})
   const [categoryTypes, setCategoryTypes] = useState([])
@@ -38,7 +39,7 @@ const NominationPage = ({ userData }) => {
   }, [])
 
   useEffect(() => {
-    if (envVarIsTrue(`NOMINATIONS_CLOSED`)) return
+    if (nominationsClosed || !populateCategories) return
     let cached = localStorage.categories
     if (cached) populateCategories(JSON.parse(cached))
     window
@@ -56,10 +57,14 @@ const NominationPage = ({ userData }) => {
           localStorage.nominees = []
         }
       })
-  }, [populateCategories])
+  }, [populateCategories, nominationsClosed])
+
+  useEffect(() => {
+    if (userData.canNominate) setNominationsClosed(false)
+  }, [userData.canNominate])
 
   //* Render the components, or the message about nominations being closed
-  if (envVarIsTrue(`NOMINATIONS_CLOSED`) && !userData.canNominate)
+  if (nominationsClosed)
     return (
       <div className='fade-rise text-center pad-top closed-page-indicator'>
         <h3>Nominations are currently closed.</h3>
