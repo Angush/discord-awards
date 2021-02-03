@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import StatusDropdown from './StatusDropdown'
 import getMapOfHeaders from '../../functions/getMapOfHeaders'
+import SelectionCheckbox from './SelectionCheckbox'
 
-const ListOfDuplicates = ({ duplicates, validCategories, allCategories, updateStatus }) => {
+const ListOfDuplicates = ({ 
+  duplicates, validCategories, allCategories, updateStatus, checkCategory, checkedCategories
+}) => {
   const [expanded, setExpanded] = useState(duplicates.map(dupe => ({ [dupe.id]: false })))
 
   const toggleExpansion = id => setExpanded({ ...expanded, [id]: !expanded[id] })
@@ -44,7 +47,11 @@ const ListOfDuplicates = ({ duplicates, validCategories, allCategories, updateSt
                 catId={category.id}
                 id={dupe.id}
               />
-              <code>{category.id}</code> {category.name}
+              <p><code>{category.id}</code> {category.name}</p>
+              <SelectionCheckbox
+                value={checkedCategories?.[dupe.id]?.[category.id]}
+                onClick={() => checkCategory(dupe.id, category.id)}
+              />
               {expandedCategories[category.id] && (
                 <span className='expanded-indicator'>Not Shared</span>
               )}

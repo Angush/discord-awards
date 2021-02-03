@@ -41,6 +41,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .item-list.list-2 .item-list-element {
@@ -209,10 +210,6 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-.nominee-vet-ui {
-  grid-area: data;
-}
-
 .list-1 + .nominee-vet-ui {
   grid-column-start: list2;
 }
@@ -243,13 +240,14 @@
 }
 
 .nominee-vet-ui {
+  grid-area: data;
   display: grid;
   grid-template-areas:
     'controls controls'
     'main     main'
     'json     json'
   ;
-  grid-template-columns: minmax(500px, 2fr) minmax(600px, 4fr);
+  grid-template-columns: minmax(530px, 2fr) minmax(570px, 4fr); /* TODO: make column 1 wider? */
   grid-template-rows: repeat(3, min-content);
   overflow-y: scroll;
 }
@@ -297,7 +295,12 @@
   border-radius: 8px;
 }
 
-.nominee-vet-ui p:not(.card-text) {
+.nominee-vet-ui p {
+  margin-bottom: 0;
+}
+
+.nominee-duplicates > p,
+.nominee-categories > p {
   margin: 0 1rem;
 }
 
@@ -515,6 +518,85 @@
   margin-left: .5rem;
 }
 
+.nominee-checkbox-container {
+  height: 36px;
+  width: 44px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  border-radius: 0 4px 4px 0;
+  visibility: hidden;
+  position: absolute;
+  background-color: none;
+  z-index: 1;
+  right: 0;
+}
+
+.nominee-checkbox-container:hover {
+  /* background-color: rgb(0, 117, 241, 1); */
+  background-color: rgba(0, 0, 0, .15);
+}
+
+.nominee-checkbox {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.nominee-controls .nominee-checkbox-container {
+  visibility: visible;
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 4rem;
+  width: 4rem;
+  right: 1rem;
+}
+
+.nominee-controls .nominee-checkbox {
+  height: 2rem;
+  width: 2rem;
+}
+
+.nominee-controls > .multi-status-dropdown {
+  position: absolute;
+  display: flex;
+  right: 6rem;
+}
+
+.nominee-controls > .multi-status-dropdown .dropdown-toggle {
+  position: relative;
+  margin: auto 0 !important;
+  background-color: #0075f1 !important;
+  border-radius: 6px !important;
+  padding: .5rem 1rem;
+  border: 1px solid #007bff !important;
+}
+
+.nominee-controls > .multi-status-dropdown .dropdown-toggle:hover {
+  background-color: #0069d9 !important;
+  border-color: #0062cc !important;
+}
+
+.nominee-categories .nominee-checkbox-container {
+  height: 44px;
+  padding: 12px;
+}
+
+.nominee-checkbox-container.nominee-checked,
+.nominee-categories > li:hover .nominee-checkbox-container,
+.duplicates-categories-list > li:hover .nominee-checkbox-container {
+  visibility: visible;
+}
+
+.duplicates-categories-list > li:hover .nominee-checkbox-container + .expanded-indicator {
+  margin-right: 48px;
+}
+
+.nominee-categories > li,
+.duplicates-categories-list > li {
+  position: relative;
+}
+
 /** ListOfDuplicates styling **/
 
 .nominee-duplicates li,
@@ -615,9 +697,13 @@
   margin-left: auto;
   margin-right: 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 0.8em;
+  font-size: 0.75em;
   font-weight: 500;
+  transition: margin-right 0.075s;
+}
+
+.nominee-checked + .expanded-indicator {
+  margin-right: 48px;
 }
 
 /** Approval status dropdown selector **/
@@ -809,6 +895,7 @@ code.status-rejected,
 .item-list-dropdown {
   margin-left: auto;
   padding-left: 1rem;
+  /* TODO: make the background & border colors more noticeable when an item is approved/rejected, so they stand out more. Should be easily identifiable at a glance what status a given item has for the current category. */
 }
 
 .item-list-dropdown .dropdown-toggle {

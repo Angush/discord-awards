@@ -5,23 +5,25 @@ import ReactJson from 'react-json-view'
 import ListOfOtherCategories from './ListOfOtherCategories'
 import ListOfDuplicates from './ListOfDuplicates'
 import StatusDropdown, { MultiStatusDropdown } from './StatusDropdown'
+import SelectionCheckbox from './SelectionCheckbox'
 import OtherCard from '../cards/OtherCard'
 import FicCard from '../cards/FicCard'
 import ArtCard from '../cards/ArtCard'
 
 const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNomineeData }) => {
   const [nomineeBeingEdited, setNomineeBeingEdited] = useState(nominee.id)
-  const [containsNullValue] = useState(false)
+  const [checkedCategories, setCheckedCategories] = useState({})
   const [nomineeEdits, setNomineeEdits] = useState(null)
+  const [containsNullValue] = useState(false)
 
-  useEffect(() => {
-    setNomineeBeingEdited(nominee.id)
-  }, [nominee])
-
+  useEffect(() => setNomineeBeingEdited(nominee.id), [nominee])
+  
   useEffect(() => {
     if (!nominee?.id) return
+    //* Reset data when the nominee changes
     if (nominee.id !== nomineeBeingEdited || !nomineeBeingEdited) {
       setNomineeBeingEdited(nominee.id)
+      setCheckedCategories({})
       setNomineeEdits(null)
     }
   }, [nominee, nomineeBeingEdited])
@@ -64,24 +66,31 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     let nomineesWithStatuses = []
 
     const getStatusChanges = key => ({ category: parseInt(key), status: newStatusValue })
-    const loopOverNominees = (array, filterFunction) => {
+    const loopOverNominees = (array, filterFn = null) => {
+      if (!array || !array.length) return
       array.forEach(item => {
         let statuses = { ...item.statuses }
-        let statusChanges = Object.keys(item.statuses)
-          .filter(filterFunction)
-          .map(getStatusChanges)
+        let keys = Object.keys(item.statuses)
+        let statusChanges = (filterFn ? keys.filter(filterFn) : keys).map(getStatusChanges)
         statusChanges.forEach(change => statuses[change.category] = newStatusValue)
         nomineesWithStatuses.push({  ...item, statuses, statusChanges })
       })
     }
 
-    // if "duplicates" is false:  Update all non-current statuses for the current nominee.
+    // Update all non-current statuses for the current nominee.
     if (type === "nominee") loopOverNominees([nominee], key => key !== `${category.id}`)
-    // if "duplicates" is true:   Update all shared statuses for detected duplicates.
+    // Update all shared statuses for detected duplicates.
     if (type === "duplicates") loopOverNominees(DUPLICATES, key => nomineeCategories.includes(key))
+    // Update all statuses for checked nominee/category pairs.
+    if (type === "checked") {
+      Object.entries(checkedCategories).forEach(([nomId, values]) => {
+        loopOverNominees([getDataOfNomineeToUpdate(parseInt(nomId))], key => values[key])
+      })
+    }
 
     if (nomineesWithStatuses.length === 0) return
-    updateNomineeData(nomineesWithStatuses, 'status')
+    if (type === "checked") updateNomineeData(nomineesWithStatuses, 'status', () => setCheckedCategories({}))
+    else updateNomineeData(nomineesWithStatuses, 'status')
   }
 
   const updateData = event => {
@@ -136,6 +145,17 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     makeEdit(newData, true)
   }
 
+  const checkCategory = (nomId, catId) => {
+    let checked = { ...checkedCategories }
+    
+    if (!checked[nomId]) checked[nomId] = {}
+    if (checked[nomId][catId]) delete checked[nomId][catId]
+    else checked[nomId][catId] = true
+
+    if (Object.values(checked[nomId]).length === 0) delete checked[nomId]
+    setCheckedCategories(checked)
+  }
+
   const addKeyToData = values => makeEdit({ ...values.existing_src }, true, addedDiff(values.existing_src, values.updated_src))
 
 
@@ -156,6 +176,9 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
       return parseInt(cat) !== category.id
     })
     .map(cat => data.categories[cat])
+  const checkedCategoryCount = Object.values(checkedCategories).reduce((acc, curr) => {
+    return acc += Object.values(curr).length
+  }, 0)
 
 
   return (
@@ -183,6 +206,16 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
             </code>
           </h3>
         </div>
+        {checkedCategoryCount > 0 && (
+          <MultiStatusDropdown
+            text={`Set Status for ${checkedCategoryCount} Selected`}
+            select={statusChange => updateAllStatuses(statusChange, "checked")}
+          />
+        )}
+        <SelectionCheckbox
+          value={checkedCategories?.[nominee.id]?.[category.id]}
+          onClick={() => checkCategory(nominee.id, category.id)}
+        />
       </div>
 
       <div className='nominee-left-column'>
@@ -206,6 +239,8 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
                 nominee={nominee}
                 categories={CATEGORIES}
                 updateStatus={updateStatus}
+                checkCategory={checkCategory}
+                checkedCategories={checkedCategories}
               />
             )}
             {CATEGORIES.length === 0 && (
@@ -242,6 +277,8 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
                 allCategories={data.categories}
                 updateStatus={updateStatus}
                 duplicates={DUPLICATES}
+                checkCategory={checkCategory}
+                checkedCategories={checkedCategories}
               />
             </>
           )}

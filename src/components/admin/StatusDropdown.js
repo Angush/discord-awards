@@ -48,18 +48,15 @@ const StatusDropdown = ({ id, catId, status, select, size = "sm", classes = '' }
   )
 }
 
-const MultiStatusDropdown = ({ select, classes = '', text, component }) => {
-
+const MultiStatusDropdown = ({ select, classes = '', text }) => {
   return (
     <Dropdown
       className={`status-dropdown multi-status-dropdown ${classes}`}
       onClick={e => e.stopPropagation()}
     >
-      {component || (
-        <Dropdown.Toggle>
-          {text || 'Set All'}
-        </Dropdown.Toggle>
-      )}
+      <Dropdown.Toggle>
+        {text || 'Set All'}
+      </Dropdown.Toggle>
 
       <Dropdown.Menu>
         {options.map(([option, optionText]) => {
