@@ -58,7 +58,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     updateNomineeData([nomineeToUpdate], 'status')
   }
 
-  const updateAllStatuses = (status, duplicates = false) => {
+  const updateAllStatuses = (status, type = "nominee") => {
     let newStatusValue = getStatusValue(status)
     let nomineeCategories = Object.keys(nominee.statuses)
     let nomineesWithStatuses = []
@@ -76,9 +76,9 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     }
 
     // if "duplicates" is false:  Update all non-current statuses for the current nominee.
-    if (!duplicates) loopOverNominees([nominee], key => key !== `${category.id}`)
+    if (type === "nominee") loopOverNominees([nominee], key => key !== `${category.id}`)
     // if "duplicates" is true:   Update all shared statuses for detected duplicates.
-    else loopOverNominees(DUPLICATES, key => nomineeCategories.includes(key))
+    if (type === "duplicates") loopOverNominees(DUPLICATES, key => nomineeCategories.includes(key))
 
     if (nomineesWithStatuses.length === 0) return
     updateNomineeData(nomineesWithStatuses, 'status')
@@ -228,7 +228,10 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
           <div className='section-head'>
             <h3>Duplicates</h3>
             {DUPLICATES.length > 0 && (
-              <MultiStatusDropdown select={statusChange => updateAllStatuses(statusChange, true)} />
+              <MultiStatusDropdown
+                select={statusChange => updateAllStatuses(statusChange, 'duplicates')}
+                text='Set Shared'
+              />
             )}
           </div>
           {DUPLICATES.length > 0 && (
@@ -301,19 +304,5 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
     </div>
   )
 }
-
-// TODO:  Next up on the to-do list:
-// *****  (a) All the nominee data editing functionality - [VetNomineeInterface]
-// *****  (b) Plain text search in header/id/subheader - [ItemList]
-// *****  (c) Add extra fields data (name/desc) to cards - [FicCard]
-// TODO:  (d) VET ALL THE NOMINEES!  Then open voting to the public.
-// *****  (e) Investigate performance a little. It hangs a bit whenever you (a) select a category, and (b) update a nominee's status or data. I think it's because it repopulates the CategoriesList and CategoryNomineesList arrays every time. Could we instead maybe just clone those arrays, update the specific categories/nominees that were changed, and then set the state variable to that copy, thus bypassing the need to recalculate every single nominee again? - [AdminVettingPage + components]
-// !          ^ Could be big job; but it only affects me, so we can do this after (f) and (g) below.
-// *****  (f) Add canonicalURL/authorURL to cards - [ArtCard]  (get glowspider's help to get the data)
-// *****  (g) Rewrite lightbox functionality to be good - [VoteFlow/VotePage]
-// ?      There was more to do than just these, but I don't remember it. lol rip.
-
-//TODO:  2.  Also add buttons to mark the selected nominee as Approved/Unvetted/Rejected in ALL of its categories, as well as a button to mark all of the selected nominee's duplicates as Approved/Unvetted/Rejected with one click.
-
 
 export default VetNomineeInterface
