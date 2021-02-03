@@ -18,9 +18,13 @@ const ItemList = ({
       return
     }
     
-    if (searchterm.length === 0) exitWithDefault()
-    let regex = new RegExp(searchterm, 'gi')
-    if (!regex || !regex.test) exitWithDefault()
+    if (searchterm.length === 0) return exitWithDefault()
+
+    let regex = null
+    try {
+      regex = new RegExp(searchterm, 'gi')
+    } catch (e) {}
+    if (!regex) return exitWithDefault()
     
     let header = null
     let newFilteredItems = []
