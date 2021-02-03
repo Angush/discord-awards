@@ -4,7 +4,7 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
   if (type === "nominees" && allNominees) {
     let returnData = data.nominees.map(nomineeId => {
       const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
-      const { name, title, author, artist, owner, url, image } = nomineeData
+      const { name, title, author, artist, owner, image } = nomineeData
 
       let returnObject = {
         id: nomineeId,
