@@ -1,11 +1,65 @@
-import React from 'react'
-import Badge from './Badge'
+import React, { useEffect, useState } from 'react'
+import { FormControl } from 'react-bootstrap'
 import StatusDropdown from './StatusDropdown'
+import InputClear from '../util/InputClear'
+import Badge from './Badge'
 
-const ItemList = ({ items, select, selectedItem, updateStatus, parentId, depth = 1 }) => {
+const ItemList = ({ name = 'items', items, select, selectedItem, updateStatus, parentId, depth = 1 }) => {
+  const [filteredItems, setFilteredItems] = useState(items)
+  const [searchterm, setSearchterm] = useState('')
+
+  useEffect(() => {
+    if (!items) return
+    const exitWithDefault = () => {
+      setFilteredItems(items)
+      return
+    }
+    
+    if (searchterm.length === 0) exitWithDefault()
+    let regex = new RegExp(searchterm, 'gi')
+    if (!regex || !regex.test) exitWithDefault()
+    
+    let header = null
+    let newFilteredItems = []
+    items.forEach(item => {
+      if (item.IS_HEADER) header = item
+      if (item.IS_HEADER || !item.id || !item.header || !item.subheader) return
+
+      let fields = [`ID ${item.id}`, item.header, item.subheader]
+      if (item.badges && item.badges.collection) fields.push(item.badges.collection)
+      let match = fields.some(field => regex.test(field))
+
+      if (match || (!match && selectedItem?.id === item.id)) {
+        if (header) {
+          newFilteredItems.push(header)
+          header = null
+        }
+        newFilteredItems.push(item)
+      }
+    })
+    
+    setFilteredItems(newFilteredItems)
+  }, [items, searchterm, selectedItem])
+
   return (
     <div className={`item-list list-${depth}${selectedItem?.id ? ' selected-list' : ''}`}>
-      {items.map(item => {
+      <div className='item-list-search'>
+        <FormControl
+          placeholder={`Search ${name}`}
+          onChange={e => setSearchterm(e.target.value)}
+          value={searchterm}
+        />
+        {searchterm && (
+          <InputClear onClick={() => setSearchterm('')} />
+        )}
+      </div>
+      {filteredItems.length === 0 && items.length > 0 && searchterm && (
+        <p className='item-list-empty'>
+            Found no results! <br/>
+            Try another term or item ID.
+        </p>
+      )}
+      {filteredItems.map(item => {
         if (item.IS_HEADER) return (
           <div className='item-list-section' key={`${item.header}-HEADER`}>
             {item.header}

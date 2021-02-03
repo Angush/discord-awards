@@ -208,6 +208,7 @@ const AdminVettingPage = ({ userData }) => {
       {categoriesList &&
         <ItemList
           key="categories"
+          name="categories"
           items={categoriesList}
           select={selectCategory}
           selectedItem={selectedCategory}
@@ -221,6 +222,7 @@ const AdminVettingPage = ({ userData }) => {
       {hasSelectedCategory &&
         <ItemList
           key="cat-nominees"
+          name="nominees"
           items={categoryNomineesList || []}
           select={selectNominee}
           selectedItem={selectedNominee}
