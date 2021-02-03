@@ -929,7 +929,6 @@ code.status-rejected,
 .item-list-dropdown {
   margin-left: auto;
   padding-left: 1rem;
-  /* TODO: make the background & border colors more noticeable when an item is approved/rejected, so they stand out more. Should be easily identifiable at a glance what status a given item has for the current category. */
 }
 
 .item-list-dropdown .dropdown-toggle {
@@ -941,20 +940,45 @@ code.status-rejected,
 }
 
 .item-list-dropdown.status-reset .dropdown-toggle:hover {
-  background-color: rgb(234, 238, 238) !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.item-list-dropdown .dropdown-toggle:hover svg {
+  transition: color 0.15s;
+  color: white !important;
 }
 
 .item-list-dropdown .dropdown-toggle::after {
   content: none;
 }
 
-.selected-list-element .item-list-dropdown .dropdown-toggle {
-  border-color: rgba(0, 0, 0, 0.5) !important;
-}
-
 .item-list-dropdown .dropdown-menu.show {
   background-color: white;
   border-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.item-list-header .status-approve .dropdown-toggle {
+  background-color: rgb(172, 255, 116) !important;
+}
+
+.item-list-header .status-reject .dropdown-toggle {
+  background-color: rgb(255, 93, 81) !important;
+}
+
+.item-list-header .status-reject .dropdown-toggle svg {
+  color: rgb(92, 6, 6);
+}
+
+.item-list-header .dropdown-toggle:hover {
+  background-color: rgba(0,0,0,0.8) !important;
+}
+
+.selected-list-element .item-list-checkbox.nominee-checked {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.selected-list-element .item-list-checkbox:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 /** Nominee JSON buttons **/

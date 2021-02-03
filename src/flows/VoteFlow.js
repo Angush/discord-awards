@@ -471,11 +471,7 @@ const VoteFlow = ({ userData }) => {
       </>
     )
 
-  //--- Things to do ---\\
-
-  //  TODO: Vet the full list of entries, assemble final list of everything (+ changes) and modify the rows in the DB to fit.
-
-  //* TODO: Add little circular checkboxes that appear on hover (or always, on mobile) in the top-right corner of larger cards. (Maybe only draw it if an {onClick} prop exists, within the cards?) Clicking this is the same as clicking the card, and marks the checkbox.
+  // TODO: add little circular checkboxes that appear on hover (or always, on mobile) in the top-right corner of larger cards. (Maybe only draw it if an {onClick} prop exists, within the cards?) Clicking this is the same as clicking the card, and marks the checkbox.
 
   let submissionText
   if (!userData.logged_in) submissionText = 'Log in to vote! Click here.'
