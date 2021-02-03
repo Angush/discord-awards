@@ -14,7 +14,7 @@ const AdminVettingPage = ({ userData }) => {
   const [categoryNomineesList, setCategoryNomineesList] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState({})
   const [selectedNominee, setSelectedNominee] = useState(null)
-
+  const [checkedNominees, setCheckedNominees] = useState({})
   
   //* Fetching and preparing vettables data
   useEffect(() => {
@@ -92,6 +92,7 @@ const AdminVettingPage = ({ userData }) => {
       setCategoryNomineesList(null)
     }
     setSelectedNominee(null)
+    setCheckedNominees({})
   }
 
   const selectNominee = id => {
@@ -154,7 +155,7 @@ const AdminVettingPage = ({ userData }) => {
     if (callback) callback()
   }
 
-  const updateStatus = ({ id, catId }, status) => {
+  const updateStatus = ({ id, catId }, status, POST = true) => {
     const getStatusValue = change => {
       if (change === "approve") return 1
       if (change === "reject") return -1
@@ -168,7 +169,29 @@ const AdminVettingPage = ({ userData }) => {
     nomineeToUpdate.statuses[catId] = newStatusValue
     nomineeToUpdate.statusChanges = [{ category: catId, status: newStatusValue }]
 
-    updateNomineeData([nomineeToUpdate])
+    if (POST) updateNomineeData([nomineeToUpdate])
+    else return nomineeToUpdate
+  }
+
+  const updateCheckedNominees = status => {
+    if (!selectedCategory.id) return
+    let nomineesToUpdate = []
+    Object.keys(checkedNominees).forEach(key => {
+      let nom = updateStatus({ id: parseInt(key), catId: selectedCategory.id }, status, false)
+      nomineesToUpdate.push(nom)
+    })
+    if (nomineesToUpdate.length > 0) updateNomineeData(nomineesToUpdate, 'status', () => setCheckedNominees({}))
+  }
+
+  const checkNominee = (nomId, reset = false) => {
+    console.log(`checkNominee called`, { nomId, reset })
+    if (reset) {
+      return setCheckedNominees({})
+    }
+    let checked = { ...checkedNominees }
+    if (checked[nomId]) delete checked[nomId]
+    else checked[nomId] = true
+    setCheckedNominees(checked)
   }
 
   const hasSelectedCategory = Object.values(selectedCategory).length > 0
@@ -228,6 +251,9 @@ const AdminVettingPage = ({ userData }) => {
           selectedItem={selectedNominee}
           parentId={selectedCategory.id}
           updateStatus={updateStatus}
+          setStatuses={updateCheckedNominees}
+          checked={checkedNominees}
+          check={checkNominee}
           depth={2}
         />
       }

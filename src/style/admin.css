@@ -563,7 +563,7 @@
   right: 6rem;
 }
 
-.nominee-controls > .multi-status-dropdown .dropdown-toggle {
+.checkbox-status-select.multi-status-dropdown .dropdown-toggle {
   position: relative;
   margin: auto 0 !important;
   background-color: #0075f1 !important;
@@ -572,7 +572,7 @@
   border: 1px solid #007bff !important;
 }
 
-.nominee-controls > .multi-status-dropdown .dropdown-toggle:hover {
+.checkbox-status-select.multi-status-dropdown .dropdown-toggle:hover {
   background-color: #0069d9 !important;
   border-color: #0062cc !important;
 }
@@ -583,6 +583,7 @@
 }
 
 .nominee-checkbox-container.nominee-checked,
+.item-list-element:hover .nominee-checkbox-container,
 .nominee-categories > li:hover .nominee-checkbox-container,
 .duplicates-categories-list > li:hover .nominee-checkbox-container {
   visibility: visible;
@@ -595,6 +596,39 @@
 .nominee-categories > li,
 .duplicates-categories-list > li {
   position: relative;
+}
+
+.list-selected-buttons {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+  height: auto;
+  display: flex;
+  background-color: black;
+}
+
+.checkbox-deselect,
+.item-list .checkbox-status-select .dropdown-toggle {
+  width: 100%;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+}
+
+.item-list .checkbox-status-select {
+  margin-left: 0;
+}
+
+.item-list-checkbox {
+  border-radius: 12px;
+  right: 4rem;
+  top: 12px;
+}
+
+.item-list-checkbox:hover {
+  background-color: #d0d0d0;
 }
 
 /** ListOfDuplicates styling **/

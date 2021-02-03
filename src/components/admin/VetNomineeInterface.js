@@ -191,7 +191,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
             catId={category.id}
             id={nominee.id}
             size='lg'
-            classes='primary-status-dropdown'
+            className='primary-status-dropdown'
           />
         </div>
         <div className='nominee-header-text'>
@@ -208,6 +208,7 @@ const VetNomineeInterface = ({ nominee, category, data, getNomineeData, updateNo
         </div>
         {checkedCategoryCount > 0 && (
           <MultiStatusDropdown
+            className='checkbox-status-select'
             text={`Set Status for ${checkedCategoryCount} Selected`}
             select={statusChange => updateAllStatuses(statusChange, "checked")}
           />

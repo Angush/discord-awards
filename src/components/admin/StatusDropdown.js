@@ -19,7 +19,7 @@ const getCurrentStatus = status => {
   return options[0]
 }
 
-const StatusDropdown = ({ id, catId, status, select, size = "sm", classes = '' }) => {
+const StatusDropdown = ({ id, catId, status, select, size = "sm", className = '' }) => {
   const [current] = getCurrentStatus(status)
   const includedOptions = options.filter(option => option[0] !== current)
   const idPacket = { id, catId }
@@ -27,7 +27,7 @@ const StatusDropdown = ({ id, catId, status, select, size = "sm", classes = '' }
   return (
     <Dropdown
       size={size}
-      className={`status-dropdown status-${current} ${classes}`}
+      className={`status-dropdown status-${current} ${className}`}
       onClick={e => e.stopPropagation()}
     >
       <Dropdown.Toggle>
@@ -48,10 +48,10 @@ const StatusDropdown = ({ id, catId, status, select, size = "sm", classes = '' }
   )
 }
 
-const MultiStatusDropdown = ({ select, classes = '', text }) => {
+const MultiStatusDropdown = ({ select, className = '', text }) => {
   return (
     <Dropdown
-      className={`status-dropdown multi-status-dropdown ${classes}`}
+      className={`status-dropdown multi-status-dropdown ${className}`}
       onClick={e => e.stopPropagation()}
     >
       <Dropdown.Toggle>
