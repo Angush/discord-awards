@@ -4,13 +4,14 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
   if (type === "nominees" && allNominees) {
     let returnData = data.nominees.map(nomineeId => {
       const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
-      const { name, title, author, artist, owner } = nomineeData
+      const { name, title, author, artist, owner, url, image } = nomineeData
 
       let returnObject = {
         id: nomineeId,
-        header: name || title || "Unknown",
-        subheader: ((name && title) ? title
-          : (author || artist || owner)) || "Unknown"
+        header: name || title || image || "Unknown",
+        subheader: ((name && title)
+          ? (author && title ? `${author}'s ${title}` : title || author)
+          : (author || artist || owner)) || ""
       }
       if (!skipBadges) returnObject.badges = {
         duplicates: duplicates.length,
