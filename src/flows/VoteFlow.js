@@ -154,7 +154,6 @@ const VoteFlow = ({ userData }) => {
         categories[id].entries = []
         categories[id].anchor = makeSafeForURL(categories[id].name)
         if (categories[id].fields) {
-          categories[id].fields = JSON.parse(categories[id].fields)
           let fields = Object.values(categories[id].fields)
           categories[id].single =
             fields.length === 1 ||
@@ -182,7 +181,7 @@ const VoteFlow = ({ userData }) => {
       Object.values(raw.nominations).forEach(nom => {
         let nomination = {
           id: nom.id,
-          data: JSON.parse(nom.data)
+          data: nom.data
         }
 
         // add nominations to contest

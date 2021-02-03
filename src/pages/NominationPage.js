@@ -46,10 +46,7 @@ const NominationPage = ({ userData }) => {
       .fetch(`https://cauldron.angu.sh/api/contests`, { credentials: 'include' })
       .then(response => response.json())
       .then(rawData => {
-        let data = Object.values(rawData).map(c => {
-          if (c.fields) return { ...c, fields: JSON.parse(c.fields) }
-          else return c
-        })
+        let data = Object.values(rawData)
         let stringified = JSON.stringify(data)
         if (cached !== stringified) {
           populateCategories(data)
