@@ -23,7 +23,12 @@ const ItemList = ({
     let regex = null
     try {
       regex = new RegExp(searchterm, 'gi')
-    } catch (e) {}
+    } catch (e) {
+      try {
+        let editedSearchterm = searchterm.replace(/[{}()[\\]/g, '\\$&')
+        regex = new RegExp(editedSearchterm, 'gi')
+      } catch (e2) {}
+    }
     if (!regex) return exitWithDefault()
     
     let header = null
