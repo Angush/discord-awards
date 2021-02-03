@@ -46,6 +46,8 @@ const SelectCategory = ({
     setSearchterm('')
   }
 
+  const closedCategories = categories.reduce((acc, curr) => acc += curr.closed ? 1 : 0, 0)
+
   //  TODO: if there are more than one "Collection" types for a category, split up the card display, with a section for each Collection.
   //! NOTE: currently, the Collection is included within the category cards themselves, rather than spliting cards into distinct groups. The latter option would be preferable, I think, but it's more complicated to implement, so for the time being, they're in the cards so that other more important functionality can be worked on first.
 
@@ -54,6 +56,11 @@ const SelectCategory = ({
       {multiple && (
         <p className='text-muted' style={{ margin: 0 }}>
           You may select multiple. Note that when searching, selected categories are always included in results.
+        </p>
+      )}
+      {closedCategories > 0 && (
+        <p className='text-muted' style={{ margin: 0 }}>
+          As you have <code>nominate</code> admin permissions, you are able to nominate for <code>{closedCategories}</code> {closedCategories === 1 ? 'category' : 'categories'} that are not open to the public. These are indicated for your convenience.
         </p>
       )}
       <div className={'category-input' + (done || submitting ? '' : ' stick')}>
