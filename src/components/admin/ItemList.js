@@ -43,16 +43,18 @@ const ItemList = ({ name = 'items', items, select, selectedItem, updateStatus, p
 
   return (
     <div className={`item-list list-${depth}${selectedItem?.id ? ' selected-list' : ''}`}>
-      <div className='item-list-search'>
-        <FormControl
-          placeholder={`Search ${name}`}
-          onChange={e => setSearchterm(e.target.value)}
-          value={searchterm}
-        />
-        {searchterm && (
-          <InputClear onClick={() => setSearchterm('')} />
-        )}
-      </div>
+      {items.length > 0 && (
+        <div className='item-list-search'>
+          <FormControl
+            placeholder={`Search ${name}`}
+            onChange={e => setSearchterm(e.target.value)}
+            value={searchterm}
+          />
+          {searchterm && (
+            <InputClear onClick={() => setSearchterm('')} />
+          )}
+        </div>
+      )}
       {filteredItems.length === 0 && items.length > 0 && searchterm && (
         <p className='item-list-empty'>
             Found no results! <br/>
