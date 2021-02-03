@@ -26,7 +26,7 @@ const ItemList = ({
     let newFilteredItems = []
     items.forEach(item => {
       if (item.IS_HEADER) header = item
-      if (item.IS_HEADER || !item.id || !item.header || !item.subheader) return
+      if (item.IS_HEADER || !item.id || !item.header || (!item.subheader && item.subheader !== '')) return
 
       let fields = [`ID ${item.id}`, item.header, item.subheader]
       if (item.badges && item.badges.collection) fields.push(item.badges.collection)
