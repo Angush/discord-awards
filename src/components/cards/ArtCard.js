@@ -17,11 +17,14 @@ const ArtCard = ({
         onClick: onClick,
         tabIndex: 0
       }
-  const artistInfo = (
-    <>
-      by <em>{formData.artist || 'Unknown'}</em>
-    </>
-  )
+  const dataName = (formData.artistPage ? (
+    <>by <a href={formData.artistPage} target='_blank' rel='noopener'><em>{formData.artist || 'Unknown'}</em></a></>
+  ) : (
+    <>by <em>{formData.artist || 'Unknown'}</em></>
+  ))
+  const dataTitle = (formData.canonicalURL ? (
+    <a href={formData.canonicalURL} target='_blank' rel='noopener'>{formData.title || 'Untitled'}</a>
+  ) : (formData.title || 'Untitled'))
 
   return (
     <Card
@@ -45,22 +48,10 @@ const ArtCard = ({
       </div>
       <Card.Body>
         {formData.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-        {formData.spoiler && (
-          <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>
-        )}
-        <Card.Title>{formData.title || 'Untitled'}</Card.Title>
+        {formData.spoiler && <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>}
+        <Card.Title>{dataTitle}</Card.Title>
         <Card.Subtitle>
-          {formData.artistURL ? (
-            <Card.Link
-              href={formData.artistURL}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              {artistInfo}
-            </Card.Link>
-          ) : (
-            artistInfo
-          )}
+          {dataName}
         </Card.Subtitle>
       </Card.Body>
     </Card>
