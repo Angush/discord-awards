@@ -11,6 +11,7 @@ const FicCard = ({ fic, className, onClick, selected }) => {
         onClick: onClick,
         tabIndex: 0
       }
+  const ficTitle = fic.title || "Untitled"
 
   return (
     <Card
@@ -19,13 +20,31 @@ const FicCard = ({ fic, className, onClick, selected }) => {
       className={classes}
       {...props}
     >
+      {fic.name && (
+        <Card.Header className='fic-name-field'>
+          <Card.Title>
+            {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
+            {fic.name}
+          </Card.Title>
+        </Card.Header>
+      )}
       <Card.Body>
-        <Card.Title>
-          {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>} {fic.title || "Untitled"}
-        </Card.Title>
-        <Card.Subtitle>
-          by <em>{fic.author || "Unknown"}</em>
-        </Card.Subtitle>
+        {fic.name ? (
+          <Card.Subtitle>
+            in {fic.author || "Unknown"}'s <em>{ficTitle}</em>
+          </Card.Subtitle>
+        ) : (
+          <>
+            <Card.Title>
+              {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
+              {ficTitle}
+            </Card.Title>
+            <Card.Subtitle>
+              by <em>{fic.author || "Unknown"}</em>
+            </Card.Subtitle>
+          </>
+        )}
+        {fic.description && <Card.Text className='fic-description-field'>{fic.description}</Card.Text>}
         <FicLinks links={fic.links} />
       </Card.Body>
     </Card>

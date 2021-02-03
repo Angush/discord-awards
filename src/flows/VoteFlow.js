@@ -153,7 +153,7 @@ const VoteFlow = ({ userData }) => {
       for (const id in categories) {
         categories[id].entries = []
         categories[id].anchor = makeSafeForURL(categories[id].name)
-        if (categories[id].fields) {
+        if (categories[id].fields && categories[id].type === 'other') {
           let fields = Object.values(categories[id].fields)
           categories[id].single =
             fields.length === 1 ||

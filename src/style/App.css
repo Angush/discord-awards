@@ -510,6 +510,24 @@ input.form-control-lg {
   border: none !important;
 }
 
+.fic-description-field {
+  margin: 14px 0;
+}
+
+.fic-name-field {
+  padding: 12px 20px 0 20px;
+  border-bottom: none;
+  background: none;
+}
+
+.fic-name-field + .card-body {
+  padding-top: 6px;
+}
+
+.fic-name-field .card-title {
+  margin: .5rem 0;
+}
+
 @media (hover: hover) {
   .fic-card:hover,
   .art-card:hover,
