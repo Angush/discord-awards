@@ -919,10 +919,7 @@ input.form-control-lg {
 
 /* Vote flow styling */
 
-.contest_section > h3 {
-  font-weight: bold;
-  /* color: rgb(64, 64, 64);
-  background-color: rgba(0, 0, 0, 0.05); */
+.contest-section-header {
   color: white;
   background-color: rgba(0, 0, 0, 0.8);
   letter-spacing: 0.05em;
@@ -932,12 +929,24 @@ input.form-control-lg {
   margin-right: -0.5rem;
 }
 
+.contest-section-header h3 {
+  font-weight: bold;
+  margin: 0;
+}
+
 .contest_section .category {
   margin-top: 3.5rem;
 }
 
-.contest_section > h3:first-child + .category {
+.contest-section-header + .category {
   margin-top: 2rem;
+}
+
+.contest-section-header .closed-vote-warning {
+  margin: 0;
+  margin-top: 12px;
+  color: #bdcfff;
+  font-size: 17px;
 }
 
 .results section:first-of-type .section-header {
@@ -2035,14 +2044,14 @@ h4 .result-indicator::before {
     color: #17a2b8;
   }
 
-  .contest_section > h3 {
+  .contest-section-header {
     border-radius: 0;
     padding: 1.5rem 1.75rem;
     width: 100vw;
     margin-left: -1.75rem;
   }
 
-  .toc-click + .contest_section > h3 {
+  .toc-click + .contest-section-header {
     margin-top: -5rem !important;
     padding-top: 4rem;
   }

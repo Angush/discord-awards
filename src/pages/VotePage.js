@@ -5,7 +5,8 @@ import envVarIsTrue from '../functions/envVarIsTrue'
 
 const VotePage = (props) => {
   // - Voting not open indicator
-  if (envVarIsTrue('VOTING_CLOSED'))
+  const { canVet, canVote } = props.userData
+  if (envVarIsTrue('VOTING_CLOSED') && !canVet && !canVote)
     return (
       <div className='fade-rise text-center pad-top closed-page-indicator'>
         <h3>Voting is currently closed.</h3>

@@ -7,6 +7,7 @@ import Lightbox from '../components/util/Lightbox'
 import Contest from '../components/vote/Contest'
 import { Button } from 'react-bootstrap'
 import { navigate } from '@reach/router'
+import envVarIsTrue from '../functions/envVarIsTrue'
 
 const VoteFlow = ({ userData }) => {
   const [sections, setSections] = useState(null)
@@ -18,6 +19,8 @@ const VoteFlow = ({ userData }) => {
   const [changes, setChanges] = useState({ total: 0 })
   const [votes, setVotes] = useState({})
   const [toc, setTOC] = useState(null)
+  const { canVet, canVote } = userData
+  const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
 
   //= Create the table of contents
   const createTOC = useCallback(sectionData => {
@@ -401,6 +404,8 @@ const VoteFlow = ({ userData }) => {
     }
     event.preventDefault()
 
+    if (VOTING_CLOSED && !canVote) return
+
     let submissionData = []
     for (const key in changedVotes) {
       // parse contest and entry ids
@@ -474,7 +479,8 @@ const VoteFlow = ({ userData }) => {
   // TODO: add little circular checkboxes that appear on hover (or always, on mobile) in the top-right corner of larger cards. (Maybe only draw it if an {onClick} prop exists, within the cards?) Clicking this is the same as clicking the card, and marks the checkbox.
 
   let submissionText
-  if (!userData.logged_in) submissionText = 'Log in to vote! Click here.'
+  if (VOTING_CLOSED && canVet && !canVote) submissionText = 'Voting is closed.'
+  else if (!userData.logged_in) submissionText = 'Log in to vote! Click here.'
   else if (!sections.fetched) submissionText = 'Syncing vote data...'
   else if (!userData.user.isCauldron)
     submissionText = "You're not a member of Cauldron!"
@@ -528,7 +534,15 @@ const VoteFlow = ({ userData }) => {
             id={section.anchor}
             className='contest_section'
           >
-            <h3>{section.sectionName} Categories</h3>
+            <div className='contest-section-header'>
+              <h3>{section.sectionName} Categories</h3>
+              {VOTING_CLOSED && canVet && !canVote && (
+                <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to view the vote options, but you may not lodge any votes.</p>
+              )}
+              {VOTING_CLOSED && canVet && canVote && (
+                <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to lodge votes despite this, but they may be annulled later.</p>
+              )}
+            </div>
             {section.contests.map((contest, index) => (
               <Contest
                 key={`cat-${contest.id}`}
@@ -565,7 +579,8 @@ const VoteFlow = ({ userData }) => {
             disabled={
               !sections.fetched ||
               (userData.logged_in && changes.total < 1) ||
-              (userData.logged_in && !userData.user.isCauldron)
+              (userData.logged_in && !userData.user.isCauldron) ||
+              (VOTING_CLOSED && !canVote)
             }
           >
             {submissionText}
