@@ -23,6 +23,9 @@
   background-color: white;
   max-width: 400px;
   width: 400px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .item-list-header {
@@ -606,6 +609,7 @@
   height: auto;
   display: flex;
   background-color: black;
+  margin-top: auto;
 }
 
 .checkbox-deselect,

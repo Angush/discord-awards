@@ -52,7 +52,7 @@ const ItemList = ({
       if (searchStatuses && Number.isInteger(status) && match) {
         let { approved, rejected, unvetted, number = null } = (searchStatuses?.groups || {})
         let statusNumber = number !== null ? parseInt(number) : null
-        console.log(`${item.id} numbers:`, { status, statusNumber, number, groups: searchStatuses.groups })
+
         if (status === 1 && !approved) match = false
         else if (status < 0 && !rejected) match = false
         else if ((status === 0 || status > 1) && !unvetted) match = false
