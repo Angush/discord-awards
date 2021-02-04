@@ -18,16 +18,23 @@ const ItemList = ({
       return
     }
     
-    if (searchterm.length === 0) return exitWithDefault()
+    if (!searchterm || searchterm.trim().length === 0) return exitWithDefault()
 
     let regex = null
-    try {
-      regex = new RegExp(searchterm, 'gi')
+    let searchStatuses = null
+    let statusSelectorRegex = /\s*:(((?<number>-?\d+)|(?<approved>approved|approve|approv|appro|appr|app|ap|a)|(?<rejected>rejected|rejecte|reject|rejec|reje|rej|re|r)|(?<unvetted>unvetted|unvette|unvett|unvet|unve|unv|un|u))\|?)+\b\s*/gi
+    let editedSearchterm = searchterm.replace(statusSelectorRegex, '')
+    
+    if (!regex) try {
+      if (editedSearchterm.length !== searchterm.length) searchStatuses = statusSelectorRegex.exec(searchterm)
+      let term = searchStatuses ? editedSearchterm : searchterm
+      regex = new RegExp(term.trim(), 'gi')
     } catch (e) {
       try {
-        let editedSearchterm = searchterm.replace(/[{}()[\\]/g, '\\$&')
-        regex = new RegExp(editedSearchterm, 'gi')
-      } catch (e2) {}
+        let term = searchStatuses ? editedSearchterm : searchterm
+        let replaced = term.trim().replace(/[{}()[\\]/g, '\\$&')
+        regex = new RegExp(replaced, 'gi')
+      } catch (_e) {}
     }
     if (!regex) return exitWithDefault()
     
@@ -38,8 +45,21 @@ const ItemList = ({
       if (item.IS_HEADER || !item.id || !item.header || (!item.subheader && item.subheader !== '')) return
 
       let fields = [`ID ${item.id}`, item.header, item.subheader]
-      if (item.badges && item.badges.collection) fields.push(item.badges.collection)
+      if (item?.badges?.collection) fields.push(item.badges.collection)
       let match = fields.some(field => regex.test(field))
+      
+      let status = item?.badges?.currentStatus
+      if (searchStatuses && Number.isInteger(status) && match) {
+        let { approved, rejected, unvetted, number = null } = (searchStatuses?.groups || {})
+        let statusNumber = number !== null ? parseInt(number) : null
+        console.log(`${item.id} numbers:`, { status, statusNumber, number, groups: searchStatuses.groups })
+        if (status === 1 && !approved) match = false
+        else if (status < 0 && !rejected) match = false
+        else if ((status === 0 || status > 1) && !unvetted) match = false
+        
+        if (statusNumber !== null && statusNumber !== status) match = false
+        else if (statusNumber !== null && statusNumber === status) match = true
+      }
 
       if (match || (!match && selectedItem?.id === item.id)) {
         if (header) {
@@ -49,7 +69,7 @@ const ItemList = ({
         newFilteredItems.push(item)
       }
     })
-    
+
     setFilteredItems(newFilteredItems)
   }, [items, searchterm, selectedItem])
 
