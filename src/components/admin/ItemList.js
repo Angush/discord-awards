@@ -26,15 +26,15 @@ const ItemList = ({
     let statusSelectorRegex = /\s*:(((?<number>-?\d+)|(?<approved>approved|approve|approv|appro|appr|app|ap|a)|(?<rejected>rejected|rejecte|reject|rejec|reje|rej|re|r)|(?<unvetted>unvetted|unvette|unvett|unvet|unve|unv|un|u))\|?)+\b\s*/gi
     let editedSearchterm = searchterm.replace(statusSelectorRegex, '')
     
-    if (!regex) try {
+    try {
       if (editedSearchterm.length !== searchterm.length) searchStatuses = statusSelectorRegex.exec(searchterm)
-      let term = searchStatuses ? editedSearchterm : searchterm
-      regex = new RegExp(term.trim(), 'gi')
+      let term = (searchStatuses ? editedSearchterm : searchterm).split('&')
+      regex = term.map(text => new RegExp(text.trim(), 'gi'))
     } catch (e) {
       try {
         let term = searchStatuses ? editedSearchterm : searchterm
-        let replaced = term.trim().replace(/[{}()[\\]/g, '\\$&')
-        regex = new RegExp(replaced, 'gi')
+        let replaced = term.trim().replace(/[{}()[\\]/g, '\\$&').split('&')
+        regex = replaced.map(text => new RegExp(text.trim(), 'gi'))
       } catch (_e) {}
     }
     if (!regex) return exitWithDefault()
@@ -51,7 +51,7 @@ const ItemList = ({
         `${item.badges.duplicates} duplicates`,
         `${item.badges.duplicates} dupes`
       )
-      let match = fields.some(field => regex.test(field))
+      let match = regex.every(r => fields.some(field => r.test(field)))
       
       let status = item?.badges?.currentStatus
       if (searchStatuses && Number.isInteger(status) && match) {
