@@ -84,17 +84,17 @@ const ItemList = ({
     <div className={`item-list list-${depth}${selectedItem?.id ? ' selected-list' : ''}`}>
       {items.length > 0 && (
         <div className='item-list-search'>
+          {searchterm.trim() && (
+            <>
+              <InputClear onClick={() => setSearchterm('')} />
+              <Badge number={filteredItems.length} suffix={filteredItems.length === 1 ? 'result' : 'results'} />
+            </>
+          )}
           <FormControl
             placeholder={`Search ${name}`}
             onChange={e => setSearchterm(e.target.value)}
             value={searchterm}
           />
-          {searchterm.trim() && (
-            <>
-              <Badge number={filteredItems.length} suffix={filteredItems.length === 1 ? 'result' : 'results'} />
-              <InputClear onClick={() => setSearchterm('')} />
-            </>
-          )}
         </div>
       )}
       {filteredItems.length === 0 && items.length > 0 && searchterm && (
