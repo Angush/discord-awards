@@ -122,6 +122,12 @@
   font-size: 2rem;
 }
 
+.item-list-search .vet-list-badge {
+  position: absolute;
+  right: 2rem;
+  top: 25%;
+}
+
 .item-list-empty {
   font-size: 1.4em;
   padding: 4rem .75rem;

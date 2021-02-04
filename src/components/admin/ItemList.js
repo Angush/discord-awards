@@ -4,6 +4,7 @@ import StatusDropdown, { MultiStatusDropdown } from './StatusDropdown'
 import SelectionCheckbox from './SelectionCheckbox'
 import ItemListElement from './ItemListElement'
 import InputClear from '../util/InputClear'
+import Badge from './Badge'
 
 const ItemList = ({
   name = 'items', items, select, selectedItem, updateStatus, parentId, depth = 1, setStatuses, check, checked
@@ -84,8 +85,11 @@ const ItemList = ({
             onChange={e => setSearchterm(e.target.value)}
             value={searchterm}
           />
-          {searchterm && (
-            <InputClear onClick={() => setSearchterm('')} />
+          {searchterm.trim() && (
+            <>
+              <Badge number={filteredItems.length} suffix={filteredItems.length === 1 ? 'result' : 'results'} />
+              <InputClear onClick={() => setSearchterm('')} />
+            </>
           )}
         </div>
       )}
