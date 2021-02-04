@@ -23,7 +23,7 @@ const ItemList = ({
 
     let regex = null
     let searchStatuses = null
-    let statusSelectorRegex = /\s*:(((?<number>-?\d+)|(?<approved>approved|approve|approv|appro|appr|app|ap|a)|(?<rejected>rejected|rejecte|reject|rejec|reje|rej|re|r)|(?<unvetted>unvetted|unvette|unvett|unvet|unve|unv|un|u))\|?)+\b\s*/gi
+    let statusSelectorRegex = /\s*:(((?<number>-?\d+)|(?<approved>approved|approve|approv|appro|appr|app|ap|a)|(?<rejected>rejected|rejecte|reject|rejec|reje|rej|re|r)|(?<vetted>vetted|vette|vett|vet|ve|v)|(?<unvetted>unvetted|unvette|unvett|unvet|unve|unv|un|u))\|?)+\b\s*/gi
     let editedSearchterm = searchterm.replace(statusSelectorRegex, '')
     
     try {
@@ -55,15 +55,20 @@ const ItemList = ({
       
       let status = item?.badges?.currentStatus
       if (searchStatuses && Number.isInteger(status) && match) {
-        let { approved, rejected, unvetted, number = null } = (searchStatuses?.groups || {})
+        let { approved, rejected, unvetted, vetted, number = null } = (searchStatuses?.groups || {})
         let statusNumber = number !== null ? parseInt(number) : null
 
-        if (status === 1 && !approved) match = false
-        else if (status < 0 && !rejected) match = false
-        else if ((status === 0 || status > 1) && !unvetted) match = false
-        
-        if (statusNumber !== null && statusNumber !== status) match = false
-        else if (statusNumber !== null && statusNumber === status) match = true
+        if (vetted && (status < 0 || status === 1)) {
+          match = true
+        } else {
+          if (status === 1 && !approved) match = false
+          else if (status < 0 && !rejected) match = false
+          else if ((status === 0 || status > 1) && !unvetted) match = false
+          
+          if (statusNumber !== null && statusNumber !== status) match = false
+          else if (statusNumber !== null && statusNumber === status) match = true
+        }
+
       }
 
       if (match || (!match && selectedItem?.id === item.id)) {
