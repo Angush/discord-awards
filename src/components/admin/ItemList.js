@@ -47,6 +47,10 @@ const ItemList = ({
 
       let fields = [`ID ${item.id}`, item.header, item.subheader]
       if (item?.badges?.collection) fields.push(item.badges.collection)
+      if (item?.badges?.duplicates) fields.push(
+        `${item.badges.duplicates} duplicates`,
+        `${item.badges.duplicates} dupes`
+      )
       let match = fields.some(field => regex.test(field))
       
       let status = item?.badges?.currentStatus
