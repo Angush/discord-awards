@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from '@reach/router'
 import '../style/admin.css'
 
 import LoadingIndicator from '../components/util/LoadingIndicator'
@@ -59,12 +58,7 @@ const AdminVettingPage = ({ userData }) => {
     }
   }, [vettingData, selectedCategory.id])
   
-
-  //* Early returns on invalid auth or data
-  if (!userData.canVet && !userData.LOADED_FROM_CACHE) return (
-    <Redirect from='/admin/vetting' to='/unauthorized' noThrow />
-  )
-
+  //* Early return on invalid data
   if (!vettingData || !categoriesList) return (
     <div className='admin-vetting-page fade-rise'>
       <ItemList items={[]} />
