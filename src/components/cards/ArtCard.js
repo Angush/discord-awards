@@ -18,12 +18,12 @@ const ArtCard = ({
         tabIndex: 0
       }
   const dataName = (formData.artistPage ? (
-    <>by <a href={formData.artistPage} target='_blank' rel='noopener noreferrer'><em>{formData.artist || 'Unknown'}</em></a></>
+    <>by <Card.Link href={formData.artistPage} target='_blank' rel='noopener noreferrer'><em>{formData.artist || 'Unknown'}</em></Card.Link></>
   ) : (
     <>by <em>{formData.artist || 'Unknown'}</em></>
   ))
   const dataTitle = (formData.canonicalURL ? (
-    <a href={formData.canonicalURL} target='_blank' rel='noopener noreferrer'>{formData.title || 'Untitled'}</a>
+    <Card.Link href={formData.canonicalURL} target='_blank' rel='noopener noreferrer'>{formData.title || 'Untitled'}</Card.Link>
   ) : (formData.title || 'Untitled'))
 
   return (
