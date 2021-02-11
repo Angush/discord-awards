@@ -398,11 +398,11 @@ const VoteFlow = ({ userData }) => {
   }
 
   const submitVotes = event => {
+    event.preventDefault()
     if (!userData.logged_in) {
-      navigate('https://cauldron.angu.sh/api/login')
+      window.location.href = 'https://cauldron.angu.sh/api/login'
       return
     }
-    event.preventDefault()
 
     if (VOTING_CLOSED && !canVote) return
 
