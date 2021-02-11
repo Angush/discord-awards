@@ -16,6 +16,7 @@ const VoteFlow = ({ userData }) => {
   const [originalVotes, setOriginalVotes] = useState({ votes: {} })
   const [lightboxData, setLightboxData] = useState(null)
   const [changedVotes, setChangedVotes] = useState({})
+  const [expanded, setExpanded] = useState({})
   const [changes, setChanges] = useState({ total: 0 })
   const [votes, setVotes] = useState({})
   const [toc, setTOC] = useState(null)
@@ -528,35 +529,50 @@ const VoteFlow = ({ userData }) => {
           onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
         ></div>
 
-        {sections.items.map(section => (
-          <section
-            key={section.sectionName}
-            id={section.anchor}
-            className='contest_section'
-          >
-            <div className='contest-section-header'>
-              <h3>{section.sectionName} Categories</h3>
-              {VOTING_CLOSED && canVet && !canVote && (
-                <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to view the vote options, but you may not lodge any votes.</p>
-              )}
-              {VOTING_CLOSED && canVet && canVote && (
-                <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to lodge votes despite this, but they may be annulled later.</p>
-              )}
-            </div>
-            {section.contests.map((contest, index) => (
-              <Contest
-                key={`cat-${contest.id}`}
-                changes={
-                  changes[contest.id] ? Object.values(changes[contest.id]) : []
-                }
-                votes={numberOfVotes(contest.id)}
-                isSelected={entryIsSelected}
-                select={selectEntry}
-                contest={contest}
-              />
-            ))}
-          </section>
-        ))}
+        {sections.items.map(section => {
+          const isExpanded = expanded[section.anchor]
+          return (
+            <section
+              key={section.sectionName}
+              id={section.anchor}
+              className='contest_section'
+            >
+              <div className='contest-section-header'>
+                <h3>{section.sectionName} Categories</h3>
+                <Button
+                  variant={isExpanded ? 'light' : 'outline-light'}
+                  onClick={() => {
+                    setExpanded({
+                      ...expanded,
+                      [section.anchor]: isExpanded ? false : true
+                    })
+                  }}
+                >
+                  {isExpanded ? 'Collapse' : 'Expand'} All
+                </Button>
+                {VOTING_CLOSED && canVet && !canVote && (
+                  <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to view the vote options, but you may not lodge any votes.</p>
+                )}
+                {VOTING_CLOSED && canVet && canVote && (
+                  <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to lodge votes despite this, but they may be annulled later.</p>
+                )}
+              </div>
+              {section.contests.map((contest, index) => (
+                <Contest
+                  key={`cat-${contest.id}`}
+                  changes={
+                    changes[contest.id] ? Object.values(changes[contest.id]) : []
+                  }
+                  votes={numberOfVotes(contest.id)}
+                  isSelected={entryIsSelected}
+                  select={selectEntry}
+                  contest={contest}
+                  expanded={isExpanded}
+                />
+              ))}
+            </section>
+          )
+        })}
 
         <div id='controls'>
           <Button

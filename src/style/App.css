@@ -927,11 +927,15 @@ input.form-control-lg {
   padding: 1.5rem;
   margin-left: -0.5rem;
   margin-right: -0.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .contest-section-header h3 {
   font-weight: bold;
   margin: 0;
+  margin-bottom: .25rem;
 }
 
 .contest_section .category {
@@ -947,6 +951,10 @@ input.form-control-lg {
   margin-top: 12px;
   color: #bdcfff;
   font-size: 17px;
+}
+
+.contest-section-header > button {
+  margin-left: auto;
 }
 
 .results section:first-of-type .section-header {
@@ -2049,6 +2057,10 @@ h4 .result-indicator::before {
     padding: 1.5rem 1.75rem;
     width: 100vw;
     margin-left: -1.75rem;
+  }
+
+  .contest-section-header h3 {
+    font-size: 1.6em;
   }
 
   .toc-click + .contest-section-header {

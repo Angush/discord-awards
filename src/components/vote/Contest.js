@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import ContestEntries from './ContestEntries'
 import jumpToID from '../../functions/jumpToID'
@@ -9,10 +9,11 @@ const Contest = ({
   select,
   isSelected,
   votes = 0,
-  changes = []
+  changes = [],
+  expanded = false
 }) => {
   const [collapsedChanges, setCollapsedChanges] = useState(true)
-  const [collapsed, setCollapsed] = useState(true)
+  const [collapsed, setCollapsed] = useState(expanded ? false : true)
   let count = contest.entries ? contest.entries.length : 0
   let countText = `${count} nominee${count === 1 ? '' : 's'}`
   let changeCount = changes.length
@@ -25,6 +26,10 @@ const Contest = ({
     setCollapsed(!collapsed)
     event.target.blur()
   }
+
+  useEffect(() => {
+    setCollapsed(!expanded)
+  }, [expanded])
 
   return (
     <div id={contest.anchor} className='category'>
