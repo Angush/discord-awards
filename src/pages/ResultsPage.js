@@ -54,7 +54,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
       })
       .catch(console.error)
 
-    import(`../json/results/${normalized}.json`)
+    import(/* webpackChunkName: "Results[request]" */ `../json/results/${normalized}.json`)
       .then(yearResults => {
         setData(yearResults.default)
         setLoading(false)

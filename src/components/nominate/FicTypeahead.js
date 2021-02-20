@@ -15,7 +15,7 @@ const FicTypeahead = ({ input, setInput, disabled, reset }) => {
     }
   }, [reset, typeahead])
 
-  import('../../json/typeahead-options/2020-fic-options.json').then(options => {
+  import(/* webpackChunkName: "TypeaheadOptions" */ '../../json/typeahead-options/2020-fic-options.json').then(options => {
     setFics(options.default)
   })
 

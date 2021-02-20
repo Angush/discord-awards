@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import NotFoundPage from './NotFoundPage'
 
-const AdminVettingPage = React.lazy(() => import('./AdminVettingPage'))
+const AdminVettingPage = React.lazy(() => import(/* webpackChunkName: "AdminVetting" */ './AdminVettingPage'))
 
 const AdminVettingPageWrapper = props => {
   const { userData, links } = props
