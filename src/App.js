@@ -20,7 +20,7 @@ import './style/App.css'
 const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
 const NOMINATIONS_CLOSED = envVarIsTrue(`NOMINATIONS_CLOSED`)
 
-const years = ['2019', '2020']
+const years = ['2020', '2019']
 const navlinks = [
   {
     to: '/results',
