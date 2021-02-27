@@ -10,24 +10,11 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
   const blur = entry.spoiler || entry.nsfw
   const creatorPage = entry.artistPage || null
 
-  const indicator =
-    entry.nsfw && entry.spoiler ? (
+  const indicator = (entry.nsfw || entry.spoiler) && (
       <p className='result-indicator'>
-        <span>NSFW</span> + <span>SPOILER</span>
+        {entry.nsfw && <span className='nsfw-indicator'>NSFW</span>}
+        {entry.spoiler && <span className='spoiler-indicator'>SPOILER</span>}
       </p>
-    ) : (
-      <>
-        {entry.nsfw && (
-          <p className='result-indicator'>
-            <span>NSFW</span>
-          </p>
-        )}
-        {entry.spoiler && (
-          <p className='result-indicator'>
-            <span>SPOILER</span>
-          </p>
-        )}
-      </>
     )
 
   return (
@@ -35,7 +22,6 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
       {title && (
         <h4>
           {link ? <a href={link} target='_blank' rel='noreferrer noopener'>{title}</a> : title}{' '}
-          {blur && !image && title && indicator}
         </h4>
       )}
       {creator && creatorPage && (
@@ -64,6 +50,7 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
         </div>
       )}
       {type === 'fic' && <FicLinks links={entry.links} />}
+      {blur && !image && title && indicator}
       {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
     </div>
