@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.5",
+    "mysql2": "^2.2.5",
     "node-fetch": "^2.6.1",
     "purgecss": "^1.4.2"
   }
