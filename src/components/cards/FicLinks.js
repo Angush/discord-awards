@@ -28,6 +28,36 @@ const TYPE = {
     name: 'Fanfiction dot net',
     order: 5
   },
+  youtube: {
+    img: '/images/youtube.png',
+    name: 'YouTube (You Tube)',
+    order: 6
+  },
+  reddit: {
+    img: '/images/reddit.png',
+    name: 'Reddit',
+    order: 7
+  },
+  tumblr: {
+    img: '/images/tumblr.png',
+    name: 'Tumblr (Tumbler)',
+    order: 8
+  },
+  deviantart: {
+    img: '/images/deviantart.png',
+    name: 'Deviant Art',
+    order: 9
+  },
+  imgur: {
+    img: '/images/imgur.png',
+    name: 'Imgur (Imager)',
+    order: 10
+  },
+  soundcloud: {
+    img: '/images/soundcloud.png',
+    name: 'SoundCloud (Sound Cloud)',
+
+  },
   misc: {
     element: (
       <svg
@@ -53,17 +83,23 @@ const TYPE = {
       </svg>
     ),
     name: 'Miscellaneous',
-    order: 6
+    order: 12
   }
 }
 
 const getLinkType = link => {
   let match = TYPE.misc
-  if (link.match(/questionablequesting.com/)) match = TYPE.qq
-  else if (link.match(/spacebattles.com/)) match = TYPE.sb
-  else if (link.match(/sufficientvelocity.com/)) match = TYPE.sv
-  else if (link.match(/fanfiction.net/)) match = TYPE.ffn
-  else if (link.match(/archiveofourown.org/)) match = TYPE.ao3
+  if (link.match(/questionablequesting\.com/)) match = TYPE.qq
+  else if (link.match(/spacebattles\.com/)) match = TYPE.sb
+  else if (link.match(/sufficientvelocity\.com/)) match = TYPE.sv
+  else if (link.match(/fanfiction\.net/)) match = TYPE.ffn
+  else if (link.match(/archiveofourown\.org/)) match = TYPE.ao3
+  else if (link.match(/youtube\.com|youtu\.be/)) match = TYPE.youtube
+  else if (link.match(/(old\.|www\.)?reddit\.com/)) match = TYPE.reddit
+  else if (link.match(/\.tumblr\.com/)) match = TYPE.tumblr
+  else if (link.match(/deviantart\.com/)) match = TYPE.deviantart
+  else if (link.match(/imgur\.com/)) match = TYPE.imgur
+  else if (link.match(/soundcloud\.com/)) match = TYPE.soundcloud
   return match
 }
 
