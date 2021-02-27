@@ -98,8 +98,9 @@ const finalizeData = (sectionResults, categoryResults, nomineeResults) => {
     DATA.totals.categories += SECTIONS[sectionName].categories.length
     DATA.totals.nominees += SECTIONS[sectionName].nominees
   })
-
   DATA.sections = SECTION_ORDER.map(sectionName => SECTIONS[sectionName])
+  DATA.totals.sections = DATA.sections.length
+
   fs.writeFileSync(`./${currentYear}-results-constructed.json`, JSON.stringify(DATA, null, 2))
   console.log(`\nData has been formatted and written to file!\n    > ./${currentYear}-results-constructed.json`)
   process.exit()

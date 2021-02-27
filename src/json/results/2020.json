@@ -1,11 +1,17 @@
 {
   "header": {
-    "paragraphs": {}
+    "paragraphs": {
+      "secondary": [
+        "With 950 entries across 58 categories (1,538 before vetting), and 12,220 votes lodged by 147 voters, the 2020 Cauldron Awards showcase Cauldron's favorites of all the myriad fanworks that our fandom created throughout the year — as well as the many people, events, and moments within the Cauldron community that deserve a little honoring.",
+        "The 2020 Awards showcases 12 new categories, such as \"Favorite Characterization of a Canon Character\" and \"Favorite Favorite Romantic Relationship in a Fic\" and \"Favorite Power in a Fic\" and many more, thanks to some wonderful suggestions from the Awards channel on Discord. This year also marks an increase in nominees, votes, and overall voter engagement, nearly doubling that of the 2019 Awards!",
+        "Thanks to everyone for taking part in the nominations and voting process, and many congratulations to the winners, runners-up, and all the nominees. See you in 2021!"
+      ]
+    }
   },
   "totals": {
     "categories": 58,
     "nominees": 950,
-    "sections": 0,
+    "sections": 3,
     "votes": 12220,
     "voters": 147
   },
@@ -2299,6 +2305,7 @@
         },
         {
           "id": 10,
+          "isNew": true,
           "votes": 170,
           "voters": 98,
           "type": "fic",
@@ -4875,6 +4882,7 @@
         },
         {
           "id": 30,
+          "isNew": true,
           "votes": 96,
           "voters": 52,
           "type": "fic",
@@ -4933,6 +4941,7 @@
         },
         {
           "id": 35,
+          "isNew": true,
           "votes": 235,
           "voters": 101,
           "type": "fic",
@@ -5128,6 +5137,7 @@
         },
         {
           "id": 36,
+          "isNew": true,
           "votes": 372,
           "voters": 104,
           "type": "fic",
@@ -5489,6 +5499,7 @@
         },
         {
           "id": 37,
+          "isNew": true,
           "votes": 155,
           "voters": 92,
           "type": "fic",
@@ -5647,6 +5658,7 @@
         },
         {
           "id": 38,
+          "isNew": true,
           "votes": 139,
           "voters": 83,
           "type": "fic",
@@ -5766,6 +5778,7 @@
         },
         {
           "id": 39,
+          "isNew": true,
           "votes": 178,
           "voters": 80,
           "type": "fic",
@@ -5976,6 +5989,7 @@
         },
         {
           "id": 40,
+          "isNew": true,
           "votes": 80,
           "voters": 55,
           "type": "fic",
@@ -6071,6 +6085,7 @@
         },
         {
           "id": 41,
+          "isNew": true,
           "votes": 89,
           "voters": 70,
           "type": "fic",
@@ -6142,6 +6157,7 @@
         },
         {
           "id": 42,
+          "isNew": true,
           "votes": 279,
           "voters": 87,
           "type": "fic",
@@ -6365,6 +6381,7 @@
         },
         {
           "id": 43,
+          "isNew": true,
           "votes": 147,
           "voters": 59,
           "type": "fic",
@@ -9535,6 +9552,7 @@
         },
         {
           "id": 93,
+          "isNew": true,
           "votes": 83,
           "voters": 56,
           "type": "other",

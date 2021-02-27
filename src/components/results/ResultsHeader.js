@@ -19,7 +19,7 @@ const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
       : `${category.votes} votes`
 
   return (
-    <>
+    <div className='results-header-container'>
       <div
         // tabIndex={-1}
         className='results-header'
@@ -48,7 +48,8 @@ const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
           {userVoteCount === 1 ? 'entry' : 'entries'}
         </h6>
       )}
-    </>
+      {category.isNew && <div className='new-indicator'>NEW CATEGORY</div>}
+    </div>
   )
 }
 
