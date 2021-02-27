@@ -39,7 +39,10 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
         credentials: 'include',
         signal: controller.signal
       })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 404) return {}
+        return response.json()
+      })
       .then(resData => {
         // convert userVotes to a list of category IDs for easy checking
         let voteIDs = {}
