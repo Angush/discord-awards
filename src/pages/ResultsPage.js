@@ -180,6 +180,17 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
               // tabIndex={-1}
             >
               <h2>{section.sectionName}</h2>
+              <div className='section-summary'>
+                <small className='text-muted'>
+                  {section.categories.length} {section.categories.length === 1 ? 'category' : 'categories'}
+                  <span className='slash-divider'> | </span>
+                  {section.nominees} {section.nominees === 1 ? 'entry' : 'entries'}
+                  <span className='slash-divider'> | </span>
+                  {section.votes} {section.votes === 1 ? 'vote' : 'votes'}
+                  <span className='slash-divider'> | </span>
+                  {section.voters} {section.voters === 1 ? 'voter' : 'voters'}
+                </small>
+              </div>
             </div>
             {section.categories.map(category => {
               return (

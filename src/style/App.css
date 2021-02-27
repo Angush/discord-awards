@@ -1416,7 +1416,7 @@ input.form-control-lg {
   font-family: trajan-pro-3, adobe-garamond-pro, serif;
   text-align: center;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgb(38, 60, 102);
   margin: 4rem auto 4rem auto;
   padding: 2rem 0;
   border-top: 1px solid rgb(180, 180, 180);
@@ -1437,7 +1437,7 @@ input.form-control-lg {
   font-size: 16px;
   letter-spacing: 0.5em;
   padding-bottom: 0.5rem;
-  color: grey;
+  color: rgb(84, 96, 128);
   margin-right: -0.5em;
   max-width: 100vw;
 }
@@ -1465,11 +1465,20 @@ input.form-control-lg {
   min-width: 340px;
 }
 
+.section-summary > small,
 .results-header > small {
   font-size: 16px;
   font-weight: 400;
   margin-top: auto;
   margin-bottom: 0;
+}
+
+.section-summary {
+  margin-top: 1rem;
+}
+
+.section-summary > small {
+  color: rgba(69, 71, 95, 0.8) !important;
 }
 
 .results-header > small:first-child {
@@ -2205,6 +2214,12 @@ input.form-control-lg {
     visibility: hidden;
     height: 0px;
     margin-bottom: -42px;
+  }
+
+  .section-summary > small > span:nth-child(2) {
+    visibility: hidden;
+    display: block;
+    height: 0px;
   }
 
   .results-header + .voted-for {
