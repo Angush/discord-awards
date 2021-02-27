@@ -3,7 +3,7 @@ import FicLinks from '../cards/FicLinks'
 
 const Result = ({ entry, type, votePercentage = null, votedFor }) => {
   const title = entry.name || entry.title
-  const creator = (entry.name && entry.title) ? `in ${entry.author}'s ${entry.title}` : (entry.author || entry.artist || entry.owner)
+  const creator = (entry.name && entry.title) ? <>in {entry.author}'s<br/><em>{entry.title}</em></> : (entry.author || entry.artist || entry.owner)
   const image = type === 'art' ? entry.url : entry.image
   const link = entry.canonicalURL || entry.url || entry.link
   const desc = entry.description
