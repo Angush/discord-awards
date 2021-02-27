@@ -1521,7 +1521,18 @@ input.form-control-lg {
 .results-entries h5 {
   font-family: adobe-garamond-pro, serif;
   font-size: 18px;
+}
+
+.results-entries h5:not(.creator-page-link) {
   opacity: 0.7;
+}
+
+.results-entries .creator-page-link a {
+  color: #1863b3;
+}
+
+.results-entries .creator-page-link a:hover {
+  color: #0a4686;
 }
 
 .results-entries h6 {
@@ -1621,9 +1632,11 @@ input.form-control-lg {
 }
 
 .results h6.result-desc {
-  margin-top: 1rem;
   line-height: 1.5rem;
-  opacity: 0.8;
+  opacity: 0.9;
+  font-size: 17px;
+  max-width: 600px;
+  margin: 1rem auto;
 }
 
 .results h6 span {
@@ -1674,7 +1687,7 @@ input.form-control-lg {
 }
 
 .result a {
-  transition: color 0.5s;
+  transition: color 0.3s;
 }
 
 .result a:hover,
