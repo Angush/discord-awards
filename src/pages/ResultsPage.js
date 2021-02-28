@@ -80,6 +80,11 @@ const ResultsPage = ({ userData, years, year }) => {
     setTOC(contents)
   }, [data])
 
+  useEffect(() => {
+    document.body.classList.add(`no-x-overflow`)
+    return () => document.body.classList.remove(`no-x-overflow`)
+  }, [])
+
   if (loading)
     return (
       <>
