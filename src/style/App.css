@@ -1775,9 +1775,15 @@ input.form-control-lg {
   background-color: rgb(246, 250, 206);
 }
 
-.new-indicator {
+.category-badges {
   margin: 1rem auto 0 auto;
   margin-bottom: .75rem;
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.new-indicator {
   width: fit-content;
 }
 
@@ -2272,7 +2278,7 @@ input.form-control-lg {
     font-size: 14px;
   }
 
-  .results-header + .new-indicator {
+  .results-header + .category-badges {
     margin-top: 2rem;
   }  
 

@@ -48,7 +48,10 @@ const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
           {userVoteCount === 1 ? 'entry' : 'entries'}
         </h6>
       )}
-      {category.isNew && <div className='new-indicator'>NEW CATEGORY</div>}
+      <div className='category-badges'>
+        {category.collection && <div className='new-indicator'>{`Collection: ${category.collection}`.toUpperCase()}</div>}
+        {category.isNew && <div className='new-indicator'>NEW CATEGORY</div>}
+      </div>
     </div>
   )
 }
