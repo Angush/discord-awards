@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import makeSafeForURL from '../functions/makeSafeForURL'
 import LoadingIndicator from '../components/util/LoadingIndicator'
-import ResultsTableOfContents from '../components/results/ResultsTableOfContents'
-import ResultsEntries from '../components/results/ResultsEntries'
-import ResultsHeader from '../components/results/ResultsHeader'
-import ResultsSummary from '../components/results/ResultsSummary'
-import jumpToID from '../functions/jumpToID'
-import { Link } from '@reach/router'
+import SelectAnotherYear from '../components/results/SelectAnotherYear'
+import LinkedCategory from '../components/results/LinkedCategory'
+import AllResults from '../components/results/AllResults'
+import { Router, Link } from '@reach/router'
 
-const SelectAnotherYear = () => (
-  <div className='results-goback'>
-    <Link to='/results'>View results for other years.</Link>
-  </div>
-)
-
-const ResultsPage = ({ userData, years, year, '*': hash }) => {
+const ResultsPage = ({ userData, years, year }) => {
   const [yearProper, setYearProper] = useState(year)
-  const [jumpTarget, setJumpTarget] = useState(
-    hash ? hash.toLowerCase().replace(/^[^\w-]*/, '') : null
-  )
   const [userCategoryVotes, setUserCategoryVotes] = useState({})
   const [userVotes, setUserVotes] = useState({})
   const [loading, setLoading] = useState(true)
@@ -91,21 +80,6 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
     setTOC(contents)
   }, [data])
 
-  useEffect(() => {
-    if (!jumpTarget) return
-    let element = document.querySelector(`#${jumpTarget}`)
-    if (!element) return
-    let timeout = setTimeout(() => {
-      console.log(`Scrolling now...`)
-      jumpToID(jumpTarget, {
-        offset: 100,
-        smooth: false,
-        onJump: () => setJumpTarget(null)
-      })
-    }, 500)
-    return () => clearTimeout(timeout)
-  })
-
   if (loading)
     return (
       <>
@@ -132,68 +106,27 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
       </div>
     )
 
-  const userVotedFor = id => userVotes[id] === 1
-
-  const userCategoryVoteCount = (categories = []) => {
-    let voteCount = 0
-    categories.forEach(c => {
-      let categoryVotes = userCategoryVotes[c.id]
-      if (categoryVotes) voteCount += categoryVotes
-    })
-    return voteCount
-  }
-
   return (
     <div className='results left-indent-container'>
-      <ResultsTableOfContents toc={toc} />
-      <div className='fade-rise'>
-        <ResultsSummary
+      <Router>
+        <AllResults
+          default
+          toc={toc}
+          data={data}
           year={yearProper}
-          header={data.header}
-          userVotes={Object.values(userVotes).length}
+          setTOC={setTOC}
           userData={userData}
-        >
-          <SelectAnotherYear />
-        </ResultsSummary>
-
-        {data.sections.map(section => (
-          <section key={section.sectionName}>
-            <div
-              id={makeSafeForURL(section.sectionName)}
-              className='section-header'
-              // tabIndex={-1}
-            >
-              <h2>{section.sectionName}</h2>
-              <div className='section-summary'>
-                <small className='text-muted'>
-                  {section.categories.length} {section.categories.length === 1 ? 'category' : 'categories'}
-                  <span className='slash-divider'> | </span>
-                  {section.nominees} {section.nominees === 1 ? 'entry' : 'entries'}
-                  <span className='slash-divider'> | </span>
-                  {section.votes} {section.votes === 1 ? 'vote' : 'votes'}
-                  <span className='slash-divider'> | </span>
-                  {section.voters} {section.voters === 1 ? 'voter' : 'voters'}
-                </small>
-              </div>
-            </div>
-            {section.categories.map(category => {
-              return (
-                <div key={category.title} className='results-category'>
-                  <ResultsHeader
-                    year={yearProper}
-                    category={category}
-                    userVoteCount={userCategoryVoteCount([category])}
-                  />
-                  <ResultsEntries
-                    category={category}
-                    userVotedFor={userVotedFor}
-                  />
-                </div>
-              )
-            })}
-          </section>
-        ))}
-      </div>
+          userVotes={userVotes}
+          userCategoryVotes={userCategoryVotes}
+        />
+        <LinkedCategory
+          path="/:slug"
+          data={data}
+          year={yearProper}
+          userVotes={userVotes}
+          userCategoryVotes={userCategoryVotes}
+        />
+      </Router>
     </div>
   )
 }

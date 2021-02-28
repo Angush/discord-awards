@@ -4,9 +4,9 @@ import { Button } from 'react-bootstrap'
 
 const ResultsEntries = ({
   category: { id, type, nominees, voters, imageOnly },
-  userVotedFor
+  TargetResetButton, expanded = false, userVotedFor
 }) => {
-  const [showExtras, setShowExtras] = useState(false)
+  const [showExtras, setShowExtras] = useState(expanded)
   const [golds] = useState(
     nominees && nominees.length > 0
       ? nominees.filter(e => e.votes === nominees[0].votes)
@@ -33,6 +33,10 @@ const ResultsEntries = ({
   useEffect(() => {
     if (document.activeElement) document.activeElement.blur()
   }, [showExtras])
+
+  useEffect(() => {
+    setShowExtras(expanded)
+  }, [expanded])
 
   if (!nominees || nominees.length === 0) return <div>No entries.</div>
 
@@ -131,6 +135,7 @@ const ResultsEntries = ({
           )}
         </>
       )}
+      {showExtras && TargetResetButton}
     </div>
   )
 }

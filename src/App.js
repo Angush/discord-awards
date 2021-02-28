@@ -129,7 +129,7 @@ const App = () => {
           <MyNomineesPage path='/nominees' />
           <ResultsListingsPage path='/results' years={years} />
           <AdminVettingPageWrapper path='/admin/vetting' userData={userData} links={navlinks} />
-          <ResultsPage path='/results/:year/*' userData={userData} years={years} />
+          <ResultsPage path='/results/:year/*' basepath='/results/:year' userData={userData} years={years} />
           <Redirect from='/' to={redirectLocation} noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
