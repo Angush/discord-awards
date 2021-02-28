@@ -9,6 +9,7 @@ const ResultsTableOfContents = ({ toc }) => {
     <>
       <TableOfContents
         items={toc}
+        fadeIn={false}
         isOpen={expanded}
         closeMenu={() => setExpanded(false)}
       />

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import useWidth from '../../functions/useWidth'
 import JumpTo from './JumpTo'
 
-const TableOfContents = ({ items, isOpen, closeMenu, offsets = [] }) => {
+const TableOfContents = ({ items, isOpen, closeMenu, offsets = [], fadeIn = true }) => {
   const [target, setTarget] = useState(undefined)
   const [offset, setOffset] = useState(undefined)
   const width = useWidth()
@@ -56,7 +56,7 @@ const TableOfContents = ({ items, isOpen, closeMenu, offsets = [] }) => {
           items.map(section => (
             <React.Fragment key={section.anchor}>
               <li
-                className='toc-entry fade-rise'
+                className={`toc-entry ${fadeIn ? 'fade-rise' : ''}`}
                 onClick={() => selectTOCItem(section.anchor)}
                 data-content={section.text}
               ></li>
