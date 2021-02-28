@@ -965,7 +965,7 @@ input.form-control-lg {
   margin-top: 8rem;
 }
 
-.toc-click + .contest_section {
+#floating-toc-btn + .contest_section {
   margin-top: 1.5rem !important;
 }
 
@@ -1534,6 +1534,7 @@ input.form-control-lg {
 .results-entries h5 {
   font-family: adobe-garamond-pro, serif;
   font-size: 18px;
+  line-height: 1.5em;
 }
 
 .results-entries h5:not(.creator-page-link) {
@@ -1557,7 +1558,7 @@ input.form-control-lg {
 }
 
 .results-gold h5 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .results-entries > div::before,
@@ -2101,7 +2102,7 @@ input.form-control-lg {
     font-size: 1.6em;
   }
 
-  .toc-click + .contest-section-header {
+  #floating-toc-btn + .contest-section-header {
     margin-top: -5rem !important;
     padding-top: 4rem;
   }

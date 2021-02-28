@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import makeSafeForURL from '../functions/makeSafeForURL'
 import LoadingIndicator from '../components/util/LoadingIndicator'
-import TableOfContents from '../components/util/TableOfContents'
+import ResultsTableOfContents from '../components/results/ResultsTableOfContents'
 import ResultsEntries from '../components/results/ResultsEntries'
 import ResultsHeader from '../components/results/ResultsHeader'
 import ResultsSummary from '../components/results/ResultsSummary'
 import jumpToID from '../functions/jumpToID'
-
-import { Button } from 'react-bootstrap'
 import { Link } from '@reach/router'
 
 const ResultsPage = ({ userData, years, year, '*': hash }) => {
@@ -19,7 +17,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
   const [userVotes, setUserVotes] = useState({})
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
-  const [toc, setTOC] = useState({})
+  const [toc, setTOC] = useState([])
   const [latest] = useState(
     typeof year === 'string' && year.toLowerCase().trim() === 'latest'
   )
@@ -33,7 +31,6 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
       setLoading(false)
       return
     }
-
     window
       .fetch(`https://cauldron.angu.sh/api/votes/${normalized}`, {
         credentials: 'include',
@@ -85,10 +82,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
         })
       })
     })
-    setTOC({
-      expanded: false,
-      items: contents
-    })
+    setTOC(contents)
   }, [data])
 
   useEffect(() => {
@@ -151,20 +145,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
 
   return (
     <div className='results left-indent-container'>
-      <TableOfContents
-        items={toc.items}
-        isOpen={toc.expanded}
-        closeMenu={() => {
-          setTOC({
-            ...toc,
-            expanded: false
-          })
-        }}
-      />
-      <div
-        className={toc.expanded ? 'toc-click expanded' : 'toc-click'}
-        onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
-      ></div>
+      <ResultsTableOfContents toc={toc} />
       <div className='fade-rise'>
         <ResultsSummary
           year={yearProper}
@@ -212,21 +193,6 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
             })}
           </section>
         ))}
-      </div>
-      <div id='floating-toc-btn'>
-        <Button
-          id='open-toc'
-          variant='light'
-          onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
-        >
-          <img
-            alt='Toggle table of contents'
-            fill='black'
-            src='/images/list.svg'
-            width='42px'
-            height='42px'
-          />
-        </Button>
       </div>
     </div>
   )
