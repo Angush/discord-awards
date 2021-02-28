@@ -24,6 +24,14 @@ const LinkedCategory = ({ slug, data, year, userVotes, userCategoryVotes, naviga
     else setJumpTarget(null)
   }, [jumpTarget, data])
 
+  useEffect(() => {
+    let navElement = document.querySelector(`.vote-nav .container`)
+    if (navElement) {
+      navElement.classList.add(`remove-vote-nav-indent`)
+      return () => navElement.classList.remove(`remove-vote-nav-indent`)
+    }
+  }, [])
+
   const clearTarget = () => {
     setTarget(null)
     setJumpTarget(null)

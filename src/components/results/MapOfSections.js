@@ -29,7 +29,7 @@ const MapOfSections = ({ data, year, userVotes, userCategoryVotes, target, clear
 
   const sections = target ? [target] : (data.sections || [])
 
-  return <div className={target ? 'fade-rise' : ''}>
+  return <div className={target ? 'fade-rise linked-section' : ''}>
     {sections.map(section => (
       <section key={section.sectionName}>
         <div
