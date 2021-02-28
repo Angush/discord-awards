@@ -8,6 +8,12 @@ import ResultsSummary from '../components/results/ResultsSummary'
 import jumpToID from '../functions/jumpToID'
 import { Link } from '@reach/router'
 
+const SelectAnotherYear = () => (
+  <div className='results-goback'>
+    <Link to='/results'>View results for other years.</Link>
+  </div>
+)
+
 const ResultsPage = ({ userData, years, year, '*': hash }) => {
   const [yearProper, setYearProper] = useState(year)
   const [jumpTarget, setJumpTarget] = useState(
@@ -100,12 +106,6 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
     return () => clearTimeout(timeout)
   })
 
-  const SelectAnotherYear = (
-    <div className='results-goback'>
-      <Link to='/results'>View results for other years.</Link>
-    </div>
-  )
-
   if (loading)
     return (
       <>
@@ -114,7 +114,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
           <h6 className='text-muted'>
             We're loading the {latest ? 'latest' : yearProper} results for you.
           </h6>
-          {SelectAnotherYear}
+          <SelectAnotherYear />
         </LoadingIndicator>
       </>
     )
@@ -153,7 +153,7 @@ const ResultsPage = ({ userData, years, year, '*': hash }) => {
           userVotes={Object.values(userVotes).length}
           userData={userData}
         >
-          {SelectAnotherYear}
+          <SelectAnotherYear />
         </ResultsSummary>
 
         {data.sections.map(section => (
