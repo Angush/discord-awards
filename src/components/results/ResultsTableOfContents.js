@@ -12,6 +12,10 @@ const ResultsTableOfContents = ({ toc }) => {
         fadeIn={false}
         isOpen={expanded}
         closeMenu={() => setExpanded(false)}
+        offsets={[{
+          default: true,
+          distance: 100
+        }]}
       />
       <div
         className={expanded ? 'toc-click expanded' : 'toc-click'}

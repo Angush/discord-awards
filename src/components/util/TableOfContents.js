@@ -10,13 +10,13 @@ const TableOfContents = ({ items, isOpen, closeMenu, offsets = [], fadeIn = true
   // = Calculate offset based on width and provided offset breakpoints = \\
   useEffect(() => {
     if (offsets.length === 0) return
-    let defaultOption = offsets.filter(o => o.default)
+    let defaultOption = offsets.find(o => o.default)
     let options = offsets
-      .filter(o => o.breakpoint >= width)
+      .filter(o => !o.default && o.breakpoint >= width)
       .sort((a, b) => a.breakpoint - b.breakpoint)
 
     if (options.length === 0) {
-      if (defaultOption.length > 0) setOffset(defaultOption[0].distance)
+      if (defaultOption) setOffset(defaultOption.distance)
     } else {
       setOffset(options[0].distance)
     }
