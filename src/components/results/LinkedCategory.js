@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import makeSafeForURL from '../../functions/makeSafeForURL'
-import jumpToID from '../../functions/jumpToID'
 import MapOfSections from './MapOfSections'
 
 const LinkedCategory = ({ slug, data, year, userVotes, userCategoryVotes, navigate }) => {
@@ -35,16 +34,7 @@ const LinkedCategory = ({ slug, data, year, userVotes, userCategoryVotes, naviga
   const clearTarget = () => {
     setTarget(null)
     setJumpTarget(null)
-    navigate('../')
-
-    setTimeout(() => {
-      let element = document.querySelector(`#${jumpTarget}`)
-      if (!element) return
-      jumpToID(jumpTarget, {
-        offset: 100,
-        smooth: false
-      })
-    }, 100)
+    navigate('../', { state: { jumpedTo: jumpTarget } })
   }
 
   return (

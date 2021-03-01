@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ResultsTableOfContents from './ResultsTableOfContents'
 import SelectAnotherYear from './SelectAnotherYear'
 import ResultsSummary from './ResultsSummary'
 import MapOfSections from './MapOfSections'
+import jumpToID from '../../functions/jumpToID'
 
-const AllResults = ({ data, toc, year, userData, userVotes = {}, userCategoryVotes = {}, children }) => {
+const AllResults = ({ data, toc, year, userData, userVotes = {}, userCategoryVotes = {}, location }) => {
+  const jumpTarget = location?.state?.jumpedTo || null
+
+  useEffect(() => {
+    if (!jumpTarget) return
+    jumpToID(jumpTarget, {
+      offset: 120,
+      smooth: false
+    })
+  }, [jumpTarget])
+
   return (
     <>
       <ResultsTableOfContents toc={toc} />
