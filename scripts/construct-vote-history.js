@@ -22,16 +22,19 @@ const db = mysql.createConnection(process.env.SQL_URL || {
 const DATA = {}
 
 db.query(`
-  SELECT idMember, idContest, idNomination FROM votes
+  SELECT CONCAT("'", idMember, "'") as idUser, idContest, idNomination
+  FROM votes
 `, (error, results, fields) => {
   if (error) {
     console.log(`Failed to fetch votes data`)
     throw error
   }
 
+  console.log(`Fetched data for ${results.length} votes`)
   results.forEach(vote => {
-    if (!DATA[vote.idMember]) DATA[vote.idMember] = {}
-    DATA[vote.idMember][`c${vote.idContest}_e${vote.idNomination}`] = 1
+    let idUser = vote.idUser.replace(/^[']|[']$/g, '')
+    if (!DATA[idUser]) DATA[idUser] = {}
+    DATA[idUser][`c${vote.idContest}_e${vote.idNomination}`] = 1
   })
 
   fs.writeFileSync(`./${currentYear}-vote-history-constructed.json`, JSON.stringify(DATA, null, 2))
