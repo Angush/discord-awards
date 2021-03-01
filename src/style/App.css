@@ -1410,6 +1410,8 @@ input.form-control-lg {
 
 /*=  Results styling  =*/
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@0;1&display=swap');
+
 .results {
   width: 100%;
   max-width: 1000px;
@@ -1417,7 +1419,7 @@ input.form-control-lg {
 }
 
 .section-header {
-  font-family: trajan-pro-3, adobe-garamond-pro, serif;
+  font-family: trajan-pro-3, 'Noto Serif', adobe-garamond-pro, serif;
   text-align: center;
   text-transform: uppercase;
   color: rgb(38, 60, 102);
@@ -1454,7 +1456,7 @@ input.form-control-lg {
   display: grid;
   text-align: center;
   text-transform: uppercase;
-  font-family: trajan-pro-3, serif;
+  font-family: 'Noto Serif', trajan-pro-3, serif;
   grid-template-areas:
     'imgl pretitle imgr'
     'imgl title    imgr'
@@ -1535,14 +1537,14 @@ input.form-control-lg {
 }
 
 .results-entries h4 {
-  font-family: adobe-garamond-pro, serif;
+  font-family: 'Noto Serif', adobe-garamond-pro, serif;
   font-size: 24px;
   font-style: italic;
 }
 
 .results-entries h5 {
-  font-family: adobe-garamond-pro, serif;
-  font-size: 18px;
+  font-family: 'Nono Serif', adobe-garamond-pro, serif;
+  font-size: 20px;
   line-height: 1.5em;
 }
 
@@ -1567,7 +1569,7 @@ input.form-control-lg {
 }
 
 .results-gold h5 {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .results-entries > div::before,
@@ -1578,7 +1580,7 @@ input.form-control-lg {
   margin-right: -0.4em;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  font-family: adobe-garamond-pro, serif;
+  font-family: 'Noto Serif', adobe-garamond-pro, serif;
 }
 
 .result + .result::before {
@@ -1656,11 +1658,13 @@ input.form-control-lg {
 }
 
 .results h6.result-desc {
-  line-height: 1.7rem;
+  line-height: 1.8em;
   opacity: 0.85;
   font-size: 17px;
   max-width: 600px;
   margin: 1rem auto;
+  margin-bottom: 1.25rem;
+  font-family: 'Noto Serif', trajan-pro-3, serif;
 }
 
 .results h6 span {
@@ -2299,7 +2303,7 @@ input.form-control-lg {
   }
 
   .results-gold h5 {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .results-entries > div::before {
