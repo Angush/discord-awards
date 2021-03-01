@@ -1473,6 +1473,11 @@ input.form-control-lg {
   min-width: 340px;
 }
 
+.results-header > h2 a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
 .section-summary > small,
 .results-header > small {
   font-size: 16px;

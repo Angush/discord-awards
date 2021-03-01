@@ -128,6 +128,7 @@ const ResultsPage = ({ userData, years, year }) => {
           path="/:slug"
           data={data}
           year={yearProper}
+          userData={userData}
           userVotes={userVotes}
           userCategoryVotes={userCategoryVotes}
         />

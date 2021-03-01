@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import makeSafeForURL from '../../functions/makeSafeForURL'
+import { Link } from '@reach/router'
 
-const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
+const ResultsHeader = ({ year, category, userVoteCount = 0, hideLink = false }) => {
   const [anchor] = useState(makeSafeForURL(category.title))
 
   const entries =
@@ -28,7 +29,13 @@ const ResultsHeader = ({ year, category, userVoteCount = 0 }) => {
       >
         <img src='/images/g24.png' alt='Left' />
         <small>Cauldron Awards {year}</small>
-        <h2>{category.title}</h2>
+        <h2>
+          {!hideLink ? (
+            <Link to={`${anchor}`}>
+              {category.title}
+            </Link>
+          ) : category.title}
+        </h2>
         <small className='text-muted'>
           {entries}
           <span className='slash-divider'> | </span>

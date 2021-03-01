@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import makeSafeForURL from '../../functions/makeSafeForURL'
 import ResultsEntries from './ResultsEntries'
 import ResultsHeader from './ResultsHeader'
 import { Button } from 'react-bootstrap'
 
 const MapOfSections = ({ data, year, userVotes, userCategoryVotes, target, clearTarget }) => {
+  useEffect(() => {
+    if (target) window.scrollTo({
+      behavior: 'auto',
+      top: 0
+    })
+  }, [target])
+
   const userVotedFor = id => userVotes[id] === 1
 
   const userCategoryVoteCount = (categories = []) => {
@@ -57,6 +64,7 @@ const MapOfSections = ({ data, year, userVotes, userCategoryVotes, target, clear
                 year={year}
                 category={category}
                 userVoteCount={userCategoryVoteCount([category])}
+                hideLink={target ? true : false}
               />
               {target && (
                 <>
