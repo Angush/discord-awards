@@ -1615,6 +1615,7 @@ input.form-control-lg {
 
 .results-entries .img-parent img {
   max-width: 100%;
+  height: auto;
 }
 
 .results-entries .img-parent a {
