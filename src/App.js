@@ -104,8 +104,8 @@ const App = () => {
   }
 
   const redirectLocation = process.env.REACT_APP_DEFAULT_REDIRECT ||
-    (NOMINATIONS_CLOSED && VOTING_CLOSED ? '/results/latest' :
-      (!NOMINATIONS_CLOSED ? '/nominate' : (!VOTING_CLOSED ? '/vote' : '/results/latest'))
+    (NOMINATIONS_CLOSED && VOTING_CLOSED ? `/results/${years[0]}` :
+      (!NOMINATIONS_CLOSED ? '/nominate' : (!VOTING_CLOSED ? '/vote' : `/results/${years[0]}`))
     )
 
   return (
