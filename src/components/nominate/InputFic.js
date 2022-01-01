@@ -11,44 +11,55 @@ const LINK_TYPES = [
     id: 'linkSB',
     name: 'Spacebattles',
     img: '/images/sb.png',
-    regex: /forum\.spacebattles\.com/i
+    regex: /forum\.spacebattles\.com/i,
   },
   {
     id: 'linkSV',
     name: 'Sufficient Velocity',
     img: '/images/sv.png',
-    regex: /forums\.sufficientvelocity\.com/i
+    regex: /forums\.sufficientvelocity\.com/i,
   },
   {
     id: 'linkQQ',
     name: 'Questionable Questing',
     img: '/images/qq.png',
-    regex: /forum\.questionablequesting\.com/i
+    regex: /forum\.questionablequesting\.com/i,
   },
   {
     id: 'linkAO3',
     name: 'Archive Of Our Own',
     img: '/images/ao3.png',
-    regex: /archiveofourown\.org/i
+    regex: /archiveofourown\.org/i,
   },
   {
     id: 'linkFFN',
     name: 'Fanfiction.net',
     img: '/images/ffn.png',
-    regex: /fanfiction\.net/i
+    regex: /fanfiction\.net/i,
   },
   {
     id: 'linkMisc',
     name: 'Miscellaneous',
-    img: '/images/misc.png'
-  }
+    img: '/images/misc.png',
+  },
 ]
 
-const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extraFields }) => {
+const InputFic = ({
+  save,
+  nominee,
+  setNominee,
+  disabled,
+  submitting,
+  reset,
+  extraFields,
+}) => {
   const [manualInput, setManualInput] = useState({})
   const [refilledData, setRefilledData] = useState(reset ? true : false)
-  const [selection, setSelection] = useState(nominee.MANUAL_INPUT === false ? nominee : null)
+  const [selection, setSelection] = useState(
+    nominee.MANUAL_INPUT === false ? nominee : null
+  )
   const [manual, setManual] = useState(nominee.MANUAL_INPUT ? true : false)
+  const [typeaheadDisabled, setTypeaheadDisabled] = useState(false)
   const [valid, setValid] = useState({ all: false })
 
   //* Forcibly reset data
@@ -76,12 +87,12 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
     if (!nominee.MANUAL_INPUT || refilledData) return
 
     let linksArray = nominee.links || []
-    let nomineeData = {...nominee}
+    let nomineeData = { ...nominee }
     let nomineeLinks = {}
 
-    linksArray.forEach(link => {
+    linksArray.forEach((link) => {
       let matched = false
-      LINK_TYPES.slice(0, LINK_TYPES.length - 1).forEach(type => {
+      LINK_TYPES.slice(0, LINK_TYPES.length - 1).forEach((type) => {
         if (!matched && link.match(type.regex)) {
           nomineeLinks[type.id] = link
           matched = true
@@ -99,7 +110,7 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
   useEffect(() => {
     if (!manual) return
     let values = Object.values(manualInput)
-    let allEmpty = values.every(v => !v || v.length === 0)
+    let allEmpty = values.every((v) => !v || v.length === 0)
     if (values.length === 0 || allEmpty) {
       setValid({ all: false })
       setNominee({})
@@ -108,7 +119,7 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
       let author = manualInput.author
       let links = Object.values(manualInput.links || {})
       let invalidLinks = Object.values(manualInput.invalidLinks || {}).filter(
-        l => l !== null
+        (l) => l !== null
       )
       let validTitle = title ? true : false
       let validAuthor = author ? true : false
@@ -117,23 +128,23 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
         title: validTitle,
         author: validAuthor,
         links: validLinks,
-        all: validTitle && validAuthor && validLinks
+        all: validTitle && validAuthor && validLinks,
       })
       setNominee({
         title: title,
         author: author,
         links: links,
         nsfw: manualInput.nsfw,
-        MANUAL_INPUT: true
+        MANUAL_INPUT: true,
       })
     }
   }, [manual, manualInput, setNominee])
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     let editedData = {
       ...nominee,
-      links: nominee.links.map(url => shortenURL(url))
+      links: nominee.links.map((url) => shortenURL(url)),
     }
     if (!manual) editedData.approval = true
     save(editedData)
@@ -141,7 +152,7 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
 
   return (
     <Form onSubmit={handleSubmit}>
-      {manual ? (
+      {manual || typeaheadDisabled ? (
         <FicManual
           input={manualInput}
           setInput={setManualInput}
@@ -154,6 +165,10 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
           setInput={setSelection}
           disabled={disabled}
           reset={reset}
+          fallback={() => {
+            setManual(true)
+            setTypeaheadDisabled(true)
+          }}
         />
       )}
 
@@ -171,20 +186,22 @@ const InputFic = ({ save, nominee, setNominee, disabled, submitting, reset, extr
           />
         )}
       </div>
-      
+
       <Submission
         tall
         disabled={!valid.all || disabled}
         text={extraFields ? 'Continue' : 'Submit'}
         submitting={submitting}
       >
-        {manual ? (
+        {manual || typeaheadDisabled ? (
           <Button
             variant='link'
             onClick={() => setManual(false)}
-            disabled={disabled}
+            disabled={disabled || typeaheadDisabled}
           >
-            Or select fic interactively.
+            {typeaheadDisabled
+              ? 'Typeahead search unavailable.'
+              : 'Or select fic interactively.'}
           </Button>
         ) : (
           <Button
