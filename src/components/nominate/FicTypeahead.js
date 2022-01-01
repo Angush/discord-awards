@@ -16,7 +16,7 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
   }, [reset, typeahead])
 
   useEffect(() => {
-    if (fics) return
+    if (!!fics) return
 
     const controller = new AbortController()
     window
@@ -29,7 +29,7 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
       .catch((err) => fallback())
 
     return () => controller.abort()
-  }, [fics])
+  }, [fics, fallback])
 
   return (
     <InputGroup id='typeahead-container'>

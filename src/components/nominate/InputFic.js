@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import Submission from '../util/Submission'
 import FicTypeahead from './FicTypeahead'
@@ -140,6 +140,11 @@ const InputFic = ({
     }
   }, [manual, manualInput, setNominee])
 
+  const typeaheadFallback = useCallback(() => {
+    setManual(true)
+    setTypeaheadDisabled(true)
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     let editedData = {
@@ -165,10 +170,7 @@ const InputFic = ({
           setInput={setSelection}
           disabled={disabled}
           reset={reset}
-          fallback={() => {
-            setManual(true)
-            setTypeaheadDisabled(true)
-          }}
+          fallback={typeaheadFallback}
         />
       )}
 
