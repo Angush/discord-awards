@@ -1,5 +1,5 @@
 # Redirect API requests to the API url
-/api/*                                    https://awardsapi.angu.sh/:splat     200
+/api/*                                    https://awards.angu.sh/:splat     200
 
 # React routing support
 /*                                        /index.html                                 200
