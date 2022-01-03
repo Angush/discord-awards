@@ -29,35 +29,40 @@ const navlinks = [
     navClass: 'vote-nav',
     classOn: {
       root: false,
-      children: true
-    }
+      children: true,
+    },
   },
-  (
-    VOTING_CLOSED ? null : {
-      to: '/vote',
-      text: 'Vote',
-      navClass: 'vote-nav'
-    }
-  ),
-  (
-    NOMINATIONS_CLOSED ? null : {
-      to: '/nominate',
-      text: 'Nominate',
-      navClass: 'nominate-nav'
-    }
-  ),
-  (
-    NOMINATIONS_CLOSED && VOTING_CLOSED ? null : {
-      to: '/nominees',
-      text: 'My Nominees'
-    }
-  )
-].filter(navlink => navlink)
+  VOTING_CLOSED
+    ? null
+    : {
+        to: '/vote',
+        text: 'Vote',
+        navClass: 'vote-nav',
+      },
+  NOMINATIONS_CLOSED
+    ? null
+    : {
+        to: '/nominate',
+        text: 'Nominate',
+        navClass: 'nominate-nav',
+      },
+  NOMINATIONS_CLOSED && VOTING_CLOSED
+    ? null
+    : {
+        to: '/nominees',
+        text: 'My Nominees',
+      },
+].filter((navlink) => navlink)
+
+if (window.location.search) {
+  let href = window.location.href.replace(/\?(code|state)=.*/, '')
+  if (href !== window.location.href) window.location.href = href
+}
 
 const App = () => {
   const [userData, setUserData] = useState({})
 
-  const handleKeydown = useCallback(event => {
+  const handleKeydown = useCallback((event) => {
     if (![32, 13].includes(event.keyCode)) return
     if (!document.activeElement.getAttribute('keyclickable')) return
     document.activeElement.click()
@@ -76,42 +81,49 @@ const App = () => {
 
     window
       .fetch(`https://cauldron.angu.sh/api/auth`, {
-        credentials: 'include'
+        credentials: 'include',
       })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => {
+        if (response.ok) return response.json()
+      })
+      .then((data) => {
         setUserData(data)
         let stringified = JSON.stringify(data)
         localStorage.userData = stringified
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(`Failed to fetch login data! That's weird...`, err)
         setUserData({})
         delete localStorage.userData
       })
   }, [handleKeydown])
 
-  const logout = event => {
+  const logout = (event) => {
     if (userData.logged_in) {
       event.preventDefault()
       window.fetch(`https://cauldron.angu.sh/api/logout`, {
         credentials: 'include',
-        method: 'POST'
+        method: 'POST',
       })
       localStorage.removeItem('userData')
       setUserData({})
     }
   }
 
-  const redirectLocation = process.env.REACT_APP_DEFAULT_REDIRECT ||
-    (NOMINATIONS_CLOSED && VOTING_CLOSED ? `/results/${years[0]}` :
-      (!NOMINATIONS_CLOSED ? '/nominate' : (!VOTING_CLOSED ? '/vote' : `/results/${years[0]}`))
-    )
+  const redirectLocation =
+    process.env.REACT_APP_DEFAULT_REDIRECT ||
+    (NOMINATIONS_CLOSED && VOTING_CLOSED
+      ? `/results/${years[0]}`
+      : !NOMINATIONS_CLOSED
+      ? '/nominate'
+      : !VOTING_CLOSED
+      ? '/vote'
+      : `/results/${years[0]}`)
 
   return (
     <div className='App'>
       <Location>
-        {props => (
+        {(props) => (
           <AppNavBar
             logout={logout}
             navlinks={navlinks}
@@ -128,8 +140,17 @@ const App = () => {
           <NominationPage path='/nominate/*' userData={userData} />
           <MyNomineesPage path='/nominees' />
           <ResultsListingsPage path='/results' years={years} />
-          <AdminVettingPageWrapper path='/admin/vetting' userData={userData} links={navlinks} />
-          <ResultsPage path='/results/:year/*' basepath='/results/:year' userData={userData} years={years} />
+          <AdminVettingPageWrapper
+            path='/admin/vetting'
+            userData={userData}
+            links={navlinks}
+          />
+          <ResultsPage
+            path='/results/:year/*'
+            basepath='/results/:year'
+            userData={userData}
+            years={years}
+          />
           <Redirect from='/' to={redirectLocation} noThrow />
           <NotFoundPage default links={navlinks} />
         </Router>
