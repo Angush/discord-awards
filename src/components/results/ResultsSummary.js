@@ -1,11 +1,13 @@
 import React from 'react'
+import getLoginPathName from '../../functions/getLoginPathName'
 
 const ResultsSummary = ({ header, year, userData, userVotes, children }) => {
   if (!header || !header.paragraphs) return children
-  const { paragraphs = {} } = header 
+  const { paragraphs = {} } = header
 
   const paragraphData = () => {
-    const hasAnyParagraphs = (paragraphs?.primary?.length || 0) + (paragraphs?.secondary?.length || 0)
+    const hasAnyParagraphs =
+      (paragraphs?.primary?.length || 0) + (paragraphs?.secondary?.length || 0)
     if (!hasAnyParagraphs) return null
     return (
       <>
@@ -41,9 +43,7 @@ const ResultsSummary = ({ header, year, userData, userVotes, children }) => {
           )}
         </>
       ) : (
-        <a href={`https://cauldron.angu.sh/api/login`}>
-          Login here to view what you voted for.
-        </a>
+        <a href={getLoginPathName()}>Login here to view what you voted for.</a>
       )}
       {children}
     </div>

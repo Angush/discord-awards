@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Navbar, Nav } from 'react-bootstrap'
+import getLoginPathName from '../../functions/getLoginPathName'
 import NavLink from './NavLink'
 
 const AppNavBar = ({ navlinks, userData, logout, location }) => {
   const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
-    window.addEventListener('click', event => {
+    window.addEventListener('click', (event) => {
       // close nav bar if user clicks outside of it
       const classes = event.target.classList
       if (
@@ -19,7 +20,7 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
     })
   }, [])
 
-  const getNavClass = link => {
+  const getNavClass = (link) => {
     let c = link.navClass || ''
     if (!link.classOn) return c
     if (link.classOn.root && link.to === location.pathname) return c
@@ -32,7 +33,7 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
   }
 
   const matchedNavLink = navlinks.filter(
-    l => l.to === location.pathname || location.pathname.startsWith(l.root)
+    (l) => l.to === location.pathname || location.pathname.startsWith(l.root)
   )
   const navClass = matchedNavLink[0] && getNavClass(matchedNavLink[0])
 
@@ -84,11 +85,7 @@ const AppNavBar = ({ navlinks, userData, logout, location }) => {
                   </div>
                 </>
               ) : (
-                <a
-                  id='login'
-                  className='logInOrOut'
-                  href={`https://cauldron.angu.sh/api/login`}
-                >
+                <a id='login' className='logInOrOut' href={getLoginPathName()}>
                   <span>Login</span>
                   <img
                     src='/images/discord_logo.svg'

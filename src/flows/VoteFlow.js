@@ -8,6 +8,7 @@ import Contest from '../components/vote/Contest'
 import { Button } from 'react-bootstrap'
 import { navigate } from '@reach/router'
 import envVarIsTrue from '../functions/envVarIsTrue'
+import getLoginPathName from '../functions/getLoginPathName'
 
 const VoteFlow = ({ userData }) => {
   const [sections, setSections] = useState(null)
@@ -24,24 +25,24 @@ const VoteFlow = ({ userData }) => {
   const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
 
   //= Create the table of contents
-  const createTOC = useCallback(sectionData => {
+  const createTOC = useCallback((sectionData) => {
     if (!sectionData) return
     let tableOfContests = []
-    sectionData.forEach(s => {
+    sectionData.forEach((s) => {
       tableOfContests.push({
         text: `${s.sectionName} Categories`,
         anchor: `#${s.anchor}`,
-        children: s.contests.map(contest => {
+        children: s.contests.map((contest) => {
           return {
             text: contest.name,
-            anchor: `#${contest.anchor}`
+            anchor: `#${contest.anchor}`,
           }
-        })
+        }),
       })
     })
     setTOC({
       expanded: false,
-      items: tableOfContests
+      items: tableOfContests,
     })
   }, [])
 
@@ -96,7 +97,7 @@ const VoteFlow = ({ userData }) => {
 
       setChanges({
         ...newChanges,
-        total: total
+        total: total,
       })
     },
     [originalVotes]
@@ -125,10 +126,10 @@ const VoteFlow = ({ userData }) => {
 
     // bit of a mess, but makes validating WAY easier
     let contests = {}
-    sections.items.forEach(s => {
-      s.contests.forEach(c => {
+    sections.items.forEach((s) => {
+      s.contests.forEach((c) => {
         let entries = {}
-        c.entries.forEach(e => {
+        c.entries.forEach((e) => {
           entries[e.id] = e
         })
         contests[c.id] = { ...c, entries: entries }
@@ -146,12 +147,12 @@ const VoteFlow = ({ userData }) => {
     validateCachedChanges,
     countCachedChanges,
     originalVotes,
-    loadedCache
+    loadedCache,
   ])
 
   //= Format category data
   const formatData = useCallback(
-    raw => {
+    (raw) => {
       let hasVotes = raw.votes ? true : false
       let categories = raw.contests
       for (const id in categories) {
@@ -161,7 +162,7 @@ const VoteFlow = ({ userData }) => {
           let fields = Object.values(categories[id].fields)
           categories[id].single =
             fields.length === 1 ||
-            fields.every(f => f.id === 'owner' || f.id === 'link')
+            fields.every((f) => f.id === 'owner' || f.id === 'link')
         }
       }
 
@@ -182,14 +183,14 @@ const VoteFlow = ({ userData }) => {
         } else return `Entry ID ${id}`
       }
 
-      Object.values(raw.nominations).forEach(nom => {
+      Object.values(raw.nominations).forEach((nom) => {
         let nomination = {
           id: nom.id,
-          data: nom.data
+          data: nom.data,
         }
 
         // add nominations to contest
-        nom.categories.forEach(cID => {
+        nom.categories.forEach((cID) => {
           if (!nomination.data.identifier) {
             let contest = categories[cID]
             nomination.data.identifier = createIdentifier(
@@ -201,21 +202,21 @@ const VoteFlow = ({ userData }) => {
             id: nomination.id,
             data: {
               ...nomination.data,
-              key: `c${cID}_e${nomination.id}`
-            }
+              key: `c${cID}_e${nomination.id}`,
+            },
           })
         })
       })
 
       // create section list
       let sectionData = {}
-      Object.values(raw.contests).forEach(contest => {
+      Object.values(raw.contests).forEach((contest) => {
         if (!contest.entries || contest.entries.length === 0) return
         if (!sectionData[contest.section]) {
           sectionData[contest.section] = {
             sectionName: contest.section,
             anchor: `${makeSafeForURL(contest.section)}-categories`,
-            contests: [categories[contest.id]]
+            contests: [categories[contest.id]],
           }
         } else {
           sectionData[contest.section].contests.push(categories[contest.id])
@@ -226,12 +227,12 @@ const VoteFlow = ({ userData }) => {
       createTOC(sectionData)
       setSections({
         items: sectionData,
-        fetched: true
+        fetched: true,
       })
       if (hasVotes)
         setOriginalVotes({
           votes: raw.votes,
-          fetched: true
+          fetched: true,
         })
       localStorage.voteables = JSON.stringify(sectionData)
     },
@@ -239,20 +240,20 @@ const VoteFlow = ({ userData }) => {
   )
 
   //= Open lightbox for image
-  const lightboxHandler = useCallback(event => {
+  const lightboxHandler = useCallback((event) => {
     // handle clicks on card images (for opening lightboxes)
     let classes = Object.values(event.target.classList)
     if (
       event.target.tagName === 'IMG' &&
       !classes.includes('non-expandable-img') &&
-      classes.some(c => c.match(/card-img/))
+      classes.some((c) => c.match(/card-img/))
     ) {
       event.preventDefault()
       let { id, src, alt } = event.target
       setLightboxData({
         identifier: alt,
         key: id,
-        src
+        src,
       })
     }
   }, [])
@@ -269,17 +270,17 @@ const VoteFlow = ({ userData }) => {
         createTOC(parsed)
         setSections({
           items: parsed,
-          fetched: false
+          fetched: false,
         })
       } catch (e) {}
 
     window
       .fetch(`https://cauldron.angu.sh/api/voteables`, {
         credentials: 'include',
-        signal: controller.signal
+        signal: controller.signal,
       })
-      .then(response => response.json())
-      .then(resData => {
+      .then((response) => response.json())
+      .then((resData) => {
         formatData(resData)
       })
       .catch(console.error)
@@ -305,7 +306,7 @@ const VoteFlow = ({ userData }) => {
 
     setVotes({
       ...originalVotes.votes,
-      ...changedVotes
+      ...changedVotes,
     })
 
     if (!originalVotes.fetched) return
@@ -344,13 +345,13 @@ const VoteFlow = ({ userData }) => {
           change = originallySelected ? 1 : -1
           setChangedVotes({
             ...changedVotes,
-            [key]: false
+            [key]: false,
           })
         } else {
           change = originallySelected ? -1 : 1
           setChangedVotes({
             ...changedVotes,
-            [key]: true
+            [key]: true,
           })
         }
 
@@ -378,18 +379,18 @@ const VoteFlow = ({ userData }) => {
         setChanges({
           ...changes,
           [cID]: contestChanges,
-          total: total + change
+          total: total + change,
         })
 
         console.log(`${type} entry with key ${key}, AKA.`, changeText)
       }
 
-  const entryIsSelected = id => {
+  const entryIsSelected = (id) => {
     if (votes[id] === true) return true
     else return false
   }
 
-  const numberOfVotes = id => {
+  const numberOfVotes = (id) => {
     let count = 0
     let match = new RegExp(`^c${id}_e\\d+$`)
     for (const vote in originalVotes.votes) {
@@ -398,10 +399,11 @@ const VoteFlow = ({ userData }) => {
     return count
   }
 
-  const submitVotes = event => {
+  const submitVotes = (event) => {
     event.preventDefault()
+    let redirectLocation = getLoginPathName()
     if (!userData.logged_in) {
-      window.location.href = 'https://cauldron.angu.sh/api/login'
+      window.location.href = redirectLocation
       return
     }
 
@@ -422,7 +424,7 @@ const VoteFlow = ({ userData }) => {
         submissionData.push({
           c: cID,
           e: eID,
-          r: changedVotes[key] === false
+          r: changedVotes[key] === false,
         })
       }
     }
@@ -438,9 +440,9 @@ const VoteFlow = ({ userData }) => {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         credentials: 'include',
-        body: JSON.stringify(submissionData)
+        body: JSON.stringify(submissionData),
       })
-      .then(res => {
+      .then((res) => {
         setSubmitting(false)
         if (res.status === 201) {
           console.log(`Submission succeeded!`)
@@ -449,18 +451,18 @@ const VoteFlow = ({ userData }) => {
         console.error(`Submission failed status code ${res.status}!`, res)
         if (res.status === 401) {
           console.warn(`User login expired. Forcing page reload...`)
-          navigate('https://cauldron.angu.sh/api/login')
+          navigate(redirectLocation)
           return null
         }
       })
-      .then(newVotes => {
+      .then((newVotes) => {
         if (!newVotes) return
         console.log(`Submitted! Committing changes and resyncing...`)
         setChanges({ total: 0 })
         setChangedVotes({})
         setOriginalVotes({
           votes: newVotes,
-          fetched: true
+          fetched: true,
         })
       })
       .catch(console.error)
@@ -509,18 +511,18 @@ const VoteFlow = ({ userData }) => {
         closeMenu={() => {
           setTOC({
             ...toc,
-            expanded: false
+            expanded: false,
           })
         }}
         offsets={[
           {
             breakpoint: 576,
-            distance: 64
+            distance: 64,
           },
           {
             default: true,
-            distance: -12
-          }
+            distance: -12,
+          },
         ]}
       />
       <div id='content' className='vote-flow left-indent-container fade-rise'>
@@ -529,7 +531,7 @@ const VoteFlow = ({ userData }) => {
           onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
         ></div>
 
-        {sections.items.map(section => {
+        {sections.items.map((section) => {
           const isExpanded = expanded[section.anchor]
           return (
             <section
@@ -544,24 +546,34 @@ const VoteFlow = ({ userData }) => {
                   onClick={() => {
                     setExpanded({
                       ...expanded,
-                      [section.anchor]: isExpanded ? false : true
+                      [section.anchor]: isExpanded ? false : true,
                     })
                   }}
                 >
                   {isExpanded ? 'Collapse' : 'Expand'} All
                 </Button>
                 {VOTING_CLOSED && canVet && !canVote && (
-                  <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to view the vote options, but you may not lodge any votes.</p>
+                  <p className='closed-vote-warning'>
+                    <span className='bold'>Note: voting is closed.</span> You
+                    have permission to view the vote options, but you may not
+                    lodge any votes.
+                  </p>
                 )}
                 {VOTING_CLOSED && canVet && canVote && (
-                  <p className='closed-vote-warning'><span className='bold'>Note: voting is closed.</span> You have permission to lodge votes despite this, but they may be annulled later.</p>
+                  <p className='closed-vote-warning'>
+                    <span className='bold'>Note: voting is closed.</span> You
+                    have permission to lodge votes despite this, but they may be
+                    annulled later.
+                  </p>
                 )}
               </div>
               {section.contests.map((contest, index) => (
                 <Contest
                   key={`cat-${contest.id}`}
                   changes={
-                    changes[contest.id] ? Object.values(changes[contest.id]) : []
+                    changes[contest.id]
+                      ? Object.values(changes[contest.id])
+                      : []
                   }
                   votes={numberOfVotes(contest.id)}
                   isSelected={entryIsSelected}
