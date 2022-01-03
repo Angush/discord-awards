@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from '@reach/router'
 import PreviewCard from '../components/cards/PreviewCard'
+import envVarIsTrue from '../functions/envVarIsTrue'
+
+const nominationsClosed = envVarIsTrue('NOMINATIONS_CLOSED')
 
 const MyNomineesPage = () => {
   const [categories, setCategories] = useState(null)
@@ -16,32 +19,43 @@ const MyNomineesPage = () => {
   if (!nominees || nominees.length === 0 || !categories)
     return (
       <div className='fade-rise text-center pad-top'>
-        <h3>You didn't nominate anything!</h3>
+        <h3>
+          {nominationsClosed
+            ? "You didn't nominate anything!"
+            : "You haven't nominated anything!"}
+        </h3>
         <p style={{ marginTop: '20px' }}>
-          Or if you have, I can't retrieve the records. Try visiting this page
-          again on the same device (and browser) that you used to make your
-          nominations.
+          Or if you {nominationsClosed ? 'did' : 'have'}, I can't retrieve the
+          records. Try visiting this page again on the same device (and browser)
+          that you used to make your nominations.
         </p>
-        <p>
-          Visit <Link to='/vote'>the vote page</Link> to register your votes for
-          the 2019 awards before they close!
-        </p>
-        <p>(This'll be improved for the 2020 awards.)</p>
+        {nominationsClosed ? (
+          <p>
+            Visit <Link to='/vote'>the vote page</Link> to register your votes
+            for the 2021 awards before voting closes!
+          </p>
+        ) : (
+          <p>
+            Visit <Link to='/nominate'>the nomination page</Link> to put your
+            own entries in for the 2021 awards before nominations close!
+          </p>
+        )}
+        <p>(This'll be improved for the 2022 awards. Maybe.)</p>
       </div>
     )
 
-  const getCategoryNominees = id => {
+  const getCategoryNominees = (id) => {
     if (nominees.length === 0 || !nominees[0].categories) return []
     return nominees
-      .filter(nominee => nominee.categories.some(cid => cid === id))
-      .map(n => n.data)
+      .filter((nominee) => nominee.categories.some((cid) => cid === id))
+      .map((n) => n.data)
   }
 
   return (
     <div className='fade-rise'>
       <h3
         style={{
-          marginTop: '20px'
+          marginTop: '20px',
         }}
       >
         My Nominees
@@ -59,7 +73,7 @@ const MyNomineesPage = () => {
         <div className='text-muted'>(Note: does not undo nominations)</div>
       </div>
       <div className='my-nominees'>
-        {categories.map(category => {
+        {categories.map((category) => {
           let categoryNominees = getCategoryNominees(category.id)
           let count = categoryNominees.length
           if (!categoryNominees || count === 0) return null
@@ -77,7 +91,7 @@ const MyNomineesPage = () => {
                   let types = {}
                   if (category.fields)
                     category.fields.forEach(
-                      field => (types[field.id] = field.name)
+                      (field) => (types[field.id] = field.name)
                     )
 
                   return (
