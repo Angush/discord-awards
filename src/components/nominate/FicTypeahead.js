@@ -20,12 +20,17 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
 
     const controller = new AbortController()
     window
-      .fetch(`/json/fic-options.json`, { signal: controller.signal })
+      .fetch(`https://cauldron.angu.sh/api/typeahead-options`, {
+        signal: controller.signal,
+      })
       .then((response) => {
         if (response.ok) return response.json()
         else fallback()
       })
-      .then((data) => setFics(data))
+      .then((data) => {
+        if (!data || data.length === 0) fallback()
+        else setFics(data)
+      })
       .catch((err) => fallback())
 
     return () => controller.abort()
