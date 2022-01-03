@@ -87,6 +87,11 @@ const App = () => {
         if (response.ok) return response.json()
       })
       .then((data) => {
+        if (data.canVet)
+          navlinks.push({
+            to: '/admin/vetting',
+            text: 'Admin Vetting',
+          })
         setUserData(data)
         let stringified = JSON.stringify(data)
         localStorage.userData = stringified
