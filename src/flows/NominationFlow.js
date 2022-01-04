@@ -48,24 +48,33 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
       selected.type === 'fic'
         ? selected.categories.filter((c) => !c.fields)
         : selected.categories
-    dataToSubmit.push({
-      categories: regularCategories.map((c) => c.id),
-      data: editedData,
-      approval,
-    })
+    if (regularCategories.length > 0)
+      dataToSubmit.push({
+        categories: regularCategories.map((c) => c.id),
+        data: editedData,
+        approval,
+      })
 
-    if (additionalData)
-      extraFields.forEach((field) => {
-        let currentFieldData = additionalData[field.id]
+    if (additionalData) {
+      extraFields.forEach((category) => {
+        let currentFieldData = additionalData[category.id]
+
+        category.fields.forEach((field) => {
+          if (!currentFieldData[field.id] && !!field.default) {
+            currentFieldData[field.id] = field.default
+          }
+        })
+
         if (currentFieldData) {
           let dataToAdd = { ...editedData, ...currentFieldData }
           dataToSubmit.push({
-            categories: [field.id],
+            categories: [category.id],
             data: dataToAdd,
             approval,
           })
         }
       })
+    }
 
     let alertOnError = () =>
       setDone({
