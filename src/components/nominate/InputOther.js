@@ -7,8 +7,16 @@ import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
 const InputOther = ({
-  category, save, disabled, submitting, nominee, setNominee = null,
-  inline = false, setExtraData = null, updateValidity = null, currentValidity = null
+  category,
+  save,
+  disabled,
+  submitting,
+  nominee,
+  setNominee = null,
+  inline = false,
+  setExtraData = null,
+  updateValidity = null,
+  currentValidity = null,
 }) => {
   const [refilledData, setRefilledData] = useState(inline)
   const [formData, setFormData] = useState({})
@@ -33,15 +41,20 @@ const InputOther = ({
   }, [formData, category, setNominee])
 
   useEffect(() => {
-    if (!updateValidity || currentValidity === valid || currentValidity === null) return
+    if (
+      !updateValidity ||
+      currentValidity === valid ||
+      currentValidity === null
+    )
+      return
     updateValidity(valid)
   }, [valid, currentValidity, updateValidity])
 
   const types = {}
-  category.fields.forEach(field => (types[field.id] = field.name))
+  category.fields.forEach((field) => (types[field.id] = field.name))
 
   const validateField = useCallback(
-    field => {
+    (field) => {
       let id = field.id
       if (field.optional && !formData[id]) return true
       if (id === 'link') return validateURL(formData.link)
@@ -53,11 +66,13 @@ const InputOther = ({
   )
 
   useEffect(() => {
-    let newValidityStatus = category.fields.every(field => validateField(field))
+    let newValidityStatus = category.fields.every((field) =>
+      validateField(field)
+    )
     setValid(newValidityStatus)
   }, [category.fields, validateField, updateValidity])
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     save(formData)
   }
@@ -65,7 +80,7 @@ const InputOther = ({
   const onLoad = () => setImgValid({ error: false, loaded: true })
   const onError = () => setImgValid({ error: true, loaded: true })
 
-  const blur = field => {
+  const blur = (field) => {
     if (!blurred[field]) setBlurred({ ...blurred, [field]: true })
     if (inline) setExtraData(formData)
   }
@@ -87,8 +102,7 @@ const InputOther = ({
     return field.text
   }
 
-
-  const createFormElement = item => {
+  const createFormElement = (item) => {
     const validated = validateField(item)
     return (
       <Form.Group key={item.id}>
@@ -96,6 +110,11 @@ const InputOther = ({
           <InputGroup.Prepend>
             <InputGroup.Text>{item.name}</InputGroup.Text>
           </InputGroup.Prepend>
+          {item.info && (
+            <div className='input-group-text extra-fields-info'>
+              {item.info}
+            </div>
+          )}
           <Form.Control
             placeholder={
               item.placeholder
@@ -105,11 +124,12 @@ const InputOther = ({
             // id={item.id}
             size='lg'
             value={formData[item.id] || ''}
-            onChange={e => {
+            onChange={(e) => {
               setFormData({ ...formData, [item.id]: e.target.value })
-              if (item.id === 'image') setImgValid({ error: false, loaded: false })
+              if (item.id === 'image')
+                setImgValid({ error: false, loaded: false })
             }}
-            onBlur={e => blur(item.id)}
+            onBlur={(e) => blur(item.id)}
             disabled={disabled}
           />
         </InputGroup>
@@ -124,20 +144,21 @@ const InputOther = ({
     )
   }
 
-  if (inline) return (
-    <div className='extra-field-input'>
-      <h5>{category.name}</h5>
-      <p>{category.description}</p>
-      {category.fields.map(createFormElement)}
-    </div>
-  )
+  if (inline)
+    return (
+      <div className='extra-field-input'>
+        <h5>{category.name}</h5>
+        <p>{category.description}</p>
+        {category.fields.map(createFormElement)}
+      </div>
+    )
 
   return (
     <Form className='other-input' onSubmit={handleSubmit}>
       {category.fields.map(createFormElement)}
 
       <div className='preview mx-auto'>
-        {Object.values(formData).filter(v => v).length > 0 ? (
+        {Object.values(formData).filter((v) => v).length > 0 ? (
           <PreviewCard
             data={
               formData.link && !validateField({ id: 'link' })
@@ -156,11 +177,7 @@ const InputOther = ({
         )}
       </div>
 
-      <Submission
-        tall
-        disabled={!valid || disabled}
-        submitting={submitting}
-      />
+      <Submission tall disabled={!valid || disabled} submitting={submitting} />
     </Form>
   )
 }
