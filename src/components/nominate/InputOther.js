@@ -51,7 +51,7 @@ const InputOther = ({
   }, [valid, currentValidity, updateValidity])
 
   const types = {}
-  category.fields.forEach((field) => (types[field.id] = field.name))
+  category.fields.forEach((field) => (types[field.id] = field.label))
 
   const validateField = useCallback(
     (field) => {
@@ -108,7 +108,7 @@ const InputOther = ({
       <Form.Group key={item.id}>
         <InputGroup>
           <InputGroup.Prepend>
-            <InputGroup.Text>{item.name}</InputGroup.Text>
+            <InputGroup.Text>{item.label}</InputGroup.Text>
           </InputGroup.Prepend>
           {item.info && (
             <div className='input-group-text extra-fields-info'>
@@ -119,7 +119,7 @@ const InputOther = ({
             placeholder={
               item.placeholder
                 ? item.placeholder
-                : `Enter ${item.name.toLowerCase()} here`
+                : `Enter ${item.label.toLowerCase()} here`
             }
             // id={item.id}
             size='lg'
