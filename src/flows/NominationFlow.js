@@ -49,16 +49,20 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
         ? selected.categories
         : selected.categories.filter((c) => !c.fields)
 
-    if (regularCategories.length > 0)
+    if (regularCategories.length > 0 && selected.type !== 'other')
       dataToSubmit.push({
         categories: regularCategories.map((c) => c.id),
         data: editedData,
         approval,
       })
 
-    if (additionalData) {
-      extraFields.forEach((category) => {
-        let currentFieldData = additionalData[category.id]
+    if (additionalData || selected.type === 'other') {
+      let nomineeCategories =
+        selected.type === 'other' ? selected.categories : extraFields
+
+      nomineeCategories.forEach((category) => {
+        let currentFieldData =
+          selected.type === 'other' ? editedData : additionalData[category.id]
 
         category.fields.forEach((field) => {
           if (!currentFieldData[field.id] && !!field.default) {
