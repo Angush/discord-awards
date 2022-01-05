@@ -10,13 +10,12 @@ const InputMain = ({
   setNominee,
   disabled = false,
   submitting = false,
-  extraFields = false
-  
+  extraFields = false,
 }) => {
   let category = selected.categories[0]
 
   const INPUT_SELECTOR = {
-    other:
+    other: (
       <InputOther
         save={save}
         category={category}
@@ -25,9 +24,10 @@ const InputMain = ({
         setNominee={setNominee}
         nominee={nominee}
         reset={selected.RESET}
-      />,
+      />
+    ),
 
-    art: 
+    art: (
       <InputArt
         save={save}
         nominee={nominee}
@@ -35,9 +35,11 @@ const InputMain = ({
         disabled={disabled}
         submitting={submitting}
         reset={selected.RESET}
-      />,
+        extraFields={extraFields}
+      />
+    ),
 
-    fic:
+    fic: (
       <InputFic
         save={save}
         nominee={nominee}
@@ -47,6 +49,7 @@ const InputMain = ({
         reset={selected.RESET}
         extraFields={extraFields}
       />
+    ),
   }
 
   return INPUT_SELECTOR[selected.type] || INPUT_SELECTOR.other

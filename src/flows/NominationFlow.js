@@ -45,9 +45,10 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
     //* Create array of nomination objects to save
     let dataToSubmit = []
     let regularCategories =
-      selected.type === 'fic'
-        ? selected.categories.filter((c) => !c.fields)
-        : selected.categories
+      selected.type === 'other'
+        ? selected.categories
+        : selected.categories.filter((c) => !c.fields)
+
     if (regularCategories.length > 0)
       dataToSubmit.push({
         categories: regularCategories.map((c) => c.id),
@@ -252,7 +253,6 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
 
   const updateExtraCategoryData = (props) => {
     setExtraCategoryData(props)
-    console.log(`User entered extra category data:`, extraCategoryData)
     setDone({ ...done, extraFields: true })
     submit(null, props)
   }

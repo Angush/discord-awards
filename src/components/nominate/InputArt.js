@@ -6,7 +6,14 @@ import LabelShrinkable from '../util/LabelShrinkable'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
 
-const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
+const InputArt = ({
+  save,
+  disabled,
+  submitting,
+  nominee,
+  setNominee,
+  extraFields,
+}) => {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
   const [refilledData, setRefilledData] = useState(false)
@@ -14,7 +21,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
     title: '',
     artist: '',
     url: '',
-    nsfw: false
+    nsfw: false,
   })
 
   useEffect(() => {
@@ -28,7 +35,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
     setNominee(formData)
   }, [formData, setNominee])
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     save(formData)
   }
@@ -54,7 +61,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
                 id='imgTitle'
                 size='lg'
                 value={formData.title || ''}
-                onChange={e =>
+                onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
                 disabled={disabled}
@@ -71,7 +78,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
                 id='imgArtist'
                 size='lg'
                 value={formData.artist || ''}
-                onChange={e =>
+                onChange={(e) =>
                   setFormData({ ...formData, artist: e.target.value })
                 }
                 disabled={disabled}
@@ -115,7 +122,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
             placeholder='Image URL'
             id='imgLink'
             value={formData.url || ''}
-            onChange={e => {
+            onChange={(e) => {
               setLoaded(false)
               setFormData({ ...formData, url: e.target.value })
             }}
@@ -141,7 +148,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
           id='nomineeIsNSFW'
           label='This nominee contains explicit sexual content'
           checked={formData.nsfw || false}
-          onChange={e => setFormData({ ...formData, nsfw: e.target.checked })}
+          onChange={(e) => setFormData({ ...formData, nsfw: e.target.checked })}
           disabled={disabled}
         />
       </Form.Group>
@@ -171,7 +178,7 @@ const InputArt = ({ save, disabled, submitting, nominee, setNominee }) => {
       <Submission
         tall
         disabled={!loaded || !formData.artist || disabled}
-        // text='Continue'
+        text={extraFields ? 'Continue' : 'Submit'}
         submitting={submitting}
       />
     </Form>
