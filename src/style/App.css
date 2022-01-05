@@ -475,6 +475,10 @@ input.form-control-lg {
   margin-bottom: -10px;
 }
 
+.nominate-toggles > :not(:first-child) {
+  margin-top: 12px;
+}
+
 .input-group-lg .input-group-text {
   font-size: 1rem !important;
 }

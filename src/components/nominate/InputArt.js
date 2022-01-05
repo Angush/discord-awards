@@ -21,12 +21,11 @@ const InputArt = ({
     title: '',
     artist: '',
     url: '',
-    nsfw: false,
   })
 
   useEffect(() => {
     if (refilledData) return
-    let defaultFormData = { title: '', artist: '', url: '', nsfw: false }
+    let defaultFormData = { title: '', artist: '', url: '' }
     setFormData({ ...defaultFormData, ...nominee })
     setRefilledData(true)
   }, [nominee, refilledData])
@@ -141,7 +140,7 @@ const InputArt = ({
 
       <div className='shrink-me'></div>
 
-      <Form.Group className='text-center'>
+      <Form.Group className='text-center nominate-toggles'>
         <Form.Check
           custom
           type='switch'
@@ -149,6 +148,17 @@ const InputArt = ({
           label='This nominee contains explicit sexual content'
           checked={formData.nsfw || false}
           onChange={(e) => setFormData({ ...formData, nsfw: e.target.checked })}
+          disabled={disabled}
+        />
+        <Form.Check
+          custom
+          type='switch'
+          id='nomineeIsSpoiler'
+          label='This nominee could be a spoiler'
+          checked={formData.spoiler || false}
+          onChange={(e) =>
+            setFormData({ ...formData, spoiler: e.target.checked })
+          }
           disabled={disabled}
         />
       </Form.Group>
