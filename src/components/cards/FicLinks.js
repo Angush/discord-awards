@@ -6,57 +6,56 @@ const TYPE = {
   sb: {
     img: '/images/sb.png',
     name: 'Space Battles',
-    order: 1
+    order: 1,
   },
   sv: {
     img: '/images/sv.png',
     name: 'Sufficient Velocity',
-    order: 2
+    order: 2,
   },
   qq: {
     img: '/images/qq.png',
     name: 'Questionable Questing',
-    order: 3
+    order: 3,
   },
   ao3: {
     img: '/images/ao3.png',
     name: 'Archive of Our Own',
-    order: 4
+    order: 4,
   },
   ffn: {
     img: '/images/ffn.png',
     name: 'Fanfiction dot net',
-    order: 5
+    order: 5,
   },
   youtube: {
     img: '/images/youtube.png',
     name: 'YouTube (You Tube)',
-    order: 6
+    order: 6,
   },
   reddit: {
     img: '/images/reddit.png',
     name: 'Reddit',
-    order: 7
+    order: 7,
   },
   tumblr: {
     img: '/images/tumblr.png',
     name: 'Tumblr (Tumbler)',
-    order: 8
+    order: 8,
   },
   deviantart: {
     img: '/images/deviantart.png',
     name: 'Deviant Art',
-    order: 9
+    order: 9,
   },
   imgur: {
     img: '/images/imgur.png',
     name: 'Imgur (Imager)',
-    order: 10
+    order: 10,
   },
   soundcloud: {
     img: '/images/soundcloud.png',
     name: 'SoundCloud (Sound Cloud)',
-
   },
   misc: {
     element: (
@@ -83,11 +82,11 @@ const TYPE = {
       </svg>
     ),
     name: 'Miscellaneous',
-    order: 12
-  }
+    order: 12,
+  },
 }
 
-const getLinkType = link => {
+const getLinkType = (link) => {
   let match = TYPE.misc
   if (link.match(/questionablequesting\.com/)) match = TYPE.qq
   else if (link.match(/spacebattles\.com/)) match = TYPE.sb
@@ -96,7 +95,7 @@ const getLinkType = link => {
   else if (link.match(/archiveofourown\.org/)) match = TYPE.ao3
   else if (link.match(/youtube\.com|youtu\.be/)) match = TYPE.youtube
   else if (link.match(/(old\.|www\.)?reddit\.com/)) match = TYPE.reddit
-  else if (link.match(/\.tumblr\.com/)) match = TYPE.tumblr
+  else if (link.match(/\.?tumblr\.com/)) match = TYPE.tumblr
   else if (link.match(/deviantart\.com/)) match = TYPE.deviantart
   else if (link.match(/imgur\.com/)) match = TYPE.imgur
   else if (link.match(/soundcloud\.com/)) match = TYPE.soundcloud
@@ -104,18 +103,19 @@ const getLinkType = link => {
 }
 
 const FicLinks = ({ links }) => {
-  if (!links || links.length === 0) return <div className='fic-links'>No links.</div>
+  if (!links || links.length === 0)
+    return <div className='fic-links'>No links.</div>
 
   const sorted = links
-    .map(link => {
+    .map((link) => {
       if (!link) return { url: '' }
       return {
         ...getLinkType(link),
-        url: link
+        url: link,
       }
     })
     .sort((a, b) => a.order - b.order)
-    .filter(link => validateURL(link.url))
+    .filter((link) => validateURL(link.url))
 
   return (
     <div className='fic-links'>
