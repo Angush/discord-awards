@@ -9,9 +9,9 @@ const FicCard = ({ fic, className, onClick, selected }) => {
     : {
         keyclickable: 'true',
         onClick: onClick,
-        tabIndex: 0
+        tabIndex: 0,
       }
-  const ficTitle = fic.title || "Untitled"
+  const ficTitle = fic.title || 'Untitled'
 
   return (
     <Card
@@ -31,7 +31,7 @@ const FicCard = ({ fic, className, onClick, selected }) => {
       <Card.Body>
         {fic.name ? (
           <Card.Subtitle>
-            in {fic.author || "Unknown"}'s <em>{ficTitle}</em>
+            in {fic.author || 'Unknown'}'s <em>{ficTitle}</em>
           </Card.Subtitle>
         ) : (
           <>
@@ -40,11 +40,28 @@ const FicCard = ({ fic, className, onClick, selected }) => {
               {ficTitle}
             </Card.Title>
             <Card.Subtitle>
-              by <em>{fic.author || "Unknown"}</em>
+              by{' '}
+              {fic.authorPage || fic.artistPage ? (
+                <em>
+                  <Card.Link
+                    href={fic.authorPage || fic.artistPage}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {fic.author || 'Unknown'}
+                  </Card.Link>
+                </em>
+              ) : (
+                <em>{fic.author || 'Unknown'}</em>
+              )}
             </Card.Subtitle>
           </>
         )}
-        {fic.description && <Card.Text className='fic-description-field'>{fic.description}</Card.Text>}
+        {fic.description && (
+          <Card.Text className='fic-description-field'>
+            {fic.description}
+          </Card.Text>
+        )}
         <FicLinks links={fic.links} />
       </Card.Body>
     </Card>
