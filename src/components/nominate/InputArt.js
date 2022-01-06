@@ -17,6 +17,8 @@ const InputArt = ({
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
   const [refilledData, setRefilledData] = useState(false)
+  const [inputtingImage, setInputtingImage] = useState(true)
+  const [nonImageInputs, setNonImageInputs] = useState([])
   const [formData, setFormData] = useState({
     title: '',
     artist: '',
@@ -29,6 +31,7 @@ const InputArt = ({
     let defaultFormData = { title: '', artist: '', url: '' }
     setFormData({ ...defaultFormData, ...nominee })
     if (nominee.extraURLs) setExtraURLs(nominee.extraURLs)
+    if (nominee.nonImageArtInput) setInputtingImage(false)
     setRefilledData(true)
   }, [nominee, refilledData])
 
@@ -38,7 +41,15 @@ const InputArt = ({
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    save({ ...formData, extraURLs })
+    if (inputtingImage) {
+      let validExtras = extraURLs.filter((url) => !!url)
+      if (validExtras.length === 0) save(formData)
+      else save({ ...formData, extraURLs })
+    } else {
+      let editedData = { ...formData, links: nonImageInputs }
+      delete editedData.url
+      save(editedData)
+    }
   }
 
   const onLoad = () => {
@@ -48,57 +59,96 @@ const InputArt = ({
 
   const onError = () => setError(true)
 
-  const ImageInputLabel = (
-    <InputGroup.Prepend>
-      <InputGroup.Text>
-        <svg
-          className='bi bi-image'
-          width='34px'
-          height='34px'
-          viewBox='0 0 20 20'
-          fill='currentColor'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            fillRule='evenodd'
-            d='M16.002 4h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2h-12z'
-            clipRule='evenodd'
-          ></path>
-          <path d='M12.648 9.646a.5.5 0 01.577-.093l3.777 1.947V16h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z'></path>
-          <path
-            fillRule='evenodd'
-            d='M6.502 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3z'
-            clipRule='evenodd'
-          ></path>
-        </svg>
-      </InputGroup.Text>
-    </InputGroup.Prepend>
-  )
+  const ImageInputLabel = (type = 'image') => {
+    if (type === 'link')
+      return (
+        <InputGroup.Prepend>
+          <InputGroup.Text style={{ width: '52px', justifyContent: 'center' }}>
+            <img src='/images/misc.png' alt={`Link input icon`} />
+          </InputGroup.Text>
+        </InputGroup.Prepend>
+      )
 
-  const createAdditionalImageInput = (index = 0, offset = 2) => {
-    return (
-      <InputGroup key={`extraImageInput${index}`}>
-        {ImageInputLabel}
-        <Form.Control
-          size='lg'
-          placeholder={`Image URL #${index + offset} (if applicable)`}
-          id={`imgLink${index + offset}`}
-          value={extraURLs[index] || ''}
-          onChange={(e) => {
-            let urls = [...extraURLs]
-            urls[index] = e.target.value
-            setExtraURLs(urls)
-          }}
-          disabled={disabled}
-        />
-      </InputGroup>
-    )
+    if (type === 'image')
+      return (
+        <InputGroup.Prepend>
+          <InputGroup.Text>
+            <svg
+              className='bi bi-image'
+              width='34px'
+              height='34px'
+              viewBox='0 0 20 20'
+              fill='currentColor'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                fillRule='evenodd'
+                d='M16.002 4h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2h-12z'
+                clipRule='evenodd'
+              ></path>
+              <path d='M12.648 9.646a.5.5 0 01.577-.093l3.777 1.947V16h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z'></path>
+              <path
+                fillRule='evenodd'
+                d='M6.502 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3z'
+                clipRule='evenodd'
+              ></path>
+            </svg>
+          </InputGroup.Text>
+        </InputGroup.Prepend>
+      )
   }
 
-  const inputsNeeded = !!formData.url
-    ? new Array(extraURLs.length + 1).fill(1)
-    : []
+  const createAdditionalInput = (index = 0, type = 'image', offset = 2) => {
+    if (type === 'link')
+      return (
+        <InputGroup key={`linkInput${index}`}>
+          {ImageInputLabel('link')}
+          <Form.Control
+            size='lg'
+            placeholder={
+              index === 0
+                ? 'Video/audio link'
+                : `Video/audio link #${index + offset}`
+            }
+            id={`artLink${index + offset}`}
+            value={nonImageInputs[index] || ''}
+            onChange={(e) => {
+              let links = [...nonImageInputs]
+              links[index] = e.target.value
+              setNonImageInputs(links)
+            }}
+            disabled={disabled}
+          />
+        </InputGroup>
+      )
 
+    if (type === 'image')
+      return (
+        <InputGroup key={`extraImageInput${index}`}>
+          {ImageInputLabel(type)}
+          <Form.Control
+            size='lg'
+            placeholder={`Image URL #${index + offset} (if applicable)`}
+            id={`imgLink${index + offset}`}
+            value={extraURLs[index] || ''}
+            onChange={(e) => {
+              let urls = [...extraURLs]
+              urls[index] = e.target.value
+              setExtraURLs(urls)
+            }}
+            disabled={disabled}
+          />
+        </InputGroup>
+      )
+  }
+
+  const inputsNeeded = inputtingImage
+    ? !!formData.url
+      ? new Array(extraURLs.length + 1).fill(1)
+      : []
+    : new Array(nonImageInputs.length + 1).fill(1)
+
+  const validLinks = nonImageInputs.filter((url) => !!url).length > 0
   const validExtraURLs = extraURLs.filter((url) => !!url)
 
   return (
@@ -145,34 +195,67 @@ const InputArt = ({
         </Form.Row>
       </Form.Group>
 
+      <div className='input-group-text field-input-controls'>
+        <Form.Check
+          custom
+          type='switch'
+          id='nomineeIsNonImage'
+          label='This nominee is not an image'
+          checked={!inputtingImage}
+          onChange={(e) => {
+            if (!inputtingImage) {
+              setFormData({ ...formData, nonImageArtInput: true })
+            } else {
+              let newFormData = { ...formData }
+              if (newFormData.nonImageArtInput)
+                delete newFormData.nonImageArtInput
+              setFormData(newFormData)
+            }
+            setInputtingImage(!inputtingImage)
+          }}
+          disabled={disabled}
+        />
+      </div>
+
       <Form.Group>
         <InputGroup className='conjoined-inputs'>
-          <InputGroup>
-            {ImageInputLabel}
-            <Form.Control
-              size='lg'
-              placeholder='Image URL'
-              id='imgLink'
-              value={formData.url || ''}
-              onChange={(e) => {
-                setLoaded(false)
-                setFormData({ ...formData, url: e.target.value })
-              }}
-              disabled={disabled}
-            />
-          </InputGroup>
-          {!!formData.url &&
-            inputsNeeded.map((item, index) =>
-              createAdditionalImageInput(index)
-            )}
-          {/* <InputGroup.Append>
-            <Button variant='dark' onClick={() => {}}>
+          {inputtingImage ? (
+            <>
+              <InputGroup>
+                {ImageInputLabel('image')}
+                <Form.Control
+                  size='lg'
+                  placeholder='Image URL'
+                  id='imgLink'
+                  value={formData.url || ''}
+                  onChange={(e) => {
+                    setLoaded(false)
+                    setFormData({ ...formData, url: e.target.value })
+                  }}
+                  disabled={disabled}
+                />
+              </InputGroup>
+              {!!formData.url &&
+                inputsNeeded.map((item, index) =>
+                  createAdditionalInput(index, 'image')
+                )}
+              {/* <InputGroup.Append>
+              <Button variant='dark' onClick={() => {}}>
               Upload
-            </Button>
-          </InputGroup.Append> */}
+              </Button>
+            </InputGroup.Append> */}
+            </>
+          ) : (
+            inputsNeeded.map((item, index) =>
+              createAdditionalInput(index, 'link', 1)
+            )
+          )}
         </InputGroup>
         <LabelShrinkable valid={!error && formData.url} error={error}>
-          {error ? 'Valid image required.' : 'Image required.'}
+          {inputtingImage &&
+            (error ? 'Valid image required.' : 'Image required.')}
+          {!inputtingImage &&
+            (error ? 'Valid link required.' : 'Link required.')}
         </LabelShrinkable>
       </Form.Group>
 
@@ -202,12 +285,12 @@ const InputArt = ({
       </Form.Group>
 
       <div className='preview mx-auto'>
-        {!loaded && !error && formData.url && (
+        {inputtingImage && !loaded && !error && formData.url && (
           <LoadingIndicator timeout={100} id='image-load'>
             <h5 className='text-muted'>Loading image...</h5>
           </LoadingIndicator>
         )}
-        {formData.url && (
+        {inputtingImage && formData.url && (
           <PreviewCard
             type='art'
             onLoad={onLoad}
@@ -216,12 +299,29 @@ const InputArt = ({
             hide={error || !loaded}
           />
         )}
-        {(!formData.url || error) && (
-          <span className='text-muted '>
-            Enter {error ? 'a valid' : 'an'} image to continue.
-          </span>
+        {!inputtingImage && (
+          <PreviewCard
+            type='fic'
+            style={{ flexGrow: 1 }}
+            fic={{
+              ...formData,
+              links: nonImageInputs,
+              author: formData.artist,
+              authorPage: formData.artistPage,
+            }}
+          />
         )}
       </div>
+      <div
+        className='text-muted text-center'
+        style={{ marginTop: !inputtingImage ? '24px' : 0 }}
+      >
+        {inputtingImage &&
+          (!formData.url || error) &&
+          `Enter ${error ? 'a valid' : 'an'} image to continue.`}
+        {!inputtingImage && 'Enter a link and artist to continue.'}
+      </div>
+
       {formData.url && validExtraURLs.length > 0 && (
         <p
           style={{
@@ -237,7 +337,12 @@ const InputArt = ({
 
       <Submission
         tall
-        disabled={!loaded || !formData.artist || disabled}
+        disabled={
+          disabled ||
+          (inputtingImage
+            ? !loaded || !formData.artist
+            : !validLinks || !formData.artist)
+        }
         text={extraFields ? 'Continue' : 'Submit'}
         submitting={submitting}
       />

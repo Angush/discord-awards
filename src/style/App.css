@@ -286,6 +286,14 @@ input::placeholder {
   border-bottom-right-radius: 0;
 }
 
+.field-input-controls {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 14px;
+  margin-bottom: -4px;
+  padding-bottom: 8px;
+}
+
 @media (max-width: 767px) {
   #nomination-selection .form-row > div:first-child {
     margin-bottom: 24px;
@@ -473,6 +481,10 @@ input.form-control-lg {
 #art-input button[type='submit'] {
   /* margin-top: -20px; */
   margin-bottom: -10px;
+}
+
+.nominate-toggles .custom-switch {
+  padding-left: 0;
 }
 
 .nominate-toggles > :not(:first-child) {

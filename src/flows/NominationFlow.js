@@ -11,7 +11,7 @@ import InputExtraFields from '../components/nominate/InputExtraFields'
 const NominationFlow = ({ categories, collections, categoryTypes }) => {
   const [errorCode, setErrorCode] = useState(null)
   const [extraFields, setExtraFields] = useState([])
-  const [extraCategoryData, setExtraCategoryData] = useState(null) // didn't actually end up using this lmao
+  const [, setExtraCategoryData] = useState(null) // didn't actually end up using this lmao
   const [nominee, setNominee] = useState({})
   const [selected, setSelected] = useState({
     type: null,
@@ -36,8 +36,8 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
 
     let approval = 0 // 0 indicating unvetted manual input
     let editedData = nomineeData || nominee
-    if (selected.type === 'fic')
-      editedData.links = editedData.links.filter((l) => l && l.length > 0)
+    if (editedData.links)
+      editedData.links = editedData.links.filter((url) => !!url)
     if (editedData.MANUAL_INPUT === false) approval = 2 // 2 indicating it was not manual input
     delete editedData.MANUAL_INPUT
     delete editedData.approval
