@@ -5,6 +5,7 @@ import LoadingIndicator from '../util/LoadingIndicator'
 import LabelShrinkable from '../util/LabelShrinkable'
 import PreviewCard from '../cards/PreviewCard'
 import Submission from '../util/Submission'
+import validateURL from '../../functions/validateURL'
 
 const InputArt = ({
   save,
@@ -150,6 +151,12 @@ const InputArt = ({
 
   const validLinks = nonImageInputs.filter((url) => !!url).length > 0
   const validExtraURLs = extraURLs.filter((url) => !!url)
+  const validArtistPage = !!formData.artistPage
+    ? validateURL(formData.artistPage)
+    : true
+  const validCanonicalURL = !!formData.canonicalURL
+    ? validateURL(formData.canonicalURL)
+    : true
 
   return (
     <Form id='art-input' onSubmit={handleSubmit}>
@@ -190,6 +197,59 @@ const InputArt = ({
             </InputGroup>
             <LabelShrinkable valid={formData.artist ? true : false}>
               Artist required.
+            </LabelShrinkable>
+          </Col>
+        </Form.Row>
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Row>
+          <Col md='6' style={{ marginTop: 0 }}>
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text>Source</InputGroup.Text>
+              </InputGroup.Prepend>
+              <div className='input-group-text extra-fields-info'>
+                Optional - Where the image was originally posted (Reddit,
+                Tumblr, Discord, etc.)
+              </div>
+              <Form.Control
+                placeholder='Canonical image link'
+                id='imgCanonicalURL'
+                size='lg'
+                value={formData.canonicalURL || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, canonicalURL: e.target.value })
+                }
+                disabled={disabled}
+              />
+            </InputGroup>
+            <LabelShrinkable valid={validCanonicalURL} error={true}>
+              Invalid link.
+            </LabelShrinkable>
+          </Col>
+          <Col md='6' style={{ marginTop: 0 }}>
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text>Artist Page</InputGroup.Text>
+              </InputGroup.Prepend>
+              <p className='input-group-text extra-fields-info'>
+                Optional - Link to the artist's page, if one exists (Tumblr,
+                DeviantArt profile, etc.)
+              </p>
+              <Form.Control
+                placeholder='Artist page link'
+                id='imgArtistPage'
+                size='lg'
+                value={formData.artistPage || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, artistPage: e.target.value })
+                }
+                disabled={disabled}
+              />
+            </InputGroup>
+            <LabelShrinkable valid={validArtistPage} error={true}>
+              Invalid link.
             </LabelShrinkable>
           </Col>
         </Form.Row>
