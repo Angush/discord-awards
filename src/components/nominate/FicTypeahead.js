@@ -17,6 +17,13 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
 
   useEffect(() => {
     if (!!fics) return
+    try {
+      const potentialOptions = JSON.parse(localStorage.typeaheadOptions)
+      if (potentialOptions) {
+        setFics(potentialOptions)
+        return
+      }
+    } catch (err) {}
 
     const controller = new AbortController()
     window
@@ -29,7 +36,10 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
       })
       .then((data) => {
         if (!data || data.length === 0) fallback()
-        else setFics(data)
+        else {
+          setFics(data)
+          localStorage.typeaheadOptions = JSON.stringify(data)
+        }
       })
       .catch((err) => fallback())
 
