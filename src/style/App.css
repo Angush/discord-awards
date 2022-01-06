@@ -266,6 +266,11 @@ input::placeholder {
   margin-right: 16px;
 }
 
+.extra-fields-info {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
 .input-group-prepend + .extra-fields-info {
   border-top: none;
   border-top-left-radius: 0;
