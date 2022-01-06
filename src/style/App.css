@@ -690,6 +690,18 @@ input.form-control-lg {
   border-top-right-radius: 0.25rem;
 }
 
+.art-card .extra-images-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  margin: 12px;
+  text-align: right;
+  border-radius: 16px;
+}
+
 .fic-card .nsfw-indicator {
   float: right;
   padding-left: 1.25rem;

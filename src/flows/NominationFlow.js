@@ -41,6 +41,11 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
     if (editedData.MANUAL_INPUT === false) approval = 2 // 2 indicating it was not manual input
     delete editedData.MANUAL_INPUT
     delete editedData.approval
+    if (editedData.extraURLs)
+      editedData.extraURLs = editedData.extraURLs.filter((url) => !!url)
+
+    if (editedData.nsfw === false) delete editedData.nsfw
+    if (editedData.spoiler === false) delete editedData.spoiler
 
     //* Create array of nomination objects to save
     let dataToSubmit = []

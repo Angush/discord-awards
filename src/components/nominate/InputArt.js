@@ -22,11 +22,13 @@ const InputArt = ({
     artist: '',
     url: '',
   })
+  const [extraURLs, setExtraURLs] = useState([])
 
   useEffect(() => {
     if (refilledData) return
     let defaultFormData = { title: '', artist: '', url: '' }
     setFormData({ ...defaultFormData, ...nominee })
+    if (nominee.extraURLs) setExtraURLs(nominee.extraURLs)
     setRefilledData(true)
   }, [nominee, refilledData])
 
@@ -36,7 +38,7 @@ const InputArt = ({
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    save(formData)
+    save({ ...formData, extraURLs })
   }
 
   const onLoad = () => {
@@ -45,6 +47,59 @@ const InputArt = ({
   }
 
   const onError = () => setError(true)
+
+  const ImageInputLabel = (
+    <InputGroup.Prepend>
+      <InputGroup.Text>
+        <svg
+          className='bi bi-image'
+          width='34px'
+          height='34px'
+          viewBox='0 0 20 20'
+          fill='currentColor'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <path
+            fillRule='evenodd'
+            d='M16.002 4h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2h-12z'
+            clipRule='evenodd'
+          ></path>
+          <path d='M12.648 9.646a.5.5 0 01.577-.093l3.777 1.947V16h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z'></path>
+          <path
+            fillRule='evenodd'
+            d='M6.502 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3z'
+            clipRule='evenodd'
+          ></path>
+        </svg>
+      </InputGroup.Text>
+    </InputGroup.Prepend>
+  )
+
+  const createAdditionalImageInput = (index = 0, offset = 2) => {
+    return (
+      <InputGroup key={`extraImageInput${index}`}>
+        {ImageInputLabel}
+        <Form.Control
+          size='lg'
+          placeholder={`Image URL #${index + offset} (if applicable)`}
+          id={`imgLink${index + offset}`}
+          value={extraURLs[index] || ''}
+          onChange={(e) => {
+            let urls = [...extraURLs]
+            urls[index] = e.target.value
+            setExtraURLs(urls)
+          }}
+          disabled={disabled}
+        />
+      </InputGroup>
+    )
+  }
+
+  const inputsNeeded = !!formData.url
+    ? new Array(extraURLs.length + 1).fill(1)
+    : []
+
+  const validExtraURLs = extraURLs.filter((url) => !!url)
 
   return (
     <Form id='art-input' onSubmit={handleSubmit}>
@@ -56,7 +111,7 @@ const InputArt = ({
                 <InputGroup.Text>Title</InputGroup.Text>
               </InputGroup.Prepend>
               <Form.Control
-                placeholder='Image title (can leave blank)'
+                placeholder='Image title (optional)'
                 id='imgTitle'
                 size='lg'
                 value={formData.title || ''}
@@ -91,42 +146,25 @@ const InputArt = ({
       </Form.Group>
 
       <Form.Group>
-        <InputGroup>
-          <InputGroup.Prepend>
-            <InputGroup.Text>
-              <svg
-                className='bi bi-image'
-                width='34px'
-                height='34px'
-                viewBox='0 0 20 20'
-                fill='currentColor'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M16.002 4h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2h-12z'
-                  clipRule='evenodd'
-                ></path>
-                <path d='M12.648 9.646a.5.5 0 01.577-.093l3.777 1.947V16h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z'></path>
-                <path
-                  fillRule='evenodd'
-                  d='M6.502 9a1.5 1.5 0 100-3 1.5 1.5 0 000 3z'
-                  clipRule='evenodd'
-                ></path>
-              </svg>
-            </InputGroup.Text>
-          </InputGroup.Prepend>
-          <Form.Control
-            size='lg'
-            placeholder='Image URL'
-            id='imgLink'
-            value={formData.url || ''}
-            onChange={(e) => {
-              setLoaded(false)
-              setFormData({ ...formData, url: e.target.value })
-            }}
-            disabled={disabled}
-          />
+        <InputGroup className='conjoined-inputs'>
+          <InputGroup>
+            {ImageInputLabel}
+            <Form.Control
+              size='lg'
+              placeholder='Image URL'
+              id='imgLink'
+              value={formData.url || ''}
+              onChange={(e) => {
+                setLoaded(false)
+                setFormData({ ...formData, url: e.target.value })
+              }}
+              disabled={disabled}
+            />
+          </InputGroup>
+          {!!formData.url &&
+            inputsNeeded.map((item, index) =>
+              createAdditionalImageInput(index)
+            )}
           {/* <InputGroup.Append>
             <Button variant='dark' onClick={() => {}}>
               Upload
@@ -174,7 +212,7 @@ const InputArt = ({
             type='art'
             onLoad={onLoad}
             onError={onError}
-            formData={formData}
+            formData={{ ...formData, extraImages: validExtraURLs }}
             hide={error || !loaded}
           />
         )}
@@ -184,6 +222,18 @@ const InputArt = ({
           </span>
         )}
       </div>
+      {formData.url && validExtraURLs.length > 0 && (
+        <p
+          style={{
+            textAlign: 'center',
+            fontStyle: 'italic',
+            marginTop: '20px',
+          }}
+        >
+          <strong>Note:</strong> this preview card only displays the first
+          image.
+        </p>
+      )}
 
       <Submission
         tall
