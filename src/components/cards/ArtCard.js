@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
+import validateURL from '../../functions/validateURL'
 
 const ArtCard = ({
   formData,
@@ -17,7 +18,7 @@ const ArtCard = ({
         onClick: onClick,
         tabIndex: 0,
       }
-  const dataName = formData.artistPage ? (
+  const dataName = validateURL(formData.artistPage) ? (
     <>
       by{' '}
       <Card.Link
@@ -33,7 +34,7 @@ const ArtCard = ({
       by <em>{formData.artist || 'Unknown'}</em>
     </>
   )
-  const dataTitle = formData.canonicalURL ? (
+  const dataTitle = validateURL(formData.canonicalURL) ? (
     <Card.Link
       href={formData.canonicalURL}
       target='_blank'
