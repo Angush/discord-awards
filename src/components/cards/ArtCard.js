@@ -7,7 +7,7 @@ const ArtCard = ({
   onLoad,
   onError,
   className,
-  selected
+  selected,
 }) => {
   const classes = 'art-card' + (className ? ' ' + className : '')
   const props = !onClick
@@ -15,16 +15,35 @@ const ArtCard = ({
     : {
         keyclickable: 'true',
         onClick: onClick,
-        tabIndex: 0
+        tabIndex: 0,
       }
-  const dataName = (formData.artistPage ? (
-    <>by <Card.Link href={formData.artistPage} target='_blank' rel='noopener noreferrer'><em>{formData.artist || 'Unknown'}</em></Card.Link></>
+  const dataName = formData.artistPage ? (
+    <>
+      by{' '}
+      <Card.Link
+        href={formData.artistPage}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <em>{formData.artist || 'Unknown'}</em>
+      </Card.Link>
+    </>
   ) : (
-    <>by <em>{formData.artist || 'Unknown'}</em></>
-  ))
-  const dataTitle = (formData.canonicalURL ? (
-    <Card.Link href={formData.canonicalURL} target='_blank' rel='noopener noreferrer'>{formData.title || 'Untitled'}</Card.Link>
-  ) : (formData.title || 'Untitled'))
+    <>
+      by <em>{formData.artist || 'Unknown'}</em>
+    </>
+  )
+  const dataTitle = formData.canonicalURL ? (
+    <Card.Link
+      href={formData.canonicalURL}
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      {formData.title || 'Untitled'}
+    </Card.Link>
+  ) : (
+    formData.title || 'Untitled'
+  )
 
   return (
     <Card
@@ -47,12 +66,17 @@ const ArtCard = ({
         />
       </div>
       <Card.Body>
+        {formData?.extraImages?.length > 0 && (
+          <span className='extra-images-indicator'>
+            +{formData.extraImages.length} images
+          </span>
+        )}
         {formData.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-        {formData.spoiler && <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>}
+        {formData.spoiler && (
+          <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>
+        )}
         <Card.Title>{dataTitle}</Card.Title>
-        <Card.Subtitle>
-          {dataName}
-        </Card.Subtitle>
+        <Card.Subtitle>{dataName}</Card.Subtitle>
       </Card.Body>
     </Card>
   )
