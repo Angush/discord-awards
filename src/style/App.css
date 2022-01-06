@@ -1228,6 +1228,7 @@ input.form-control-lg {
   right: 1rem;
   bottom: 1rem;
   border-radius: 0.25rem;
+  z-index: 1048;
 }
 
 #floating-toc-btn button {
