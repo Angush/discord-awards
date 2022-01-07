@@ -790,6 +790,18 @@ input.form-control-lg {
   cursor: pointer;
 }
 
+.input-icon-overlay-text {
+  padding: 2px 4px;
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  color: #e3e3e3;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
 /*
   Border radii on the vertically-grouped inputs (.conjoined-inputs)
   (really dodgy but I couldn't get it working another way)

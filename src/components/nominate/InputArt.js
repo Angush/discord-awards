@@ -85,11 +85,12 @@ const InputArt = ({
 
   const onError = () => setError(true)
 
-  const ImageInputLabel = (type = 'image') => {
+  const ImageInputLabel = (type = 'image', number = null) => {
     if (type === 'link')
       return (
         <InputGroup.Prepend>
           <InputGroup.Text style={{ width: '52px', justifyContent: 'center' }}>
+            {number && <div className='input-icon-overlay-text'>#{number}</div>}
             <img src='/images/misc.png' alt={`Link input icon`} />
           </InputGroup.Text>
         </InputGroup.Prepend>
@@ -99,6 +100,7 @@ const InputArt = ({
       return (
         <InputGroup.Prepend>
           <InputGroup.Text>
+            {number && <div className='input-icon-overlay-text'>#{number}</div>}
             <svg
               className='bi bi-image'
               width='34px'
@@ -125,18 +127,18 @@ const InputArt = ({
   }
 
   const createAdditionalInput = (index = 0, type = 'image', offset = 2) => {
+    const num = index + offset
+
     if (type === 'link')
       return (
         <InputGroup key={`linkInput${index}`}>
-          {ImageInputLabel('link')}
+          {ImageInputLabel(type, num === 1 ? null : num)}
           <Form.Control
             size='lg'
             placeholder={
-              index === 0
-                ? 'Video/audio link'
-                : `Video/audio link #${index + offset}`
+              index === 0 ? 'Video/audio link' : `Video/audio link #${num}`
             }
-            id={`artLink${index + offset}`}
+            id={`artLink${num}`}
             value={nonImageInputs[index] || ''}
             onChange={(e) => {
               let links = [...nonImageInputs]
@@ -151,11 +153,11 @@ const InputArt = ({
     if (type === 'image')
       return (
         <InputGroup key={`extraImageInput${index}`}>
-          {ImageInputLabel(type)}
+          {ImageInputLabel(type, num === 1 ? null : num)}
           <Form.Control
             size='lg'
-            placeholder={`Image URL #${index + offset} (if applicable)`}
-            id={`imgLink${index + offset}`}
+            placeholder={`Image URL #${num} (if applicable)`}
+            id={`imgLink${num}`}
             value={extraURLs[index] || ''}
             onChange={(e) => {
               let urls = [...extraURLs]
