@@ -42,12 +42,19 @@ const InputArt = ({
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    let editedData = { ...formData }
+    if (!editedData.title) delete editedData.title
+    if (!editedData.artistPage) delete editedData.artistPage
+    if (!editedData.canonicalURL) delete editedData.canonicalURL
+    if (editedData.hasOwnProperty('nonImageArtInput'))
+      delete editedData.nonImageArtInput
+
     if (inputtingImage) {
       let validExtras = extraURLs.filter((url) => !!url)
-      if (validExtras.length === 0) save(formData)
-      else save({ ...formData, extraURLs })
+      if (validExtras.length === 0) save(editedData)
+      else save({ ...editedData, extraURLs })
     } else {
-      let editedData = { ...formData, links: nonImageInputs }
+      editedData.links = nonImageInputs
       delete editedData.url
       save(editedData)
     }

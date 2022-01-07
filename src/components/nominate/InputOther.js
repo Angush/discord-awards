@@ -126,6 +126,8 @@ const InputOther = ({
             value={formData[item.id] || ''}
             onChange={(e) => {
               setFormData({ ...formData, [item.id]: e.target.value })
+              if (inline)
+                setExtraData({ ...formData, [item.id]: e.target.value })
               if (item.id === 'image')
                 setImgValid({ error: false, loaded: false })
             }}
