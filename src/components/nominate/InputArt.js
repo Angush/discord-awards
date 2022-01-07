@@ -26,6 +26,7 @@ const InputArt = ({
     url: '',
   })
   const [extraURLs, setExtraURLs] = useState([])
+  const [validExtraLinks, setValidExtraLinks] = useState([])
 
   useEffect(() => {
     if (refilledData) return
@@ -39,6 +40,23 @@ const InputArt = ({
   useEffect(() => {
     setNominee(formData)
   }, [formData, setNominee])
+
+  useEffect(() => {
+    let validIndexes = []
+
+    const validate = (url) => {
+      if (!url || validateURL(url)) return true
+      return false
+    }
+
+    if (inputtingImage) {
+      if (extraURLs.length > 0) validIndexes = extraURLs.map(validate)
+    } else {
+      if (nonImageInputs.length > 0) validIndexes = nonImageInputs.map(validate)
+    }
+
+    setValidExtraLinks(validIndexes)
+  }, [inputtingImage, nonImageInputs, extraURLs])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -164,6 +182,15 @@ const InputArt = ({
   const validCanonicalURL = !!formData.canonicalURL
     ? validateURL(formData.canonicalURL)
     : true
+  const allValidLinks = validExtraLinks.every((url) => url)
+  const anyInvalidLinks = validExtraLinks.some((url) => !url)
+  const invalidLinksAlertString = validExtraLinks
+    .map((valid, index) => {
+      if (valid) return ``
+      if (inputtingImage) return `Link #${index + 2} invalid. `
+      return `Link #${index + 1} invalid. `
+    })
+    .join('')
 
   return (
     <Form id='art-input' onSubmit={handleSubmit}>
@@ -318,11 +345,23 @@ const InputArt = ({
             )
           )}
         </InputGroup>
-        <LabelShrinkable valid={!error && formData.url} error={error}>
+        <LabelShrinkable
+          valid={
+            inputtingImage
+              ? !error && formData.url && allValidLinks
+              : validLinks && allValidLinks
+          }
+          error={error || anyInvalidLinks}
+        >
           {inputtingImage &&
-            (error ? 'Valid image required.' : 'Image required.')}
+            (error
+              ? 'Valid image required. '
+              : !formData.url || !loaded
+              ? 'Image required. '
+              : '')}
+          {inputtingImage && anyInvalidLinks && invalidLinksAlertString}
           {!inputtingImage &&
-            (error ? 'Valid link required.' : 'Link required.')}
+            (anyInvalidLinks ? invalidLinksAlertString : 'Link required.')}
         </LabelShrinkable>
       </Form.Group>
 
@@ -362,7 +401,12 @@ const InputArt = ({
             type='art'
             onLoad={onLoad}
             onError={onError}
-            formData={{ ...formData, extraImages: validExtraURLs }}
+            formData={{
+              ...formData,
+              extraImages: validExtraURLs.filter(
+                (item, index) => validExtraLinks[index]
+              ),
+            }}
             hide={error || !loaded}
           />
         )}
@@ -372,7 +416,9 @@ const InputArt = ({
             style={{ flexGrow: 1 }}
             fic={{
               ...formData,
-              links: nonImageInputs,
+              links: nonImageInputs.filter(
+                (item, index) => validExtraLinks[index]
+              ),
               author: formData.artist,
               authorPage: formData.artistPage,
             }}
@@ -386,7 +432,10 @@ const InputArt = ({
         {inputtingImage &&
           (!formData.url || error) &&
           `Enter ${error ? 'a valid' : 'an'} image to continue.`}
-        {!inputtingImage && 'Enter a link and artist to continue.'}
+        {!inputtingImage &&
+          `Enter a ${
+            anyInvalidLinks ? 'valid ' : ''
+          }link and artist to continue.`}
       </div>
 
       {formData.url && validExtraURLs.length > 0 && (
@@ -406,6 +455,8 @@ const InputArt = ({
         tall
         disabled={
           disabled ||
+          anyInvalidLinks ||
+          !allValidLinks ||
           (inputtingImage
             ? !loaded || !formData.artist
             : !validLinks || !formData.artist)
