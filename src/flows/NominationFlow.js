@@ -7,6 +7,7 @@ import InputMain from '../components/nominate/InputMain'
 import JumpTo from '../components/util/JumpTo'
 import GoBack from '../components/util/GoBack'
 import InputExtraFields from '../components/nominate/InputExtraFields'
+import NominationInfo from '../components/nominate/NominationInfo'
 
 const NominationFlow = ({ categories, collections, categoryTypes }) => {
   const [errorCode, setErrorCode] = useState(null)
@@ -278,6 +279,8 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
 
   return (
     <div className='nomination-flow'>
+      <NominationInfo />
+
       <CategoryTypeSelect
         types={categoryTypes}
         hidden={selected.type ? true : false}

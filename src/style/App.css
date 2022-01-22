@@ -299,6 +299,61 @@ input::placeholder {
   padding-bottom: 8px;
 }
 
+.nomination-info {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.nomination-info details {
+  border: 1px solid #c7c7c7;
+  border-radius: 1rem;
+}
+
+.nomination-info-details {
+  padding: 1rem;
+  background-color: #ececec;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.nomination-info summary :first-child,
+.nomination-info-details :first-child {
+  margin-top: 0;
+}
+
+.nomination-info summary :last-child,
+.nomination-info-details :last-child {
+  margin-bottom: 0;
+}
+
+.nomination-info details summary {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #e4e4e4;
+  transition: background-color 0.2s;
+}
+
+.nomination-info details[open] summary {
+  border-bottom: 1px solid #c7c7c7;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.nomination-info details summary:hover {
+  background-color: #e7e7e7;
+}
+
+.nomination-criteria li {
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+.nomination-criteria li::marker {
+  font-weight: bold;
+}
+
+.nomination-criteria :not(:first-child) {
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 767px) {
   #nomination-selection .form-row > div:first-child {
     margin-bottom: 24px;
