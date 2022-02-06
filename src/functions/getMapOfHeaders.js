@@ -1,42 +1,56 @@
 import React from 'react'
 
-const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => {
-  if (type === "nominees" && allNominees) {
-    let returnData = data.nominees.map(nomineeId => {
+const getMapOfHeaders = (
+  type,
+  data,
+  allNominees = null,
+  skipBadges = false
+) => {
+  if (type === 'nominees' && allNominees) {
+    let returnData = data.nominees.map((nomineeId) => {
       const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
       const { name, title, author, artist, owner, image } = nomineeData
 
       let returnObject = {
         id: nomineeId,
-        header: name || title || image || "Unknown",
-        subheader: ((name && title)
-          ? (author && title ? `${author}'s ${title}` : title || author)
-          : (author || artist || owner)) || ""
+        header:
+          data.type === 'art'
+            ? title || 'Untitled'
+            : name || title || image || 'Unknown',
+        subheader:
+          data.type === 'art'
+            ? artist
+            : (name && title
+                ? author && title
+                  ? `${author}'s ${title}`
+                  : title || author
+                : author || artist || owner) || '',
       }
-      if (!skipBadges) returnObject.badges = {
-        duplicates: duplicates.length,
-        currentStatus: statuses[data.id]
-      }
+      if (!skipBadges)
+        returnObject.badges = {
+          duplicates: duplicates.length,
+          currentStatus: statuses[data.id],
+        }
       return returnObject
     })
     return returnData
   }
 
-  if (type === "categories") {
+  if (type === 'categories') {
     let returnData = []
     let sections = {}
-    data.forEach(cat => {
+    data.forEach((cat) => {
       if (!sections[cat.section]) {
         sections[cat.section] = true
         returnData.push({
           IS_HEADER: true,
-          header: cat.section
+          header: cat.section,
         })
       }
 
       let vetted = 0
       let duplicates = 0
-      cat.nominees.forEach(nomineeId => {
+      cat.nominees.forEach((nomineeId) => {
         let nominee = allNominees[nomineeId]
         if (!nominee) return
 
@@ -47,23 +61,28 @@ const getMapOfHeaders = (type, data, allNominees = null, skipBadges = false) => 
         let duplicatesCount = nominee?.duplicates?.length
         if (duplicatesCount) duplicates += duplicatesCount
       })
-      let vettedClassName = `status-${vetted === cat.nominees.length ? 'approved' : 'rejected'} vetted-count`
+      let vettedClassName = `status-${
+        vetted === cat.nominees.length ? 'approved' : 'rejected'
+      } vetted-count`
 
       let returnObject = {
         id: cat.id,
         header: cat.name,
-        subheader: <>
-          <code className={vettedClassName}>{vetted}</code>{' '}
-          <span className="slash-divider">/</span>{' '}
-          <code>{cat.nominees.length}</code> vetted{' '}
-          <span className="slash-divider">|</span>{' '}
-          <code>{duplicates}</code> dupe{duplicates === 1 ? '' : 's'}
-        </>
+        subheader: (
+          <>
+            <code className={vettedClassName}>{vetted}</code>{' '}
+            <span className='slash-divider'>/</span>{' '}
+            <code>{cat.nominees.length}</code> vetted{' '}
+            <span className='slash-divider'>|</span> <code>{duplicates}</code>{' '}
+            dupe{duplicates === 1 ? '' : 's'}
+          </>
+        ),
       }
 
-      if (cat.collection && !skipBadges) returnObject.badges = {
-        collection: cat.collection
-      }
+      if (cat.collection && !skipBadges)
+        returnObject.badges = {
+          collection: cat.collection,
+        }
 
       returnData.push(returnObject)
     })
