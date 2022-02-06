@@ -58,6 +58,9 @@ const AdminVettingPage = ({ userData }) => {
         },
         {
           duration: 5000,
+          loading: {
+            duration: Infinity,
+          },
         }
       )
     } else {
@@ -148,6 +151,87 @@ const AdminVettingPage = ({ userData }) => {
     else setSelectedNominee(null)
   }
 
+  const assembleListOfIDs = (change, index, ids) => {
+    if (index === ids.length - 1) return <code>{change.id}</code>
+    return (
+      <>
+        <code>{change.id}</code>,{' '}
+      </>
+    )
+  }
+
+  const generateName = (data) => {
+    let creator = data.artist || data.owner || null
+    if (data.name && selectedCategory.type !== 'art') {
+      if (data.title) return `${data.name} in ${data.title}`
+      if (creator || data.author)
+        return `${creator || data.author}'s ${data.name}`
+      return data.name
+    }
+
+    if (data.title) {
+      if (creator) return `${creator}'s ${data.title}`
+      return data.title
+    }
+
+    if (data.link) return data.link
+    if (data.image) return data.image
+  }
+
+  const getChangeText = (changes) => {
+    let count = changes.length
+    if (count === 1) {
+      let change = vettingData.nominees[changes[0].id]
+      let itemName = generateName(change.data)
+      if (changes[0].data) {
+        return (
+          <>
+            data for {itemName} (<code>{change.id}</code>)
+          </>
+        )
+      } else if (changes[0].statuses) {
+        return (
+          <>
+            status for {itemName} (<code>{change.id}</code>)
+          </>
+        )
+      } else {
+        return (
+          <>
+            {itemName} (<code>{change.id}</code>)
+          </>
+        )
+      }
+    } else {
+      if (changes[0].data) {
+        let itemName = generateName(selectedNominee.data)
+        let ids = changes
+          .filter((change) => change.id !== selectedNominee.id)
+          .map(assembleListOfIDs)
+        return (
+          <>
+            data for {itemName} (<code>{selectedNominee.id}</code>) and{' '}
+            {count - 1} duplicates ({ids})
+          </>
+        )
+      } else if (changes[0].statuses) {
+        let ids = changes.map(assembleListOfIDs)
+        return (
+          <>
+            status for {count} nominees ({ids})
+          </>
+        )
+      } else {
+        let ids = changes.map(assembleListOfIDs)
+        return (
+          <>
+            {count} nominees ({ids})
+          </>
+        )
+      }
+    }
+  }
+
   //* update vettingData on status/data changes and handle POSTing to API
   const sendUpdatedNomineeData = (nomineesArray) => {
     toast.promise(
@@ -158,17 +242,16 @@ const AdminVettingPage = ({ userData }) => {
         body: JSON.stringify(nomineesArray),
       }),
       {
-        loading: 'Submitting changes...',
-        success: 'Changes saved!',
-        error: 'Could not submit changes!',
+        loading: <div>Submitting changes...</div>,
+        success: <div>Updated {getChangeText(nomineesArray)}!</div>,
+        error: <div>Failed to update {getChangeText(nomineesArray)}!</div>,
+      },
+      {
+        duration: nomineesArray.length > 1 && 4000,
+        loading: {
+          duration: Infinity,
+        },
       }
-    )
-
-    console.log(
-      `POST'd data to /api/edit-nominee!\n${nomineesArray.length} nominee${
-        nomineesArray.length === 1 ? '' : 's'
-      } are being edited:\n`,
-      nomineesArray
     )
   }
 
