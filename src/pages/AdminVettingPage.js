@@ -19,8 +19,6 @@ const AdminVettingPage = ({ userData }) => {
 
   //* Fetching and preparing vettables data
   useEffect(() => {
-    if (!userData.canVet || userData.LOADED_FROM_CACHE) return
-
     const prepareData = (resData, fetched = true) => {
       setVettingData(resData)
       if (fetched) localStorage.vettables = JSON.stringify(resData)
@@ -44,7 +42,7 @@ const AdminVettingPage = ({ userData }) => {
       .catch(console.error)
 
     return () => controller.abort()
-  }, [userData])
+  }, [])
 
   //* Assemble list of categories when vettingData changes
   useEffect(() => {

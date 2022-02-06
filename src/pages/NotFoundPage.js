@@ -2,12 +2,12 @@ import React from 'react'
 import { Link, useMatch } from '@reach/router'
 import getLoginPathName from '../functions/getLoginPathName'
 
-const NotFoundPage = ({ links, unauthorized = false }) => {
+const NotFoundPage = ({ links, unauthorized = false, fadeRise = false }) => {
   const match = useMatch(`/unauthorized`)
 
   return (
     <div
-      className='mx-auto text-center'
+      className={'mx-auto text-center' + (fadeRise ? ' fade-rise' : '')}
       style={{
         width: 'fit-content',
         marginTop: '20vh',
@@ -21,7 +21,7 @@ const NotFoundPage = ({ links, unauthorized = false }) => {
           Sorry.{' '}
           {match || unauthorized ? (
             <>
-              <a href={getLoginPathName()}>Login</a> or try
+              <a href={getLoginPathName()}>Log in</a> or try
             </>
           ) : (
             'Try'
