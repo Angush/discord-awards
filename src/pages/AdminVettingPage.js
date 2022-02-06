@@ -184,6 +184,24 @@ const AdminVettingPage = ({ userData }) => {
     else setSelectedNominee(null)
   }
 
+  const selectDuplicateNominee = (id) => {
+    if (id)
+      setSelectedNominee({
+        ...vettingData.nominees[id],
+        parent: selectedNominee,
+      })
+    else if (selectedNominee.parent)
+      setSelectedNominee({
+        ...selectedNominee.parent,
+        ...vettingData.nominees[selectedNominee.parent.id],
+      })
+    else
+      console.error(
+        `Can't change selection! ID provided: "${id}" - Current selection:`,
+        selectedNominee
+      )
+  }
+
   const assembleListOfIDs = (change, index, ids) => {
     if (index === ids.length - 1) return <code>{change.id}</code>
     return (
@@ -424,6 +442,7 @@ const AdminVettingPage = ({ userData }) => {
         category={selectedCategory}
         getNomineeData={getNomineeData}
         updateNomineeData={updateNomineeData}
+        select={selectDuplicateNominee}
         data={vettingData}
       />
     )
