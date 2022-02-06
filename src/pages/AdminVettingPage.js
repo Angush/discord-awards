@@ -4,6 +4,7 @@ import '../style/admin.css'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import VetNomineeInterface from '../components/admin/VetNomineeInterface'
 import ItemList from '../components/admin/ItemList'
+import RefreshButton from '../components/admin/RefreshButton'
 
 import getMapOfHeaders from '../functions/getMapOfHeaders'
 import fetch from '../functions/fetch'
@@ -17,11 +18,13 @@ const AdminVettingPage = ({ userData }) => {
   const [selectedNominee, setSelectedNominee] = useState(null)
   const [checkedNominees, setCheckedNominees] = useState({})
   const [failedFetch, setFailedFetch] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   //* Fetching and preparing vettables data
   useEffect(() => {
     const prepareData = (resData, fetched = true) => {
       setVettingData(resData)
+      if (fetched) setLoading(false)
       if (fetched) localStorage.vettables = JSON.stringify(resData)
     }
 
@@ -91,6 +94,36 @@ const AdminVettingPage = ({ userData }) => {
       setSelectedCategory(vettingData.categories[id])
     }
   }, [vettingData, selectedCategory.id])
+
+  const refreshAll = () => {
+    setLoading('refresh')
+    toast.promise(
+      fetch(`https://cauldron.angu.sh/api/vettables`, {
+        credentials: 'include',
+      })
+        .then((resData) => {
+          setLoading(false)
+          setVettingData(resData)
+          localStorage.vettables = JSON.stringify(resData)
+        })
+        .catch((errData) => {
+          setLoading(false)
+          setFailedFetch(true)
+          console.error(errData)
+        }),
+      {
+        loading: 'Refreshing vetting data...',
+        success: "You're all up-to-date!",
+        error: 'Could not refresh!',
+      },
+      {
+        duration: 5000,
+        loading: {
+          duration: Infinity,
+        },
+      }
+    )
+  }
 
   //* Early return on invalid data
   if (failedFetch)
@@ -355,7 +388,14 @@ const AdminVettingPage = ({ userData }) => {
     if (!hasSelectedCategory || !vettingData?.nominees)
       return (
         <div className='nominee-vet-ui no-nominee-selected'>
-          <h1>Select a category & nominee to vet it!</h1>
+          <div>
+            <h1>Select a category to start vetting!</h1>
+            {loading !== true && (
+              <RefreshButton disabled={loading} refresh={refreshAll}>
+                Refresh Everything
+              </RefreshButton>
+            )}
+          </div>
         </div>
       )
 
@@ -368,6 +408,11 @@ const AdminVettingPage = ({ userData }) => {
               <span className='text-muted bold'>{selectedCategory.name}</span>.
             </h1>
             <h2>Now select a nominee to vet it!</h2>
+            {loading !== true && (
+              <RefreshButton disabled={loading} refresh={refreshAll}>
+                Refresh Category
+              </RefreshButton>
+            )}
           </div>
         </div>
       )
