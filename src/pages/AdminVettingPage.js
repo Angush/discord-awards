@@ -6,6 +6,8 @@ import VetNomineeInterface from '../components/admin/VetNomineeInterface'
 import ItemList from '../components/admin/ItemList'
 
 import getMapOfHeaders from '../functions/getMapOfHeaders'
+import fetch from '../functions/fetch'
+import toast from 'react-hot-toast'
 
 const AdminVettingPage = ({ userData }) => {
   const [vettingData, setVettingData] = useState(null)
@@ -109,12 +111,19 @@ const AdminVettingPage = ({ userData }) => {
 
   //* update vettingData on status/data changes and handle POSTing to API
   const sendUpdatedNomineeData = (nomineesArray) => {
-    window.fetch(`https://cauldron.angu.sh/api/edit-nominee`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(nomineesArray),
-    })
+    toast.promise(
+      fetch(`https://cauldron.angu.sh/api/edit-nominee`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(nomineesArray),
+      }),
+      {
+        loading: 'Submitting changes...',
+        success: 'Changes saved!',
+        error: 'Could not submit changes!',
+      }
+    )
 
     console.log(
       `POST'd data to /api/edit-nominee!\n${nomineesArray.length} nominee${

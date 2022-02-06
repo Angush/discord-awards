@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Router, Redirect, Location } from '@reach/router'
 import { Container } from 'react-bootstrap'
+import { Toaster } from 'react-hot-toast'
 import AppNavBar from './components/util/AppNavBar'
 
 // router pages
@@ -127,6 +128,16 @@ const App = () => {
 
   return (
     <div className='App'>
+      <Toaster
+        position='bottom-right'
+        reverseOrder={true}
+        toastOptions={{
+          duration: 2000,
+          error: {
+            duration: 5000,
+          },
+        }}
+      />
       <Location>
         {(props) => (
           <AppNavBar
