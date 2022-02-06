@@ -16,12 +16,18 @@ const AdminVettingPage = ({ userData }) => {
   const [selectedCategory, setSelectedCategory] = useState({})
   const [selectedNominee, setSelectedNominee] = useState(null)
   const [checkedNominees, setCheckedNominees] = useState({})
+  const [failedFetch, setFailedFetch] = useState(false)
 
   //* Fetching and preparing vettables data
   useEffect(() => {
     const prepareData = (resData, fetched = true) => {
       setVettingData(resData)
       if (fetched) localStorage.vettables = JSON.stringify(resData)
+    }
+
+    const reportFailure = (errorData) => {
+      console.error(errorData)
+      setFailedFetch(true)
     }
 
     let cached = localStorage.vettables
@@ -39,7 +45,7 @@ const AdminVettingPage = ({ userData }) => {
         signal: controller.signal,
       })
         .then(prepareData)
-        .catch(console.error)
+        .catch(reportFailure)
     }
 
     if (cached) {
@@ -84,6 +90,24 @@ const AdminVettingPage = ({ userData }) => {
   }, [vettingData, selectedCategory.id])
 
   //* Early return on invalid data
+  if (failedFetch)
+    return (
+      <div className='admin-vetting-page fade-rise'>
+        <ItemList items={[]} />
+        <div className='nominee-vet-ui no-nominee-selected loading-section'>
+          <div>
+            <h4>Uh-oh!</h4>
+            <h6 className='text-muted text-error'>
+              Something went wrong, and we couldn't load the vetting data!
+              <br /> <br />
+              Try again later, or if this persists, contact the admin.
+            </h6>
+          </div>
+        </div>
+      </div>
+    )
+
+  //* And early return if we're loading for the first time
   if (!vettingData || !categoriesList)
     return (
       <div className='admin-vetting-page fade-rise'>

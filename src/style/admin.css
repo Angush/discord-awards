@@ -252,6 +252,10 @@
   color: #0075f1 !important;
 }
 
+.no-nominee-selected .text-error {
+  color: #e10909 !important;
+}
+
 .hidden-button {
   all: unset;
   display: none;
