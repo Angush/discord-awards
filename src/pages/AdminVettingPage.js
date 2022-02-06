@@ -32,14 +32,31 @@ const AdminVettingPage = ({ userData }) => {
       } catch (e) {}
 
     const controller = new AbortController()
-    window
-      .fetch(`https://cauldron.angu.sh/api/vettables`, {
+
+    const getData = () => {
+      return fetch(`https://cauldron.angu.sh/api/vettables`, {
         credentials: 'include',
         signal: controller.signal,
       })
-      .then((response) => response.json())
-      .then(prepareData)
-      .catch(console.error)
+        .then(prepareData)
+        .catch(console.error)
+    }
+
+    if (cached) {
+      toast.promise(
+        getData(),
+        {
+          loading: 'Refreshing cached data...',
+          success: "You're all up-to-date!",
+          error: 'Could not refresh!',
+        },
+        {
+          duration: 5000,
+        }
+      )
+    } else {
+      getData()
+    }
 
     return () => controller.abort()
   }, [])
