@@ -857,6 +857,12 @@ input.form-control-lg {
   background-color: rgba(0, 0, 0, 0.75);
 }
 
+.card .video-embed {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
 /*
   Border radii on the vertically-grouped inputs (.conjoined-inputs)
   (really dodgy but I couldn't get it working another way)

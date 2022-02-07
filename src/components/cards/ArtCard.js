@@ -1,6 +1,13 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import validateURL from '../../functions/validateURL'
+import YouTubeEmbed from './embeds/YouTubeEmbed'
+
+const getEmbed = (url, data) => {
+  let match
+  match = url.match(/(youtube.com\/watch\?v=|youtu.be\/)(?<id>\w+)/)
+  if (match?.groups?.id) return <YouTubeEmbed id={match.groups.id} />
+}
 
 const ArtCard = ({
   formData,
@@ -46,6 +53,8 @@ const ArtCard = ({
     formData.title || 'Untitled'
   )
 
+  const Embed = getEmbed(formData.url || formData?.links?.[0])
+
   return (
     <Card
       bg={selected ? 'primary' : 'dark'}
@@ -54,17 +63,19 @@ const ArtCard = ({
       {...props}
     >
       <div className='card-img-parent'>
-        <Card.Img
-          onLoad={onLoad}
-          onError={onError}
-          src={formData.url}
-          alt={formData.identifier}
-          id={formData.key}
-          className={(formData.nsfw || formData.spoiler) && 'nsfw-img'}
-          // height={400 * (formData.height / formData.width)}
-          // width={400}
-          // loading='lazy'
-        />
+        {Embed || (
+          <Card.Img
+            onLoad={onLoad}
+            onError={onError}
+            src={formData.url}
+            alt={formData.identifier}
+            id={formData.key}
+            className={(formData.nsfw || formData.spoiler) && 'nsfw-img'}
+            // height={400 * (formData.height / formData.width)}
+            // width={400}
+            // loading='lazy'
+          />
+        )}
       </div>
       <Card.Body>
         {formData?.extraImages?.length > 0 && (
