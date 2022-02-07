@@ -40,7 +40,10 @@ const ListOfDuplicates = ({
       if (Number.isInteger(validCategories[categoryId])) {
         dupeCategories.push(category)
         return
-      } else if (expanded[dupe.id]) {
+      } else if (
+        expanded[dupe.id] ||
+        checkedCategories?.[dupe.id]?.[category.id]
+      ) {
         dupeCategories.push(category)
         expandedCategories[category.id] = true
       }
