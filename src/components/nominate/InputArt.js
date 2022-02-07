@@ -405,7 +405,7 @@ const InputArt = ({
             onError={onError}
             formData={{
               ...formData,
-              extraImages: validExtraURLs.filter(
+              extraURLs: validExtraURLs.filter(
                 (item, index) => validExtraLinks[index]
               ),
             }}

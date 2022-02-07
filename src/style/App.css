@@ -791,6 +791,30 @@ input.form-control-lg {
   border-top-left-radius: 0.25rem;
 }
 
+.card-indicators.bottom-indicators {
+  top: 0;
+  width: 100%;
+  position: absolute;
+  margin-left: -1.25rem;
+  justify-content: start;
+  display: flex;
+}
+
+.card-indicators.bottom-indicators > * {
+  position: relative;
+  margin-top: 0.75rem;
+  padding: 0 0.5rem;
+  top: unset;
+}
+
+.card-indicators.bottom-indicators > *:first-child {
+  padding-left: 1.25rem;
+}
+
+.error-card .card-indicators.bottom-indicators + * {
+  margin-top: 1.25rem;
+}
+
 .fic-links {
   margin-top: 10px;
 }
@@ -861,6 +885,10 @@ input.form-control-lg {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
+}
+
+.card .generic-video-embed {
+  width: 100%;
 }
 
 /*

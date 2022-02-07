@@ -94,7 +94,8 @@ const getLinkType = (link) => {
   else if (link.match(/fanfiction\.net/)) match = TYPE.ffn
   else if (link.match(/archiveofourown\.org/)) match = TYPE.ao3
   else if (link.match(/youtube\.com|youtu\.be/)) match = TYPE.youtube
-  else if (link.match(/(old\.|www\.)?reddit\.com/)) match = TYPE.reddit
+  else if (link.match(/(old\.|www\.)?(reddit\.com|redd\.it)/))
+    match = TYPE.reddit
   else if (link.match(/\.?tumblr\.com/)) match = TYPE.tumblr
   else if (link.match(/deviantart\.com/)) match = TYPE.deviantart
   else if (link.match(/imgur\.com/)) match = TYPE.imgur

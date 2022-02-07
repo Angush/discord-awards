@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import validateURL from '../../functions/validateURL'
+import GenericVideoEmbed from './embeds/GenericVideoEmbed'
 import YouTubeEmbed from './embeds/YouTubeEmbed'
+import FicLinks from './FicLinks'
 
 const getEmbed = (url, data) => {
+  const title = `(${data.id}) ${data.title || 'Untitled'} by ${
+    data.artist || 'Unknown'
+  }`
   let match
   match = url.match(/(youtube.com\/watch\?v=|youtu.be\/)(?<id>\w+)/)
-  if (match?.groups?.id) return <YouTubeEmbed id={match.groups.id} />
+  if (match?.groups?.id)
+    return <YouTubeEmbed id={match.groups.id} title={title} />
+  if (url.match(/redd\.it.+format=mp4/))
+    return <GenericVideoEmbed url={url} title={title} />
 }
 
 const ArtCard = ({
   formData,
   onClick,
   onLoad,
-  onError,
+  onError = null,
   className,
   selected,
 }) => {
-  const classes = 'art-card' + (className ? ' ' + className : '')
+  const [error, setError] = useState(false)
+
+  const classes =
+    'art-card' +
+    (error && (formData.nsfw || formData.spoiler) ? ' error-card' : '') +
+    (className ? ' ' + className : '')
   const props = !onClick
     ? {}
     : {
@@ -52,8 +65,14 @@ const ArtCard = ({
   ) : (
     formData.title || 'Untitled'
   )
+  const dataURL =
+    formData.url ||
+    formData?.extraURLs?.find((url) => !!url) ||
+    formData?.links?.find((url) => !!url)
 
-  const Embed = getEmbed(formData.url || formData?.links?.[0])
+  const Embed = getEmbed(dataURL, formData)
+
+  const ifInvalidImage = () => setError(true)
 
   return (
     <Card
@@ -63,32 +82,44 @@ const ArtCard = ({
       {...props}
     >
       <div className='card-img-parent'>
-        {Embed || (
-          <Card.Img
-            onLoad={onLoad}
-            onError={onError}
-            src={formData.url}
-            alt={formData.identifier}
-            id={formData.key}
-            className={(formData.nsfw || formData.spoiler) && 'nsfw-img'}
-            // height={400 * (formData.height / formData.width)}
-            // width={400}
-            // loading='lazy'
-          />
-        )}
+        {Embed ||
+          (!error && (
+            <Card.Img
+              onLoad={onLoad}
+              onError={onError || ifInvalidImage}
+              src={dataURL}
+              alt={formData.identifier}
+              id={formData.key}
+              className={(formData.nsfw || formData.spoiler) && 'nsfw-img'}
+              // height={400 * (formData.height / formData.width)}
+              // width={400}
+              // loading='lazy'
+            />
+          ))}
       </div>
       <Card.Body>
-        {formData?.extraImages?.length > 0 && (
+        {formData?.extraURLs?.length > 0 && (
           <span className='extra-images-indicator'>
-            +{formData.extraImages.length} images
+            +{formData.extraURLs.length} images
           </span>
         )}
-        {formData.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-        {formData.spoiler && (
-          <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>
-        )}
+        <div
+          className={'card-indicators' + (error ? ' bottom-indicators' : '')}
+        >
+          {formData.nsfw && <span className='nsfw-indicator'>NSFW</span>}
+          {formData.spoiler && (
+            <span className='nsfw-indicator spoiler-indicator'>SPOILER</span>
+          )}
+        </div>
         <Card.Title>{dataTitle}</Card.Title>
         <Card.Subtitle>{dataName}</Card.Subtitle>
+        {error && (
+          <Card.Text className='fic-description-field'>
+            This artwork could not be embedded; please use the link
+            {formData?.links?.length > 1 ? 's' : ''} below.
+          </Card.Text>
+        )}
+        {formData.links && <FicLinks links={formData.links} />}
       </Card.Body>
     </Card>
   )
