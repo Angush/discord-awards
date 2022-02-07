@@ -9,14 +9,22 @@ const getMapOfHeaders = (
   if (type === 'nominees' && allNominees) {
     let returnData = data.nominees.map((nomineeId) => {
       const { data: nomineeData, duplicates, statuses } = allNominees[nomineeId]
-      const { name, title, author, artist, owner, image } = nomineeData
+      const { name, title, author, artist, owner, image, description } =
+        nomineeData
 
+      // NOTE: could refactor this somewhat to cut ALL headers off at 64 characters (or so), rather than just description? Some titles can get pretty long.
       let returnObject = {
         id: nomineeId,
         header:
           data.type === 'art'
             ? title || 'Untitled'
-            : name || title || image || 'Unknown',
+            : name ||
+              title ||
+              image ||
+              (description?.length > 64
+                ? `${description.substr(0, 64)}...`
+                : description) ||
+              'Unknown',
         subheader:
           data.type === 'art'
             ? artist
