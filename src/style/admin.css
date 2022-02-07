@@ -1037,6 +1037,48 @@ code.status-rejected,
   background-color: rgba(255, 255, 255, 0.8);
 }
 
+/** Toast customization **/
+
+.dismiss-toast-container {
+  display: flex;
+  align-items: center;
+  margin-right: -10px;
+}
+
+.dismiss-toast {
+  width: 20px;
+  opacity: 1;
+  height: 20px;
+  border-radius: 10px;
+  background: transparent; /* Could also make it red? */
+  position: relative;
+  transform: rotate(45deg);
+  transition: background-color 200ms ease-out;
+  cursor: pointer;
+}
+
+.dismiss-toast:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.dismiss-toast:after,
+.dismiss-toast:before {
+  content: '';
+  animation-delay: 150ms;
+  position: absolute;
+  border-radius: 3px;
+  opacity: 1;
+  background: #000;
+  bottom: 9px;
+  left: 4px;
+  height: 2px;
+  width: 12px;
+}
+
+.dismiss-toast:before {
+  transform: rotate(90deg);
+}
+
 /** Nominee JSON buttons **/
 
 .json-edit-buttons,

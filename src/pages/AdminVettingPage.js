@@ -285,6 +285,7 @@ const AdminVettingPage = ({ userData }) => {
 
   //* update vettingData on status/data changes and handle POSTing to API
   const sendUpdatedNomineeData = (nomineesArray) => {
+    const Infinite = { duration: Infinity }
     toast.promise(
       fetch(`https://cauldron.angu.sh/api/edit-nominee`, {
         method: 'POST',
@@ -295,13 +296,26 @@ const AdminVettingPage = ({ userData }) => {
       {
         loading: <div>Submitting changes...</div>,
         success: <div>Updated {getChangeText(nomineesArray)}!</div>,
-        error: <div>Failed to update {getChangeText(nomineesArray)}!</div>,
+        error: () => (t) =>
+          (
+            <>
+              <div>
+                Failed to update {getChangeText(nomineesArray)}! You may need to
+                refresh the page or log in again.
+              </div>
+              <div className='dismiss-toast-container'>
+                <div
+                  className='dismiss-toast'
+                  onClick={() => toast.dismiss(t.id)}
+                />
+              </div>
+            </>
+          ),
       },
       {
         duration: nomineesArray.length > 1 && 4000,
-        loading: {
-          duration: Infinity,
-        },
+        loading: Infinite,
+        error: Infinite,
       }
     )
   }
