@@ -2063,6 +2063,10 @@ input.form-control-lg {
 }
 
 @media (max-width: 576px) {
+  .section-categories-text {
+    display: none;
+  }
+
   .entries .card {
     max-width: 100%;
     margin: 0 8px 12px 8px;

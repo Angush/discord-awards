@@ -602,7 +602,10 @@ const VoteFlow = ({ userData }) => {
               className='contest_section'
             >
               <div className='contest-section-header'>
-                <h3>{section.sectionName} Categories</h3>
+                <h3>
+                  {section.sectionName}
+                  <span className='section-categories-text'> Categories</span>
+                </h3>
                 <Button
                   variant={isExpanded ? 'light' : 'outline-light'}
                   onClick={() => {
