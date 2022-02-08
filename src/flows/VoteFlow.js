@@ -3,12 +3,13 @@ import makeSafeForURL from '../functions/makeSafeForURL'
 import LoadingIndicator from '../components/util/LoadingIndicator'
 import TableOfContents from '../components/util/TableOfContents'
 import SubmitVotes from '../components/vote/SubmitVotes'
-import Lightbox from '../components/util/Lightbox'
 import Contest from '../components/vote/Contest'
 import { Button } from 'react-bootstrap'
 import { navigate } from '@reach/router'
 import envVarIsTrue from '../functions/envVarIsTrue'
 import getLoginPathName from '../functions/getLoginPathName'
+import Lightbox from 'react-image-lightbox'
+import 'react-image-lightbox/style.css'
 
 const VoteFlow = ({ userData }) => {
   const [sections, setSections] = useState(null)
@@ -240,28 +241,63 @@ const VoteFlow = ({ userData }) => {
   )
 
   //= Open lightbox for image
-  const lightboxHandler = useCallback((event) => {
-    // handle clicks on card images (for opening lightboxes)
-    let classes = Object.values(event.target.classList)
-    if (
-      event.target.tagName === 'IMG' &&
-      !classes.includes('non-expandable-img') &&
-      classes.some((c) => c.match(/card-img/))
-    ) {
-      event.preventDefault()
-      let { id, src, alt } = event.target
-      setLightboxData({
-        identifier: alt,
-        key: id,
-        src,
-      })
-    }
-  }, [])
+  const lightboxHandler = useCallback(
+    (event) => {
+      const findItem = (id) => {
+        let itemToFind
+        const contestId = parseInt(id.match(/c(?<id>\d+)/).groups.id)
+        const nomineeId = parseInt(id.match(/e(?<id>\d+)/).groups.id)
+        for (const section of sections.items) {
+          if (itemToFind) break
+          const contests = section.contests
+          for (const contest of contests) {
+            if (itemToFind) break
+            if (contest.id === contestId) {
+              for (const entry of contest.entries) {
+                if (entry.id === nomineeId) {
+                  itemToFind = entry
+                  break
+                }
+              }
+            }
+          }
+        }
+        return itemToFind
+      }
 
-  //= Get voteables data + set up lightbox event listener
+      // handle clicks on card images (for opening lightboxes)
+      let classes = Object.values(event.target.classList)
+      if (
+        event.target.tagName === 'IMG' &&
+        !classes.includes('non-expandable-img') &&
+        classes.some((c) => c.match(/card-img/))
+      ) {
+        event.preventDefault()
+        let { id } = event.target
+        const clicked = findItem(id)
+        const srcs = [
+          clicked.data.url,
+          ...(clicked.data.extraURLs || []),
+        ].filter((u) => !!u)
+        setLightboxData({
+          ...clicked.data,
+          id,
+          srcs,
+          index: 0,
+          total: srcs.length,
+        })
+      }
+    },
+    [sections]
+  )
+
   useEffect(() => {
     window.addEventListener('click', lightboxHandler)
+    return () => window.removeEventListener('click', lightboxHandler)
+  }, [lightboxHandler])
 
+  //= Get voteables data
+  useEffect(() => {
     const controller = new AbortController()
     let cached = localStorage.voteables
     if (cached)
@@ -285,11 +321,8 @@ const VoteFlow = ({ userData }) => {
       })
       .catch(console.error)
 
-    return () => {
-      controller.abort()
-      window.removeEventListener('click', lightboxHandler)
-    }
-  }, [createTOC, formatData, lightboxHandler])
+    return () => controller.abort()
+  }, [createTOC, formatData])
 
   //= Discard vote data if user logs out
   useEffect(() => {
@@ -495,14 +528,43 @@ const VoteFlow = ({ userData }) => {
         ? `Lodge unsubmitted change`
         : `Lodge ${changes.total} unsubmitted changes`
 
+  const total = !lightboxData ? null : lightboxData.total
+  const nextIndex = !lightboxData ? null : (lightboxData.index + 1) % total
+  const prevIndex = !lightboxData
+    ? null
+    : (lightboxData.index + total - 1) % total
+
+  const SelectEntryButton = ({ data }) => {
+    const isSelected = entryIsSelected(data.key)
+    return (
+      <Button
+        variant={isSelected ? 'danger' : 'primary'}
+        onClick={() => selectEntry(data.key, data.identifier)}
+      >
+        {isSelected ? 'Deselect this entry' : 'Select this entry'}
+      </Button>
+    )
+  }
+
   return (
     <>
       {lightboxData && (
         <Lightbox
-          data={lightboxData}
-          exit={() => setLightboxData(null)}
-          isSelected={entryIsSelected}
-          toggle={selectEntry}
+          reactModalStyle={{ overlay: { zIndex: 1100 } }}
+          mainSrc={lightboxData.srcs[lightboxData.index]}
+          nextSrc={total > 1 ? lightboxData.srcs[nextIndex] : null}
+          prevSrc={total > 1 ? lightboxData.srcs[prevIndex] : null}
+          onCloseRequest={() => setLightboxData(null)}
+          onMoveNextRequest={() =>
+            setLightboxData({ ...lightboxData, index: nextIndex })
+          }
+          onMovePrevRequest={() =>
+            setLightboxData({ ...lightboxData, index: prevIndex })
+          }
+          imageTitle={
+            total > 1 && `Image #${lightboxData.index + 1} of ${total}.`
+          }
+          imageCaption={<SelectEntryButton data={lightboxData} />}
         />
       )}
       <TableOfContents

@@ -772,6 +772,7 @@ input.form-control-lg {
   margin: 12px;
   text-align: right;
   border-radius: 16px;
+  pointer-events: none;
 }
 
 .fic-card .nsfw-indicator {
@@ -796,7 +797,7 @@ input.form-control-lg {
   width: 100%;
   position: absolute;
   margin-left: -1.25rem;
-  justify-content: start;
+  justify-content: flex-start;
   display: flex;
 }
 
@@ -889,6 +890,12 @@ input.form-control-lg {
 
 .card .generic-video-embed {
   width: 100%;
+}
+
+.ril-caption-content.ril__captionContent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /*
@@ -1428,139 +1435,6 @@ input.form-control-lg {
   display: flex;
   max-width: 100%;
   flex-grow: 100;
-}
-
-/*= Lightbox =*/
-
-.lightbox {
-  position: fixed;
-  z-index: 1100;
-  height: 100vh;
-  width: 100vw;
-  left: 0;
-  top: 0;
-  display: flex;
-  padding: 0 2rem;
-}
-
-.lightbox-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.lightbox-overlay {
-  z-index: 1100;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.95);
-}
-
-.lightbox-body {
-  z-index: 1101;
-  max-width: 800px;
-  max-height: calc(100vh - 4rem);
-  margin: auto auto;
-  overflow-y: scroll;
-  color: rgba(255, 255, 255, 0.9);
-  border-radius: 1rem;
-}
-
-.lightbox-img > img {
-  overflow-y: scroll;
-  width: 100% !important;
-  height: auto;
-}
-
-.lightbox-img {
-  overflow-y: scroll;
-}
-
-.lightbox-info {
-  top: 0;
-  width: 100%;
-  position: sticky;
-  padding: 1rem 1rem;
-  background-color: rgba(15, 41, 97, 0.6);
-  box-shadow: 0 3px 1rem rgba(0, 0, 0, 0.6);
-  justify-content: space-between;
-  backdrop-filter: blur(8px);
-  display: flex;
-  overflow: hidden;
-}
-
-.lightbox-info > *:not(.lightbox-blurred) {
-  z-index: 1101;
-}
-
-/* .lightbox-blurred {
-  position: absolute;
-  width: 150%;
-  z-index: 1100;
-  filter: blur(16px) brightness(0.5) contrast(0.5);
-  margin: 0;
-  margin-left: -25%;
-  margin-top: -50%;
-} */
-
-.lightbox-info > a {
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
-  padding-left: 0.5rem;
-  margin: auto 0;
-  color: white;
-  transition: color 0.2s;
-  text-decoration: underline;
-  font-size: 14pt;
-}
-
-.lightbox-info > a:hover {
-  color: #35d7ff;
-}
-
-.lightbox-controls {
-  display: flex;
-  height: 100%;
-}
-
-.lightbox-controls > button {
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), 0 0 4px rgba(255, 255, 255, 0.75);
-}
-
-.lightbox-controls .btn {
-  height: 48px;
-  width: 128px;
-  font-size: 14pt;
-  margin: auto 1rem;
-  border-radius: 2rem;
-  border: none !important;
-}
-
-.lightbox-controls .btn-outline-primary:not(:hover) {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.lightbox-controls > .btn-primary:hover {
-  background-color: #006adb;
-}
-
-.lightbox-close {
-  all: unset;
-  width: 52px;
-  height: 42px;
-  text-align: center;
-  padding-bottom: 10px;
-  font-size: 24pt !important;
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 100%;
-  margin: auto;
-  color: rgba(240, 240, 240);
-  transition: all 0.2s;
-}
-
-.lightbox-close:hover {
-  color: black;
-  background-color: white;
 }
 
 /*=  Results styling  =*/

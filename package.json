@@ -11,6 +11,7 @@
     "react-bootstrap-typeahead": "^3.4.7",
     "react-dom": "^16.12.0",
     "react-hot-toast": "^2.2.0",
+    "react-image-lightbox": "^5.1.4",
     "react-json-view": "^1.20.4",
     "react-masonry-css": "^1.0.14",
     "react-scripts": "^3.2.0",
