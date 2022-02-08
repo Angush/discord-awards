@@ -57,6 +57,22 @@ const TYPE = {
     img: '/images/soundcloud.png',
     name: 'SoundCloud (Sound Cloud)',
   },
+  royalroad: {
+    img: '/images/royalroad.png',
+    name: 'Royal Road',
+  },
+  wordpress: {
+    img: '/images/wordpress.svg',
+    name: 'Wordpress',
+  },
+  game: {
+    img: '/images/game.svg',
+    name: 'Itch.io',
+  },
+  gdocs: {
+    img: '/images/gdocs.svg',
+    name: 'Google Docs',
+  },
   misc: {
     element: (
       <svg
@@ -82,7 +98,7 @@ const TYPE = {
       </svg>
     ),
     name: 'Miscellaneous',
-    order: 12,
+    order: 99,
   },
 }
 
@@ -100,6 +116,10 @@ const getLinkType = (link) => {
   else if (link.match(/deviantart\.com/)) match = TYPE.deviantart
   else if (link.match(/imgur\.com/)) match = TYPE.imgur
   else if (link.match(/soundcloud\.com/)) match = TYPE.soundcloud
+  else if (link.match(/(docs|sheets)\.google\.com/)) match = TYPE.gdocs
+  else if (link.match(/wordpress\.com/)) match = TYPE.wordpress
+  else if (link.match(/royalroad\.com/)) match = TYPE.royalroad
+  else if (link.match(/(itch\.io)/)) match = TYPE.game
   return match
 }
 
