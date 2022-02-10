@@ -4,9 +4,11 @@ const getMapOfValues = (contest, data) => {
   if (!contest.fields) return new Map()
   const values = new Map(
     contest.fields.map((field) => {
-      if (field.computed) return [field.id, getComputedValue(field.value, data)]
+      let fieldData = data[field.id]
+      if (!fieldData && !field.computed) return [null, null]
       if (field.hidden) return [null, null]
-      return [field.id, data[field.id]]
+      if (field.computed) return [field.id, getComputedValue(field.value, data)]
+      return [field.id, fieldData]
     })
   )
   values.delete(null)
