@@ -162,7 +162,7 @@ const VoteFlow = ({ userData }) => {
         if (categories[id].fields && categories[id].type === 'other') {
           let fields = Object.values(categories[id].fields)
           categories[id].single =
-            fields.length === 1 ||
+            (fields.length === 1 && fields[0].id !== 'description') ||
             fields.every((f) => f.id === 'owner' || f.id === 'link')
         }
       }
