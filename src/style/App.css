@@ -22,6 +22,10 @@ body {
   left: 0;
 }
 
+.card {
+  white-space: pre-line;
+}
+
 .card-container .card,
 .type-selection .card,
 .contest-filler {
