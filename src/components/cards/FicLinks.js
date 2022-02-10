@@ -73,6 +73,10 @@ const TYPE = {
     img: '/images/gdocs.svg',
     name: 'Google Docs',
   },
+  ccup: {
+    img: '/images/ccup.png',
+    name: 'Cauldron Cup',
+  },
   misc: {
     element: (
       <svg
@@ -120,6 +124,7 @@ const getLinkType = (link) => {
   else if (link.match(/wordpress\.com/)) match = TYPE.wordpress
   else if (link.match(/royalroad\.com/)) match = TYPE.royalroad
   else if (link.match(/(itch\.io)/)) match = TYPE.game
+  else if (link.match(/syl\.ae\/cauldroncup/)) match = TYPE.ccup
   return match
 }
 
