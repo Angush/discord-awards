@@ -275,14 +275,15 @@ const VoteFlow = ({ userData }) => {
         event.preventDefault()
         let { id } = event.target
         const clicked = findItem(id)
-        const srcs = [
-          clicked.data.url,
-          ...(clicked.data.extraURLs || []),
-        ].filter((u) => !!u)
+        const srcs = []
+        const { data } = clicked
+        if (data.url) srcs.push(data.url)
+        if (data.image) srcs.push(data.image)
+        if (data.extraURLs) data.extraURLs.forEach((url) => srcs.push(url))
         setLightboxData({
-          ...clicked.data,
+          ...data,
           id,
-          srcs,
+          srcs: srcs.filter((url) => !!url),
           index: 0,
           total: srcs.length,
         })
