@@ -17,7 +17,7 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
   // TODO: support for computed values
   // TODO: also support for prefixes/suffixes
 
-  const values = getMapOfValues(contest, fic)
+  const values = contest?.fields ? getMapOfValues(contest, fic) : new Map()
 
   return (
     <Card

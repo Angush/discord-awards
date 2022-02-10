@@ -76,7 +76,7 @@ const ArtCard = ({
 
   const ifInvalidImage = () => setError(true)
 
-  const values = getMapOfValues(contest, formData)
+  const values = contest?.fields ? getMapOfValues(contest, formData) : new Map()
 
   return (
     <Card
