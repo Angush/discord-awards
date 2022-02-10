@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import FicLinks from './FicLinks'
 
-const FicCard = ({ fic, className, onClick, selected }) => {
+const FicCard = ({ fic, className, onClick, selected, contest }) => {
   const classes = 'fic-card' + (className ? ' ' + className : '')
   const props = !onClick
     ? {}
@@ -12,6 +12,9 @@ const FicCard = ({ fic, className, onClick, selected }) => {
         tabIndex: 0,
       }
   const ficTitle = fic.title || 'Untitled'
+
+  // TODO: support for computed values
+  // TODO: also support for prefixes/suffixes
 
   return (
     <Card

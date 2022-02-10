@@ -211,11 +211,11 @@ const VetNomineeInterface = ({
     : 'other'
   const CARD =
     type === 'other' ? (
-      <OtherCard data={nomineeEdits || nominee.data} />
+      <OtherCard data={nomineeEdits || nominee.data} contest={category} />
     ) : type === 'art' ? (
-      <ArtCard formData={nomineeEdits || nominee.data} />
+      <ArtCard formData={nomineeEdits || nominee.data} contest={category} />
     ) : (
-      <FicCard fic={nomineeEdits || nominee.data} />
+      <FicCard fic={nomineeEdits || nominee.data} contest={category} />
     )
   const DUPLICATES = (nominee.duplicates || []).map(getNomineeData)
   const CATEGORIES = Object.keys(nominee.statuses || {})

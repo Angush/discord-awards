@@ -12,7 +12,7 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
     let imageOnly = contest.fields[0].imageOnly
     return (
       <div className={className + (imageOnly ? ' image-only-fields' : '')}>
-        {contest.entries.map(nominee => {
+        {contest.entries.map((nominee) => {
           return (
             <OtherCard
               onClick={() => select(nominee.data.key, nominee.data.identifier)}
@@ -21,6 +21,7 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
               data={nominee.data}
               single={true}
               key={nominee.data.key}
+              contest={contest}
             />
           )
         })}
@@ -37,12 +38,12 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
           default: 4,
           1199: 3,
           991: 2,
-          576: 1
+          576: 1,
         }}
       >
-        {contest.entries.map(nominee => {
+        {contest.entries.map((nominee) => {
           const selected = isSelected(nominee.data.key)
-          const onClick = event => {
+          const onClick = (event) => {
             let tag = event.target.tagName
             if (!['IMG', 'A', 'svg'].includes(tag)) {
               event.preventDefault()
@@ -55,6 +56,7 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
               onClick={onClick}
               selected={selected}
               data={nominee.data}
+              contest={contest}
             />
           ) : contest.type === 'art' ? (
             <ArtCard
@@ -62,6 +64,7 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
               onClick={onClick}
               selected={selected}
               formData={nominee.data}
+              contest={contest}
             />
           ) : (
             <FicCard
@@ -69,6 +72,7 @@ const ContestEntries = ({ contest, select, isSelected, mode = 'cards' }) => {
               onClick={onClick}
               selected={selected}
               fic={nominee.data}
+              contest={contest}
             />
           )
         })}

@@ -12,7 +12,8 @@ const OtherCard = ({
   onClick,
   onLoad,
   onError,
-  selected
+  selected,
+  contest,
 }) => {
   const classes =
     'other-card' +
@@ -29,8 +30,11 @@ const OtherCard = ({
     : {
         keyclickable: 'true',
         onClick: onClick,
-        tabIndex: 0
+        tabIndex: 0,
       }
+
+  // TODO: support for computed values
+  // TODO: also support for prefixes/suffixes
 
   return (
     <Card

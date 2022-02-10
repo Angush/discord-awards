@@ -103,6 +103,7 @@ const InputOther = ({
   }
 
   const createFormElement = (item) => {
+    if (item.computed) return null
     const validated = validateField(item)
     return (
       <Form.Group key={item.id}>
@@ -117,9 +118,7 @@ const InputOther = ({
           )}
           <Form.Control
             placeholder={
-              item.placeholder
-                ? item.placeholder
-                : `Enter ${item.label.toLowerCase()} here`
+              item.placeholder || `Enter ${item.label.toLowerCase()} here`
             }
             // id={item.id}
             size='lg'

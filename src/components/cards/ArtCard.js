@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
+import getMapOfValues from '../../functions/getMapOfValues'
 import validateURL from '../../functions/validateURL'
 import GenericVideoEmbed from './embeds/GenericVideoEmbed'
 import YouTubeEmbed from './embeds/YouTubeEmbed'
@@ -24,6 +25,7 @@ const ArtCard = ({
   onError = null,
   className,
   selected,
+  contest,
 }) => {
   const [error, setError] = useState(false)
 
@@ -74,6 +76,8 @@ const ArtCard = ({
 
   const ifInvalidImage = () => setError(true)
 
+  const values = getMapOfValues(contest, formData)
+
   return (
     <Card
       bg={selected ? 'primary' : 'dark'}
@@ -117,6 +121,11 @@ const ArtCard = ({
           <Card.Text className='fic-description-field'>
             This artwork could not be embedded; please use the link
             {formData?.links?.length > 1 ? 's' : ''} below.
+          </Card.Text>
+        )}
+        {values.has('description') && (
+          <Card.Text className='fic-description-field'>
+            {values.get('description')}
           </Card.Text>
         )}
         {formData.links && <FicLinks links={formData.links} />}

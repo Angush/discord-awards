@@ -3,7 +3,10 @@ import OtherCard from './OtherCard'
 import FicCard from './FicCard'
 import ArtCard from './ArtCard'
 
-const PreviewCard = props => {
+const PreviewCard = (props) => {
+  // TODO: support for computed values
+  // TODO: also support for prefixes/suffixes
+
   let propsCopy = { ...props }
   let { type } = propsCopy
   delete propsCopy.type
@@ -23,7 +26,7 @@ const PreviewCard = props => {
   let { data, requiredTypes } = propsCopy
   delete propsCopy.requiredTypes
 
-  let allNull = Object.values(data).every(item => (item ? false : true))
+  let allNull = Object.values(data).every((item) => (item ? false : true))
   if (allNull || Object.values(data).length === 0) return null
 
   let { usePlaceholders } = propsCopy
@@ -31,7 +34,7 @@ const PreviewCard = props => {
   if (usePlaceholders === undefined) usePlaceholders = true
 
   const vowels = ['a', 'e', 'i', 'o', 'u']
-  const blankField = field => {
+  const blankField = (field) => {
     if (field === 'image') return '/images/noimage.png'
     if (field === 'link') return '#no-link'
     let value = requiredTypes[field].toLowerCase()
@@ -55,8 +58,9 @@ const PreviewCard = props => {
   }
   propsCopy.data = cardData
 
-  let fieldCount = Object.values(cardData).filter(field => field || false)
-    .length
+  let fieldCount = Object.values(cardData).filter(
+    (field) => field || false
+  ).length
   if (
     !emptyField &&
     ((fieldCount === 1 && !cardData.image) ||
