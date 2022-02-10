@@ -203,11 +203,12 @@ const AdminVettingPage = ({ userData }) => {
   }
 
   const assembleListOfIDs = (change, index, ids) => {
-    if (index === ids.length - 1) return <code>{change.id}</code>
+    if (index === ids.length - 1)
+      return <code key={change.id}>{change.id}</code>
     return (
-      <>
+      <React.Fragment key={change.id}>
         <code>{change.id}</code>,{' '}
-      </>
+      </React.Fragment>
     )
   }
 
