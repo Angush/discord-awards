@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
+import getMapOfValues from '../../functions/getMapOfValues'
 import FicLinks from './FicLinks'
 
 const FicCard = ({ fic, className, onClick, selected, contest }) => {
@@ -16,6 +17,8 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
   // TODO: support for computed values
   // TODO: also support for prefixes/suffixes
 
+  const values = getMapOfValues(contest, fic)
+
   return (
     <Card
       bg={selected ? 'primary' : 'dark'}
@@ -23,7 +26,7 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
       className={classes}
       {...props}
     >
-      {fic.name && (
+      {values.has('name') && (
         <Card.Header className='fic-name-field'>
           <Card.Title>
             {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
@@ -33,16 +36,16 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                {fic.name}
+                {values.get('name')}
               </Card.Link>
             ) : (
-              fic.name
+              values.get('name')
             )}
           </Card.Title>
         </Card.Header>
       )}
       <Card.Body>
-        {fic.name ? (
+        {values.has('name') ? (
           <Card.Subtitle>
             in {fic.author || 'Unknown'}'s <em>{ficTitle}</em>
           </Card.Subtitle>
@@ -50,7 +53,7 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
           <>
             <Card.Title>
               {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-              {fic.link && !fic.name ? (
+              {fic.link && !values.has('name') ? (
                 <Card.Link
                   href={fic.link}
                   target='_blank'
@@ -80,9 +83,9 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
             </Card.Subtitle>
           </>
         )}
-        {fic.description && (
+        {(fic.description || values.has('description')) && (
           <Card.Text className='fic-description-field'>
-            {fic.description}
+            {fic.description || values.get('description')}
           </Card.Text>
         )}
         <FicLinks links={fic.links} />
