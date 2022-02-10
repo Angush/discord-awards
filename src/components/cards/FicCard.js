@@ -27,7 +27,17 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
         <Card.Header className='fic-name-field'>
           <Card.Title>
             {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-            {fic.name}
+            {fic.link ? (
+              <Card.Link
+                href={fic.link}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {fic.name}
+              </Card.Link>
+            ) : (
+              fic.name
+            )}
           </Card.Title>
         </Card.Header>
       )}
@@ -40,7 +50,17 @@ const FicCard = ({ fic, className, onClick, selected, contest }) => {
           <>
             <Card.Title>
               {fic.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-              {ficTitle}
+              {fic.link && !fic.name ? (
+                <Card.Link
+                  href={fic.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {ficTitle}
+                </Card.Link>
+              ) : (
+                ficTitle
+              )}
             </Card.Title>
             <Card.Subtitle>
               by{' '}
