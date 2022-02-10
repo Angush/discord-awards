@@ -1,6 +1,7 @@
 import getComputedValue from './getComputedValue'
 
 const getMapOfValues = (contest, data) => {
+  if (!contest.fields) return new Map()
   const values = new Map(
     contest.fields.map((field) => {
       if (field.computed) return [field.id, getComputedValue(field.value, data)]
