@@ -21,7 +21,7 @@ import './style/App.css'
 const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
 const NOMINATIONS_CLOSED = envVarIsTrue(`NOMINATIONS_CLOSED`)
 
-const years = ['2020', '2019']
+const years = ['2021', '2020', '2019']
 const navlinks = [
   {
     to: '/results',
@@ -53,7 +53,7 @@ const navlinks = [
         to: '/nominees',
         text: 'My Nominees',
       },
-].filter((navlink) => navlink)
+].filter(navlink => navlink)
 
 if (window.location.search) {
   let href = window.location.href.replace(/\?(code|state)=.*/, '')
@@ -63,7 +63,7 @@ if (window.location.search) {
 const App = () => {
   const [userData, setUserData] = useState({})
 
-  const handleKeydown = useCallback((event) => {
+  const handleKeydown = useCallback(event => {
     if (![32, 13].includes(event.keyCode)) return
     if (!document.activeElement.getAttribute('keyclickable')) return
     document.activeElement.click()
@@ -84,10 +84,10 @@ const App = () => {
       .fetch(`https://cauldron.angu.sh/api/auth`, {
         credentials: 'include',
       })
-      .then((response) => {
+      .then(response => {
         if (response.ok) return response.json()
       })
-      .then((data) => {
+      .then(data => {
         if (data.canVet)
           navlinks.push({
             to: '/admin/vetting',
@@ -97,14 +97,14 @@ const App = () => {
         let stringified = JSON.stringify(data)
         localStorage.userData = stringified
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(`Failed to fetch login data! That's weird...`, err)
         setUserData({})
         delete localStorage.userData
       })
   }, [handleKeydown])
 
-  const logout = (event) => {
+  const logout = event => {
     if (userData.logged_in) {
       event.preventDefault()
       window.fetch(`https://cauldron.angu.sh/api/logout`, {
@@ -139,7 +139,7 @@ const App = () => {
         }}
       />
       <Location>
-        {(props) => (
+        {props => (
           <AppNavBar
             logout={logout}
             navlinks={navlinks}
