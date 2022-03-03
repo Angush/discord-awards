@@ -3,7 +3,16 @@ import FicLinks from '../cards/FicLinks'
 
 const Result = ({ entry, type, votePercentage = null, votedFor }) => {
   const title = entry.name || entry.title
-  const creator = (entry.name && entry.title) ? <>in {entry.author}'s<br/><em>{entry.title}</em></> : (entry.author || entry.artist || entry.owner)
+  const creator =
+    entry.name && entry.title ? (
+      <>
+        in {entry.author}'s
+        <br />
+        <em>{entry.title}</em>
+      </>
+    ) : (
+      entry.author || entry.artist || entry.owner
+    )
   const image = type === 'art' ? entry.url : entry.image
   const link = entry.canonicalURL || entry.url || entry.link
   const desc = entry.description
@@ -11,22 +20,30 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
   const creatorPage = entry.artistPage || null
 
   const indicator = (entry.nsfw || entry.spoiler) && (
-      <p className='result-indicator'>
-        {entry.nsfw && <span className='nsfw-indicator'>NSFW</span>}
-        {entry.spoiler && <span className='spoiler-indicator'>SPOILER</span>}
-      </p>
-    )
+    <p className='result-indicator'>
+      {entry.nsfw && <span className='nsfw-indicator'>NSFW</span>}
+      {entry.spoiler && <span className='spoiler-indicator'>SPOILER</span>}
+    </p>
+  )
 
   return (
     <div className='result'>
       {title && (
         <h4>
-          {link ? <a href={link} target='_blank' rel='noreferrer noopener'>{title}</a> : title}{' '}
+          {link ? (
+            <a href={link} target='_blank' rel='noreferrer noopener'>
+              {title}
+            </a>
+          ) : (
+            title
+          )}{' '}
         </h4>
       )}
       {creator && creatorPage && (
         <h5 className='creator-page-link'>
-          <a href={creatorPage} target='_blank' rel='noreferrer noopener'>{creator}</a>
+          <a href={creatorPage} target='_blank' rel='noreferrer noopener'>
+            {creator}
+          </a>
         </h5>
       )}
       {creator && !creatorPage && <h5>{creator}</h5>}
@@ -49,7 +66,7 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
           </a>
         </div>
       )}
-      {type === 'fic' && <FicLinks links={entry.links} />}
+      {entry?.links?.length > 0 && <FicLinks links={entry.links} />}
       {blur && !image && title && indicator}
       {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
