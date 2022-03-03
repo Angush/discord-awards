@@ -2,17 +2,28 @@ import React from 'react'
 import FicLinks from '../cards/FicLinks'
 
 const Result = ({ entry, type, votePercentage = null, votedFor }) => {
-  const title = entry.name || entry.title
-  const creator =
-    entry.name && entry.title ? (
-      <>
-        in {entry.author}'s
-        <br />
-        <em>{entry.title}</em>
-      </>
-    ) : (
-      entry.author || entry.artist || entry.owner
-    )
+  const hasMultipleOwners =
+    entry.owner && (entry.artist || entry.author) && (entry.title || entry.name)
+  const title = hasMultipleOwners
+    ? entry.title || entry.name
+    : entry.name || entry.title
+  const creator = hasMultipleOwners ? (
+    <>
+      by {entry.artist || entry.author}
+      <br />
+      for {entry.owner}'s
+      <br />
+      <em>{entry.name || entry.title}</em>
+    </>
+  ) : entry.name && entry.title ? (
+    <>
+      in {entry.author || entry.artist || entry.owner}'s
+      <br />
+      <em>{entry.title}</em>
+    </>
+  ) : (
+    entry.author || entry.artist || entry.owner
+  )
   const image = type === 'art' ? entry.url : entry.image
   const link = entry.canonicalURL || entry.url || entry.link
   const desc = entry.description
