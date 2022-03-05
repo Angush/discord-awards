@@ -60,7 +60,7 @@ const ResultsHeader = ({
           {userVoteCount === 1 ? 'entry' : 'entries'}
         </h6>
       )}
-      <details className='category-description' open={true}>
+      <details className='category-description'>
         <summary>Description &amp; Tags</summary>
         {category.description}
         {(category.collection || category.isNew) && (
