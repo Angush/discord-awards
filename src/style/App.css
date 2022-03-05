@@ -1647,6 +1647,18 @@ input.form-control-lg {
   padding-bottom: 10vh;
 }
 
+.result .extra-images-indicator {
+  position: absolute;
+  padding: 4px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  backdrop-filter: blur(8px);
+  margin: 12px;
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .results-entries .img-parent img {
   max-width: 100%;
   height: auto;

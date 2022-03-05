@@ -88,9 +88,17 @@ const Result = ({
           <p className='hover-to-reveal'>Mouseover to reveal.</p>
         </>
       )}
+      {entry?.extraURLs?.length > 0 && (
+        <p className='hover-to-reveal'>Click to view additional images.</p>
+      )}
       {image && (
         <div className='img-parent'>
           <div>
+            {entry?.extraURLs?.length > 0 && (
+              <span className='extra-images-indicator'>
+                +{entry.extraURLs.length} images
+              </span>
+            )}
             <img
               id={entryKey}
               src={image}
