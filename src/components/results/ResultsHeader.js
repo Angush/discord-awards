@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import makeSafeForURL from '../../functions/makeSafeForURL'
 import { Link } from '@reach/router'
 
-const ResultsHeader = ({ year, category, userVoteCount = 0, hideLink = false }) => {
+const ResultsHeader = ({
+  year,
+  category,
+  userVoteCount = 0,
+  hideLink = false,
+}) => {
   const [anchor] = useState(makeSafeForURL(category.title))
 
   const entries =
@@ -31,10 +36,10 @@ const ResultsHeader = ({ year, category, userVoteCount = 0, hideLink = false }) 
         <small>Cauldron Awards {year}</small>
         <h2>
           {!hideLink ? (
-            <Link to={`${anchor}`}>
-              {category.title}
-            </Link>
-          ) : category.title}
+            <Link to={`${anchor}`}>{category.title}</Link>
+          ) : (
+            category.title
+          )}
         </h2>
         <small className='text-muted'>
           {entries}
@@ -56,9 +61,17 @@ const ResultsHeader = ({ year, category, userVoteCount = 0, hideLink = false }) 
         </h6>
       )}
       <div className='category-badges'>
-        {category.collection && <div className='new-indicator'>{`Collection: ${category.collection}`.toUpperCase()}</div>}
+        {category.collection && (
+          <div className='new-indicator'>
+            {`Collection: ${category.collection}`.toUpperCase()}
+          </div>
+        )}
         {category.isNew && <div className='new-indicator'>NEW CATEGORY</div>}
       </div>
+      <details className='category-description' open={true}>
+        <summary>Description</summary>
+        {category.description}
+      </details>
     </div>
   )
 }

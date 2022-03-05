@@ -1556,6 +1556,44 @@ input.form-control-lg {
   transform: scaleX(-1);
 }
 
+.results-category .category-description {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 70%;
+  font-family: 'Noto Serif', trajan-pro-3, serif;
+  line-height: 1.8em;
+}
+
+.category-description summary {
+  text-transform: uppercase;
+  font-size: 14px;
+  width: fit-content;
+  margin: 0 auto;
+  border: 1px solid rgb(200, 200, 200);
+  background-color: rgba(0, 0, 0, 0.02);
+  padding: 0 14px;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+
+.category-description summary:hover {
+  border-color: 1px solid rgb(180, 180, 180);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.category-description[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+.category-description summary::before {
+  padding-left: 4px;
+  content: 'Show ';
+}
+
+.category-description[open] summary::before {
+  content: 'Hide ';
+}
+
 .results-entries {
   text-align: center;
   width: 100%;
@@ -2076,6 +2114,10 @@ input.form-control-lg {
   #floating-toc-btn {
     bottom: 1.5rem;
     right: 1.5rem;
+  }
+
+  .results-category .category-description {
+    max-width: 90%;
   }
 }
 
