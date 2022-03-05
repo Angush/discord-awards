@@ -1699,6 +1699,7 @@ input.form-control-lg {
   margin: 1rem auto;
   margin-bottom: 1.25rem;
   font-family: 'Noto Serif', trajan-pro-3, serif;
+  white-space: pre-line;
 }
 
 .results h6 span {
