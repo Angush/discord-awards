@@ -60,17 +60,21 @@ const ResultsHeader = ({
           {userVoteCount === 1 ? 'entry' : 'entries'}
         </h6>
       )}
-      <div className='category-badges'>
-        {category.collection && (
-          <div className='new-indicator'>
-            {`Collection: ${category.collection}`.toUpperCase()}
+      <details className='category-description' open={true}>
+        <summary>Description &amp; Tags</summary>
+        {category.description}
+        {(category.collection || category.isNew) && (
+          <div className='category-badges'>
+            {category.collection && (
+              <div className='new-indicator'>
+                {`Collection: ${category.collection}`.toUpperCase()}
+              </div>
+            )}
+            {category.isNew && (
+              <div className='new-indicator'>NEW CATEGORY</div>
+            )}
           </div>
         )}
-        {category.isNew && <div className='new-indicator'>NEW CATEGORY</div>}
-      </div>
-      <details className='category-description' open={true}>
-        <summary>Description</summary>
-        {category.description}
       </details>
     </div>
   )

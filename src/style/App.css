@@ -1562,6 +1562,7 @@ input.form-control-lg {
   max-width: 70%;
   font-family: 'Noto Serif', trajan-pro-3, serif;
   line-height: 1.8em;
+  margin-top: 1.5rem;
 }
 
 .category-description summary {
