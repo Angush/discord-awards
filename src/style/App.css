@@ -1659,6 +1659,18 @@ input.form-control-lg {
   z-index: 2;
 }
 
+.result .video-embed,
+.result .generic-video-embed {
+  width: 100%;
+  max-width: 70%;
+  height: auto;
+  margin-top: 1.25rem;
+}
+
+.result .video-embed {
+  aspect-ratio: 16 / 9;
+}
+
 .results-entries .img-parent img {
   max-width: 100%;
   height: auto;

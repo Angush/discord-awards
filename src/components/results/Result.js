@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FicLinks from '../cards/FicLinks'
 import getMapOfValues from '../../functions/getMapOfValues'
+import YouTubeEmbed from '../cards/embeds/YouTubeEmbed'
+import GenericVideoEmbed from '../cards/embeds/GenericVideoEmbed'
+
+const getEmbed = (url, data) => {
+  if (!url) return
+  const title = `(${data.id}) ${data.title || 'Untitled'} by ${
+    data.artist || 'Unknown'
+  }`
+  let match
+  match = url.match(/(youtube\.com\/watch\?v=|youtu\.be\/)(?<id>\w+)/)
+  if (match?.groups?.id)
+    return <YouTubeEmbed id={match.groups.id} title={title} />
+  if (url.match(/redd\.it.+format=mp4/))
+    return <GenericVideoEmbed url={url} title={title} />
+}
 
 const Result = ({
   entry,
@@ -10,6 +25,9 @@ const Result = ({
   votePercentage = null,
   votedFor,
 }) => {
+  const [error, setError] = useState(false)
+  const ifInvalidImage = () => setError(true)
+
   const hiddenFields = {}
   if (category.fields)
     category.fields.forEach(field => {
@@ -43,7 +61,6 @@ const Result = ({
   ) : (
     entry.author || entry.artist || entry.owner
   )
-  const image = type === 'art' ? entry.url : entry.image
   const link = entry.canonicalURL || entry.url || entry.link
   const desc = entry.description
   const blur = entry.spoiler || entry.nsfw
@@ -57,6 +74,19 @@ const Result = ({
   )
 
   const values = category?.fields ? getMapOfValues(category, entry) : new Map()
+  const image =
+    type === 'fic'
+      ? null
+      : entry.url ||
+        entry.image ||
+        entry?.extraURLs?.find(url => !!url) ||
+        entry?.links?.find(url => !!url)
+
+  const Embed = getEmbed(image, entry)
+  const nonEmbedLinks = entry?.links || []
+  const filteredLinks = Embed
+    ? nonEmbedLinks.filter(url => url !== image)
+    : nonEmbedLinks
 
   return (
     <div className='result'>
@@ -82,16 +112,25 @@ const Result = ({
       {(desc || values.has('description')) && (
         <h6 className='result-desc'>{desc || values.get('description')}</h6>
       )}
+      {!Embed && image && error && (
+        <div>
+          This artwork could not be embedded; please use the link
+          {nonEmbedLinks.length > 1 ? 's' : ''} below.
+        </div>
+      )}
       {blur && image && (
         <>
           {indicator}
-          <p className='hover-to-reveal'>Mouseover to reveal.</p>
+          {!error && !Embed && (
+            <p className='hover-to-reveal'>Mouseover to reveal.</p>
+          )}
         </>
       )}
-      {entry?.extraURLs?.length > 0 && (
+      {entry?.extraURLs?.length > 0 && !error && (
         <p className='hover-to-reveal'>Click to view additional images.</p>
       )}
-      {image && (
+      {!!Embed && Embed}
+      {!Embed && image && !error && (
         <div className='img-parent'>
           <div>
             {entry?.extraURLs?.length > 0 && (
@@ -103,13 +142,15 @@ const Result = ({
               id={entryKey}
               src={image}
               loading='lazy'
+              onError={ifInvalidImage}
               className={blur ? 'nsfw-img result-img' : 'result-img'}
               alt={`Entry ${entry.id}`}
             />
           </div>
         </div>
       )}
-      {entry?.links?.length > 0 && <FicLinks links={entry.links} />}
+      {!error && filteredLinks.length > 0 && <FicLinks links={filteredLinks} />}
+      {error && nonEmbedLinks.length > 0 && <FicLinks links={nonEmbedLinks} />}
       {blur && !image && title && indicator}
       {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
