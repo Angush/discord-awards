@@ -1,6 +1,12 @@
 {
   "header": {
-    "paragraphs": {}
+    "paragraphs": {
+      "secondary": [
+        "With 1012 entries across 66 categories (1,504 before vetting), and 10,090 votes lodged by 107 voters, the 2021 Cauldron Awards showcase Cauldron's favorites of all the myriad fanworks that our fandom created throughout the year — as well as the many people, events, and moments within the Cauldron community that deserve a little honoring.",
+        "The 2021 Awards showcases 12 new categories, such as \"Favorite Original Work by a Cauldron member\" and \"Favorite Quote or Line From a Fic\" and \"Favorite Omake or Recursive Fic\" and many more, including 7 new categories for art nominees, from memes and comic strips to videos and animations — all thanks to some wonderful suggestions from the Awards channel on Discord!",
+        "Thanks to everyone for taking part in the nominations and voting process, and many congratulations to the winners, runners-up, and all the nominees. See you next year!"
+      ]
+    }
   },
   "totals": {
     "categories": 66,
@@ -50,9 +56,7 @@
             {
               "id": 507,
               "votes": 22,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -71,9 +75,7 @@
             {
               "id": 140,
               "votes": 21,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
@@ -91,18 +93,14 @@
             {
               "id": 55,
               "votes": 18,
-              "links": [
-                "https://forums.spacebattles.com/threads/963796"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963796"],
               "title": "Hers Is The Fury",
               "author": "Ridtom"
             },
             {
               "id": 76,
               "votes": 17,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -182,9 +180,7 @@
             {
               "id": 621,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/840956"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/840956"],
               "title": "Implacable",
               "author": "billymorph"
             },
@@ -243,9 +239,7 @@
             {
               "id": 159,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/chapters/86859820"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86859820"],
               "title": "Ghostlight",
               "author": "Dusky"
             },
@@ -263,9 +257,7 @@
             {
               "id": 671,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -305,9 +297,7 @@
             {
               "id": 592,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/29953431"
-              ],
+              "links": ["https://archiveofourown.org/works/29953431"],
               "title": "and they were villains!",
               "author": "EtchJetty, Chartic, Fishtail, Blue, TheSleepingKnight, OMEGA93, 8, Torvaun, tackeart, MarcoFro5, tearlessNevermore, Topaz, T0PH4T, and Hestia"
             },
@@ -347,9 +337,7 @@
             {
               "id": 733,
               "votes": 6,
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -389,18 +377,14 @@
             {
               "id": 226,
               "votes": 5,
-              "links": [
-                "https://forums.spacebattles.com/threads/951384"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/951384"],
               "title": "No Greater Love",
               "author": "HopefulPenguin"
             },
             {
               "id": 612,
               "votes": 5,
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -417,9 +401,7 @@
             {
               "id": 129,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
@@ -449,9 +431,7 @@
             {
               "id": 791,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/765826"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/765826"],
               "title": "Late",
               "author": "twosmall"
             },
@@ -491,36 +471,28 @@
             {
               "id": 595,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/29744235"
-              ],
+              "links": ["https://archiveofourown.org/works/29744235"],
               "title": "fade out",
               "author": "tackeart"
             },
             {
               "id": 130,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/32941384"
-              ],
+              "links": ["https://archiveofourown.org/works/32941384"],
               "title": "Clear and Present",
               "author": "HopefulPenguin"
             },
             {
               "id": 131,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/32964043"
-              ],
+              "links": ["https://archiveofourown.org/works/32964043"],
               "title": "Neat Little Boxes",
               "author": "HopefulPenguin"
             },
             {
               "id": 149,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/34992193"
-              ],
+              "links": ["https://archiveofourown.org/works/34992193"],
               "title": "Minimise",
               "author": "HopefulPenguin"
             },
@@ -548,18 +520,14 @@
             {
               "id": 594,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/32512096"
-              ],
+              "links": ["https://archiveofourown.org/works/32512096"],
               "title": "pupa",
               "author": "tackeart"
             },
             {
               "id": 609,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/952117"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952117"],
               "title": "Ace Combat: Parahuman",
               "author": "Pixel"
             },
@@ -588,27 +556,21 @@
             {
               "id": 808,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
             {
               "id": 128,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/32057035"
-              ],
+              "links": ["https://archiveofourown.org/works/32057035"],
               "title": "Cobalt",
               "author": "breakingamber"
             },
             {
               "id": 184,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/34087774"
-              ],
+              "links": ["https://archiveofourown.org/works/34087774"],
               "title": "Defiant Beyond the Border",
               "author": "Flair2334"
             },
@@ -637,9 +599,7 @@
             {
               "id": 606,
               "votes": 1,
-              "links": [
-                "https://forums.sufficientvelocity.com/threads/89976"
-              ],
+              "links": ["https://forums.sufficientvelocity.com/threads/89976"],
               "title": "Lesion",
               "author": "Estro"
             },
@@ -744,9 +704,7 @@
             {
               "id": 55,
               "votes": 24,
-              "links": [
-                "https://forums.spacebattles.com/threads/963796"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963796"],
               "title": "Hers Is The Fury",
               "author": "Ridtom"
             },
@@ -827,9 +785,7 @@
             {
               "id": 776,
               "votes": 13,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -857,9 +813,7 @@
             {
               "id": 226,
               "votes": 11,
-              "links": [
-                "https://forums.spacebattles.com/threads/951384"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/951384"],
               "title": "No Greater Love",
               "author": "HopefulPenguin"
             },
@@ -886,18 +840,14 @@
             {
               "id": 677,
               "votes": 10,
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater"
             },
             {
               "id": 428,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -945,18 +895,14 @@
             {
               "id": 601,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/posts/81232066"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81232066"],
               "title": "Galatea",
               "author": "K800"
             },
             {
               "id": 134,
               "votes": 6,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
@@ -984,9 +930,7 @@
             {
               "id": 243,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/29744235"
-              ],
+              "links": ["https://archiveofourown.org/works/29744235"],
               "title": "fade out",
               "author": "tackeart"
             },
@@ -1004,9 +948,7 @@
             {
               "id": 518,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/chapters/86716006"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86716006"],
               "title": "Anactória",
               "author": "Hopeful Penguin"
             },
@@ -1045,9 +987,7 @@
             {
               "id": 132,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/32057035"
-              ],
+              "links": ["https://archiveofourown.org/works/32057035"],
               "title": "Cobalt",
               "author": "breakingamber"
             },
@@ -1075,9 +1015,7 @@
             {
               "id": 896,
               "votes": 3,
-              "links": [
-                "https://forums.spacebattles.com/threads/963481"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963481"],
               "title": "Arch",
               "author": "AbyssRay"
             },
@@ -1104,9 +1042,7 @@
             {
               "id": 594,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/32512096"
-              ],
+              "links": ["https://archiveofourown.org/works/32512096"],
               "title": "pupa",
               "author": "tackeart"
             },
@@ -1123,36 +1059,28 @@
             {
               "id": 609,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/952117"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952117"],
               "title": "Ace Combat: Parahuman",
               "author": "Pixel"
             },
             {
               "id": 610,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/984634"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/984634"],
               "title": "Batman and Buggirl",
               "author": "Ralton"
             },
             {
               "id": 611,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/963433"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963433"],
               "title": "The Alchemist",
               "author": "TheFridgeLogician"
             },
             {
               "id": 714,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/933411"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/933411"],
               "title": "Conception: Regret",
               "author": "Nitelock75"
             },
@@ -1170,18 +1098,14 @@
             {
               "id": 149,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/34992193"
-              ],
+              "links": ["https://archiveofourown.org/works/34992193"],
               "title": "Minimise",
               "author": "HopefulPenguin"
             },
             {
               "id": 184,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/34087774"
-              ],
+              "links": ["https://archiveofourown.org/works/34087774"],
               "title": "Defiant Beyond the Border",
               "author": "Flair2334"
             },
@@ -1232,18 +1156,14 @@
             {
               "id": 606,
               "votes": 1,
-              "links": [
-                "https://forums.sufficientvelocity.com/threads/89976"
-              ],
+              "links": ["https://forums.sufficientvelocity.com/threads/89976"],
               "title": "Lesion",
               "author": "Estro"
             },
             {
               "id": 607,
               "votes": 1,
-              "links": [
-                "https://forums.spacebattles.com/threads/978079"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/978079"],
               "title": "Monsters In Brockton",
               "author": "Tankaxe"
             },
@@ -1336,9 +1256,7 @@
             {
               "id": 507,
               "votes": 25,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -1356,9 +1274,7 @@
             {
               "id": 76,
               "votes": 23,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -1375,18 +1291,14 @@
             {
               "id": 655,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             },
             {
               "id": 621,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/840956"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/840956"],
               "title": "Implacable",
               "author": "billymorph"
             },
@@ -1405,9 +1317,7 @@
             {
               "id": 226,
               "votes": 8,
-              "links": [
-                "https://forums.spacebattles.com/threads/951384"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/951384"],
               "title": "No Greater Love",
               "author": "HopefulPenguin"
             },
@@ -1447,27 +1357,21 @@
             {
               "id": 680,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/35698870"
-              ],
+              "links": ["https://archiveofourown.org/works/35698870"],
               "title": "What's Next",
               "author": "MarcoFro5"
             },
             {
               "id": 592,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/29953431"
-              ],
+              "links": ["https://archiveofourown.org/works/29953431"],
               "title": "and they were villains!",
               "author": "EtchJetty, Chartic, Fishtail, Blue, TheSleepingKnight, OMEGA93, 8, Torvaun, tackeart, MarcoFro5, tearlessNevermore, Topaz, T0PH4T, and Hestia"
             },
             {
               "id": 134,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
@@ -1485,18 +1389,14 @@
             {
               "id": 149,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/34992193"
-              ],
+              "links": ["https://archiveofourown.org/works/34992193"],
               "title": "Minimise",
               "author": "HopefulPenguin"
             },
             {
               "id": 427,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/36099061"
-              ],
+              "links": ["https://archiveofourown.org/works/36099061"],
               "title": "Upside Down",
               "author": "Redcoat_Officer"
             },
@@ -1568,9 +1468,7 @@
             {
               "id": 606,
               "votes": 1,
-              "links": [
-                "https://forums.sufficientvelocity.com/threads/89976"
-              ],
+              "links": ["https://forums.sufficientvelocity.com/threads/89976"],
               "title": "Lesion",
               "author": "Estro"
             },
@@ -1727,18 +1625,14 @@
             {
               "id": 827,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/978519"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/978519"],
               "title": "Enter Midas",
               "author": "Zerrer"
             },
             {
               "id": 688,
               "votes": 0,
-              "links": [
-                "https://forums.spacebattles.com/threads/960677"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/960677"],
               "title": "Seize the Bay: a Brockton Gang Quest",
               "author": "Unqualified Questor"
             }
@@ -1746,6 +1640,7 @@
         },
         {
           "id": 5,
+          "isNew": true,
           "votes": 48,
           "voters": 33,
           "type": "fic",
@@ -1755,18 +1650,14 @@
             {
               "id": 709,
               "votes": 13,
-              "links": [
-                "https://redsheild.wordpress.com/mitosis-literally/"
-              ],
+              "links": ["https://redsheild.wordpress.com/mitosis-literally/"],
               "title": "Mitosis, Literally",
               "author": "Redsheild"
             },
             {
               "id": 237,
               "votes": 11,
-              "links": [
-                "https://conquestofavalon.wordpress.com/"
-              ],
+              "links": ["https://conquestofavalon.wordpress.com/"],
               "title": "Conquest of Avalon",
               "author": "Husr"
             },
@@ -1812,9 +1703,7 @@
             {
               "id": 147,
               "votes": 25,
-              "links": [
-                "https://forums.spacebattles.com/posts/81181456"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81181456"],
               "title": "Accord's Terrible, Horrible, No Good, Very Bad Day",
               "author": "Colossal Mistake"
             },
@@ -1843,36 +1732,28 @@
             {
               "id": 592,
               "votes": 10,
-              "links": [
-                "https://archiveofourown.org/works/29953431"
-              ],
+              "links": ["https://archiveofourown.org/works/29953431"],
               "title": "and they were villains!",
               "author": "EtchJetty, Chartic, Fishtail, Blue, TheSleepingKnight, OMEGA93, 8, Torvaun, tackeart, MarcoFro5, tearlessNevermore, Topaz, T0PH4T, and Hestia"
             },
             {
               "id": 279,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
             {
               "id": 397,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/36028540"
-              ],
+              "links": ["https://archiveofourown.org/works/36028540"],
               "title": "Doesn't Count",
               "author": "HopefulPenguin"
             },
             {
               "id": 159,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/chapters/86859820"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86859820"],
               "title": "Ghostlight",
               "author": "Dusky"
             },
@@ -1889,108 +1770,84 @@
             {
               "id": 10,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/33066796"
-              ],
+              "links": ["https://archiveofourown.org/works/33066796"],
               "title": "Carnaval",
               "author": "ScorpiaMossmoon"
             },
             {
               "id": 595,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/29744235"
-              ],
+              "links": ["https://archiveofourown.org/works/29744235"],
               "title": "fade out",
               "author": "tackeart"
             },
             {
               "id": 683,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/29281635"
-              ],
+              "links": ["https://archiveofourown.org/works/29281635"],
               "title": "Goldilocks - A Shitpost in Fanfic Form",
               "author": "Napoleon Bonerfart"
             },
             {
               "id": 136,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/32941384"
-              ],
+              "links": ["https://archiveofourown.org/works/32941384"],
               "title": "Clear and Present",
               "author": "HopefulPenguin"
             },
             {
               "id": 156,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/34855063"
-              ],
+              "links": ["https://archiveofourown.org/works/34855063"],
               "title": "Folie deux: to the devil his dues",
               "author": "TheSleepingKnight"
             },
             {
               "id": 241,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/34992193"
-              ],
+              "links": ["https://archiveofourown.org/works/34992193"],
               "title": "Minimise",
               "author": "HopefulPenguin"
             },
             {
               "id": 398,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/posts/74466602"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/74466602"],
               "title": "When Colin Met Tess",
               "author": "Colossal Mistake"
             },
             {
               "id": 518,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/chapters/86716006"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86716006"],
               "title": "Anactória",
               "author": "Hopeful Penguin"
             },
             {
               "id": 686,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/34846207"
-              ],
+              "links": ["https://archiveofourown.org/works/34846207"],
               "title": "Burnscar Dies At The End",
               "author": "JoesAlot"
             },
             {
               "id": 38,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/36099643"
-              ],
+              "links": ["https://archiveofourown.org/works/36099643"],
               "title": "Second Skin",
               "author": "BinaryApotheosis"
             },
             {
               "id": 138,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/32964043"
-              ],
+              "links": ["https://archiveofourown.org/works/32964043"],
               "title": "Neat Little Boxes",
               "author": "HopefulPenguin"
             },
             {
               "id": 211,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/29763396"
-              ],
+              "links": ["https://archiveofourown.org/works/29763396"],
               "title": "Give Advice, Take Heart, and Have Fun",
               "author": "Distraktion"
             },
@@ -2028,45 +1885,35 @@
             {
               "id": 394,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/35953954"
-              ],
+              "links": ["https://archiveofourown.org/works/35953954"],
               "title": "Ever Northwards Gaze",
               "author": "HopefulPenguin"
             },
             {
               "id": 677,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater"
             },
             {
               "id": 766,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/31008296"
-              ],
+              "links": ["https://archiveofourown.org/works/31008296"],
               "title": "Parahuman Dread",
               "author": "BinaryApotheosis"
             },
             {
               "id": 327,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/29091885"
-              ],
+              "links": ["https://archiveofourown.org/works/29091885"],
               "title": "scales that glitter",
               "author": "Starsilver"
             },
             {
               "id": 331,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/28963494"
-              ],
+              "links": ["https://archiveofourown.org/works/28963494"],
               "title": "Digging Deep Inside Myself",
               "author": "Distraktion"
             },
@@ -2083,36 +1930,28 @@
             {
               "id": 399,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/posts/79830877"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/79830877"],
               "title": "Draconic",
               "author": "Colossal Mistake"
             },
             {
               "id": 628,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/29152221"
-              ],
+              "links": ["https://archiveofourown.org/works/29152221"],
               "title": "Not Forever, But Memories",
               "author": "YseultNott"
             },
             {
               "id": 640,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/34854502"
-              ],
+              "links": ["https://archiveofourown.org/works/34854502"],
               "title": "hands and eyes and teeth and hands",
               "author": "YseultNott"
             },
             {
               "id": 815,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/973729"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/973729"],
               "title": "Whalefall",
               "author": "ccstat"
             },
@@ -2129,27 +1968,21 @@
             {
               "id": 335,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/30024804"
-              ],
+              "links": ["https://archiveofourown.org/works/30024804"],
               "title": "Basilisk's Day Off",
               "author": "Distraktion"
             },
             {
               "id": 336,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/31007855"
-              ],
+              "links": ["https://archiveofourown.org/works/31007855"],
               "title": "Through a New Lens",
               "author": "Distraktion"
             },
             {
               "id": 347,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/36100246"
-              ],
+              "links": ["https://archiveofourown.org/works/36100246"],
               "title": "Whetstone",
               "author": "Distraktion"
             },
@@ -2166,144 +1999,112 @@
             {
               "id": 627,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/29129619"
-              ],
+              "links": ["https://archiveofourown.org/works/29129619"],
               "title": "Icarus soared",
               "author": "YseultNott"
             },
             {
               "id": 629,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/29426856"
-              ],
+              "links": ["https://archiveofourown.org/works/29426856"],
               "title": "Love Language",
               "author": "YseultNott"
             },
             {
               "id": 630,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/30716600"
-              ],
+              "links": ["https://archiveofourown.org/works/30716600"],
               "title": "Sponge Cake and Swiss Knives",
               "author": "YseultNott"
             },
             {
               "id": 633,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/31589519"
-              ],
+              "links": ["https://archiveofourown.org/works/31589519"],
               "title": "99 Bottles of Beer on the Wall",
               "author": "YseultNott"
             },
             {
               "id": 634,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/34209637"
-              ],
+              "links": ["https://archiveofourown.org/works/34209637"],
               "title": "A Nice Cloud of Pixie Dust",
               "author": "YseultNott"
             },
             {
               "id": 642,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/31542413"
-              ],
+              "links": ["https://archiveofourown.org/works/31542413"],
               "title": "Family Dinner",
               "author": "YseultNott"
             },
             {
               "id": 648,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/31458380"
-              ],
+              "links": ["https://archiveofourown.org/works/31458380"],
               "title": "Murder at Tiffany's",
               "author": "YseultNott"
             },
             {
               "id": 626,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/29105916"
-              ],
+              "links": ["https://archiveofourown.org/works/29105916"],
               "title": "People Watching",
               "author": "YseultNott"
             },
             {
               "id": 631,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/31502576"
-              ],
+              "links": ["https://archiveofourown.org/works/31502576"],
               "title": "Of Silver Hair and Raspberry Lamb Chops",
               "author": "YseultNott"
             },
             {
               "id": 632,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/31567628"
-              ],
+              "links": ["https://archiveofourown.org/works/31567628"],
               "title": "More Nurturing Than the Desert",
               "author": "YseultNott"
             },
             {
               "id": 635,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/34235863"
-              ],
+              "links": ["https://archiveofourown.org/works/34235863"],
               "title": "Shelter in the Storm",
               "author": "YseultNott"
             },
             {
               "id": 636,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/35101660"
-              ],
+              "links": ["https://archiveofourown.org/works/35101660"],
               "title": "Dirty Hands Reaching Out",
               "author": "YseultNott"
             },
             {
               "id": 638,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/36099508"
-              ],
+              "links": ["https://archiveofourown.org/works/36099508"],
               "title": "The Wonderful Christmas of Mister and Mister Berry",
               "author": "YseultNott"
             },
             {
               "id": 644,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/31524974"
-              ],
+              "links": ["https://archiveofourown.org/works/31524974"],
               "title": "The Ghost in the Graveyard",
               "author": "YseultNott"
             },
             {
               "id": 646,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/31478477"
-              ],
+              "links": ["https://archiveofourown.org/works/31478477"],
               "title": "The Girl Wearing a Demon Mask",
               "author": "YseultNott"
             },
             {
               "id": 765,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/36099472"
-              ],
+              "links": ["https://archiveofourown.org/works/36099472"],
               "title": "Intrusion",
               "author": "BinaryApotheosis"
             }
@@ -2311,6 +2112,7 @@
         },
         {
           "id": 7,
+          "isNew": true,
           "votes": 70,
           "voters": 47,
           "type": "fic",
@@ -2320,18 +2122,14 @@
             {
               "id": 741,
               "votes": 16,
-              "links": [
-                "https://forums.spacebattles.com/threads/645934"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/645934"],
               "title": "Ten Times",
               "author": "Argentorum"
             },
             {
               "id": 146,
               "votes": 15,
-              "links": [
-                "https://forums.spacebattles.com/threads/893320"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/893320"],
               "title": "The Thread That Launched A Thousand Snips",
               "author": "Colossal Mistake"
             },
@@ -2358,18 +2156,14 @@
             {
               "id": 321,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/914217"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/914217"],
               "title": "Distraktion's Distractions",
               "author": "Distraktion"
             },
             {
               "id": 886,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/925925"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/925925"],
               "title": "Fragments of Apotheosis",
               "author": "BinaryApotheosis"
             },
@@ -2386,9 +2180,7 @@
             {
               "id": 328,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/series/2134413"
-              ],
+              "links": ["https://archiveofourown.org/series/2134413"],
               "title": "dreaming of city smoke",
               "author": "Starsilver"
             }
@@ -2396,6 +2188,7 @@
         },
         {
           "id": 8,
+          "isNew": true,
           "votes": 60,
           "voters": 47,
           "type": "fic",
@@ -2431,9 +2224,7 @@
               "id": 265,
               "votes": 12,
               "name": "various fics - Internship, Arsenal, No Greater Love, Foundations, Nike, Black Rain",
-              "links": [
-                "https://forums.spacebattles.com/threads/955312"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/955312"],
               "owner": "Hopeful Penguin",
               "title": "Archipelago",
               "author": "HopefulPenguin"
@@ -2490,9 +2281,7 @@
             {
               "id": 1,
               "votes": 7,
-              "links": [
-                "https://sunnydaysadness.itch.io/sink"
-              ],
+              "links": ["https://sunnydaysadness.itch.io/sink"],
               "title": "Sink",
               "author": "sunnydays"
             }
@@ -2509,9 +2298,7 @@
             {
               "id": 40,
               "votes": 43,
-              "links": [
-                "https://archiveofourown.org/works/31825576"
-              ],
+              "links": ["https://archiveofourown.org/works/31825576"],
               "title": "Literally Worm Except Taylor Gets Addicted To Critically Acclaimed MMO Final Fantasy XIV Which Now Includes A Free Trial Up To Level 60 Along With Its Award-Winning Expansion Heavensward",
               "author": "misha906 (BoopPhysics)"
             },
@@ -2541,36 +2328,28 @@
             {
               "id": 147,
               "votes": 18,
-              "links": [
-                "https://forums.spacebattles.com/posts/81181456"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81181456"],
               "title": "Accord's Terrible, Horrible, No Good, Very Bad Day",
               "author": "Colossal Mistake"
             },
             {
               "id": 775,
               "votes": 18,
-              "links": [
-                "https://forums.spacebattles.com/threads/961422"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/961422"],
               "title": "Bayesian/Blockchain/Sigma/Trillionaire!Taylor",
               "author": "Rhydeble"
             },
             {
               "id": 784,
               "votes": 18,
-              "links": [
-                "https://archiveofourown.org/works/35710438"
-              ],
+              "links": ["https://archiveofourown.org/works/35710438"],
               "title": "Terrible Jokes That Eventually Lead Up to an Obscure Glassblowing Fetish Fulfillment for the Five People Who Like That",
               "author": "MarcoFro5"
             },
             {
               "id": 507,
               "votes": 14,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -2630,9 +2409,7 @@
             {
               "id": 776,
               "votes": 8,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -2703,9 +2480,7 @@
             {
               "id": 226,
               "votes": 3,
-              "links": [
-                "https://forums.spacebattles.com/threads/951384"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/951384"],
               "title": "No Greater Love",
               "author": "HopefulPenguin"
             }
@@ -2722,9 +2497,7 @@
             {
               "id": 571,
               "votes": 26,
-              "links": [
-                "https://parahumanzine.tumblr.com/"
-              ],
+              "links": ["https://parahumanzine.tumblr.com/"],
               "title": "Parahumans Zine",
               "author": "TheSleepingKnight and Nil"
             },
@@ -2778,27 +2551,21 @@
             {
               "id": 491,
               "votes": 13,
-              "links": [
-                "https://forums.spacebattles.com/threads/726946"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/726946"],
               "title": "Luminous",
               "author": "Relyet"
             },
             {
               "id": 124,
               "votes": 12,
-              "links": [
-                "https://forums.spacebattles.com/threads/337516"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/337516"],
               "title": "Intrepid",
               "author": "Cerulean"
             },
             {
               "id": 391,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/chapters/53687230"
-              ],
+              "links": ["https://archiveofourown.org/chapters/53687230"],
               "title": "Clear As Day",
               "author": "MarcoFro5"
             },
@@ -2836,63 +2603,49 @@
             {
               "id": 501,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/785140"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/785140"],
               "title": "I Wish I Was Hunter S. Thompson, Because Then I'd Be Dead",
               "author": "Death of the Artist"
             },
             {
               "id": 829,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/718222"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/718222"],
               "title": "Uplink",
               "author": "AnOutrageousAmountOfOwls"
             },
             {
               "id": 900,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/734500"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/734500"],
               "title": "Lend Me Your Ears",
               "author": "BurningCrab"
             },
             {
               "id": 121,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/779515"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/779515"],
               "title": "Gumshoe: Glory for Justice (Worm Canon Divergence)",
               "author": "BlackDynamite"
             },
             {
               "id": 122,
               "votes": 3,
-              "links": [
-                "https://forums.sufficientvelocity.com/threads/36003"
-              ],
+              "links": ["https://forums.sufficientvelocity.com/threads/36003"],
               "title": "Skitter Studies",
               "author": "The Laurent"
             },
             {
               "id": 218,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/chapters/54754909"
-              ],
+              "links": ["https://archiveofourown.org/chapters/54754909"],
               "title": "Walk on Hephaestus",
               "author": "cattesaber"
             },
             {
               "id": 689,
               "votes": 0,
-              "links": [
-                "https://forums.spacebattles.com/threads/493583"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/493583"],
               "title": "Perfection",
               "author": "Belial666"
             }
@@ -2932,18 +2685,14 @@
             {
               "id": 621,
               "votes": 13,
-              "links": [
-                "https://forums.spacebattles.com/threads/840956"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/840956"],
               "title": "Implacable",
               "author": "billymorph"
             },
             {
               "id": 788,
               "votes": 11,
-              "links": [
-                "https://forums.spacebattles.com/threads/463000"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/463000"],
               "title": "Internship",
               "author": "HopefulPenguin"
             },
@@ -2992,9 +2741,7 @@
             {
               "id": 76,
               "votes": 27,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -3044,9 +2791,7 @@
             {
               "id": 655,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             },
@@ -3073,18 +2818,14 @@
             {
               "id": 279,
               "votes": 8,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
             {
               "id": 535,
               "votes": 8,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -3102,9 +2843,7 @@
             {
               "id": 31,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/24163687"
-              ],
+              "links": ["https://archiveofourown.org/works/24163687"],
               "title": "Sasaeng",
               "author": "henghost"
             },
@@ -3121,9 +2860,7 @@
             {
               "id": 733,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -3142,9 +2879,7 @@
             {
               "id": 680,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/35698870"
-              ],
+              "links": ["https://archiveofourown.org/works/35698870"],
               "title": "What's Next",
               "author": "MarcoFro5"
             },
@@ -3182,9 +2917,7 @@
             {
               "id": 518,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/chapters/86716006"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86716006"],
               "title": "Anactória",
               "author": "Hopeful Penguin"
             },
@@ -3201,27 +2934,21 @@
             {
               "id": 301,
               "votes": 3,
-              "links": [
-                "https://forums.spacebattles.com/threads/959318"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/959318"],
               "title": "High Soaring Above",
               "author": "HopefulPenguin"
             },
             {
               "id": 714,
               "votes": 3,
-              "links": [
-                "https://forums.spacebattles.com/threads/933411"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/933411"],
               "title": "Conception: Regret",
               "author": "Nitelock75"
             },
             {
               "id": 697,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/34854502"
-              ],
+              "links": ["https://archiveofourown.org/works/34854502"],
               "title": "hands and eyes and teeth and hands",
               "author": "YseultNott"
             }
@@ -3229,6 +2956,7 @@
         },
         {
           "id": 14,
+          "isNew": true,
           "votes": 64,
           "voters": 38,
           "type": "fic",
@@ -3238,9 +2966,7 @@
             {
               "id": 148,
               "votes": 17,
-              "links": [
-                "https://forums.spacebattles.com/posts/81181456"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81181456"],
               "title": "Accord's Terrible, Horrible, No Good, Very Bad Day",
               "author": "Colossal Mistake",
               "description": "Written for Fic Santas."
@@ -3260,9 +2986,7 @@
             {
               "id": 160,
               "votes": 9,
-              "links": [
-                "https://archiveofourown.org/chapters/86859820"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86859820"],
               "title": "Ghostlight",
               "author": "Dusky",
               "description": "Written for Fic Spoops."
@@ -3270,9 +2994,7 @@
             {
               "id": 431,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer",
               "description": "Written for Fic Spoops."
@@ -3280,9 +3002,7 @@
             {
               "id": 175,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/34855063"
-              ],
+              "links": ["https://archiveofourown.org/works/34855063"],
               "title": "Folie deux: to the devil his dues",
               "author": "TheSleepingKnight",
               "description": "Written for Fic Spoops."
@@ -3290,9 +3010,7 @@
             {
               "id": 641,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/34854502"
-              ],
+              "links": ["https://archiveofourown.org/works/34854502"],
               "title": "hands and eyes and teeth and hands",
               "author": "YseultNott",
               "description": "Written for Fic Spoops."
@@ -3300,9 +3018,7 @@
             {
               "id": 212,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/29763396"
-              ],
+              "links": ["https://archiveofourown.org/works/29763396"],
               "title": "Give Advice, Take Heart, and Have Fun",
               "author": "Distraktion",
               "description": "Written for Fic Valentines."
@@ -3310,9 +3026,7 @@
             {
               "id": 643,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/31542413"
-              ],
+              "links": ["https://archiveofourown.org/works/31542413"],
               "title": "Family Dinner",
               "author": "YseultNott",
               "description": "Written for the Cauldron Blitz Cup."
@@ -3320,9 +3034,7 @@
             {
               "id": 942,
               "votes": 2,
-              "links": [
-                "https://syl.ae/cauldroncup/4qohbg"
-              ],
+              "links": ["https://syl.ae/cauldroncup/4qohbg"],
               "title": "The Evening Fog",
               "author": "Angush",
               "description": "Written for the Cauldron Blitz Cup."
@@ -3330,9 +3042,7 @@
             {
               "id": 943,
               "votes": 2,
-              "links": [
-                "https://syl.ae/cauldroncup/4tcric"
-              ],
+              "links": ["https://syl.ae/cauldroncup/4tcric"],
               "title": "Propaganda",
               "author": "Angush",
               "description": "Written for the Cauldron Blitz Cup."
@@ -3340,9 +3050,7 @@
             {
               "id": 647,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/31478477"
-              ],
+              "links": ["https://archiveofourown.org/works/31478477"],
               "title": "The Girl Wearing a Demon Mask",
               "author": "YseultNott",
               "description": "Written for the Cauldron Blitz Cup."
@@ -3350,9 +3058,7 @@
             {
               "id": 649,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/31458380"
-              ],
+              "links": ["https://archiveofourown.org/works/31458380"],
               "title": "Murder at Tiffany's",
               "author": "YseultNott",
               "description": "Written for the Cauldon Blitz Cup."
@@ -3360,9 +3066,7 @@
             {
               "id": 639,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/36099508"
-              ],
+              "links": ["https://archiveofourown.org/works/36099508"],
               "title": "The Wonderful Christmas of Mister and Mister Berry",
               "author": "YseultNott",
               "description": "Written for Fic Santas."
@@ -3370,9 +3074,7 @@
             {
               "id": 645,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/31524974"
-              ],
+              "links": ["https://archiveofourown.org/works/31524974"],
               "title": "The Ghost in the Graveyard",
               "author": "YseultNott",
               "description": "Written for the Cauldron Blitz Cup."
@@ -3380,9 +3082,7 @@
             {
               "id": 699,
               "votes": 0,
-              "links": [
-                "https://archiveofourown.org/works/34853197"
-              ],
+              "links": ["https://archiveofourown.org/works/34853197"],
               "title": "Harm Reduction",
               "author": "Fwee",
               "description": "Written for Fic Spoops."
@@ -3472,9 +3172,7 @@
             {
               "id": 788,
               "votes": 8,
-              "links": [
-                "https://forums.spacebattles.com/threads/463000"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/463000"],
               "title": "Internship",
               "author": "HopefulPenguin"
             },
@@ -3492,9 +3190,7 @@
             {
               "id": 680,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/35698870"
-              ],
+              "links": ["https://archiveofourown.org/works/35698870"],
               "title": "What's Next",
               "author": "MarcoFro5"
             },
@@ -3512,9 +3208,7 @@
             {
               "id": 677,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater"
             },
@@ -3542,9 +3236,7 @@
             {
               "id": 211,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/29763396"
-              ],
+              "links": ["https://archiveofourown.org/works/29763396"],
               "title": "Give Advice, Take Heart, and Have Fun",
               "author": "Distraktion"
             }
@@ -3562,9 +3254,7 @@
             {
               "id": 507,
               "votes": 22,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -3615,9 +3305,7 @@
             {
               "id": 875,
               "votes": 11,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -3657,9 +3345,7 @@
             {
               "id": 874,
               "votes": 6,
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -3677,9 +3363,7 @@
             {
               "id": 714,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/933411"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/933411"],
               "title": "Conception: Regret",
               "author": "Nitelock75"
             }
@@ -3707,9 +3391,7 @@
             {
               "id": 385,
               "votes": 18,
-              "links": [
-                "https://forums.spacebattles.com/threads/982852"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/982852"],
               "title": "Balestra",
               "author": "maroon_sweater & Hopeful Penguin"
             },
@@ -3737,9 +3419,7 @@
             {
               "id": 692,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/chapters/87282697"
-              ],
+              "links": ["https://archiveofourown.org/chapters/87282697"],
               "title": "A Fistful of Cicadas",
               "author": "Pendragoon"
             },
@@ -3779,9 +3459,7 @@
             {
               "id": 147,
               "votes": 26,
-              "links": [
-                "https://forums.spacebattles.com/posts/81181456"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81181456"],
               "title": "Accord's Terrible, Horrible, No Good, Very Bad Day",
               "author": "Colossal Mistake"
             },
@@ -3799,9 +3477,7 @@
             {
               "id": 775,
               "votes": 16,
-              "links": [
-                "https://forums.spacebattles.com/threads/961422"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/961422"],
               "title": "Bayesian/Blockchain/Sigma/Trillionaire!Taylor",
               "author": "Rhydeble"
             },
@@ -3838,27 +3514,21 @@
             {
               "id": 677,
               "votes": 9,
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater"
             },
             {
               "id": 683,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/29281635"
-              ],
+              "links": ["https://archiveofourown.org/works/29281635"],
               "title": "Goldilocks - A Shitpost in Fanfic Form",
               "author": "Napoleon Bonerfart"
             },
             {
               "id": 784,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/35710438"
-              ],
+              "links": ["https://archiveofourown.org/works/35710438"],
               "title": "Terrible Jokes That Eventually Lead Up to an Obscure Glassblowing Fetish Fulfillment for the Five People Who Like That",
               "author": "MarcoFro5"
             },
@@ -3875,18 +3545,14 @@
             {
               "id": 680,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/35698870"
-              ],
+              "links": ["https://archiveofourown.org/works/35698870"],
               "title": "What's Next",
               "author": "MarcoFro5"
             },
             {
               "id": 211,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/29763396"
-              ],
+              "links": ["https://archiveofourown.org/works/29763396"],
               "title": "Give Advice, Take Heart, and Have Fun",
               "author": "Distraktion"
             },
@@ -3903,9 +3569,7 @@
             {
               "id": 783,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/35953819"
-              ],
+              "links": ["https://archiveofourown.org/works/35953819"],
               "title": "CognitoRep 1-Bet",
               "author": "HopefulPenguin"
             }
@@ -3947,9 +3611,7 @@
             {
               "id": 55,
               "votes": 27,
-              "links": [
-                "https://forums.spacebattles.com/threads/963796"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963796"],
               "title": "Hers Is The Fury",
               "author": "Ridtom"
             },
@@ -4071,9 +3733,7 @@
             {
               "id": 428,
               "votes": 8,
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -4100,9 +3760,7 @@
             {
               "id": 592,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/29953431"
-              ],
+              "links": ["https://archiveofourown.org/works/29953431"],
               "title": "and they were villains!",
               "author": "EtchJetty, Chartic, Fishtail, Blue, TheSleepingKnight, OMEGA93, 8, Torvaun, tackeart, MarcoFro5, tearlessNevermore, Topaz, T0PH4T, and Hestia"
             },
@@ -4142,9 +3800,7 @@
             {
               "id": 243,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/29744235"
-              ],
+              "links": ["https://archiveofourown.org/works/29744235"],
               "title": "fade out",
               "author": "tackeart"
             },
@@ -4162,9 +3818,7 @@
             {
               "id": 609,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/952117"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952117"],
               "title": "Ace Combat: Parahuman",
               "author": "Pixel"
             },
@@ -4181,45 +3835,35 @@
             {
               "id": 132,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/32057035"
-              ],
+              "links": ["https://archiveofourown.org/works/32057035"],
               "title": "Cobalt",
               "author": "breakingamber"
             },
             {
               "id": 610,
               "votes": 3,
-              "links": [
-                "https://forums.spacebattles.com/threads/984634"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/984634"],
               "title": "Batman and Buggirl",
               "author": "Ralton"
             },
             {
               "id": 606,
               "votes": 2,
-              "links": [
-                "https://forums.sufficientvelocity.com/threads/89976"
-              ],
+              "links": ["https://forums.sufficientvelocity.com/threads/89976"],
               "title": "Lesion",
               "author": "Estro"
             },
             {
               "id": 783,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/35953819"
-              ],
+              "links": ["https://archiveofourown.org/works/35953819"],
               "title": "CognitoRep 1-Bet",
               "author": "HopefulPenguin"
             },
             {
               "id": 748,
               "votes": 1,
-              "links": [
-                "https://forums.spacebattles.com/threads/987646"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/987646"],
               "title": "Just One More Thing, Mr Anders",
               "author": "Rukaio Alter"
             },
@@ -4259,18 +3903,14 @@
             {
               "id": 392,
               "votes": 23,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
             {
               "id": 415,
               "votes": 23,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -4309,9 +3949,7 @@
             {
               "id": 535,
               "votes": 12,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -4361,27 +3999,21 @@
             {
               "id": 612,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
             {
               "id": 791,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/765826"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/765826"],
               "title": "Late",
               "author": "twosmall"
             },
             {
               "id": 134,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
@@ -4451,36 +4083,28 @@
             {
               "id": 677,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater"
             },
             {
               "id": 518,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/chapters/86716006"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86716006"],
               "title": "Anactória",
               "author": "Hopeful Penguin"
             },
             {
               "id": 595,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/29744235"
-              ],
+              "links": ["https://archiveofourown.org/works/29744235"],
               "title": "fade out",
               "author": "tackeart"
             },
             {
               "id": 609,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/952117"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952117"],
               "title": "Ace Combat: Parahuman",
               "author": "Pixel"
             },
@@ -4518,9 +4142,7 @@
             {
               "id": 394,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/35953954"
-              ],
+              "links": ["https://archiveofourown.org/works/35953954"],
               "title": "Ever Northwards Gaze",
               "author": "HopefulPenguin"
             },
@@ -4538,18 +4160,14 @@
             {
               "id": 327,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/29091885"
-              ],
+              "links": ["https://archiveofourown.org/works/29091885"],
               "title": "scales that glitter",
               "author": "Starsilver"
             },
             {
               "id": 427,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/36099061"
-              ],
+              "links": ["https://archiveofourown.org/works/36099061"],
               "title": "Upside Down",
               "author": "Redcoat_Officer"
             }
@@ -4567,9 +4185,7 @@
             {
               "id": 507,
               "votes": 17,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -4587,9 +4203,7 @@
             {
               "id": 428,
               "votes": 14,
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -4626,9 +4240,7 @@
             {
               "id": 791,
               "votes": 11,
-              "links": [
-                "https://forums.spacebattles.com/threads/765826"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/765826"],
               "title": "Late",
               "author": "twosmall"
             },
@@ -4657,18 +4269,14 @@
             {
               "id": 611,
               "votes": 5,
-              "links": [
-                "https://forums.spacebattles.com/threads/963433"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963433"],
               "title": "The Alchemist",
               "author": "TheFridgeLogician"
             },
             {
               "id": 606,
               "votes": 3,
-              "links": [
-                "https://forums.sufficientvelocity.com/threads/89976"
-              ],
+              "links": ["https://forums.sufficientvelocity.com/threads/89976"],
               "title": "Lesion",
               "author": "Estro"
             },
@@ -4685,9 +4293,7 @@
             {
               "id": 609,
               "votes": 3,
-              "links": [
-                "https://forums.spacebattles.com/threads/952117"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952117"],
               "title": "Ace Combat: Parahuman",
               "author": "Pixel"
             },
@@ -4715,9 +4321,7 @@
             {
               "id": 76,
               "votes": 27,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -4746,9 +4350,7 @@
             {
               "id": 279,
               "votes": 12,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
@@ -4787,18 +4389,14 @@
             {
               "id": 775,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/961422"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/961422"],
               "title": "Bayesian/Blockchain/Sigma/Trillionaire!Taylor",
               "author": "Rhydeble"
             },
             {
               "id": 677,
               "votes": 8,
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater"
             },
@@ -4849,18 +4447,14 @@
             {
               "id": 592,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/works/29953431"
-              ],
+              "links": ["https://archiveofourown.org/works/29953431"],
               "title": "and they were villains!",
               "author": "EtchJetty, Chartic, Fishtail, Blue, TheSleepingKnight, OMEGA93, 8, Torvaun, tackeart, MarcoFro5, tearlessNevermore, Topaz, T0PH4T, and Hestia"
             },
             {
               "id": 896,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/963481"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963481"],
               "title": "Arch",
               "author": "AbyssRay"
             }
@@ -4878,9 +4472,7 @@
             {
               "id": 76,
               "votes": 24,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -4898,9 +4490,7 @@
             {
               "id": 776,
               "votes": 16,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -4928,18 +4518,14 @@
             {
               "id": 733,
               "votes": 11,
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
             {
               "id": 171,
               "votes": 8,
-              "links": [
-                "https://archiveofourown.org/chapters/78104363"
-              ],
+              "links": ["https://archiveofourown.org/chapters/78104363"],
               "title": "Pair",
               "author": "K800 and Treeville"
             },
@@ -4958,9 +4544,7 @@
             {
               "id": 655,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             },
@@ -5012,9 +4596,7 @@
             {
               "id": 607,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/threads/978079"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/978079"],
               "title": "Monsters In Brockton",
               "author": "Tankaxe"
             }
@@ -5032,18 +4614,14 @@
             {
               "id": 140,
               "votes": 22,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
             {
               "id": 76,
               "votes": 18,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -5104,9 +4682,7 @@
             {
               "id": 655,
               "votes": 9,
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             },
@@ -5123,9 +4699,7 @@
             {
               "id": 31,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/24163687"
-              ],
+              "links": ["https://archiveofourown.org/works/24163687"],
               "title": "Sasaeng",
               "author": "henghost"
             },
@@ -5163,9 +4737,7 @@
             {
               "id": 279,
               "votes": 5,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
@@ -5183,9 +4755,7 @@
             {
               "id": 680,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/35698870"
-              ],
+              "links": ["https://archiveofourown.org/works/35698870"],
               "title": "What's Next",
               "author": "MarcoFro5"
             },
@@ -5225,18 +4795,14 @@
             {
               "id": 184,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/34087774"
-              ],
+              "links": ["https://archiveofourown.org/works/34087774"],
               "title": "Defiant Beyond the Border",
               "author": "Flair2334"
             },
             {
               "id": 347,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/36100246"
-              ],
+              "links": ["https://archiveofourown.org/works/36100246"],
               "title": "Whetstone",
               "author": "Distraktion"
             },
@@ -5350,9 +4916,7 @@
             {
               "id": 55,
               "votes": 21,
-              "links": [
-                "https://forums.spacebattles.com/threads/963796"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963796"],
               "title": "Hers Is The Fury",
               "author": "Ridtom"
             },
@@ -5390,9 +4954,7 @@
             {
               "id": 784,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/35710438"
-              ],
+              "links": ["https://archiveofourown.org/works/35710438"],
               "title": "Terrible Jokes That Eventually Lead Up to an Obscure Glassblowing Fetish Fulfillment for the Five People Who Like That",
               "author": "MarcoFro5"
             },
@@ -5410,9 +4972,7 @@
             {
               "id": 757,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/976843"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/976843"],
               "title": "When In Rome",
               "author": "Ridtom"
             },
@@ -5429,18 +4989,14 @@
             {
               "id": 343,
               "votes": 2,
-              "links": [
-                "https://forums.spacebattles.com/posts/76407678"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/76407678"],
               "title": "Burning Birds and Remorseful Rabbits",
               "author": "Distraktion"
             },
             {
               "id": 346,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/34854379"
-              ],
+              "links": ["https://archiveofourown.org/works/34854379"],
               "title": "The End Justifies the Means",
               "author": "Distraktion"
             },
@@ -5478,36 +5034,28 @@
             {
               "id": 853,
               "votes": 17,
-              "links": [
-                "https://forums.spacebattles.com/threads/832091"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/832091"],
               "title": "Abyssal Plain",
               "author": "ManMagnificent"
             },
             {
               "id": 30,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/chapters/78586924"
-              ],
+              "links": ["https://archiveofourown.org/chapters/78586924"],
               "title": "Shouts and Murmurs [Pact]",
               "author": "glowspider"
             },
             {
               "id": 166,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/works/32280844"
-              ],
+              "links": ["https://archiveofourown.org/works/32280844"],
               "title": "Fukt ",
               "author": "RecursiveMontage"
             },
             {
               "id": 171,
               "votes": 6,
-              "links": [
-                "https://archiveofourown.org/chapters/78104363"
-              ],
+              "links": ["https://archiveofourown.org/chapters/78104363"],
               "title": "Pair",
               "author": "K800 and Treeville"
             },
@@ -5525,9 +5073,7 @@
             {
               "id": 170,
               "votes": 1,
-              "links": [
-                "https://archiveofourown.org/works/32248564"
-              ],
+              "links": ["https://archiveofourown.org/works/32248564"],
               "title": "Pies",
               "author": "the6thratio"
             }
@@ -5545,27 +5091,21 @@
             {
               "id": 140,
               "votes": 19,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
             {
               "id": 76,
               "votes": 17,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
             {
               "id": 539,
               "votes": 9,
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             },
@@ -5583,18 +5123,14 @@
             {
               "id": 791,
               "votes": 8,
-              "links": [
-                "https://forums.spacebattles.com/threads/765826"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/765826"],
               "title": "Late",
               "author": "twosmall"
             },
             {
               "id": 851,
               "votes": 8,
-              "links": [
-                "https://forums.spacebattles.com/threads/832091"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/832091"],
               "title": "Abyssal Plain",
               "author": "ManMagnificent"
             },
@@ -5633,9 +5169,7 @@
             {
               "id": 224,
               "votes": 5,
-              "links": [
-                "https://forums.spacebattles.com/threads/950020"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/950020"],
               "title": "Black Rain",
               "author": "HopefulPenguin"
             },
@@ -5652,9 +5186,7 @@
             {
               "id": 31,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/24163687"
-              ],
+              "links": ["https://archiveofourown.org/works/24163687"],
               "title": "Sasaeng",
               "author": "henghost"
             },
@@ -5672,27 +5204,21 @@
             {
               "id": 216,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
             {
               "id": 279,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
             {
               "id": 609,
               "votes": 4,
-              "links": [
-                "https://forums.spacebattles.com/threads/952117"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952117"],
               "title": "Ace Combat: Parahuman",
               "author": "Pixel"
             },
@@ -5731,18 +5257,14 @@
             {
               "id": 140,
               "votes": 20,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
             {
               "id": 507,
               "votes": 17,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -5760,9 +5282,7 @@
             {
               "id": 76,
               "votes": 13,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -5821,18 +5341,14 @@
             {
               "id": 776,
               "votes": 9,
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
             {
               "id": 597,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/posts/81181456"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81181456"],
               "title": "Accord's Terrible, Horrible, No Good, Very Bad Day",
               "author": "Colossal Mistake"
             },
@@ -5860,18 +5376,14 @@
             {
               "id": 385,
               "votes": 6,
-              "links": [
-                "https://forums.spacebattles.com/threads/982852"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/982852"],
               "title": "Balestra",
               "author": "maroon_sweater & Hopeful Penguin"
             },
             {
               "id": 428,
               "votes": 6,
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -5889,9 +5401,7 @@
             {
               "id": 733,
               "votes": 6,
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -5931,9 +5441,7 @@
             {
               "id": 763,
               "votes": 5,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
@@ -5973,9 +5481,7 @@
             {
               "id": 427,
               "votes": 2,
-              "links": [
-                "https://archiveofourown.org/works/36099061"
-              ],
+              "links": ["https://archiveofourown.org/works/36099061"],
               "title": "Upside Down",
               "author": "Redcoat_Officer"
             },
@@ -6037,36 +5543,28 @@
             {
               "id": 507,
               "votes": 20,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
             {
               "id": 140,
               "votes": 14,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
             {
               "id": 2,
               "votes": 10,
-              "links": [
-                "https://forums.spacebattles.com/posts/79856989"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/79856989"],
               "title": "Ghostlight",
               "author": "Dusky"
             },
             {
               "id": 31,
               "votes": 9,
-              "links": [
-                "https://archiveofourown.org/works/24163687"
-              ],
+              "links": ["https://archiveofourown.org/works/24163687"],
               "title": "Sasaeng",
               "author": "henghost"
             },
@@ -6104,9 +5602,7 @@
             {
               "id": 733,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -6134,9 +5630,7 @@
             {
               "id": 76,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -6186,18 +5680,14 @@
             {
               "id": 518,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/chapters/86716006"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86716006"],
               "title": "Anactória",
               "author": "Hopeful Penguin"
             },
             {
               "id": 594,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/works/32512096"
-              ],
+              "links": ["https://archiveofourown.org/works/32512096"],
               "title": "pupa",
               "author": "tackeart"
             },
@@ -6215,9 +5705,7 @@
             {
               "id": 657,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             }
@@ -6226,6 +5714,7 @@
         },
         {
           "id": 50,
+          "isNew": true,
           "votes": 160,
           "voters": 66,
           "type": "fic",
@@ -6264,9 +5753,7 @@
               "votes": 18,
               "link": "https://archiveofourown.org/works/26832802/chapters/78385874",
               "name": "From Chapter 9: Colin",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight",
               "description": "“Oh, Colin.” Lisa sighs. “You don’t actually know, do you? Or you’ve convinced yourself otherwise.”\n\n“Convinced myself of what?”\n\nLisa looks at him with a gaze that’s… pitying? “Convinced yourself that you’re the original.”"
@@ -6275,9 +5762,7 @@
               "id": 161,
               "votes": 14,
               "link": "https://archiveofourown.org/works/25251013/chapters/86859820",
-              "links": [
-                "https://archiveofourown.org/chapters/86859820"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86859820"],
               "title": "From Ghostlight",
               "author": "Dusky",
               "description": "\"Where does the body carry regret?\" — Alexandria to Pretender"
@@ -6287,9 +5772,7 @@
               "votes": 14,
               "link": "https://archiveofourown.org/works/26832802/chapters/65908642",
               "name": "From Chapter 3: Hannah",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight",
               "description": "\"We send them out on patrol. We send them out, dressed up in costumes and head full of fantasies, and we tell them to travel the city. Sending them out to inspire hope, as if Brockton isn’t full of monsters. And sometimes, they find them. Our very own minesweepers.\" — Miss Militia"
@@ -6299,9 +5782,7 @@
               "votes": 13,
               "link": "https://forums.spacebattles.com/threads/the-making-worm.973504/page-2#post-79817929",
               "name": "From Chapter 6: Fasten Your Friends",
-              "links": [
-                "https://forums.spacebattles.com/threads/973504"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/973504"],
               "title": "The Making",
               "author": "kvt",
               "description": "\"For dogs,\" [Rachel] said, putting a hand on my back. A couple seconds later, she frowned. \"You're not a dog.\"\n\n\"I'm trying my best,\" I protested."
@@ -6311,9 +5792,7 @@
               "votes": 9,
               "link": "https://forums.spacebattles.com/posts/73800022",
               "name": "From Bombing 8.4",
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer",
               "description": "\"Survivor?\" Sophia suggests.\n\n\"Survivor. I like that. There's a chance for irony in it,\" I say."
@@ -6323,9 +5802,7 @@
               "votes": 9,
               "link": "https://archiveofourown.org/works/26832802/chapters/79327342",
               "name": "From Chapter 10: Taylor",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight",
               "description": "Sophia’s cloak whips in the wind, a specter without a shade of despair, as fearless in death as in life."
@@ -6335,9 +5812,7 @@
               "votes": 7,
               "link": "https://archiveofourown.org/works/34992193/chapters/87148744",
               "name": "From Chapter 1",
-              "links": [
-                "https://archiveofourown.org/works/34992193"
-              ],
+              "links": ["https://archiveofourown.org/works/34992193"],
               "title": "Minimise",
               "author": "HopefulPenguin",
               "description": "You probably didn’t expect a letter. That’s alright. If you want to throw this away without reading it - I’ll understand. Probably better to burn it, though. You’d need to sign off with Colin to use the Top Secret shredder, and he’d probably be upset. "
@@ -6360,9 +5835,7 @@
               "votes": 7,
               "link": "https://forums.spacebattles.com/posts/77268687",
               "name": "From Chapter 1: The Hotel",
-              "links": [
-                "https://archiveofourown.org/works/32518978"
-              ],
+              "links": ["https://archiveofourown.org/works/32518978"],
               "title": "The Quick and the Dead",
               "author": "maroon_sweater",
               "description": "\"I'm not afraid of heights,\" [Kurt] said, testily responding to what she hadn't actually said aloud. \"Simply aware that if something bursts out of those windows and collides with me, I will have only two point eight seconds to regret all the impolite things I never said to you.\""
@@ -6372,9 +5845,7 @@
               "votes": 6,
               "link": "https://forums.spacebattles.com/threads/rank-worm-oc-canon-compliant.631417/post-75411022",
               "name": "From Credits 17.12",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible",
               "description": "It didn't matter — this had long since stopped being a battle of combat strength. Once precognition entered the picture this became a battle of wits, and in that regard Empty Moment was unarmed."
@@ -6398,9 +5869,7 @@
               "votes": 5,
               "link": "https://forums.spacebattles.com/threads/rank-worm-oc-canon-compliant.631417/post-75411022",
               "name": "From Credits 17.12",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible",
               "description": "\"You can take away my tools. This weapon will always be a part of me. As long as there is light, it will find me.\" — Carrie"
@@ -6425,9 +5894,7 @@
               "votes": 4,
               "link": "https://forums.spacebattles.com/posts/74442254",
               "name": "From Personal Boundaries 9.4",
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer",
               "description": "I suppose that means I have to acknowledge the fact that I was almost killed."
@@ -6514,9 +5981,7 @@
               "id": 416,
               "votes": 10,
               "name": "Myrmekes",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -6572,9 +6037,7 @@
               "id": 429,
               "votes": 7,
               "name": "Swallowtail",
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -6637,9 +6100,7 @@
               "id": 42,
               "votes": 25,
               "name": "Eidolon",
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
@@ -6672,9 +6133,7 @@
               "id": 389,
               "votes": 14,
               "name": "Victoria Dallon",
-              "links": [
-                "https://forums.spacebattles.com/threads/963796"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/963796"],
               "title": "Hers Is The Fury",
               "author": "Ridtom"
             },
@@ -6682,9 +6141,7 @@
               "id": 599,
               "votes": 14,
               "name": "Accord",
-              "links": [
-                "https://forums.spacebattles.com/posts/81181456"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81181456"],
               "title": "Accord's Terrible, Horrible, No Good, Very Bad Day",
               "author": "Colossal Mistake"
             },
@@ -6737,9 +6194,7 @@
               "id": 32,
               "votes": 9,
               "name": "Amy Dallon",
-              "links": [
-                "https://archiveofourown.org/works/24163687"
-              ],
+              "links": ["https://archiveofourown.org/works/24163687"],
               "title": "Sasaeng",
               "author": "henghost"
             },
@@ -6820,9 +6275,7 @@
               "id": 275,
               "votes": 7,
               "name": "Flechette",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -6830,9 +6283,7 @@
               "id": 386,
               "votes": 7,
               "name": "Rebecca",
-              "links": [
-                "https://forums.spacebattles.com/threads/982852"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/982852"],
               "title": "Balestra",
               "author": "maroon_sweater & Hopeful Penguin"
             },
@@ -6840,9 +6291,7 @@
               "id": 473,
               "votes": 7,
               "name": "Oni Lee",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -6863,9 +6312,7 @@
               "id": 430,
               "votes": 6,
               "name": "Faultline",
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -6885,9 +6332,7 @@
               "id": 139,
               "votes": 5,
               "name": "Robin Swoyer",
-              "links": [
-                "https://archiveofourown.org/works/32964043"
-              ],
+              "links": ["https://archiveofourown.org/works/32964043"],
               "title": "Neat Little Boxes",
               "author": "HopefulPenguin"
             },
@@ -6918,9 +6363,7 @@
               "id": 509,
               "votes": 5,
               "name": "Miss Militia ",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -6928,9 +6371,7 @@
               "id": 811,
               "votes": 5,
               "name": "Kid Win",
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -6949,9 +6390,7 @@
               "id": 85,
               "votes": 4,
               "name": "Winter",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -6959,9 +6398,7 @@
               "id": 150,
               "votes": 3,
               "name": "Hannah",
-              "links": [
-                "https://archiveofourown.org/works/34992193"
-              ],
+              "links": ["https://archiveofourown.org/works/34992193"],
               "title": "Minimise",
               "author": "HopefulPenguin"
             },
@@ -6981,9 +6418,7 @@
               "id": 302,
               "votes": 3,
               "name": "Miss Militia",
-              "links": [
-                "https://forums.spacebattles.com/threads/959318"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/959318"],
               "title": "High Soaring Above",
               "author": "HopefulPenguin"
             },
@@ -7002,9 +6437,7 @@
               "id": 596,
               "votes": 3,
               "name": "Defiant",
-              "links": [
-                "https://archiveofourown.org/works/29744235"
-              ],
+              "links": ["https://archiveofourown.org/works/29744235"],
               "title": "fade out",
               "author": "tackeart"
             },
@@ -7012,9 +6445,7 @@
               "id": 667,
               "votes": 3,
               "name": "March / May",
-              "links": [
-                "https://archiveofourown.org/works/33066796"
-              ],
+              "links": ["https://archiveofourown.org/works/33066796"],
               "title": "Carnaval",
               "author": "ScorpiaMossmoon"
             },
@@ -7022,9 +6453,7 @@
               "id": 133,
               "votes": 2,
               "name": "Colin",
-              "links": [
-                "https://archiveofourown.org/works/32057035"
-              ],
+              "links": ["https://archiveofourown.org/works/32057035"],
               "title": "Cobalt",
               "author": "breakingamber"
             },
@@ -7032,9 +6461,7 @@
               "id": 137,
               "votes": 2,
               "name": "Hana Kochar",
-              "links": [
-                "https://archiveofourown.org/works/32941384"
-              ],
+              "links": ["https://archiveofourown.org/works/32941384"],
               "title": "Clear and Present",
               "author": "HopefulPenguin"
             },
@@ -7042,9 +6469,7 @@
               "id": 355,
               "votes": 2,
               "name": "Thomas Calvert",
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis"
             },
@@ -7052,9 +6477,7 @@
               "id": 715,
               "votes": 2,
               "name": "Browbeat",
-              "links": [
-                "https://forums.spacebattles.com/threads/933411"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/933411"],
               "title": "Conception: Regret",
               "author": "Nitelock75"
             },
@@ -7103,9 +6526,7 @@
               "id": 78,
               "votes": 12,
               "name": "Carrie Kobayashi",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -7125,9 +6546,7 @@
               "id": 536,
               "votes": 12,
               "name": "Ange",
-              "links": [
-                "https://archiveofourown.org/works/35662924"
-              ],
+              "links": ["https://archiveofourown.org/works/35662924"],
               "title": "This City of Blood and Teeth",
               "author": "TheSleepingKnight"
             },
@@ -7147,9 +6566,7 @@
               "id": 62,
               "votes": 9,
               "name": "Redoubt ",
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -7170,9 +6587,7 @@
               "id": 142,
               "votes": 8,
               "name": "Amp",
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
@@ -7192,9 +6607,7 @@
               "id": 84,
               "votes": 4,
               "name": "Praxis",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -7202,9 +6615,7 @@
               "id": 789,
               "votes": 3,
               "name": "Safiya",
-              "links": [
-                "https://forums.spacebattles.com/threads/463000"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/463000"],
               "title": "Internship",
               "author": "HopefulPenguin"
             },
@@ -7212,9 +6623,7 @@
               "id": 280,
               "votes": 2,
               "name": "Dove",
-              "links": [
-                "https://archiveofourown.org/works/34843555"
-              ],
+              "links": ["https://archiveofourown.org/works/34843555"],
               "title": "Wolf Point",
               "author": "Redcoat Officer"
             },
@@ -7222,9 +6631,7 @@
               "id": 86,
               "votes": 1,
               "name": "Nousagi ",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             }
@@ -7250,9 +6657,7 @@
               "id": 227,
               "votes": 17,
               "name": "Taylor Hebert x Sophia Hess",
-              "links": [
-                "https://forums.spacebattles.com/threads/951384"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/951384"],
               "title": "No Greater Love",
               "author": "HopefulPenguin"
             },
@@ -7260,9 +6665,7 @@
               "id": 795,
               "votes": 17,
               "name": "Taylor x Lisa",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight"
             },
@@ -7293,9 +6696,7 @@
               "id": 839,
               "votes": 8,
               "name": "Redoubt x Kid Win",
-              "links": [
-                "https://forums.spacebattles.com/threads/871645"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/871645"],
               "title": "Redoubt",
               "author": "Plum Colored Blazer"
             },
@@ -7314,9 +6715,7 @@
               "id": 790,
               "votes": 3,
               "name": "Taylor x Safiya",
-              "links": [
-                "https://forums.spacebattles.com/threads/463000"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/463000"],
               "title": "Internship",
               "author": "HopefulPenguin"
             },
@@ -7404,9 +6803,7 @@
               "id": 81,
               "votes": 9,
               "name": "Carrie & Kat",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -7541,9 +6938,7 @@
               "votes": 19,
               "link": "https://archiveofourown.org/works/27459643/chapters/73549416",
               "name": "Eidolon vs. Gavel vs. Pastor",
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake",
               "description": "In chapters 15, 16, and 17."
@@ -7581,9 +6976,7 @@
               "votes": 12,
               "link": "https://archiveofourown.org/works/26832802/chapters/78385874",
               "name": "Armsmaster vs. Brockton Bay Protectorate",
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight",
               "description": "In Chapter 9."
@@ -7663,9 +7056,7 @@
               "votes": 3,
               "link": "https://forums.spacebattles.com/posts/75411022",
               "name": "Carrie Kobayashi vs. Empty Moment",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible",
               "description": "In Credits 17.12."
@@ -7744,9 +7135,7 @@
               "id": 888,
               "votes": 15,
               "name": "Swallowtail / Taylor Hebert",
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis",
               "description": "Sensory fern-like wings and the ability to heighten or subtract observability in her domain."
@@ -7768,9 +7157,7 @@
               "id": 79,
               "votes": 9,
               "name": "Praxis",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible",
               "description": "Capable of succeeding at any task given enough attempts."
@@ -7793,9 +7180,7 @@
               "id": 792,
               "votes": 7,
               "name": "Luminary / Taylor Hebert",
-              "links": [
-                "https://forums.spacebattles.com/threads/765826"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/765826"],
               "title": "Late",
               "author": "twosmall",
               "description": "Senses and logs the exact shapes of everything within a small radius around her every millisecond, can summon and control Siberian-like projections of anything she's logged."
@@ -7879,9 +7264,7 @@
               "id": 357,
               "votes": 15,
               "name": "Masters and Strangers playing around on Youtube",
-              "links": [
-                "https://forums.spacebattles.com/threads/765826"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/765826"],
               "title": "Late",
               "author": "twosmall",
               "description": "It's so apt, but unexplored due to many fics being locked into Bet 2011."
@@ -7890,9 +7273,7 @@
               "id": 387,
               "votes": 15,
               "name": "Ecoterrorist!Cauldron",
-              "links": [
-                "https://forums.spacebattles.com/threads/982852"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/982852"],
               "title": "Balestra",
               "author": "maroon_sweater & hopefulpenguin",
               "description": "Technically done before in Life Bends Down, but made a primary focus in this lovingly crafted AU."
@@ -7901,9 +7282,7 @@
               "id": 354,
               "votes": 10,
               "name": "The New Wave movie",
-              "links": [
-                "https://forums.spacebattles.com/threads/970396"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/970396"],
               "title": "Swallowtail",
               "author": "NotDis",
               "description": "It seems a goofy comedy, spun for relatability."
@@ -7950,9 +7329,7 @@
               "id": 43,
               "votes": 12,
               "name": "Argentina",
-              "links": [
-                "https://archiveofourown.org/works/34859836"
-              ],
+              "links": ["https://archiveofourown.org/works/34859836"],
               "title": "Luz Mala",
               "author": "keighthundred"
             },
@@ -7960,9 +7337,7 @@
               "id": 82,
               "votes": 11,
               "name": "San Francisco",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -7970,9 +7345,7 @@
               "id": 144,
               "votes": 9,
               "name": "Freedom, California",
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake"
             },
@@ -7992,9 +7365,7 @@
               "id": 764,
               "votes": 9,
               "name": "The First World War",
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin"
             },
@@ -8002,9 +7373,7 @@
               "id": 174,
               "votes": 7,
               "name": "Late 1800s London",
-              "links": [
-                "https://archiveofourown.org/works/34855063"
-              ],
+              "links": ["https://archiveofourown.org/works/34855063"],
               "title": "Folie deux: to the devil his dues",
               "author": "TheSleepingKnight"
             },
@@ -8034,9 +7403,7 @@
               "id": 801,
               "votes": 6,
               "name": "San Diego",
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible"
             },
@@ -8044,9 +7411,7 @@
               "id": 167,
               "votes": 4,
               "name": "Otherverse Australia ",
-              "links": [
-                "https://archiveofourown.org/works/32280844"
-              ],
+              "links": ["https://archiveofourown.org/works/32280844"],
               "title": "Fukt ",
               "author": "RecursiveMontage"
             },
@@ -8088,9 +7453,7 @@
               "id": 931,
               "votes": 2,
               "name": "Philippines",
-              "links": [
-                "https://forums.spacebattles.com/posts/81498217"
-              ],
+              "links": ["https://forums.spacebattles.com/posts/81498217"],
               "title": "Struggling Out of the Mud ",
               "author": "Datu"
             }
@@ -8115,9 +7478,7 @@
             {
               "id": 797,
               "votes": 20,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight",
               "description": "A murder-mystery thriller set within the ENE Protectorate in the aftermath of Echidna."
@@ -8125,9 +7486,7 @@
             {
               "id": 604,
               "votes": 16,
-              "links": [
-                "https://forums.spacebattles.com/threads/973504"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/973504"],
               "title": "The Making",
               "author": "kvt",
               "description": "One of Nilbog's creations pretending to be a dog and failing miserably by talking all the time."
@@ -8159,9 +7518,7 @@
             {
               "id": 469,
               "votes": 13,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible",
               "description": "Canon compliant story set in 2005 San Francisco with an unpowered protagonist."
@@ -8169,9 +7526,7 @@
             {
               "id": 169,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/chapters/78586924"
-              ],
+              "links": ["https://archiveofourown.org/chapters/78586924"],
               "title": "Shouts and Murmurs",
               "author": "glowspider",
               "description": "It's a social media fic told entirely through NextDoor posts."
@@ -8179,9 +7534,7 @@
             {
               "id": 223,
               "votes": 10,
-              "links": [
-                "https://forums.spacebattles.com/threads/958164"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/958164"],
               "title": "Countervailing",
               "author": "HopefulPenguin",
               "description": "It's a Worm fic about a nuclear war - I don't think we've had one of those before!"
@@ -8213,9 +7566,7 @@
             {
               "id": 681,
               "votes": 7,
-              "links": [
-                "https://archiveofourown.org/works/35698870"
-              ],
+              "links": ["https://archiveofourown.org/works/35698870"],
               "title": "What's Next",
               "author": "MarcoFro5",
               "description": "A group of Watchdog precogs go out for drinks and hang out."
@@ -8223,9 +7574,7 @@
             {
               "id": 519,
               "votes": 4,
-              "links": [
-                "https://archiveofourown.org/chapters/86716006"
-              ],
+              "links": ["https://archiveofourown.org/chapters/86716006"],
               "title": "Anactória",
               "author": "Hopeful Penguin",
               "description": "Greek Mythology AU. "
@@ -8233,9 +7582,7 @@
             {
               "id": 172,
               "votes": 3,
-              "links": [
-                "https://archiveofourown.org/chapters/78104363"
-              ],
+              "links": ["https://archiveofourown.org/chapters/78104363"],
               "title": "Pair",
               "author": "K800 & Treeville",
               "description": "Split POV chapters between the two main characters. One of them is technically a YA book protagonist come to life."
@@ -8253,6 +7600,7 @@
         },
         {
           "id": 61,
+          "isNew": true,
           "votes": 143,
           "voters": 69,
           "type": "fic",
@@ -8262,9 +7610,7 @@
             {
               "id": 83,
               "votes": 25,
-              "links": [
-                "https://forums.spacebattles.com/threads/631417"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/631417"],
               "title": "Rank",
               "author": "The_Incorruptible",
               "description": "Canon compliant story that covers the entirety of the Slaughterhouse 9000 and Gold Morning to the end."
@@ -8272,9 +7618,7 @@
             {
               "id": 517,
               "votes": 25,
-              "links": [
-                "https://archiveofourown.org/works/27459643"
-              ],
+              "links": ["https://archiveofourown.org/works/27459643"],
               "title": "The Great Escape",
               "author": "ColossalMistake",
               "description": "The combination of a fic focused on Eidolon, hardly a popular figure in this fandom, combined with a breakout from the Birdcage? Spectacular."
@@ -8294,9 +7638,7 @@
             {
               "id": 511,
               "votes": 24,
-              "links": [
-                "https://archiveofourown.org/works/26832802"
-              ],
+              "links": ["https://archiveofourown.org/works/26832802"],
               "title": "Our Private Crises",
               "author": "TheSleepingKnight",
               "description": "A deeply psychological murder mystery with a compelling, emotional cast and an extremely satisfying conclusion. "
@@ -8304,9 +7646,7 @@
             {
               "id": 593,
               "votes": 11,
-              "links": [
-                "https://archiveofourown.org/works/29953431"
-              ],
+              "links": ["https://archiveofourown.org/works/29953431"],
               "title": "and they were villains!",
               "author": "EtchJetty, Chartic, Fishtail, Blue, TheSleepingKnight, OMEGA93, 8, Torvaun, tackeart, MarcoFro5, tearlessNevermore, Topaz, T0PH4T, and Hestia",
               "description": "It was a collaborative self-insert event in a shared crossover universe written over the span of only a few days!"
@@ -8314,9 +7654,7 @@
             {
               "id": 603,
               "votes": 9,
-              "links": [
-                "https://forums.spacebattles.com/threads/973504"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/973504"],
               "title": "The Making",
               "author": "kvt",
               "description": "Its unique POV character, a creation of Nilbog's that is trying (and failing) to pretend to be a dog."
@@ -8324,9 +7662,7 @@
             {
               "id": 135,
               "votes": 8,
-              "links": [
-                "https://forums.spacebattles.com/threads/952366"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/952366"],
               "title": "When We Are Dust",
               "author": "HopefulPenguin",
               "description": "The only World War I AU."
@@ -8334,9 +7670,7 @@
             {
               "id": 711,
               "votes": 7,
-              "links": [
-                "https://forums.spacebattles.com/threads/933411"
-              ],
+              "links": ["https://forums.spacebattles.com/threads/933411"],
               "title": "Conception; Regret",
               "author": "Nitelock75",
               "description": "As tm put it so succinctly, it is \"a reasonably well-executed version of a fundamentally bad idea.\" Mpreg is such a horrendous meme, especially in this fandom, and taking a serious, somber approach to it qualifies it for this category. Even with the gratuitous vomiting."
@@ -8412,9 +7746,7 @@
             {
               "id": 767,
               "votes": 28,
-              "links": [
-                "https://youtu.be/ytmXBHm1FeI"
-              ],
+              "links": ["https://youtu.be/ytmXBHm1FeI"],
               "title": "Control - Worm Animated Short",
               "artist": "Adaptation VFX"
             },
@@ -8464,9 +7796,7 @@
             {
               "id": 294,
               "votes": 18,
-              "links": [
-                "https://www.youtube.com/watch?v=fwbEKJgiIoo"
-              ],
+              "links": ["https://www.youtube.com/watch?v=fwbEKJgiIoo"],
               "title": "Fuck it, Accord Fancam",
               "artist": "glowspider",
               "artistPage": "https://brocktonbay.tumblr.com/"
@@ -8474,9 +7804,7 @@
             {
               "id": 298,
               "votes": 18,
-              "links": [
-                "https://www.youtube.com/watch?v=J8WysbknTnE "
-              ],
+              "links": ["https://www.youtube.com/watch?v=J8WysbknTnE "],
               "title": "Bury A Friend",
               "artist": "halizumab",
               "spoiler": true
@@ -8554,9 +7882,7 @@
             {
               "id": 291,
               "votes": 13,
-              "links": [
-                "https://www.youtube.com/watch?v=I40PgILOZag"
-              ],
+              "links": ["https://www.youtube.com/watch?v=I40PgILOZag"],
               "title": "The Mind Electric",
               "artist": "bug4932",
               "artistPage": "https://bug4932.tumblr.com/"
@@ -8580,9 +7906,7 @@
             {
               "id": 311,
               "votes": 12,
-              "links": [
-                "https://i.redd.it/3i7mc77s09671.gif"
-              ],
+              "links": ["https://i.redd.it/3i7mc77s09671.gif"],
               "title": "Wait, I dropped my gamepad",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/WormMemes/comments/o3ju82/wait_i_dropped_my_gamepad/"
@@ -8625,9 +7949,7 @@
             {
               "id": 271,
               "votes": 11,
-              "links": [
-                "https://i.redd.it/atfmrd43mmo61.gif"
-              ],
+              "links": ["https://i.redd.it/atfmrd43mmo61.gif"],
               "title": "Welcome to Brockton Bay",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/Parahumans/comments/mav0wy/pixelart_welcome_to_brockton_bay/"
@@ -8728,9 +8050,7 @@
             {
               "id": 296,
               "votes": 6,
-              "links": [
-                "https://www.youtube.com/watch?v=SIA3kHWvDIQ"
-              ],
+              "links": ["https://www.youtube.com/watch?v=SIA3kHWvDIQ"],
               "title": "Not the End of the World",
               "artist": "CPericardium & Chartic (voice work)",
               "artistPage": "https://cpericardium.tumblr.com/"
@@ -8738,9 +8058,7 @@
             {
               "id": 299,
               "votes": 6,
-              "links": [
-                "https://www.youtube.com/watch?v=8xLNN89RC_w"
-              ],
+              "links": ["https://www.youtube.com/watch?v=8xLNN89RC_w"],
               "title": "When He Sees Me",
               "artist": "Amaryllis",
               "artistPage": "https://the-l-spacer.tumblr.com/"
@@ -8809,9 +8127,7 @@
             {
               "id": 311,
               "votes": 14,
-              "links": [
-                "https://i.redd.it/3i7mc77s09671.gif"
-              ],
+              "links": ["https://i.redd.it/3i7mc77s09671.gif"],
               "title": "Wait, I dropped my gamepad",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/WormMemes/comments/o3ju82/wait_i_dropped_my_gamepad/"
@@ -8841,6 +8157,7 @@
         },
         {
           "id": 72,
+          "isNew": true,
           "votes": 128,
           "voters": 40,
           "type": "art",
@@ -9012,7 +8329,7 @@
               "url": "https://i.imgur.com/B1PFwVx.jpeg",
               "title": "The Great Escape's Cover Art",
               "artist": "Joe Hutchinson",
-              "artistPage": "www.instagram.com/owl_hat",
+              "artistPage": "https://www.instagram.com/owl_hat",
               "canonicalURL": "https://archiveofourown.org/works/27459643/chapters/80030023"
             },
             {
@@ -9469,9 +8786,7 @@
             {
               "id": 311,
               "votes": 5,
-              "links": [
-                "https://i.redd.it/3i7mc77s09671.gif"
-              ],
+              "links": ["https://i.redd.it/3i7mc77s09671.gif"],
               "title": "Wait, I dropped my gamepad",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/WormMemes/comments/o3ju82/wait_i_dropped_my_gamepad/"
@@ -9507,6 +8822,7 @@
         },
         {
           "id": 74,
+          "isNew": true,
           "votes": 101,
           "voters": 60,
           "type": "art",
@@ -9521,7 +8837,7 @@
               "owner": "Colossal Mistake",
               "title": "The Great Escape's Cover Art",
               "artist": "Joe/Owl Hat",
-              "artistPage": "www.instagram.com/owl_hat",
+              "artistPage": "https://www.instagram.com/owl_hat",
               "canonicalURL": "https://imgur.com/a/iH7gKyJ"
             },
             {
@@ -9605,6 +8921,7 @@
         },
         {
           "id": 75,
+          "isNew": true,
           "votes": 122,
           "voters": 54,
           "type": "art",
@@ -9709,9 +9026,7 @@
               "url": "https://i.redd.it/p6vlg2d1vn381.jpg",
               "title": "Weird-Looking Dog",
               "artist": "glowspider",
-              "extraURLs": [
-                "https://i.redd.it/lzjnfyc1vn381.jpg"
-              ],
+              "extraURLs": ["https://i.redd.it/lzjnfyc1vn381.jpg"],
               "artistPage": "https://brocktonbay.tumblr.com",
               "canonicalURL": "https://www.reddit.com/r/Parahumans/comments/r98nrz/fan_art_weirdlooking_dog/"
             }
@@ -9719,6 +9034,7 @@
         },
         {
           "id": 76,
+          "isNew": true,
           "votes": 156,
           "voters": 62,
           "type": "art",
@@ -9728,9 +9044,7 @@
             {
               "id": 949,
               "votes": 31,
-              "links": [
-                "https://www.youtube.com/watch?v=ytmXBHm1FeI"
-              ],
+              "links": ["https://www.youtube.com/watch?v=ytmXBHm1FeI"],
               "title": "Control",
               "artist": "Grahamasaurus Rex",
               "canonicalURL": "https://www.youtube.com/watch?v=ytmXBHm1FeI"
@@ -9738,9 +9052,7 @@
             {
               "id": 41,
               "votes": 25,
-              "links": [
-                "https://www.youtube.com/watch?v=fwbEKJgiIoo"
-              ],
+              "links": ["https://www.youtube.com/watch?v=fwbEKJgiIoo"],
               "title": "Fuck it, Accord Fancam",
               "artist": "glowspider",
               "artistPage": "https://brocktonbay.tumblr.com/"
@@ -9748,9 +9060,7 @@
             {
               "id": 26,
               "votes": 19,
-              "links": [
-                "https://www.youtube.com/watch?v=0IyAbXwNCsg"
-              ],
+              "links": ["https://www.youtube.com/watch?v=0IyAbXwNCsg"],
               "title": "Malicious compliance wormfics be like",
               "artist": "Pericardium",
               "artistPage": "https://www.deviantart.com/cpericardium",
@@ -9759,9 +9069,7 @@
             {
               "id": 197,
               "votes": 18,
-              "links": [
-                "https://i.redd.it/wsx0wf2xnsp61.gif"
-              ],
+              "links": ["https://i.redd.it/wsx0wf2xnsp61.gif"],
               "title": "Dragon+Colin",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/Parahumans/comments/mf42mo/pixelart_dragoncolin/"
@@ -9769,9 +9077,7 @@
             {
               "id": 27,
               "votes": 16,
-              "links": [
-                "https://www.youtube.com/watch?v=N2TZ8CuI5Qc"
-              ],
+              "links": ["https://www.youtube.com/watch?v=N2TZ8CuI5Qc"],
               "title": "My response to the allegations of kidnapping and human experimentation.",
               "artist": "Pericardium",
               "artistPage": "https://www.deviantart.com/cpericardium",
@@ -9780,9 +9086,7 @@
             {
               "id": 271,
               "votes": 16,
-              "links": [
-                "https://i.redd.it/atfmrd43mmo61.gif"
-              ],
+              "links": ["https://i.redd.it/atfmrd43mmo61.gif"],
               "title": "Welcome to Brockton Bay",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/Parahumans/comments/mav0wy/pixelart_welcome_to_brockton_bay/"
@@ -9790,9 +9094,7 @@
             {
               "id": 25,
               "votes": 13,
-              "links": [
-                "https://www.youtube.com/watch?v=SIA3kHWvDIQ"
-              ],
+              "links": ["https://www.youtube.com/watch?v=SIA3kHWvDIQ"],
               "title": "Not the End of the World",
               "artist": "Pericardium",
               "artistPage": "https://www.deviantart.com/cpericardium",
@@ -9801,9 +9103,7 @@
             {
               "id": 311,
               "votes": 11,
-              "links": [
-                "https://i.redd.it/3i7mc77s09671.gif"
-              ],
+              "links": ["https://i.redd.it/3i7mc77s09671.gif"],
               "title": "Wait, I dropped my gamepad",
               "artist": "AI_totallyNot",
               "canonicalURL": "https://www.reddit.com/r/WormMemes/comments/o3ju82/wait_i_dropped_my_gamepad/"
@@ -9823,6 +9123,7 @@
         },
         {
           "id": 77,
+          "isNew": true,
           "votes": 182,
           "voters": 61,
           "type": "art",
@@ -9832,9 +9133,7 @@
             {
               "id": 189,
               "votes": 37,
-              "links": [
-                "https://youtu.be/ytmXBHm1FeI"
-              ],
+              "links": ["https://youtu.be/ytmXBHm1FeI"],
               "title": "Control",
               "artist": "Grahamasaurus Rex",
               "canonicalURL": "https://www.youtube.com/watch?v=ytmXBHm1FeI"
@@ -9852,9 +9151,7 @@
             {
               "id": 294,
               "votes": 24,
-              "links": [
-                "https://www.youtube.com/watch?v=fwbEKJgiIoo"
-              ],
+              "links": ["https://www.youtube.com/watch?v=fwbEKJgiIoo"],
               "title": "Fuck it, Accord Fancam",
               "artist": "glowspider",
               "artistPage": "https://brocktonbay.tumblr.com/"
@@ -9862,9 +9159,7 @@
             {
               "id": 298,
               "votes": 19,
-              "links": [
-                "https://www.youtube.com/watch?v=J8WysbknTnE "
-              ],
+              "links": ["https://www.youtube.com/watch?v=J8WysbknTnE "],
               "title": "Bury A Friend",
               "artist": "halizumab",
               "spoiler": true
@@ -9872,9 +9167,7 @@
             {
               "id": 341,
               "votes": 14,
-              "links": [
-                "https://www.youtube.com/watch?v=0IyAbXwNCsg"
-              ],
+              "links": ["https://www.youtube.com/watch?v=0IyAbXwNCsg"],
               "title": "Malicious Compliance Wormfics Be Like",
               "artist": "Pericardium",
               "canonicalURL": "https://www.youtube.com/watch?v=0IyAbXwNCsg"
@@ -9882,9 +9175,7 @@
             {
               "id": 337,
               "votes": 13,
-              "links": [
-                "https://www.youtube.com/watch?v=N2TZ8CuI5Qc"
-              ],
+              "links": ["https://www.youtube.com/watch?v=N2TZ8CuI5Qc"],
               "title": "Cauldron Apology Video",
               "artist": "Pericardium",
               "canonicalURL": "https://www.reddit.com/r/Parahumans/comments/omyzsh/fanimation_cauldron_apology_video/"
@@ -9892,9 +9183,7 @@
             {
               "id": 661,
               "votes": 13,
-              "links": [
-                "https://www.youtube.com/watch?v=x4RJCTNLonM"
-              ],
+              "links": ["https://www.youtube.com/watch?v=x4RJCTNLonM"],
               "title": "Wires",
               "artist": "TheSleepingKnight",
               "canonicalURL": "https://www.youtube.com/watch?v=x4RJCTNLonM"
@@ -9902,9 +9191,7 @@
             {
               "id": 291,
               "votes": 12,
-              "links": [
-                "https://www.youtube.com/watch?v=I40PgILOZag"
-              ],
+              "links": ["https://www.youtube.com/watch?v=I40PgILOZag"],
               "title": "The Mind Electric",
               "artist": "bug4932",
               "artistPage": "https://bug4932.tumblr.com/"
@@ -9922,9 +9209,7 @@
             {
               "id": 296,
               "votes": 8,
-              "links": [
-                "https://www.youtube.com/watch?v=SIA3kHWvDIQ"
-              ],
+              "links": ["https://www.youtube.com/watch?v=SIA3kHWvDIQ"],
               "title": "Not the End of the World",
               "artist": "CPericardium & Chartic (voice work)",
               "artistPage": "https://cpericardium.tumblr.com/"
@@ -9932,9 +9217,7 @@
             {
               "id": 299,
               "votes": 5,
-              "links": [
-                "https://www.youtube.com/watch?v=8xLNN89RC_w"
-              ],
+              "links": ["https://www.youtube.com/watch?v=8xLNN89RC_w"],
               "title": "When He Sees Me",
               "artist": "Amaryllis",
               "artistPage": "https://the-l-spacer.tumblr.com/"
@@ -10082,6 +9365,7 @@
         },
         {
           "id": 79,
+          "isNew": true,
           "votes": 254,
           "voters": 67,
           "type": "art",
@@ -10144,9 +9428,7 @@
             {
               "id": 341,
               "votes": 18,
-              "links": [
-                "https://www.youtube.com/watch?v=0IyAbXwNCsg"
-              ],
+              "links": ["https://www.youtube.com/watch?v=0IyAbXwNCsg"],
               "title": "Malicious Compliance Wormfics Be Like",
               "artist": "Pericardium",
               "canonicalURL": "https://www.youtube.com/watch?v=0IyAbXwNCsg"
@@ -10164,9 +9446,7 @@
             {
               "id": 337,
               "votes": 14,
-              "links": [
-                "https://www.youtube.com/watch?v=N2TZ8CuI5Qc"
-              ],
+              "links": ["https://www.youtube.com/watch?v=N2TZ8CuI5Qc"],
               "title": "Cauldron Apology Video",
               "artist": "Pericardium",
               "canonicalURL": "https://www.reddit.com/r/Parahumans/comments/omyzsh/fanimation_cauldron_apology_video/"
@@ -10224,91 +9504,23 @@
           "title": "Author of the Year",
           "description": "Whether they were the most productive or just had the best fics, the criteria is up to you. Must have been active in 2021.",
           "nominees": [
-            {
-              "id": 96,
-              "votes": 33,
-              "name": "Ridtom"
-            },
-            {
-              "id": 522,
-              "votes": 22,
-              "name": "TheSleepingKnight"
-            },
-            {
-              "id": 177,
-              "votes": 21,
-              "name": "K800"
-            },
-            {
-              "id": 261,
-              "votes": 21,
-              "name": "hopefulpenguin"
-            },
-            {
-              "id": 100,
-              "votes": 19,
-              "name": "ManMagnificent"
-            },
-            {
-              "id": 551,
-              "votes": 17,
-              "name": "maroon_sweater"
-            },
-            {
-              "id": 521,
-              "votes": 16,
-              "name": "Chartic"
-            },
-            {
-              "id": 552,
-              "votes": 16,
-              "name": "Pericardium"
-            },
-            {
-              "id": 98,
-              "votes": 15,
-              "name": "Yseult"
-            },
-            {
-              "id": 185,
-              "votes": 13,
-              "name": "Colossal Mistake"
-            },
-            {
-              "id": 567,
-              "votes": 12,
-              "name": "glowspider"
-            },
-            {
-              "id": 447,
-              "votes": 9,
-              "name": "Lyrisey"
-            },
-            {
-              "id": 119,
-              "votes": 8,
-              "name": "Husr"
-            },
-            {
-              "id": 99,
-              "votes": 7,
-              "name": "Plum Colored Blazer"
-            },
-            {
-              "id": 97,
-              "votes": 6,
-              "name": "Lead Zeppelin"
-            },
-            {
-              "id": 101,
-              "votes": 6,
-              "name": "The_Incorruptible"
-            },
-            {
-              "id": 120,
-              "votes": 5,
-              "name": "EvaGrimm"
-            }
+            { "id": 96, "votes": 33, "name": "Ridtom" },
+            { "id": 522, "votes": 22, "name": "TheSleepingKnight" },
+            { "id": 177, "votes": 21, "name": "K800" },
+            { "id": 261, "votes": 21, "name": "hopefulpenguin" },
+            { "id": 100, "votes": 19, "name": "ManMagnificent" },
+            { "id": 551, "votes": 17, "name": "maroon_sweater" },
+            { "id": 521, "votes": 16, "name": "Chartic" },
+            { "id": 552, "votes": 16, "name": "Pericardium" },
+            { "id": 98, "votes": 15, "name": "Yseult" },
+            { "id": 185, "votes": 13, "name": "Colossal Mistake" },
+            { "id": 567, "votes": 12, "name": "glowspider" },
+            { "id": 447, "votes": 9, "name": "Lyrisey" },
+            { "id": 119, "votes": 8, "name": "Husr" },
+            { "id": 99, "votes": 7, "name": "Plum Colored Blazer" },
+            { "id": 97, "votes": 6, "name": "Lead Zeppelin" },
+            { "id": 101, "votes": 6, "name": "The_Incorruptible" },
+            { "id": 120, "votes": 5, "name": "EvaGrimm" }
           ],
           "label": "author",
           "fields": [
@@ -10328,36 +9540,12 @@
           "title": "Artist of the Year",
           "description": "Maybe they had the most output, or maybe just the coolest style. The criteria is up to you. Must have been active in 2021.",
           "nominees": [
-            {
-              "id": 545,
-              "votes": 29,
-              "name": "Pericardium"
-            },
-            {
-              "id": 181,
-              "votes": 28,
-              "name": "glowspider"
-            },
-            {
-              "id": 106,
-              "votes": 20,
-              "name": "Joe Hutchinson"
-            },
-            {
-              "id": 179,
-              "votes": 19,
-              "name": "halizumab"
-            },
-            {
-              "id": 563,
-              "votes": 15,
-              "name": "Seathing"
-            },
-            {
-              "id": 564,
-              "votes": 5,
-              "name": "Makoto"
-            }
+            { "id": 545, "votes": 29, "name": "Pericardium" },
+            { "id": 181, "votes": 28, "name": "glowspider" },
+            { "id": 106, "votes": 20, "name": "Joe Hutchinson" },
+            { "id": 179, "votes": 19, "name": "halizumab" },
+            { "id": 563, "votes": 15, "name": "Seathing" },
+            { "id": 564, "votes": 5, "name": "Makoto" }
           ],
           "label": "artist",
           "fields": [
@@ -10377,21 +9565,9 @@
           "title": "New Creator of the Year",
           "description": "Another year, another wave of new authors and artists alike. Who were the best fandom creators to debut in 2021?",
           "nominees": [
-            {
-              "id": 176,
-              "votes": 41,
-              "name": "K800"
-            },
-            {
-              "id": 180,
-              "votes": 15,
-              "name": "halizumab"
-            },
-            {
-              "id": 533,
-              "votes": 9,
-              "name": "NotDis"
-            }
+            { "id": 176, "votes": 41, "name": "K800" },
+            { "id": 180, "votes": 15, "name": "halizumab" },
+            { "id": 533, "votes": 9, "name": "NotDis" }
           ],
           "label": "new creator",
           "fields": [
@@ -10496,36 +9672,12 @@
           "title": "Favorite Event",
           "description": "What were your favourite events hosted on Cauldron in 2021?",
           "nominees": [
-            {
-              "id": 939,
-              "votes": 24,
-              "name": "Cauldron Awards"
-            },
-            {
-              "id": 935,
-              "votes": 14,
-              "name": "Give-a-Fic-a-Thon"
-            },
-            {
-              "id": 937,
-              "votes": 13,
-              "name": "Inktober"
-            },
-            {
-              "id": 938,
-              "votes": 7,
-              "name": "Cred Hunters / NaNoWriMo"
-            },
-            {
-              "id": 941,
-              "votes": 5,
-              "name": "Cauldron Blitz Cup"
-            },
-            {
-              "id": 936,
-              "votes": 3,
-              "name": "Echidnas"
-            }
+            { "id": 939, "votes": 24, "name": "Cauldron Awards" },
+            { "id": 935, "votes": 14, "name": "Give-a-Fic-a-Thon" },
+            { "id": 937, "votes": 13, "name": "Inktober" },
+            { "id": 938, "votes": 7, "name": "Cred Hunters / NaNoWriMo" },
+            { "id": 941, "votes": 5, "name": "Cauldron Blitz Cup" },
+            { "id": 936, "votes": 3, "name": "Echidnas" }
           ],
           "label": "event",
           "fields": [
@@ -10544,106 +9696,26 @@
           "title": "Friendliest Face",
           "description": "The most approachable and friendly of Cauldron members.",
           "nominees": [
-            {
-              "id": 108,
-              "votes": 24,
-              "name": "Ridtom"
-            },
-            {
-              "id": 350,
-              "votes": 19,
-              "name": "HopefulPenguin"
-            },
-            {
-              "id": 349,
-              "votes": 18,
-              "name": "K800"
-            },
-            {
-              "id": 112,
-              "votes": 17,
-              "name": "Redcoat_Officer"
-            },
-            {
-              "id": 496,
-              "votes": 17,
-              "name": "Chartic"
-            },
-            {
-              "id": 451,
-              "votes": 14,
-              "name": "seathing"
-            },
-            {
-              "id": 351,
-              "votes": 13,
-              "name": "Glowspiders"
-            },
-            {
-              "id": 922,
-              "votes": 13,
-              "name": "Zoob"
-            },
-            {
-              "id": 412,
-              "votes": 12,
-              "name": "TheSleepingKnight"
-            },
-            {
-              "id": 547,
-              "votes": 10,
-              "name": "Pericardium"
-            },
-            {
-              "id": 498,
-              "votes": 9,
-              "name": "Kyakan"
-            },
-            {
-              "id": 497,
-              "votes": 8,
-              "name": "HK-47"
-            },
-            {
-              "id": 113,
-              "votes": 6,
-              "name": "StealthyPeacock"
-            },
-            {
-              "id": 450,
-              "votes": 6,
-              "name": "Doc PRT"
-            },
-            {
-              "id": 111,
-              "votes": 5,
-              "name": "Hazard"
-            },
-            {
-              "id": 114,
-              "votes": 4,
-              "name": "Giles"
-            },
-            {
-              "id": 495,
-              "votes": 4,
-              "name": "NBBTCS"
-            },
-            {
-              "id": 566,
-              "votes": 4,
-              "name": "REDSHEILD"
-            },
-            {
-              "id": 109,
-              "votes": 3,
-              "name": "ccstat"
-            },
-            {
-              "id": 110,
-              "votes": 1,
-              "name": "Silverstrings"
-            }
+            { "id": 108, "votes": 24, "name": "Ridtom" },
+            { "id": 350, "votes": 19, "name": "HopefulPenguin" },
+            { "id": 349, "votes": 18, "name": "K800" },
+            { "id": 112, "votes": 17, "name": "Redcoat_Officer" },
+            { "id": 496, "votes": 17, "name": "Chartic" },
+            { "id": 451, "votes": 14, "name": "seathing" },
+            { "id": 351, "votes": 13, "name": "Glowspiders" },
+            { "id": 922, "votes": 13, "name": "Zoob" },
+            { "id": 412, "votes": 12, "name": "TheSleepingKnight" },
+            { "id": 547, "votes": 10, "name": "Pericardium" },
+            { "id": 498, "votes": 9, "name": "Kyakan" },
+            { "id": 497, "votes": 8, "name": "HK-47" },
+            { "id": 113, "votes": 6, "name": "StealthyPeacock" },
+            { "id": 450, "votes": 6, "name": "Doc PRT" },
+            { "id": 111, "votes": 5, "name": "Hazard" },
+            { "id": 114, "votes": 4, "name": "Giles" },
+            { "id": 495, "votes": 4, "name": "NBBTCS" },
+            { "id": 566, "votes": 4, "name": "REDSHEILD" },
+            { "id": 109, "votes": 3, "name": "ccstat" },
+            { "id": 110, "votes": 1, "name": "Silverstrings" }
           ],
           "label": "Cauldroner",
           "fields": [
@@ -10663,16 +9735,8 @@
           "title": "Most Helpful Power Genner",
           "description": "Those who have helped the most with the generation of Wormy powers.",
           "nominees": [
-            {
-              "id": 70,
-              "votes": 24,
-              "name": "MarcoFro5"
-            },
-            {
-              "id": 924,
-              "votes": 17,
-              "name": "Joesalot"
-            }
+            { "id": 70, "votes": 24, "name": "MarcoFro5" },
+            { "id": 924, "votes": 17, "name": "Joesalot" }
           ],
           "label": "Power Genner",
           "fields": [
@@ -10692,34 +9756,14 @@
           "title": "Most Helpful Beta",
           "description": "Those who have helped the most with your stories, snips, and other writing projects.",
           "nominees": [
-            {
-              "id": 107,
-              "votes": 36,
-              "name": "Juff"
-            },
-            {
-              "id": 546,
-              "votes": 10,
-              "name": "Pericardium"
-            },
-            {
-              "id": 454,
-              "votes": 7,
-              "name": "Satya"
-            },
-            {
-              "id": 466,
-              "votes": 6,
-              "name": "Joesalot"
-            }
+            { "id": 107, "votes": 36, "name": "Juff" },
+            { "id": 546, "votes": 10, "name": "Pericardium" },
+            { "id": 454, "votes": 7, "name": "Satya" },
+            { "id": 466, "votes": 6, "name": "Joesalot" }
           ],
           "label": "Beta",
           "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "placeholder": "The Beta's name"
-            }
+            { "id": "name", "label": "Name", "placeholder": "The Beta's name" }
           ],
           "collection": "people"
         },
@@ -10731,31 +9775,11 @@
           "title": "Most Helpful Wordsmith",
           "description": "Those who have helped the most with all manners prose, characters, and plot.",
           "nominees": [
-            {
-              "id": 457,
-              "votes": 28,
-              "name": "Juff"
-            },
-            {
-              "id": 468,
-              "votes": 14,
-              "name": "tmthesaurus"
-            },
-            {
-              "id": 553,
-              "votes": 10,
-              "name": "Pericardium"
-            },
-            {
-              "id": 456,
-              "votes": 8,
-              "name": "Satya"
-            },
-            {
-              "id": 463,
-              "votes": 6,
-              "name": "EternalStruggle"
-            }
+            { "id": 457, "votes": 28, "name": "Juff" },
+            { "id": 468, "votes": 14, "name": "tmthesaurus" },
+            { "id": 553, "votes": 10, "name": "Pericardium" },
+            { "id": 456, "votes": 8, "name": "Satya" },
+            { "id": 463, "votes": 6, "name": "EternalStruggle" }
           ],
           "label": "Wordsmith",
           "fields": [
@@ -10775,16 +9799,8 @@
           "title": "Most Helpful Fact Checker",
           "description": "Those who have helped the most with keeping canon canonical and fanon... fanonical.",
           "nominees": [
-            {
-              "id": 458,
-              "votes": 38,
-              "name": "Juff"
-            },
-            {
-              "id": 127,
-              "votes": 27,
-              "name": "Kyakan"
-            }
+            { "id": 458, "votes": 38, "name": "Juff" },
+            { "id": 127, "votes": 27, "name": "Kyakan" }
           ],
           "label": "Fact Checker",
           "fields": [
@@ -10813,7 +9829,7 @@
             },
             {
               "id": 897,
-              "votes": 35,
+              "votes": 36,
               "name": "Everything he does for Cauldron.",
               "owner": "Angush",
               "description": "The events, moderation, answering the same questions that are already answered in the documents, and even these awards. Angush puts up with a lot, does a lot, and deserves recognition of all of it and more."
@@ -10833,7 +9849,7 @@
             },
             {
               "id": 899,
-              "votes": 11,
+              "votes": 12,
               "name": "Constantly sprinting in #the-cult",
               "owner": "Yseult Y. Nott",
               "description": "Motivation is difficult to find sometimes, so it was always nice in 2021 to have Yseult popping up wanting people to join in a sprint and get the old creative juices flowing."
@@ -10925,11 +9941,7 @@
           ],
           "label": "pet",
           "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "placeholder": "The pet's name"
-            },
+            { "id": "name", "label": "Name", "placeholder": "The pet's name" },
             {
               "id": "owner",
               "label": "Owner",

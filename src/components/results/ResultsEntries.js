@@ -3,9 +3,12 @@ import Result from './Result'
 import { Button } from 'react-bootstrap'
 
 const ResultsEntries = ({
-  category: { id, type, nominees, voters, imageOnly },
-  TargetResetButton, expanded = false, userVotedFor
+  category,
+  TargetResetButton,
+  expanded = false,
+  userVotedFor,
 }) => {
+  const { id, type, nominees, voters, imageOnly } = category
   const [showExtras, setShowExtras] = useState(expanded)
   const [golds] = useState(
     nominees && nominees.length > 0
@@ -67,6 +70,7 @@ const ResultsEntries = ({
               entry={entry}
               type={type}
               votedFor={userVotedFor(voteID)}
+              category={category}
             />
           )
         })}
@@ -82,6 +86,7 @@ const ResultsEntries = ({
                 entry={entry}
                 type={type}
                 votedFor={userVotedFor(voteID)}
+                category={category}
               />
             )
           })}
@@ -98,6 +103,7 @@ const ResultsEntries = ({
                 entry={entry}
                 type={type}
                 votedFor={userVotedFor(voteID)}
+                category={category}
               />
             )
           })}
@@ -127,6 +133,7 @@ const ResultsEntries = ({
                       type={type}
                       votedFor={userVotedFor(voteID)}
                       votePercentage={votePercentage(entry.votes, false)}
+                      category={category}
                     />
                   )
                 })}

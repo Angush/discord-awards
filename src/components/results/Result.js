@@ -1,11 +1,23 @@
 import React from 'react'
 import FicLinks from '../cards/FicLinks'
+import getMapOfValues from '../../functions/getMapOfValues'
 
-const Result = ({ entry, type, votePercentage = null, votedFor }) => {
+const Result = ({ entry, category, type, votePercentage = null, votedFor }) => {
+  const hiddenFields = {}
+  if (category.fields)
+    category.fields.forEach(field => {
+      if (field.hidden) hiddenFields[field.id] = true
+    })
   const hasMultipleOwners =
-    entry.owner && (entry.artist || entry.author) && (entry.title || entry.name)
+    entry.owner &&
+    (entry.artist || entry.author) &&
+    (entry.title || entry.name) &&
+    !hiddenFields['owner'] &&
+    !hiddenFields['name']
   const title = hasMultipleOwners
     ? entry.title || entry.name
+    : hiddenFields['name']
+    ? entry.title
     : entry.name || entry.title
   const creator = hasMultipleOwners ? (
     <>
@@ -15,7 +27,7 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
       <br />
       <em>{entry.name || entry.title}</em>
     </>
-  ) : entry.name && entry.title ? (
+  ) : entry.name && entry.title && !hiddenFields['name'] ? (
     <>
       in {entry.author || entry.artist || entry.owner}'s
       <br />
@@ -36,6 +48,8 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
       {entry.spoiler && <span className='spoiler-indicator'>SPOILER</span>}
     </p>
   )
+
+  const values = category?.fields ? getMapOfValues(category, entry) : new Map()
 
   return (
     <div className='result'>
@@ -58,7 +72,9 @@ const Result = ({ entry, type, votePercentage = null, votedFor }) => {
         </h5>
       )}
       {creator && !creatorPage && <h5>{creator}</h5>}
-      {desc && <h6 className='result-desc'>{desc}</h6>}
+      {(desc || values.has('description')) && (
+        <h6 className='result-desc'>{desc || values.get('description')}</h6>
+      )}
       {blur && image && (
         <>
           {indicator}
