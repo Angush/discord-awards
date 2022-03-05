@@ -130,6 +130,7 @@ const ResultsPage = ({ userData, years, year }) => {
         if (clicked.url) srcs.push(clicked.url)
         if (clicked.image) srcs.push(clicked.image)
         if (clicked.extraURLs) clicked.extraURLs.forEach(url => srcs.push(url))
+        if (clicked.links) clicked.links.forEach(url => srcs.push(url))
         setLightboxData({
           ...clicked,
           id,

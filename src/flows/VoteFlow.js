@@ -26,14 +26,14 @@ const VoteFlow = ({ userData }) => {
   const VOTING_CLOSED = envVarIsTrue(`VOTING_CLOSED`)
 
   //= Create the table of contents
-  const createTOC = useCallback((sectionData) => {
+  const createTOC = useCallback(sectionData => {
     if (!sectionData) return
     let tableOfContests = []
-    sectionData.forEach((s) => {
+    sectionData.forEach(s => {
       tableOfContests.push({
         text: `${s.sectionName} Categories`,
         anchor: `#${s.anchor}`,
-        children: s.contests.map((contest) => {
+        children: s.contests.map(contest => {
           return {
             text: contest.name,
             anchor: `#${contest.anchor}`,
@@ -127,10 +127,10 @@ const VoteFlow = ({ userData }) => {
 
     // bit of a mess, but makes validating WAY easier
     let contests = {}
-    sections.items.forEach((s) => {
-      s.contests.forEach((c) => {
+    sections.items.forEach(s => {
+      s.contests.forEach(c => {
         let entries = {}
-        c.entries.forEach((e) => {
+        c.entries.forEach(e => {
           entries[e.id] = e
         })
         contests[c.id] = { ...c, entries: entries }
@@ -153,7 +153,7 @@ const VoteFlow = ({ userData }) => {
 
   //= Format category data
   const formatData = useCallback(
-    (raw) => {
+    raw => {
       let hasVotes = raw.votes ? true : false
       let categories = raw.contests
       for (const id in categories) {
@@ -163,7 +163,7 @@ const VoteFlow = ({ userData }) => {
           let fields = Object.values(categories[id].fields)
           categories[id].single =
             (fields.length === 1 && fields[0].id !== 'description') ||
-            fields.every((f) => f.id === 'owner' || f.id === 'link')
+            fields.every(f => f.id === 'owner' || f.id === 'link')
         }
       }
 
@@ -184,14 +184,14 @@ const VoteFlow = ({ userData }) => {
         } else return `Entry ID ${id}`
       }
 
-      Object.values(raw.nominations).forEach((nom) => {
+      Object.values(raw.nominations).forEach(nom => {
         let nomination = {
           id: nom.id,
           data: nom.data,
         }
 
         // add nominations to contest
-        nom.categories.forEach((cID) => {
+        nom.categories.forEach(cID => {
           if (!nomination.data.identifier) {
             let contest = categories[cID]
             nomination.data.identifier = createIdentifier(
@@ -211,7 +211,7 @@ const VoteFlow = ({ userData }) => {
 
       // create section list
       let sectionData = {}
-      Object.values(raw.contests).forEach((contest) => {
+      Object.values(raw.contests).forEach(contest => {
         if (!contest.entries || contest.entries.length === 0) return
         if (!sectionData[contest.section]) {
           sectionData[contest.section] = {
@@ -242,8 +242,8 @@ const VoteFlow = ({ userData }) => {
 
   //= Open lightbox for image
   const lightboxHandler = useCallback(
-    (event) => {
-      const findItem = (id) => {
+    event => {
+      const findItem = id => {
         let itemToFind
         const contestId = parseInt(id.match(/c(?<id>\d+)/).groups.id)
         const nomineeId = parseInt(id.match(/e(?<id>\d+)/).groups.id)
@@ -270,7 +270,7 @@ const VoteFlow = ({ userData }) => {
       if (
         event.target.tagName === 'IMG' &&
         !classes.includes('non-expandable-img') &&
-        classes.some((c) => c.match(/card-img/))
+        classes.some(c => c.match(/card-img/))
       ) {
         event.preventDefault()
         let { id } = event.target
@@ -279,11 +279,12 @@ const VoteFlow = ({ userData }) => {
         const { data } = clicked
         if (data.url) srcs.push(data.url)
         if (data.image) srcs.push(data.image)
-        if (data.extraURLs) data.extraURLs.forEach((url) => srcs.push(url))
+        if (data.extraURLs) data.extraURLs.forEach(url => srcs.push(url))
+        if (data.links) data.links.forEach(url => srcs.push(url))
         setLightboxData({
           ...data,
           id,
-          srcs: srcs.filter((url) => !!url),
+          srcs: srcs.filter(url => !!url),
           index: 0,
           total: srcs.length,
         })
@@ -316,8 +317,8 @@ const VoteFlow = ({ userData }) => {
         credentials: 'include',
         signal: controller.signal,
       })
-      .then((response) => response.json())
-      .then((resData) => {
+      .then(response => response.json())
+      .then(resData => {
         formatData(resData)
       })
       .catch(console.error)
@@ -419,12 +420,12 @@ const VoteFlow = ({ userData }) => {
         console.log(`${type} entry with key ${key}, AKA.`, changeText)
       }
 
-  const entryIsSelected = (id) => {
+  const entryIsSelected = id => {
     if (votes[id] === true) return true
     else return false
   }
 
-  const numberOfVotes = (id) => {
+  const numberOfVotes = id => {
     let count = 0
     let match = new RegExp(`^c${id}_e\\d+$`)
     for (const vote in originalVotes.votes) {
@@ -433,7 +434,7 @@ const VoteFlow = ({ userData }) => {
     return count
   }
 
-  const submitVotes = (event) => {
+  const submitVotes = event => {
     event.preventDefault()
     let redirectLocation = getLoginPathName()
     if (!userData.logged_in) {
@@ -476,7 +477,7 @@ const VoteFlow = ({ userData }) => {
         credentials: 'include',
         body: JSON.stringify(submissionData),
       })
-      .then((res) => {
+      .then(res => {
         setSubmitting(false)
         if (res.status === 201) {
           console.log(`Submission succeeded!`)
@@ -489,7 +490,7 @@ const VoteFlow = ({ userData }) => {
           return null
         }
       })
-      .then((newVotes) => {
+      .then(newVotes => {
         if (!newVotes) return
         console.log(`Submitted! Committing changes and resyncing...`)
         setChanges({ total: 0 })
@@ -594,7 +595,7 @@ const VoteFlow = ({ userData }) => {
           onClick={() => setTOC({ ...toc, expanded: !toc.expanded })}
         ></div>
 
-        {sections.items.map((section) => {
+        {sections.items.map(section => {
           const isExpanded = expanded[section.anchor]
           return (
             <section
