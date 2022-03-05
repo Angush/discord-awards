@@ -736,7 +736,8 @@ input.form-control-lg {
   transition: filter 0.75s ease-in;
 }
 
-.img-parent > a:focus-within img {
+.img-parent > a:focus-within img,
+.img-parent > div:focus-within img {
   filter: blur(0px);
 }
 
@@ -1651,11 +1652,13 @@ input.form-control-lg {
   height: auto;
 }
 
-.results-entries .img-parent a {
+.results-entries .img-parent a,
+.results-entries .img-parent div {
   margin: 0.25rem;
   display: block;
   overflow: hidden;
   border-radius: 0.25rem;
+  cursor: pointer;
 }
 
 .results-entries .img-parent {
@@ -1674,7 +1677,8 @@ input.form-control-lg {
   margin-top: 0;
 }
 
-.results .imageonly .img-parent a {
+.results .imageonly .img-parent a,
+.results .imageonly .img-parent div {
   margin: 0;
   padding: 0.75rem;
 }

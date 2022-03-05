@@ -2,7 +2,14 @@ import React from 'react'
 import FicLinks from '../cards/FicLinks'
 import getMapOfValues from '../../functions/getMapOfValues'
 
-const Result = ({ entry, category, type, votePercentage = null, votedFor }) => {
+const Result = ({
+  entry,
+  entryKey,
+  category,
+  type,
+  votePercentage = null,
+  votedFor,
+}) => {
   const hiddenFields = {}
   if (category.fields)
     category.fields.forEach(field => {
@@ -83,14 +90,15 @@ const Result = ({ entry, category, type, votePercentage = null, votedFor }) => {
       )}
       {image && (
         <div className='img-parent'>
-          <a href={image} target='_blank' rel='noreferrer noopener'>
+          <div>
             <img
+              id={entryKey}
               src={image}
               loading='lazy'
-              className={blur ? 'nsfw-img' : ''}
+              className={blur ? 'nsfw-img result-img' : 'result-img'}
               alt={`Entry ${entry.id}`}
             />
-          </a>
+          </div>
         </div>
       )}
       {entry?.links?.length > 0 && <FicLinks links={entry.links} />}

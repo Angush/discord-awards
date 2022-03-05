@@ -67,6 +67,7 @@ const ResultsEntries = ({
           return (
             <Result
               key={voteID}
+              entryKey={voteID}
               entry={entry}
               type={type}
               votedFor={userVotedFor(voteID)}
@@ -83,6 +84,7 @@ const ResultsEntries = ({
             return (
               <Result
                 key={voteID}
+                entryKey={voteID}
                 entry={entry}
                 type={type}
                 votedFor={userVotedFor(voteID)}
@@ -100,6 +102,7 @@ const ResultsEntries = ({
             return (
               <Result
                 key={voteID}
+                entryKey={voteID}
                 entry={entry}
                 type={type}
                 votedFor={userVotedFor(voteID)}
@@ -129,6 +132,7 @@ const ResultsEntries = ({
                   return (
                     <Result
                       key={voteID}
+                      entryKey={voteID}
                       entry={entry}
                       type={type}
                       votedFor={userVotedFor(voteID)}
