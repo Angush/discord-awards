@@ -1021,6 +1021,19 @@ input.form-control-lg {
   margin: 0.5rem auto;
 }
 
+.navbar .container img:first-child {
+  align-self: flex-start;
+  margin-right: 0.5rem;
+  height: auto;
+  width: 30px;
+  /* margin-top: -0.5rem; */
+}
+
+.navbar-brand a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #user {
   justify-self: end;
   align-items: center;
@@ -2100,6 +2113,10 @@ input.form-control-lg {
     z-index: 0;
     bottom: -8px;
     transition: background 0.3s;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
   }
 
   .logInOrOut span {
