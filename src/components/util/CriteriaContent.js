@@ -16,9 +16,14 @@ const createContentElement = content => {
   return null
 }
 
-const CriteriaContent = ({ criteria = [], children }) => {
+const CriteriaContent = ({
+  criteria = [],
+  children,
+  className = '',
+  ...props
+}) => {
   return (
-    <div className='criteria-content'>
+    <div className={`criteria-content ${className}`} {...props}>
       {criteria.map(createContentElement)}
       {children}
     </div>

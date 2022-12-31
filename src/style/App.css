@@ -341,17 +341,18 @@ input::placeholder {
 .nomination-info {
   margin-bottom: 2rem;
   margin-top: 1rem;
+  --radius: 1rem;
 }
 
 .nomination-info details {
   border: 1px solid #c7c7c7;
-  border-radius: 1rem;
+  border-radius: var(--radius);
 }
 
 .nomination-info-details {
   padding: 1rem;
   background-color: #ececec;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 
 .nomination-info summary :first-child,
@@ -366,14 +367,14 @@ input::placeholder {
 
 .nomination-info details summary {
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: var(--radius);
   background-color: #e4e4e4;
   transition: background-color 0.2s;
 }
 
 .nomination-info details[open] summary {
   border-bottom: 1px solid #c7c7c7;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: var(--radius) var(--radius) 0 0;
 }
 
 .nomination-info details summary:hover {
@@ -391,6 +392,63 @@ input::placeholder {
 
 .nomination-criteria :not(:first-child) {
   margin-top: 0.5rem;
+}
+
+.criteria-accordions {
+  --radius: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid #dadada;
+  background-color: rgb(255 255 255 / 0.3);
+  transition: background-color 0.2s;
+}
+
+.criteria-accordions:hover {
+  background-color: rgb(255 255 255 / 0.5);
+}
+
+.criteria-accordions[open] > summary {
+  margin-bottom: 0.75rem;
+}
+
+.criteria-accordions[open] > summary span,
+.criteria-accordions > details summary span {
+  margin-left: 0.25rem;
+}
+
+.criteria-accordions > details summary {
+  padding-block: 0.75rem;
+}
+
+.criteria-accordions > details,
+.criteria-accordions > details summary,
+.criteria-accordions > details[open] summary,
+.criteria-accordions > details:not(:last-of-type) .nomination-info-details {
+  border-radius: 0;
+}
+
+.criteria-accordions > details:first-of-type,
+.criteria-accordions > details:first-of-type summary {
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+
+.criteria-accordions > details:last-of-type,
+.criteria-accordions > details:last-of-type:not([open]) summary {
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+}
+
+.criteria-accordions > details:not(:first-of-type) {
+  border-top-width: 0px;
+}
+
+.criteria-accordions > summary span::after {
+  content: ' Expand to view.';
+}
+
+.criteria-accordions[open] > summary span::after {
+  content: ' Listed below for convenience.';
 }
 
 @media (max-width: 767px) {

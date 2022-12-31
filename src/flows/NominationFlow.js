@@ -8,6 +8,7 @@ import JumpTo from '../components/util/JumpTo'
 import GoBack from '../components/util/GoBack'
 import InputExtraFields from '../components/nominate/InputExtraFields'
 import NominationInfo from '../components/nominate/NominationInfo'
+import CriteriaAccordions from '../components/util/CriteriaAccordions'
 
 const NominationFlow = ({ categories, collections, categoryTypes }) => {
   const [errorCode, setErrorCode] = useState(null)
@@ -261,6 +262,10 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
     [categories, selected.type]
   )
 
+  const selectedCategoriesWithCriteria = (selected.categories || []).filter(
+    cat => cat.criteria
+  )
+
   const updateExtraCategoryData = props => {
     setExtraCategoryData(props)
     setDone({ ...done, extraFields: true })
@@ -384,6 +389,11 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
               extra data. You will be asked to provide this in Step 4.
             </p>
           )}
+
+          {selectedCategoriesWithCriteria.length > 0 && (
+            <CriteriaAccordions categories={selectedCategoriesWithCriteria} />
+          )}
+
           <InputMain
             save={dataToSave => {
               save(dataToSave)
