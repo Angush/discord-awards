@@ -158,7 +158,13 @@ const SelectCategory = ({
                   <OverlayTrigger
                     placement='top'
                     delay={{ show: 250 }}
-                    overlay={<Tooltip>View eligibility criteria</Tooltip>}
+                    overlay={
+                      inaccessible ? (
+                        <span></span>
+                      ) : (
+                        <Tooltip>View eligibility criteria</Tooltip>
+                      )
+                    }
                   >
                     <div
                       {...criteriaProps}
