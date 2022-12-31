@@ -2,8 +2,9 @@ import React from 'react'
 import CriteriaContent from './CriteriaContent'
 
 const CriteriaAccordions = ({ categories }) => {
+  const defaultState = categories.length <= 3 ? { open: true } : {}
   return (
-    <details className='nomination-info criteria-accordions' open>
+    <details className='nomination-info criteria-accordions' {...defaultState}>
       <summary>
         <span className='h6'>
           {categories.length === 1
