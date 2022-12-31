@@ -8,8 +8,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* Custom styles */
   background: rgb(240, 240, 240);
-  padding-top: 72px;
   scroll-behavior: smooth;
+}
+
+#root {
+  padding-top: 72px;
 }
 
 .no-x-overflow {
@@ -71,7 +74,6 @@ body {
   display: inline-block;
   width: fit-content !important;
   color: rgba(0, 0, 0, 0.5);
-  padding: 0 20px 16px 20px;
   text-transform: uppercase;
   margin: 0;
 }
@@ -82,10 +84,12 @@ body {
 
 .card-bottom-tags {
   display: flex;
+  padding: 0 1.25rem 1rem 1.25rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 .category-closed {
-  margin-left: auto;
   color: #007bff;
 }
 
@@ -94,6 +98,37 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   background: none;
+}
+
+.criteria-icon-box {
+  margin-left: auto;
+  width: fit-content;
+  border-radius: 1rem;
+}
+
+.criteria-icon {
+  width: 32px;
+  --regular-color: 0 0 0 / 0.2;
+  color: rgb(var(--regular-color));
+  transition: color 0.2s;
+}
+
+.criteria-icon:hover {
+  color: rgb(0 0 0 / 0.6);
+  cursor: default;
+}
+
+.selected-card .criteria-icon {
+  --regular-color: 255 255 255 / 1;
+  color: rgb(var(--regular-color));
+}
+
+.selected-card .criteria-icon:hover {
+  color: rgb(208, 223, 255);
+}
+
+*.hidden .criteria-icon:hover {
+  color: rgb(var(--regular-color));
 }
 
 .navbar-dark.bg-dark {
@@ -2580,4 +2615,34 @@ input.form-control-lg {
 
 .bold {
   font-weight: bold;
+}
+
+.modal-footer-text {
+  margin-right: auto;
+}
+
+.criteria-content > * {
+  margin-block: 0.5rem;
+}
+
+.criteria-content > :first-child {
+  margin-top: 0;
+}
+
+.criteria-content > :last-child {
+  margin-bottom: 0;
+}
+
+.criteria-content .nomination-criteria li {
+  margin-top: 0.25rem;
+}
+
+.modal-subtitle {
+  order: 1;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.modal-topbar {
+  flex-wrap: wrap;
 }
