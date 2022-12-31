@@ -26,7 +26,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
     submitting: false,
   })
 
-  const save = useCallback((nomineeData) => {
+  const save = useCallback(nomineeData => {
     setNominee(nomineeData)
   }, [])
 
@@ -38,12 +38,12 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
     let approval = 0 // 0 indicating unvetted manual input
     let editedData = nomineeData || nominee
     if (editedData.links)
-      editedData.links = editedData.links.filter((url) => !!url)
+      editedData.links = editedData.links.filter(url => !!url)
     if (editedData.MANUAL_INPUT === false) approval = 2 // 2 indicating it was not manual input
     delete editedData.MANUAL_INPUT
     delete editedData.approval
     if (editedData.extraURLs)
-      editedData.extraURLs = editedData.extraURLs.filter((url) => !!url)
+      editedData.extraURLs = editedData.extraURLs.filter(url => !!url)
 
     if (editedData.nsfw === false) delete editedData.nsfw
     if (editedData.spoiler === false) delete editedData.spoiler
@@ -53,11 +53,11 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
     let regularCategories =
       selected.type === 'other'
         ? selected.categories
-        : selected.categories.filter((c) => !c.fields)
+        : selected.categories.filter(c => !c.fields)
 
     if (regularCategories.length > 0 && selected.type !== 'other')
       dataToSubmit.push({
-        categories: regularCategories.map((c) => c.id),
+        categories: regularCategories.map(c => c.id),
         data: editedData,
         approval,
       })
@@ -66,11 +66,11 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
       let nomineeCategories =
         selected.type === 'other' ? selected.categories : extraFields
 
-      nomineeCategories.forEach((category) => {
+      nomineeCategories.forEach(category => {
         let currentFieldData =
           selected.type === 'other' ? editedData : additionalData[category.id]
 
-        category.fields.forEach((field) => {
+        category.fields.forEach(field => {
           if (!currentFieldData[field.id] && !!field.default) {
             currentFieldData[field.id] = field.default
           }
@@ -103,7 +103,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
         credentials: 'include',
         body: JSON.stringify(dataToSubmit),
       })
-      .then((res) => {
+      .then(res => {
         if (res.status === 201) {
           setDone({
             ...done,
@@ -123,7 +123,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
           alertOnError()
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(`POST to /api/nominate failed!`, err)
         alertOnError()
       })
@@ -174,7 +174,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
       selected.type !== 'other' &&
       selected.categories.length > 0
     ) {
-      let customFields = selected.categories.filter((cat) => cat.fields)
+      let customFields = selected.categories.filter(cat => cat.fields)
       setExtraFields(customFields)
     }
   }, [done.stepTwo, selected.categories, selected.type])
@@ -214,7 +214,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
 
   //* Callbacks & memos
   const selectThisCategory = useCallback(
-    (category) => {
+    category => {
       if (selected.type === 'other') {
         setSelected({
           ...selected,
@@ -235,7 +235,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
   )
 
   const deselectThisCategory = useCallback(
-    (category) => {
+    category => {
       if (selected.type === 'other') {
         setSelected({
           ...selected,
@@ -244,7 +244,7 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
       } else {
         setSelected({
           ...selected,
-          categories: selected.categories.filter((c) => c.id !== category.id),
+          categories: selected.categories.filter(c => c.id !== category.id),
         })
       }
     },
@@ -257,11 +257,11 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
   )
 
   const filteredCategories = useMemo(
-    () => categories.filter((c) => c.type === selected.type),
+    () => categories.filter(c => c.type === selected.type),
     [categories, selected.type]
   )
 
-  const updateExtraCategoryData = (props) => {
+  const updateExtraCategoryData = props => {
     setExtraCategoryData(props)
     setDone({ ...done, extraFields: true })
     submit(null, props)
@@ -369,8 +369,23 @@ const NominationFlow = ({ categories, collections, categoryTypes }) => {
               : selected.type}{' '}
             nominee
           </h4>
+          {extraFields.length > 0 && (
+            <p>
+              {extraFields.length === selected.categories.length
+                ? extraFields.length === 1
+                  ? 'The category you have selected requires'
+                  : 'All'
+                : extraFields.length}{' '}
+              {extraFields.length === 1
+                ? selected.categories.length === 1
+                  ? ''
+                  : 'selected category requires'
+                : 'selected categories require'}{' '}
+              extra data. You will be asked to provide this in Step 4.
+            </p>
+          )}
           <InputMain
-            save={(dataToSave) => {
+            save={dataToSave => {
               save(dataToSave)
               if (extraFields.length === 0) submit(dataToSave)
               else setDone({ ...done, stepThree: true, extraFields: false })
