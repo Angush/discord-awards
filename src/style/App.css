@@ -106,29 +106,35 @@ body {
   border-radius: 1rem;
 }
 
-.criteria-icon {
+.criteria-icon-box .criteria-icon {
   width: 32px;
   --regular-color: 0 0 0 / 0.2;
   color: rgb(var(--regular-color));
   transition: color 0.2s;
 }
 
-.criteria-icon:hover {
+.criteria-icon-box .criteria-icon:hover {
   color: rgb(0 0 0 / 0.6);
   cursor: default;
 }
 
-.selected-card .criteria-icon {
+.selected-card .criteria-icon-box .criteria-icon {
   --regular-color: 255 255 255 / 1;
   color: rgb(var(--regular-color));
 }
 
-.selected-card .criteria-icon:hover {
+.selected-card .criteria-icon-box .criteria-icon:hover {
   color: rgb(208, 223, 255);
 }
 
-*.hidden .criteria-icon:hover {
+*.hidden .criteria-icon-box .criteria-icon:hover {
   color: rgb(var(--regular-color));
+}
+
+#category-selection > p.text-muted .criteria-icon {
+  width: 16px;
+  vertical-align: text-bottom;
+  margin-bottom: 1px;
 }
 
 .navbar-dark.bg-dark {

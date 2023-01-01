@@ -69,6 +69,7 @@ const SelectCategory = ({
     0
   )
 
+  const anyHaveCriteria = categories.some(cat => cat.criteria)
   const inaccessible = done || submitting || modal !== null
   const criteriaProps = inaccessible
     ? {}
@@ -94,17 +95,23 @@ const SelectCategory = ({
       )}
 
       {multiple && (
-        <p className='text-muted' style={{ margin: 0 }}>
+        <p className='text-muted' style={{ marginBlock: '0.25rem' }}>
           You may select multiple. Note that when searching, selected categories
           are always included in results.
         </p>
       )}
       {closedCategories > 0 && (
-        <p className='text-muted' style={{ margin: 0 }}>
+        <p className='text-muted' style={{ marginBlock: '0.25rem' }}>
           As you have <code>nominate</code> admin permissions, you are able to
           nominate for <code>{closedCategories}</code>{' '}
           {closedCategories === 1 ? 'category' : 'categories'} that are not open
           to the public. These are indicated for your convenience.
+        </p>
+      )}
+      {anyHaveCriteria && (
+        <p className='text-muted' style={{ marginBlock: '0.25rem' }}>
+          Certain categories have additional criteria stipulations. Click the{' '}
+          {SVGs.reset} icon on these categories to view.
         </p>
       )}
       <div className={'category-input' + (inaccessible ? '' : ' stick')}>
