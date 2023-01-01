@@ -2701,6 +2701,10 @@ input.form-control-lg {
   margin-top: 0.25rem;
 }
 
+.portal-modal .modal-content {
+  border-radius: 0.75rem;
+}
+
 .modal-subtitle {
   order: 1;
   width: 100%;
