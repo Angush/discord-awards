@@ -19,7 +19,23 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
     if (!!fics) return
     try {
       const potentialOptions = JSON.parse(localStorage.typeaheadOptions)
-      if (potentialOptions) {
+      const typeaheadOptionsFetchDate = localStorage.typeaheadOptionsFetchDate
+      const rawDifference = Date.now() - (typeaheadOptionsFetchDate || 0)
+      const difference = Math.ceil(rawDifference / 1000 / 60 / 60 / 24)
+      if (
+        difference <= 1 &&
+        Array.isArray(potentialOptions) &&
+        potentialOptions.every(
+          v =>
+            v.title ||
+            v.name ||
+            v.owner ||
+            v.links ||
+            v.link ||
+            v.description ||
+            v.url
+        )
+      ) {
         setFics(potentialOptions)
         return
       }
@@ -30,18 +46,19 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
       .fetch(`https://cauldron.angu.sh/api/typeahead-options`, {
         signal: controller.signal,
       })
-      .then((response) => {
+      .then(response => {
         if (response.ok) return response.json()
         else fallback()
       })
-      .then((data) => {
+      .then(data => {
         if (!data || data.length === 0) fallback()
         else {
           setFics(data)
           localStorage.typeaheadOptions = JSON.stringify(data)
+          localStorage.typeaheadOptionsFetchDate = Date.now()
         }
       })
-      .catch((err) => fallback())
+      .catch(err => fallback())
 
     return () => controller.abort()
   }, [fics, fallback])
@@ -49,9 +66,9 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
   return (
     <InputGroup id='typeahead-container'>
       <Typeahead
-        onInputChange={(text) => setSearchterm(text)}
-        ref={(ref) => setTypeahead(ref)}
-        onChange={(selected) => {
+        onInputChange={text => setSearchterm(text)}
+        ref={ref => setTypeahead(ref)}
+        onChange={selected => {
           setInput(selected[0])
           let text = typeahead.getInstance().getInput()
           setSearchterm(text.value)
@@ -64,7 +81,7 @@ const FicTypeahead = ({ input, setInput, disabled, reset, fallback }) => {
         placeholder={
           fics ? 'Search for a fic...' : 'Fetching fics... Just a moment!'
         }
-        labelKey={(fic) => `${fic.title} by ${fic.author}`}
+        labelKey={fic => `${fic.title} by ${fic.author}`}
         disabled={disabled || !fics}
         id='typeahead'
         bsSize='lg'
