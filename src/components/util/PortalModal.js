@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Button, Modal } from 'react-bootstrap'
 
@@ -9,10 +9,13 @@ const PortalModal = ({
   buttons,
   subtitle,
   nodeId = 'modal',
-  isOpen = true,
   showCloseButton = true,
   children,
+  isOpen,
 }) => {
+  const [show, setShow] = useState(isOpen === undefined ? true : isOpen)
+  const hide = () => setShow(false)
+
   return (
     <>
       {createPortal(
@@ -20,8 +23,9 @@ const PortalModal = ({
           className='portal-modal'
           centered
           size='lg'
-          show={isOpen}
-          onHide={close}
+          show={show}
+          onHide={hide}
+          onExited={close}
         >
           <Modal.Header className='modal-topbar' closeButton>
             <Modal.Title className='modal-heading'>{title}</Modal.Title>
@@ -31,7 +35,7 @@ const PortalModal = ({
           <Modal.Footer className='modal-bottombar'>
             {footer && <p className='modal-footer-text'>{footer}</p>}
             {buttons && buttons.map(btn => btn)}
-            {showCloseButton && <Button onClick={close}>Close</Button>}
+            {showCloseButton && <Button onClick={hide}>Close</Button>}
           </Modal.Footer>
         </Modal>,
         document.getElementById(nodeId)
