@@ -15,7 +15,7 @@ const CriteriaAccordions = ({ categories }) => {
       </summary>
       {categories.map(cat => {
         return (
-          <details>
+          <details key={cat.name}>
             <summary>
               <span className='h6'>{cat.name}</span>
             </summary>

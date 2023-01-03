@@ -1,13 +1,14 @@
 import React from 'react'
 
-const createContentElement = content => {
+const createContentElement = (content, index) => {
+  const key = `criteria-${index}`
   if (typeof content === 'string') {
-    return <p>{content}</p>
+    return <p key={key}>{content}</p>
   } else if (Array.isArray(content)) {
     return (
-      <ol className='nomination-criteria'>
-        {content.map(listContent => (
-          <li>{listContent}</li>
+      <ol key={key} className='nomination-criteria'>
+        {content.map((listContent, listIndex) => (
+          <li key={`criteria-${index}-list-${listIndex}`}>{listContent}</li>
         ))}
       </ol>
     )
