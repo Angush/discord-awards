@@ -4,16 +4,21 @@ const cheerio = require('cheerio')
 const fs = require('fs')
 
 const baseURL = `https://wormstorysearch.com`
-const shortenURL = (url) =>
+const shortenURL = url =>
   url
-    .replace(/(\.com)\/threads\/\S+\.\d+\/\S*post-(\d+)$/i, '$1/posts/$2')
+    .replace(/(\.com)\/threads\/\S+\.\d+\/\S*post-(\d+)\/?$/i, '$1/posts/$2')
     .replace(/(\.com)\/threads\/\S+\.(\d+)\/?$/i, '$1/threads/$2')
-    .replace(/(\.fanfiction.net\/s\/\d+(\/?\d+)?)\/\S+$/i, '$1')
-    .replace(/(archiveofourown\.org\/)works\/\d+\/(chapters\/\d+)$/i, '$1$2')
-    .replace(/(docs\.google\.\w+\/\S+)\/(edit\S+)?$/i, '$1')
+    .replace(/(\.fanfiction.net\/s\/\d+)(\/?\d+)?\/\S+$/i, '$1')
+    .replace(/(archiveofourown\.org\/)works\/\d+\/(chapters\/\d+)\/?$/i, '$1$2')
+    .replace(/(docs\.google\.\w+\/\S+)\/(edit\S+)?\/?$/i, '$1')
+    .replace(/\/threadmarks\/?$/i, '')
 
 const currentYear = new Date().getFullYear()
 const endOfPreviousYear = currentYear - 2
+const pageOneURL = process.env.INCLUDE_NEW_YEAR_UPDATES
+  ? `/?updated_after_filter=12%2F31%2F${endOfPreviousYear}&page=1&limit=20&sort=stories.story_updated_at&direction=desc&searching=true`
+  : `/?updated_after_filter=12%2F31%2F${endOfPreviousYear}&updated_before_filter=01%2F01%2F${currentYear}&page=1&limit=20&sort=stories.story_updated_at&direction=desc&searching=true`
+
 const pageLoadInterval = process.env.INTERVAL ?? 1000 // In milliseconds.
 const cleanTitles = process.env.CLEAN ?? false
 
@@ -21,25 +26,25 @@ let results = []
 let fetchedNSFWFics = process.env.NSFW ?? null // Set to false to enable NSFW fic scraping. Anything else will disable. Use NSFW=false when running to set it as a temporary environment variable instead of editing this file.
 let totalPages = 0
 
-const cleanTitle = (title) => {
+const cleanTitle = title => {
   const cleanedTitle = title.replace(/\s*(\([^\(\)]*\)|\[[^\[\]]*\])/gi, '')
   return cleanedTitle.trim()
 }
 
 const cleanExistingTitles = () => {
   const cleanedPath = `${currentYear - 1}-fic-options-cleaned.json`
-  const existing = JSON.parse(
-    fs.readFileSync(`${currentYear - 1}-fic-options.json`)
-  )
+  const originalPath = `${currentYear - 1}-fic-options.json`
+  const existing = JSON.parse(fs.readFileSync(originalPath))
   console.log(`Cleaning titles for ${existing.length} fics`)
-  const cleaned = existing.map((item) => {
+  const cleaned = existing.map(item => {
     let newTitle = cleanTitle(item.title)
     console.log(`CLEANED: ${newTitle} —— ORIGINAL: ${item.title}`)
     item.title = newTitle
     return item
   })
-  console.log(`Cleaned ${existing.length} titles`)
   fs.writeFileSync(cleanedPath, JSON.stringify(cleaned))
+  console.log(`\nCleaned ${existing.length} titles`)
+  console.log(`Loaded fics from ${originalPath}`)
   console.log(`Saved cleaned fics in ${cleanedPath}`)
 }
 
@@ -79,7 +84,7 @@ const loadPage = async (url, isNSFW = false) => {
         links.push(shortened.trim())
       })
 
-    if (cleanTitles === true || cleanTitles.toLowerCase() === 'yes') {
+    if (cleanTitles && cleanTitles != false) {
       title = cleanTitle(title)
     }
     let result = { title, author, links }
@@ -106,10 +111,7 @@ const loadPage = async (url, isNSFW = false) => {
       fetchedNSFWFics = true
       console.log(`\n= STARTING TO SCRAPE NSFW FICS ONLY =`)
       setTimeout(() => {
-        loadPage(
-          `/?updated_after_filter=12%2F31%2F${endOfPreviousYear}&updated_before_filter=01%2F01%2F${currentYear}&is_nsfw_eq=true&page=1&limit=20&sort=stories.story_updated_at&direction=desc&searching=true`,
-          true
-        )
+        loadPage(`${pageOneURL}&is_nsfw_eq=true`, true)
       }, pageLoadInterval)
     } else {
       //! Save data to file if we're all finished.
@@ -125,14 +127,15 @@ const loadPage = async (url, isNSFW = false) => {
   }
 }
 
-if (cleanTitles.toLowerCase() === 'only') {
+if (cleanTitles?.toLowerCase?.() === 'only') {
   cleanExistingTitles()
 } else {
-  console.log(
-    `= SCRAPING FICS UPDATED BETWEEN ${endOfPreviousYear} and ${currentYear} =`
-  )
-
-  loadPage(
-    `/?updated_after_filter=12%2F31%2F${endOfPreviousYear}&updated_before_filter=01%2F01%2F${currentYear}&page=1&limit=20&sort=stories.story_updated_at&direction=desc&searching=true`
-  )
+  if (process.env.INCLUDE_NEW_YEAR_UPDATES) {
+    console.log(`= SCRAPING FICS UPDATED AFTER ${endOfPreviousYear} =`)
+  } else {
+    console.log(
+      `= SCRAPING FICS UPDATED BETWEEN ${endOfPreviousYear} and ${currentYear} =`
+    )
+  }
+  loadPage(pageOneURL)
 }
