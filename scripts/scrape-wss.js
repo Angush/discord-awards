@@ -1,7 +1,7 @@
 // NOTE: This script requires the following dev dependencies, and won't work outside a dev environment.
-const fetch = require('node-fetch')
-const cheerio = require('cheerio')
-const fs = require('fs')
+import fetch from 'node-fetch'
+import cheerio from 'cheerio'
+import fs from 'fs'
 
 const baseURL = `https://wormstorysearch.com`
 const shortenURL = url =>

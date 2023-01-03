@@ -12,5 +12,6 @@
     "cheerio": "^1.0.0-rc.12",
     "mysql2": "^2.3.3",
     "node-fetch": "^3.3.0"
-  }
+  },
+  "type": "module"
 }
