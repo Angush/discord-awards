@@ -51,11 +51,12 @@ const InputOther = ({
   }, [valid, currentValidity, updateValidity])
 
   const types = {}
-  category.fields.forEach((field) => (types[field.id] = field.label))
+  category.fields.forEach(field => (types[field.id] = field.label))
 
   const validateField = useCallback(
-    (field) => {
+    field => {
       let id = field.id
+      if (field.computed) return true
       if (field.optional && !formData[id]) return true
       if (id === 'link') return validateURL(formData.link)
       if (id === 'image')
@@ -66,13 +67,11 @@ const InputOther = ({
   )
 
   useEffect(() => {
-    let newValidityStatus = category.fields.every((field) =>
-      validateField(field)
-    )
+    let newValidityStatus = category.fields.every(field => validateField(field))
     setValid(newValidityStatus)
   }, [category.fields, validateField, updateValidity])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
     save(formData)
   }
@@ -80,7 +79,7 @@ const InputOther = ({
   const onLoad = () => setImgValid({ error: false, loaded: true })
   const onError = () => setImgValid({ error: true, loaded: true })
 
-  const blur = (field) => {
+  const blur = field => {
     if (!blurred[field]) setBlurred({ ...blurred, [field]: true })
     if (inline) setExtraData(formData)
   }
@@ -102,7 +101,7 @@ const InputOther = ({
     return field.text
   }
 
-  const createFormElement = (item) => {
+  const createFormElement = item => {
     if (item.computed) return null
     const validated = validateField(item)
     return (
@@ -123,14 +122,14 @@ const InputOther = ({
             // id={item.id}
             size='lg'
             value={formData[item.id] || ''}
-            onChange={(e) => {
+            onChange={e => {
               setFormData({ ...formData, [item.id]: e.target.value })
               if (inline)
                 setExtraData({ ...formData, [item.id]: e.target.value })
               if (item.id === 'image')
                 setImgValid({ error: false, loaded: false })
             }}
-            onBlur={(e) => blur(item.id)}
+            onBlur={e => blur(item.id)}
             disabled={disabled}
           />
         </InputGroup>
@@ -159,7 +158,7 @@ const InputOther = ({
       {category.fields.map(createFormElement)}
 
       <div className='preview mx-auto'>
-        {Object.values(formData).filter((v) => v).length > 0 ? (
+        {Object.values(formData).filter(v => v).length > 0 ? (
           <PreviewCard
             data={
               formData.link && !validateField({ id: 'link' })
