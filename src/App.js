@@ -130,14 +130,17 @@ const App = () => {
   return (
     <div className='App'>
       <Helmet defaultTitle='Cauldron Awards'>
-        <meta name='og:url' content='https://cauldron.angu.sh' />
-        <meta name='og:type' content='website' />
-        <meta name='og:title' content='Cauldron Awards' />
+        <meta property='og:url' content='https://cauldron.angu.sh' />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content='Cauldron Awards' />
         <meta
-          name='og:description'
+          property='og:description'
           content="The home of the Cauldron Discord's annual community awards for fanfiction, fanart, and more!"
         />
-        <meta name='og:image' content='/images/metadata/cauldron-awards.png' />
+        <meta
+          property='og:image'
+          content='/images/metadata/cauldron-awards.png'
+        />
 
         <meta name='twitter:card' content='summary_large_image' />
         <meta property='twitter:domain' content='cauldron.angu.sh' />

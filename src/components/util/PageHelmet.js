@@ -19,7 +19,7 @@ const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
       )}
       {(meta.description || meta.ogDescription) && (
         <meta
-          name='og:description'
+          property='og:description'
           content={meta.ogDescription || meta.description}
         />
       )}
@@ -31,7 +31,7 @@ const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
       )}
 
       {(meta.image || meta.ogImage) && (
-        <meta name='og:image' content={meta.ogImage || meta.image} />
+        <meta property='og:image' content={meta.ogImage || meta.image} />
       )}
       {(meta.image || meta.twitterImage) && (
         <meta name='twitter:image' content={meta.twitterImage || meta.image} />
