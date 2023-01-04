@@ -1,11 +1,28 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
+const BASE_URL = `https://cauldron.angu.sh`
+
 const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
   const meta = {
     title: `Cauldron Awards`,
     description: `The home of the Cauldron Discord's annual community awards for fanfiction, fanart, and more!`,
     ...propMeta,
+  }
+
+  const images = {
+    image:
+      meta.image && meta.image.startsWith?.('/')
+        ? `${BASE_URL}${meta.image}`
+        : meta.image,
+    ogImage:
+      meta.ogImage && meta.ogImage.startsWith?.('/')
+        ? `${BASE_URL}${meta.ogImage}`
+        : meta.ogImage,
+    twitterImage:
+      meta.twitterImage && meta.twitterImage.startsWith?.('/')
+        ? `${BASE_URL}${meta.twitterImage}`
+        : meta.twitterImage,
   }
 
   return (
@@ -30,11 +47,14 @@ const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
         />
       )}
 
-      {(meta.image || meta.ogImage) && (
-        <meta property='og:image' content={meta.ogImage || meta.image} />
+      {(images.image || images.ogImage) && (
+        <meta property='og:image' content={images.ogImage || images.image} />
       )}
-      {(meta.image || meta.twitterImage) && (
-        <meta name='twitter:image' content={meta.twitterImage || meta.image} />
+      {(images.image || images.twitterImage) && (
+        <meta
+          name='twitter:image'
+          content={images.twitterImage || images.image}
+        />
       )}
 
       {meta.robots && <meta name='robots' content={meta.robots} />}
