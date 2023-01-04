@@ -7,7 +7,16 @@ import InputClear from '../util/InputClear'
 import Badge from './Badge'
 
 const ItemList = ({
-  name = 'items', items, select, selectedItem, updateStatus, parentId, depth = 1, setStatuses, check, checked
+  name = 'items',
+  items,
+  select,
+  selectedItem,
+  updateStatus,
+  parentId,
+  depth = 1,
+  setStatuses,
+  check,
+  checked,
 }) => {
   const [filteredItems, setFilteredItems] = useState(items)
   const [searchterm, setSearchterm] = useState('')
@@ -18,44 +27,62 @@ const ItemList = ({
       setFilteredItems(items)
       return
     }
-    
+
     if (!searchterm || searchterm.trim().length === 0) return exitWithDefault()
 
     let regex = null
     let searchStatuses = null
-    let statusSelectorRegex = /\s*:(((?<number>-?\d+)|(?<approved>approved|approve|approv|appro|appr|app|ap|a)|(?<rejected>rejected|rejecte|reject|rejec|reje|rej|re|r)|(?<vetted>vetted|vette|vett|vet|ve|v)|(?<unvetted>unvetted|unvette|unvett|unvet|unve|unv|un|u))\|?)+\b\s*/gi
+    let statusSelectorRegex =
+      /\s*:(((?<number>-?\d+)|(?<approved>approved|approve|approv|appro|appr|app|ap|a)|(?<rejected>rejected|rejecte|reject|rejec|reje|rej|re|r)|(?<vetted>vetted|vette|vett|vet|ve|v)|(?<unvetted>unvetted|unvette|unvett|unvet|unve|unv|un|u))\|?)+\b\s*/gi
     let editedSearchterm = searchterm.replace(statusSelectorRegex, '')
-    
+
     try {
-      if (editedSearchterm.length !== searchterm.length) searchStatuses = statusSelectorRegex.exec(searchterm)
+      if (editedSearchterm.length !== searchterm.length)
+        searchStatuses = statusSelectorRegex.exec(searchterm)
       let term = (searchStatuses ? editedSearchterm : searchterm).split('&')
       regex = term.map(text => new RegExp(text.trim(), 'gi'))
     } catch (e) {
       try {
         let term = searchStatuses ? editedSearchterm : searchterm
-        let replaced = term.trim().replace(/[{}()[\\]/g, '\\$&').split('&')
+        let replaced = term
+          .trim()
+          .replace(/[{}()[\\]/g, '\\$&')
+          .split('&')
         regex = replaced.map(text => new RegExp(text.trim(), 'gi'))
       } catch (_e) {}
     }
     if (!regex) return exitWithDefault()
-    
+
     let header = null
     let newFilteredItems = []
     items.forEach(item => {
       if (item.IS_HEADER) header = item
-      if (item.IS_HEADER || !item.id || !item.header || (!item.subheader && item.subheader !== '')) return
+      if (
+        item.IS_HEADER ||
+        !item.id ||
+        !item.header ||
+        (!item.subheader && item.subheader !== '')
+      )
+        return
 
       let fields = [`ID ${item.id}`, item.header, item.subheader]
       if (item?.badges?.collection) fields.push(item.badges.collection)
-      if (item?.badges?.duplicates) fields.push(
-        `${item.badges.duplicates} duplicates`,
-        `${item.badges.duplicates} dupes`
-      )
+      if (item?.badges?.duplicates)
+        fields.push(
+          `${item.badges.duplicates} duplicates`,
+          `${item.badges.duplicates} dupes`
+        )
       let match = regex.every(r => fields.some(field => r.test(field)))
-      
+
       let status = item?.badges?.currentStatus
       if (searchStatuses && Number.isInteger(status) && match) {
-        let { approved, rejected, unvetted, vetted, number = null } = (searchStatuses?.groups || {})
+        let {
+          approved,
+          rejected,
+          unvetted,
+          vetted,
+          number = null,
+        } = searchStatuses?.groups || {}
         let statusNumber = number !== null ? parseInt(number) : null
 
         if (vetted && (status < 0 || status === 1)) {
@@ -64,11 +91,11 @@ const ItemList = ({
           if (status === 1 && !approved) match = false
           else if (status < 0 && !rejected) match = false
           else if ((status === 0 || status > 1) && !unvetted) match = false
-          
-          if (statusNumber !== null && statusNumber !== status) match = false
-          else if (statusNumber !== null && statusNumber === status) match = true
-        }
 
+          if (statusNumber !== null && statusNumber !== status) match = false
+          else if (statusNumber !== null && statusNumber === status)
+            match = true
+        }
       }
 
       if (match || (!match && selectedItem?.id === item.id)) {
@@ -84,15 +111,27 @@ const ItemList = ({
   }, [items, searchterm, selectedItem])
 
   const checkedItems = Object.values(checked || {}).length
+  const filteredItemsWithoutSections = filteredItems.filter(i => !i.IS_HEADER)
 
   return (
-    <div className={`item-list list-${depth}${selectedItem?.id ? ' selected-list' : ''}`}>
+    <div
+      className={`item-list list-${depth}${
+        selectedItem?.id ? ' selected-list' : ''
+      }`}
+    >
       {items.length > 0 && (
         <div className='item-list-search'>
           {searchterm.trim() && (
             <>
               <InputClear onClick={() => setSearchterm('')} />
-              <Badge number={filteredItems.length} suffix={filteredItems.length === 1 ? 'result' : 'results'} />
+              <Badge
+                number={filteredItemsWithoutSections.length}
+                suffix={
+                  filteredItemsWithoutSections.length === 1
+                    ? 'result'
+                    : 'results'
+                }
+              />
             </>
           )}
           <FormControl
@@ -104,23 +143,25 @@ const ItemList = ({
       )}
       {filteredItems.length === 0 && items.length > 0 && searchterm && (
         <p className='item-list-empty'>
-          Found no results! <br/>
+          Found no results! <br />
           Try another term or item ID.
         </p>
       )}
       {filteredItems.map(item => {
         const STATUS = item.badges?.currentStatus
-        const STATUS_SELECTOR = (Number.isInteger(STATUS) && updateStatus && parentId) && (
-          <StatusDropdown
-            status={STATUS}
-            select={updateStatus}
-            catId={parentId}
-            id={item.id}
-            className='item-list-dropdown'
-          />
-        )
+        const STATUS_SELECTOR = Number.isInteger(STATUS) &&
+          updateStatus &&
+          parentId && (
+            <StatusDropdown
+              status={STATUS}
+              select={updateStatus}
+              catId={parentId}
+              id={item.id}
+              className='item-list-dropdown'
+            />
+          )
 
-        const CHECKBOX = (check && checked && setStatuses) && (
+        const CHECKBOX = check && checked && setStatuses && (
           <SelectionCheckbox
             onClick={e => {
               e.stopPropagation()
