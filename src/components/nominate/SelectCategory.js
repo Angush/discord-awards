@@ -87,7 +87,7 @@ const SelectCategory = ({
       {modal && (
         <PortalModal
           title={modal.name}
-          footer='Category eligibility criteria'
+          footer='Extra information and category eligibility criteria.'
           close={() => setModal(null)}
         >
           <CriteriaContent criteria={modal.criteria} />

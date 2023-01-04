@@ -10,7 +10,7 @@ const CriteriaAccordions = ({ categories }) => {
           {categories.length === 1
             ? '1 selected category'
             : `${categories.length} selected categories`}{' '}
-          have unique criteria stipulations.
+          have unique criteria stipulations or additional information.
         </span>
       </summary>
       {categories.map(cat => {
