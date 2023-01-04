@@ -7,6 +7,7 @@ import AllResults from '../components/results/AllResults'
 import { Router, Link } from '@reach/router'
 import Lightbox from 'react-image-lightbox'
 import 'react-image-lightbox/style.css'
+import PageHelmet from '../components/util/PageHelmet'
 
 const ResultsPage = ({ userData, years, year }) => {
   const [yearProper, setYearProper] = useState(year)
@@ -148,9 +149,19 @@ const ResultsPage = ({ userData, years, year }) => {
     return () => window.removeEventListener('click', lightboxHandler)
   }, [lightboxHandler])
 
+  const pageMetadata = (
+    <PageHelmet
+      meta={{
+        description: `Results for the ${year} Cauldron Awards.`,
+        title: `${year} Results - Cauldron Awards`,
+      }}
+    />
+  )
+
   if (loading)
     return (
       <>
+        {pageMetadata}
         <LoadingIndicator className='fade-rise'>
           <h4>Just a moment!</h4>
           <h6 className='text-muted'>
@@ -164,6 +175,7 @@ const ResultsPage = ({ userData, years, year }) => {
   if (!data)
     return (
       <div className='result-years fade-rise'>
+        {pageMetadata}
         <h4>Year not found!</h4>
         <h4>
           <small className='text-muted'>
@@ -182,6 +194,14 @@ const ResultsPage = ({ userData, years, year }) => {
 
   return (
     <>
+      <PageHelmet
+        meta={{
+          description: data.totals
+            ? `Results for the ${year} Cauldron Awards! With ${data.totals.nominees} entries across ${data.totals.categories} categories, and ${data.totals.votes} total votes.`
+            : `Results for the ${year} Cauldron Awards.`,
+          title: `${year} Results - Cauldron Awards`,
+        }}
+      />
       {lightboxData && (
         <Lightbox
           reactModalStyle={{ overlay: { zIndex: 1100 } }}

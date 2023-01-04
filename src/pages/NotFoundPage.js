@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useMatch } from '@reach/router'
 import getLoginPathName from '../functions/getLoginPathName'
+import PageHelmet from '../components/util/PageHelmet'
 
 const NotFoundPage = ({ links, unauthorized = false, fadeRise = false }) => {
   const match = useMatch(`/unauthorized`)
@@ -13,6 +14,15 @@ const NotFoundPage = ({ links, unauthorized = false, fadeRise = false }) => {
         marginTop: '20vh',
       }}
     >
+      <PageHelmet
+        meta={{
+          title:
+            match || unauthorized
+              ? `Unauthorized - Cauldron Awards`
+              : `Page Not Found - Cauldron Awards`,
+        }}
+        noRobots
+      />
       <h4 style={{ marginBottom: '1rem' }}>
         {match || unauthorized ? "You're not authorized!" : 'Page not found!'}
       </h4>

@@ -2,12 +2,19 @@ import React, { useState, useEffect, useCallback } from 'react'
 import envVarIsTrue from '../functions/envVarIsTrue'
 import NominationFlow from '../flows/NominationFlow'
 import { Link } from '@reach/router'
+import PageHelmet from '../components/util/PageHelmet'
 
 const NominationPage = ({ userData }) => {
-  const [nominationsClosed, setNominationsClosed] = useState(envVarIsTrue(`NOMINATIONS_CLOSED`) && !userData.canNominate)
+  const [nominationsClosed, setNominationsClosed] = useState(
+    envVarIsTrue(`NOMINATIONS_CLOSED`) && !userData.canNominate
+  )
   const [categories, setCategories] = useState([])
   const [collections, setCollections] = useState({})
   const [categoryTypes, setCategoryTypes] = useState([])
+  const currentYear =
+    new Date().getMonth() >= 10
+      ? new Date().getFullYear()
+      : new Date().getFullYear() - 1
 
   const populateCategories = useCallback(data => {
     //* set category types
@@ -17,7 +24,7 @@ const NominationPage = ({ userData }) => {
       else return [...arr, obj]
     }, [])
     setCategoryTypes(types)
-    
+
     //* set categories & category collections
     //! note: this collections variable is not used, as it's intended for the split display mode, which has yet to be implemented
     let collections = {}
@@ -43,7 +50,9 @@ const NominationPage = ({ userData }) => {
     let cached = localStorage.categories
     if (cached) populateCategories(JSON.parse(cached))
     window
-      .fetch(`https://cauldron.angu.sh/api/contests`, { credentials: 'include' })
+      .fetch(`https://cauldron.angu.sh/api/contests`, {
+        credentials: 'include',
+      })
       .then(response => response.json())
       .then(rawData => {
         let data = Object.values(rawData)
@@ -61,23 +70,41 @@ const NominationPage = ({ userData }) => {
   }, [userData.canNominate])
 
   //* Render the components, or the message about nominations being closed
-  if (nominationsClosed)
+  if (nominationsClosed) {
     return (
       <div className='fade-rise text-center pad-top closed-page-indicator'>
         <h3>Nominations are currently closed.</h3>
         <p>They will reopen in January for the next Cauldron Awards.</p>
-        <p>Visit <Link to='/results'>the results page</Link> to see the results of past years!</p>
+        <p>
+          Visit <Link to='/results'>the results page</Link> to see the results
+          of past years!
+        </p>
+
+        <PageHelmet
+          meta={{
+            description: `Cauldron Awards nominations are currently closed. Come back in January!`,
+            title: `Nominations - Cauldron Awards ${currentYear}`,
+          }}
+        />
       </div>
     )
+  }
 
   return (
-    <NominationFlow
-      categories={categories}
-      collections={collections}
-      categoryTypes={categoryTypes}
-    />
+    <>
+      <PageHelmet
+        meta={{
+          description: `Cauldron Awards nominations are open! Nominate your favourite fanfics and fanart and community members for one of our ${categories.length} categories!`,
+          title: `Nominations - Cauldron Awards ${currentYear}`,
+        }}
+      />
+      <NominationFlow
+        categories={categories}
+        collections={collections}
+        categoryTypes={categoryTypes}
+      />
+    </>
   )
-
 }
 
 export default NominationPage

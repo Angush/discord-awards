@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react'
 import LoadingIndicator from '../components/util/LoadingIndicator'
+import PageHelmet from '../components/util/PageHelmet'
 import NotFoundPage from './NotFoundPage'
 
 const AdminVettingPage = React.lazy(() =>
   import(/* webpackChunkName: "AdminVetting" */ './AdminVettingPage')
 )
 
-const AdminVettingPageWrapper = (props) => {
+const AdminVettingPageWrapper = props => {
   const { userData, links } = props
   //* Early return on invalid auth
   if (!userData.canVet && !userData.LOADED_FROM_CACHE)
@@ -22,9 +23,17 @@ const AdminVettingPageWrapper = (props) => {
   if (!userData.canVet) return Loading
 
   return (
-    <Suspense fallback={Loading}>
-      <AdminVettingPage />
-    </Suspense>
+    <>
+      <PageHelmet
+        meta={{
+          title: 'Admin Vetting - Cauldron Awards',
+        }}
+        noRobots
+      />
+      <Suspense fallback={Loading}>
+        <AdminVettingPage />
+      </Suspense>
+    </>
   )
 }
 
