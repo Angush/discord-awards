@@ -1,12 +1,16 @@
+import { useLocation } from '@reach/router'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
 const BASE_URL = `https://cauldron.angu.sh`
 
 const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
+  const location = useLocation()
+
   const meta = {
     title: `Cauldron Awards`,
     description: `The home of the Cauldron Discord's annual community awards for fanfiction, fanart, and more!`,
+    canonical: location.pathname,
     ...propMeta,
   }
 
@@ -24,6 +28,11 @@ const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
         ? `${BASE_URL}${meta.twitterImage}`
         : meta.twitterImage,
   }
+
+  const canonical =
+    meta.canonical && meta.canonical.startsWith?.('/')
+      ? `${BASE_URL}${meta.canonical}`
+      : meta.canonical || BASE_URL
 
   return (
     <Helmet defaultTitle='Cauldron Awards'>
@@ -59,6 +68,8 @@ const PageHelmet = ({ meta: propMeta, noRobots = false }) => {
 
       {meta.robots && <meta name='robots' content={meta.robots} />}
       {noRobots && <meta name='robots' content='noindex, nofollow' />}
+
+      {canonical && <link rel='canonical' href={canonical} />}
     </Helmet>
   )
 }

@@ -149,20 +149,16 @@ const ResultsPage = ({ userData, years, year }) => {
     return () => window.removeEventListener('click', lightboxHandler)
   }, [lightboxHandler])
 
-  const pageMetadata = (
-    <PageHelmet
-      meta={{
-        description: `Results for the ${year} Cauldron Awards.`,
-        title: `${year} Results - Cauldron Awards`,
-        image: `/images/metadata/results.png`,
-      }}
-    />
-  )
-
   if (loading)
     return (
       <>
-        {pageMetadata}
+        <PageHelmet
+          meta={{
+            description: `Results for the ${year} Cauldron Awards.`,
+            title: `${year} Results - Cauldron Awards`,
+            image: `/images/metadata/results.png`,
+          }}
+        />
         <LoadingIndicator className='fade-rise'>
           <h4>Just a moment!</h4>
           <h6 className='text-muted'>
@@ -176,7 +172,15 @@ const ResultsPage = ({ userData, years, year }) => {
   if (!data)
     return (
       <div className='result-years fade-rise'>
-        {pageMetadata}
+        <PageHelmet
+          meta={{
+            description: `There are no results for the ${year} Cauldron Awards.`,
+            title: `Year Not Found - Cauldron Awards`,
+            image: `/images/metadata/cauldron-awards.png`,
+            canonical: null,
+          }}
+          noRobots
+        />
         <h4>Year not found!</h4>
         <h4>
           <small className='text-muted'>
