@@ -137,6 +137,7 @@ const App = () => {
           name='og:description'
           content="The home of the Cauldron Discord's annual community awards for fanfiction, fanart, and more!"
         />
+        <meta name='og:image' content='/images/metadata/cauldron-awards.png' />
 
         <meta name='twitter:card' content='summary_large_image' />
         <meta property='twitter:domain' content='cauldron.angu.sh' />
@@ -145,6 +146,10 @@ const App = () => {
         <meta
           name='twitter:description'
           content="The home of the Cauldron Discord's annual community awards for fanfiction, fanart, and more!"
+        />
+        <meta
+          name='twitter:image'
+          content='/images/metadata/cauldron-awards.png'
         />
 
         <meta
