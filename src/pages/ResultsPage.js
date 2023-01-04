@@ -154,6 +154,7 @@ const ResultsPage = ({ userData, years, year }) => {
       meta={{
         description: `Results for the ${year} Cauldron Awards.`,
         title: `${year} Results - Cauldron Awards`,
+        image: `/images/metadata/results.png`,
       }}
     />
   )
@@ -200,6 +201,7 @@ const ResultsPage = ({ userData, years, year }) => {
             ? `Results for the ${year} Cauldron Awards! With ${data.totals.nominees} entries across ${data.totals.categories} categories, and ${data.totals.votes} total votes.`
             : `Results for the ${year} Cauldron Awards.`,
           title: `${year} Results - Cauldron Awards`,
+          image: `/images/metadata/${year}.png`,
         }}
       />
       {lightboxData && (

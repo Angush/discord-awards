@@ -84,6 +84,7 @@ const NominationPage = ({ userData }) => {
           meta={{
             description: `Cauldron Awards nominations are currently closed. Come back in January!`,
             title: `Nominations - Cauldron Awards ${currentYear}`,
+            image: `/images/metadata/nominations.png`,
           }}
         />
       </div>
@@ -96,6 +97,7 @@ const NominationPage = ({ userData }) => {
         meta={{
           description: `Cauldron Awards nominations are open! Nominate your favourite fanfics and fanart and community members for one of our ${categories.length} categories!`,
           title: `Nominations - Cauldron Awards ${currentYear}`,
+          image: `/images/metadata/nominations.png`,
         }}
       />
       <NominationFlow

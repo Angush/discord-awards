@@ -11,6 +11,7 @@ const ResultsListingsPage = ({ years }) => {
             ? `View results for the ${years[0]} Cauldron Awards, or for earlier years.`
             : `View results for earlier years of the Cauldron Awards.`,
         title: `Past Results - Cauldron Awards`,
+        image: `/images/metadata/results.png`,
         robots: 'noindex',
       }}
     />

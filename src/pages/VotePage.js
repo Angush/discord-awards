@@ -25,6 +25,7 @@ const VotePage = props => {
           meta={{
             description: `Cauldron Awards voting is closed. Come back in January.`,
             title: `Voting - Cauldron Awards ${currentYear}`,
+            image: `/images/metadata/voting.png`,
           }}
         />
       </div>
@@ -37,6 +38,7 @@ const VotePage = props => {
         meta={{
           description: `Cauldron Awards voting is open! Vote for your favourite fanfics and fanart and more from ${currentYear}.`,
           title: `Voting - Cauldron Awards ${currentYear}`,
+          image: `/images/metadata/voting.png`,
         }}
       />
       <VoteFlow {...props} />
