@@ -16,7 +16,10 @@ const NominationInfo = () => {
           <h5 style={{ display: 'inline-block' }}>
             Nominations for {currentYear} are open!
           </h5>
-          <p>Click to view eligibility criteria.</p>
+          <p>
+            Please read the awards eligibility criteria below before lodging any
+            nominations. Click to view.
+          </p>
         </summary>
         <div className='nomination-info-details'>
           <p>Criteria for eligible nominations is as follows:</p>
@@ -46,8 +49,10 @@ const NominationInfo = () => {
               rules are, you shouldn't be nominating anything.
             </li>
             <li>
-              Wherever a category indicates additional criteria in its title or
-              description, that criteria is also to be followed.
+              Wherever a category indicates that additional criteria
+              stipulations apply (whether in its title, description, or the
+              embedded criteria accordions or modals), entrants must also
+              satisfy those criteria.
             </li>
             <li>
               Self-nominations (ie. nominating your own creations) are permitted
