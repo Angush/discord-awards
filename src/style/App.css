@@ -1120,16 +1120,24 @@ input.form-control-lg {
   margin: 0.5rem auto;
 }
 
-.navbar .container img:first-child {
+.navbar .container > img:first-child {
   margin-right: 0.5rem;
   height: auto;
   width: 30px;
-  /* margin-top: -0.5rem; */
 }
 
 .navbar-brand a {
   text-decoration: none;
   color: inherit;
+}
+
+.navbar-collapse {
+  align-items: unset;
+}
+
+.navbar-nav {
+  align-items: center;
+  text-align: center;
 }
 
 #user {
