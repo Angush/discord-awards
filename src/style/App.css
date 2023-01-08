@@ -1121,7 +1121,6 @@ input.form-control-lg {
 }
 
 .navbar .container img:first-child {
-  align-self: flex-start;
   margin-right: 0.5rem;
   height: auto;
   width: 30px;
