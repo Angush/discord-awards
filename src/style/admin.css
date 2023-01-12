@@ -497,17 +497,22 @@
 /** Other nominee UI styles **/
 
 .nominee-controls {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
   align-items: center;
   grid-area: controls;
-  max-height: 100px;
-  height: 100px;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
   background-color: #dfdfdf;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: sticky;
   z-index: 100;
   top: 0;
+}
+
+.nominee-controls > :first-child {
+  display: flex;
+  align-items: center;
 }
 
 .nominee-buttons {
@@ -1108,6 +1113,27 @@ code.status-rejected,
 .json-submit-buttons > button {
   margin-right: 1rem;
   padding: 12px 24px;
+}
+
+.nominee-category-description {
+  grid-column: 1 / -1;
+  background-color: #dfdfdf;
+  margin-top: 0.5rem;
+  overflow-y: scroll;
+}
+
+.nominee-category-description summary {
+  font-weight: bold;
+}
+
+.nominee-category-description[open] summary {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 1rem;
+}
+
+.nominee-category-description h4 {
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
 
 /** Media queries **/

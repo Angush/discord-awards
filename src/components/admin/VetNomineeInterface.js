@@ -9,6 +9,7 @@ import SelectionCheckbox from './SelectionCheckbox'
 import OtherCard from '../cards/OtherCard'
 import FicCard from '../cards/FicCard'
 import ArtCard from '../cards/ArtCard'
+import CriteriaContent from '../util/CriteriaContent'
 
 const VetNomineeInterface = ({
   nominee,
@@ -36,7 +37,7 @@ const VetNomineeInterface = ({
   }, [nominee, nomineeBeingEdited])
 
   //* Utility functions
-  const getApprovalStatus = (number) => {
+  const getApprovalStatus = number => {
     if (number === -1) return 'Rejected'
     if (number === 0) return 'Unvetted'
     if (number === 1) return 'Approved'
@@ -44,16 +45,16 @@ const VetNomineeInterface = ({
     return 'Unvetted' // default fallback
   }
 
-  const getStatusValue = (change) => {
+  const getStatusValue = change => {
     if (change === 'approve') return 1
     if (change === 'reject') return -1
     if (change === 'reset') return 0
     return 0 // default fallback
   }
 
-  const getDataOfNomineeToUpdate = (id) => {
+  const getDataOfNomineeToUpdate = id => {
     if (!id || id === nominee.id) return nominee
-    return DUPLICATES.find((dupe) => dupe.id === id)
+    return DUPLICATES.find(dupe => dupe.id === id)
   }
 
   //* Update data functions
@@ -74,20 +75,20 @@ const VetNomineeInterface = ({
     let nomineeCategories = Object.keys(nominee.statuses)
     let nomineesWithStatuses = []
 
-    const getStatusChanges = (key) => ({
+    const getStatusChanges = key => ({
       category: parseInt(key),
       status: newStatusValue,
     })
     const loopOverNominees = (array, filterFn = null) => {
       if (!array || !array.length) return
-      array.forEach((item) => {
+      array.forEach(item => {
         let statuses = { ...item.statuses }
         let keys = Object.keys(item.statuses)
         let statusChanges = (filterFn ? keys.filter(filterFn) : keys).map(
           getStatusChanges
         )
         statusChanges.forEach(
-          (change) => (statuses[change.category] = newStatusValue)
+          change => (statuses[change.category] = newStatusValue)
         )
         nomineesWithStatuses.push({ ...item, statuses, statusChanges })
       })
@@ -95,16 +96,16 @@ const VetNomineeInterface = ({
 
     // Update all non-current statuses for the current nominee.
     if (type === 'nominee')
-      loopOverNominees([nominee], (key) => key !== `${category.id}`)
+      loopOverNominees([nominee], key => key !== `${category.id}`)
     // Update all shared statuses for detected duplicates.
     if (type === 'duplicates')
-      loopOverNominees(DUPLICATES, (key) => nomineeCategories.includes(key))
+      loopOverNominees(DUPLICATES, key => nomineeCategories.includes(key))
     // Update all statuses for checked nominee/category pairs.
     if (type === 'checked') {
       Object.entries(checkedCategories).forEach(([nomId, values]) => {
         loopOverNominees(
           [getDataOfNomineeToUpdate(parseInt(nomId))],
-          (key) => values[key]
+          key => values[key]
         )
       })
     }
@@ -117,7 +118,7 @@ const VetNomineeInterface = ({
     else updateNomineeData(nomineesWithStatuses, 'status')
   }
 
-  const updateData = (event) => {
+  const updateData = event => {
     let nomineeToUpdate = getDataOfNomineeToUpdate()
     let newData = {
       ...nomineeToUpdate,
@@ -126,13 +127,13 @@ const VetNomineeInterface = ({
     updateNomineeData([newData], 'data', clearEdits)
   }
 
-  const updateDataIncludingDuplicates = (event) => {
+  const updateDataIncludingDuplicates = event => {
     let nomineeToUpdate = getDataOfNomineeToUpdate()
     let newData = nomineeEdits || nomineeToUpdate.data
-    const formatNomineeData = (nom) => ({ ...nom, data: newData })
+    const formatNomineeData = nom => ({ ...nom, data: newData })
 
     let nomineesBeingUpdated = [formatNomineeData(nomineeToUpdate)]
-    DUPLICATES.forEach((dupe) => {
+    DUPLICATES.forEach(dupe => {
       nomineesBeingUpdated.push(formatNomineeData(dupe))
     })
 
@@ -176,7 +177,7 @@ const VetNomineeInterface = ({
     setNomineeEdits(newNominee)
   }
 
-  const toggleBooleanValue = (key) => {
+  const toggleBooleanValue = key => {
     let newData = { ...(nomineeEdits ? nomineeEdits : nominee?.data) }
     if (newData.hasOwnProperty(key) && newData[key] !== false)
       delete newData[key]
@@ -195,7 +196,7 @@ const VetNomineeInterface = ({
     setCheckedCategories(checked)
   }
 
-  const addKeyToData = (values) =>
+  const addKeyToData = values =>
     makeEdit(
       { ...values.existing_src },
       true,
@@ -219,11 +220,11 @@ const VetNomineeInterface = ({
     )
   const DUPLICATES = (nominee.duplicates || []).map(getNomineeData)
   const CATEGORIES = Object.keys(nominee.statuses || {})
-    .filter((cat) => {
+    .filter(cat => {
       if (Number.isInteger(cat)) return cat !== category.id
       return parseInt(cat) !== category.id
     })
-    .map((cat) => data.categories[cat])
+    .map(cat => data.categories[cat])
   const checkedCategoryCount = Object.values(checkedCategories).reduce(
     (acc, curr) => {
       return (acc += Object.values(curr).length)
@@ -238,82 +239,98 @@ const VetNomineeInterface = ({
         className='nominee-controls'
         style={{ marginBottom: nominee.parent && '30px' }}
       >
-        {nominee.parent && (
-          <button className='return-to-parent-btn' onClick={() => select()}>
+        <div>
+          {nominee.parent && (
+            <button className='return-to-parent-btn' onClick={() => select()}>
+              <>
+                {'<'} Return to original selection (ID{' '}
+                <code>{nominee.parent.id}</code>)
+              </>
+            </button>
+          )}
+          {isInCurrentCategory && (
             <>
-              {'<'} Return to original selection (ID{' '}
-              <code>{nominee.parent.id}</code>)
-            </>
-          </button>
-        )}
-        {isInCurrentCategory && (
-          <>
-            <div className='nominee-buttons'>
-              <StatusDropdown
-                status={nominee.statuses[category.id]}
-                select={updateStatus}
-                catId={category.id}
-                id={nominee.id}
-                size='lg'
-                className='primary-status-dropdown'
-              />
-            </div>
-            <div className='nominee-header-text'>
-              <h2>
-                Viewing nominee <code>{nominee.id}</code> in{' '}
-                <code>{category.name}</code>
-              </h2>
-              <h3 className='text-muted'>
-                Current approval status:{' '}
-                <code
-                  className={
-                    approvalStatus === 'Rejected'
-                      ? 'status-rejected'
-                      : approvalStatus === 'Approved'
-                      ? 'status-approved'
-                      : 'status-unvetted'
+              <div className='nominee-buttons'>
+                <StatusDropdown
+                  status={nominee.statuses[category.id]}
+                  select={updateStatus}
+                  catId={category.id}
+                  id={nominee.id}
+                  size='lg'
+                  className='primary-status-dropdown'
+                />
+              </div>
+              <div className='nominee-header-text'>
+                <h2>
+                  Viewing nominee <code>{nominee.id}</code> in{' '}
+                  <code>{category.name}</code>
+                </h2>
+                <h3 className='text-muted'>
+                  Current approval status:{' '}
+                  <code
+                    className={
+                      approvalStatus === 'Rejected'
+                        ? 'status-rejected'
+                        : approvalStatus === 'Approved'
+                        ? 'status-approved'
+                        : 'status-unvetted'
+                    }
+                  >
+                    {approvalStatus}
+                  </code>
+                </h3>
+              </div>
+              {checkedCategoryCount > 0 && (
+                <MultiStatusDropdown
+                  className='checkbox-status-select'
+                  text={`Set Status for ${checkedCategoryCount} Selected`}
+                  select={statusChange =>
+                    updateAllStatuses(statusChange, 'checked')
                   }
-                >
-                  {approvalStatus}
-                </code>
-              </h3>
-            </div>
-            {checkedCategoryCount > 0 && (
-              <MultiStatusDropdown
-                className='checkbox-status-select'
-                text={`Set Status for ${checkedCategoryCount} Selected`}
-                select={(statusChange) =>
-                  updateAllStatuses(statusChange, 'checked')
-                }
+                />
+              )}
+              <SelectionCheckbox
+                value={checkedCategories?.[nominee.id]?.[category.id]}
+                onClick={() => checkCategory(nominee.id, category.id)}
               />
-            )}
-            <SelectionCheckbox
-              value={checkedCategories?.[nominee.id]?.[category.id]}
-              onClick={() => checkCategory(nominee.id, category.id)}
-            />
-          </>
-        )}
-        {!isInCurrentCategory && (
-          <>
-            <div className='nominee-header-text'>
-              <h2>
-                Viewing duplicate nominee <code>{nominee.id}</code>
-              </h2>
-              <h3 className='text-muted'>
-                This nominee is not entered into <code>{category.name}</code>
-              </h3>
-            </div>
-            {checkedCategoryCount > 0 && (
-              <MultiStatusDropdown
-                className='checkbox-status-select'
-                text={`Set Status for ${checkedCategoryCount} Selected`}
-                select={(statusChange) =>
-                  updateAllStatuses(statusChange, 'checked')
-                }
-              />
-            )}
-          </>
-        )}
+            </>
+          )}
+          {!isInCurrentCategory && (
+            <>
+              <div className='nominee-header-text'>
+                <h2>
+                  Viewing duplicate nominee <code>{nominee.id}</code>
+                </h2>
+                <h3 className='text-muted'>
+                  This nominee is not entered into <code>{category.name}</code>
+                </h3>
+              </div>
+              {checkedCategoryCount > 0 && (
+                <MultiStatusDropdown
+                  className='checkbox-status-select'
+                  text={`Set Status for ${checkedCategoryCount} Selected`}
+                  select={statusChange =>
+                    updateAllStatuses(statusChange, 'checked')
+                  }
+                />
+              )}
+            </>
+          )}
+        </div>
+
+        <details className='nominee-category-description'>
+          <summary>
+            View category description {category.criteria ? 'and criteria' : ''}
+          </summary>
+          <h4>Description</h4>
+          <p>{category.description}</p>
+          {category.criteria && (
+            <>
+              <h4>Criteria</h4>
+              <CriteriaContent criteria={category.criteria} />
+            </>
+          )}
+        </details>
       </div>
 
       <div className='nominee-left-column'>
@@ -322,7 +339,7 @@ const VetNomineeInterface = ({
             <h3>Other categories</h3>
             {CATEGORIES.length > 0 && (
               <MultiStatusDropdown
-                select={(statusChange) => updateAllStatuses(statusChange)}
+                select={statusChange => updateAllStatuses(statusChange)}
               />
             )}
           </div>
@@ -361,7 +378,7 @@ const VetNomineeInterface = ({
             <h3>Duplicates</h3>
             {DUPLICATES.length > 0 && (
               <MultiStatusDropdown
-                select={(statusChange) =>
+                select={statusChange =>
                   updateAllStatuses(statusChange, 'duplicates')
                 }
                 text='Set Shared'
@@ -429,7 +446,7 @@ const VetNomineeInterface = ({
           quotesOnKeys={false}
           onEdit={makeEdit}
           onAdd={addKeyToData}
-          onDelete={(values) => makeEdit(values, true)}
+          onDelete={values => makeEdit(values, true)}
           name={null}
         />
         {containsNullValue && (
