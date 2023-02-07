@@ -601,6 +601,10 @@
   height: 4rem;
   width: 4rem;
   margin-right: -0.5rem;
+  margin-left: auto;
+}
+
+.multi-status-dropdown + .nominee-checkbox-container {
   margin-left: 0.75rem;
 }
 
