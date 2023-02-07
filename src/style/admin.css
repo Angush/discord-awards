@@ -1121,7 +1121,7 @@ code.status-rejected,
   grid-column: 1 / -1;
   background-color: #dfdfdf;
   margin-top: 0.5rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .nominee-category-description summary {
