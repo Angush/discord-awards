@@ -594,12 +594,14 @@
 }
 
 .nominee-controls .nominee-checkbox-container {
+  position: relative;
   visibility: visible;
   border-radius: 1rem;
   padding: 1rem;
   height: 4rem;
   width: 4rem;
-  right: 1rem;
+  margin-right: -0.5rem;
+  margin-left: 0.75rem;
 }
 
 .nominee-controls .nominee-checkbox {
