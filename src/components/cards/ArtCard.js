@@ -7,11 +7,8 @@ import YouTubeEmbed from './embeds/YouTubeEmbed'
 import FicLinks from './FicLinks'
 
 const getEmbed = (url, data) => {
-  const title = `(${data.id}) ${data.title || 'Untitled'} by ${
-    data.artist || 'Unknown'
-  }`
-  let match
-  match = url.match(/(youtube.com\/watch\?v=|youtu.be\/)(?<id>\w+)/)
+  const title = `${data.title || 'Untitled'} by ${data.artist || 'Unknown'}`
+  const match = url.match(/(youtube.com\/watch\?v=|youtu.be\/)(?<id>[\w-]+)/)
   if (match?.groups?.id)
     return <YouTubeEmbed id={match.groups.id} title={title} />
   if (url.match(/redd\.it.+format=mp4/))
@@ -69,8 +66,8 @@ const ArtCard = ({
   )
   const dataURL =
     formData.url ||
-    formData?.extraURLs?.find((url) => !!url) ||
-    formData?.links?.find((url) => !!url)
+    formData?.extraURLs?.find(url => !!url) ||
+    formData?.links?.find(url => !!url)
 
   const Embed = getEmbed(dataURL, formData)
 
