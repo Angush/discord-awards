@@ -1,21 +1,7 @@
 import React, { useState } from 'react'
 import FicLinks from '../cards/FicLinks'
 import getMapOfValues from '../../functions/getMapOfValues'
-import YouTubeEmbed from '../cards/embeds/YouTubeEmbed'
-import GenericVideoEmbed from '../cards/embeds/GenericVideoEmbed'
-
-const getEmbed = (url, data) => {
-  if (!url) return
-  const title = `(${data.id}) ${data.title || 'Untitled'} by ${
-    data.artist || 'Unknown'
-  }`
-  let match
-  match = url.match(/(youtube\.com\/watch\?v=|youtu\.be\/)(?<id>\w+)/)
-  if (match?.groups?.id)
-    return <YouTubeEmbed id={match.groups.id} title={title} />
-  if (url.match(/redd\.it.+format=mp4/))
-    return <GenericVideoEmbed url={url} title={title} />
-}
+import getEmbed from '../../functions/getEmbed'
 
 const Result = ({
   entry,

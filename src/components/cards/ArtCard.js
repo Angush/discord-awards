@@ -2,22 +2,8 @@ import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import getMapOfValues from '../../functions/getMapOfValues'
 import validateURL from '../../functions/validateURL'
-import GenericVideoEmbed from './embeds/GenericVideoEmbed'
-import YouTubeEmbed from './embeds/YouTubeEmbed'
 import FicLinks from './FicLinks'
-
-const getEmbed = (url, data) => {
-  const title = `${data.title || 'Untitled'} by ${data.artist || 'Unknown'}`
-  const match = url.match(
-    /(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)(?<id>[\w-]+)/
-  )
-  if (match?.groups?.id)
-    return <YouTubeEmbed id={match.groups.id} title={title} />
-  if (url.match(/redd\.it.+format=mp4/))
-    return <GenericVideoEmbed url={url} title={title} />
-
-  return
-}
+import getEmbed from '../../functions/getEmbed'
 
 const ArtCard = ({
   formData,
