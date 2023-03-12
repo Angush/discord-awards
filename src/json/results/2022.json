@@ -1,6 +1,12 @@
 {
   "header": {
-    "paragraphs": {}
+    "paragraphs": {
+      "secondary": [
+        "With 1620 entries across 83 categories (2,247 before vetting), and 13,552 votes lodged by 116 voters, the 2022 Cauldron Awards showcase Cauldron's favorites of all the myriad fanworks that our fandom created throughout the year — as well as the many people, events, and moments within the Cauldron community that deserve a little honoring.",
+        "The 2022 Awards showcases 15 new categories, such as \"Favorite Longform\" and \"Favorite Shortform Fic\", a slew of character categories like \"Favorite Protagonist\" and \"Most Novel Use of a Character\", \"Authors That Went The Extra Mile\", and some new community categories such as \"Favorite Commenter\" and \"Favorite Art Style\" and many more — all thanks to some wonderful suggestions from the Awards channel on Discord!",
+        "Thanks to everyone for taking part in the nominations and voting process, and many congratulations to the winners, runners-up, and all the nominees. See you next year!"
+      ]
+    }
   },
   "totals": {
     "categories": 83,
@@ -3965,6 +3971,7 @@
         },
         {
           "id": 15,
+          "isNew": true,
           "votes": 210,
           "voters": 81,
           "type": "fic",
@@ -4184,6 +4191,7 @@
         },
         {
           "id": 16,
+          "isNew": true,
           "votes": 140,
           "voters": 67,
           "type": "fic",
@@ -4333,6 +4341,7 @@
         },
         {
           "id": 17,
+          "isNew": true,
           "votes": 331,
           "voters": 82,
           "type": "fic",
@@ -4693,6 +4702,7 @@
         },
         {
           "id": 18,
+          "isNew": true,
           "votes": 150,
           "voters": 71,
           "type": "fic",
@@ -9584,6 +9594,7 @@
         },
         {
           "id": 43,
+          "isNew": true,
           "votes": 110,
           "voters": 56,
           "type": "fic",
@@ -9773,6 +9784,7 @@
         },
         {
           "id": 45,
+          "isNew": true,
           "votes": 293,
           "voters": 74,
           "type": "fic",
@@ -10279,6 +10291,7 @@
         },
         {
           "id": 46,
+          "isNew": true,
           "votes": 89,
           "voters": 58,
           "type": "fic",
@@ -10412,6 +10425,7 @@
         },
         {
           "id": 47,
+          "isNew": true,
           "votes": 93,
           "voters": 55,
           "type": "fic",
@@ -10597,6 +10611,7 @@
         },
         {
           "id": 48,
+          "isNew": true,
           "votes": 156,
           "voters": 65,
           "type": "fic",
@@ -10820,6 +10835,7 @@
         },
         {
           "id": 49,
+          "isNew": true,
           "votes": 128,
           "voters": 57,
           "type": "fic",
@@ -16111,6 +16127,7 @@
         },
         {
           "id": 80,
+          "isNew": true,
           "votes": 61,
           "voters": 42,
           "type": "art",
@@ -17057,6 +17074,7 @@
         },
         {
           "id": 105,
+          "isNew": true,
           "votes": 67,
           "voters": 35,
           "type": "other",
@@ -17113,6 +17131,7 @@
         },
         {
           "id": 106,
+          "isNew": true,
           "votes": 93,
           "voters": 42,
           "type": "other",
@@ -17184,6 +17203,7 @@
         },
         {
           "id": 107,
+          "isNew": true,
           "votes": 82,
           "voters": 40,
           "type": "other",
@@ -17245,6 +17265,7 @@
         },
         {
           "id": 108,
+          "isNew": true,
           "votes": 71,
           "voters": 41,
           "type": "other",
