@@ -317,9 +317,7 @@ const getSatoriText = async data => {
 }
 
 async function renderImage(nominee, category) {
-  const dirName = `badges/${currentYear}/cat_${
-    category.id
-  } - ${category.title.replace('Favorite ', '')}`
+  const dirName = `badges/${currentYear}/cat_${category.id}`
   const fileName = `${nominee.placement}_${nominee.id}`
   if (!fs.existsSync(`badges`)) {
     fs.mkdirSync(`badges`)
