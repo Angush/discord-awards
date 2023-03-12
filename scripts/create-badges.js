@@ -307,7 +307,7 @@ const getSatoriText = async data => {
         {
           name: 'Inter',
           // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
-          data: fs.readFileSync('./badges/inter-latin-ext-700-normal.woff'),
+          data: fs.readFileSync('./inter-latin-ext-700-normal.woff'),
           weight: 700,
           style: 'normal',
         },
