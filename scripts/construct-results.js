@@ -19,6 +19,7 @@ Alternatively, provide these four env variables instead: HOST, USER, PASSWORD, D
 const currentYear = process.env.YEAR
   ? parseInt(process.env.year)
   : new Date().getFullYear() - 1
+
 const db = mysql.createConnection(
   process.env.SQL_URL || {
     host: process.env.HOST,
@@ -104,11 +105,36 @@ const finalizeData = (sectionResults, categoryResults, nomineeResults) => {
   })
 
   //* Add the categories and sections to the final data, then output to file
-  console.log(`  4. Formatting total counts...`)
+  console.log(`  4. Formatting total counts and adding placement notations...`)
   Object.entries(CATEGORIES_IN_SECTIONS).forEach(
     ([sectionName, sectionCategories]) => {
       Object.keys(sectionCategories).forEach(categoryId => {
         const category = CATEGORIES[categoryId]
+
+        //* Add "1st", "2nd", and "3rd" placements to appropriate nominees
+        const placementOptions = ['1st', '2nd', '3rd']
+        let nextPlacement = placementOptions[0]
+        let previous = null
+
+        for (const index in category.nominees) {
+          if (nextPlacement === undefined) break
+          const votes = category.nominees[index].votes
+          if (previous === null) {
+            category.nominees[index].placement = nextPlacement
+            nextPlacement =
+              placementOptions[placementOptions.indexOf(nextPlacement) + 1]
+          } else {
+            if (previous.votes === votes) {
+              category.nominees[index].placement = previous.placement
+            } else {
+              category.nominees[index].placement = nextPlacement
+              nextPlacement =
+                placementOptions[placementOptions.indexOf(nextPlacement) + 1]
+            }
+          }
+          previous = category.nominees[index]
+        }
+
         SECTIONS[sectionName].categories.push(category)
         SECTIONS[sectionName].nominees += category.nominees.length
       })
