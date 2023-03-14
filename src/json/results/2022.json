@@ -3638,7 +3638,8 @@
                 "https://forum.questionablequesting.com/threads/17189"
               ],
               "title": "Inheritance",
-              "author": "Pendragoon"
+              "author": "Pendragoon",
+              "placement": "3rd"
             },
             {
               "id": 342,
@@ -5395,7 +5396,8 @@
               "votes": 19,
               "links": ["https://forums.spacebattles.com/threads/987646"],
               "title": "Just One More Thing, Mr Anders...",
-              "author": "Rukaio Alter"
+              "author": "Rukaio Alter",
+              "placement": "3rd"
             },
             {
               "id": 110,
@@ -6108,7 +6110,8 @@
                 "https://archiveofourown.org/works/41635311"
               ],
               "title": "City of Salt",
-              "author": "ApatheticTangerine"
+              "author": "ApatheticTangerine",
+              "placement": "3rd"
             },
             {
               "id": 311,
@@ -7549,7 +7552,8 @@
                 "https://archiveofourown.org/works/26196070"
               ],
               "title": "Point Me At The Skyrim",
-              "author": "Ridtom"
+              "author": "Ridtom",
+              "placement": "3rd"
             },
             {
               "id": 76,
@@ -7792,7 +7796,8 @@
                 "https://archiveofourown.org/works/41635311"
               ],
               "title": "City of Salt",
-              "author": "ApatheticTangerine"
+              "author": "ApatheticTangerine",
+              "placement": "3rd"
             },
             {
               "id": 311,
@@ -8476,7 +8481,8 @@
                 "https://archiveofourown.org/works/21179717"
               ],
               "title": "The Artist Formerly Known As Bonesaw",
-              "author": "Octobre"
+              "author": "Octobre",
+              "placement": "3rd"
             },
             {
               "id": 138,
@@ -9773,7 +9779,8 @@
               ],
               "title": "Administrative Mishap",
               "author": "OxfordOctopus",
-              "description": "Forced to pilot, and eventually internalise, Taylor's body as her own."
+              "description": "Forced to pilot, and eventually internalise, Taylor's body as her own.",
+              "placement": "3rd"
             },
             {
               "id": 150,
@@ -9946,7 +9953,8 @@
               "name": "Stephanie Brown",
               "links": ["https://archiveofourown.org/works/43819486"],
               "title": "The Underside of Gotham",
-              "author": "ColossalMistake"
+              "author": "ColossalMistake",
+              "placement": "3rd"
             },
             {
               "id": 278,
@@ -10622,7 +10630,8 @@
                 "https://archiveofourown.org/works/39030465"
               ],
               "title": "TWNY",
-              "author": "Miss Peacecraft"
+              "author": "Miss Peacecraft",
+              "placement": "3rd"
             },
             {
               "id": 566,
@@ -10634,7 +10643,8 @@
                 "https://archiveofourown.org/works/35678512"
               ],
               "title": "Soliloquy",
-              "author": "keighthundred"
+              "author": "keighthundred",
+              "placement": "3rd"
             },
             {
               "id": 576,
@@ -10646,7 +10656,8 @@
                 "https://archiveofourown.org/works/31089173"
               ],
               "title": "Forward",
-              "author": "keighthundred"
+              "author": "keighthundred",
+              "placement": "3rd"
             },
             {
               "id": 141,
@@ -11604,7 +11615,8 @@
               "name": "Taylor Schechter",
               "links": ["https://archiveofourown.org/works/39081357"],
               "title": "WORM: A Web-serial",
-              "author": "henghost"
+              "author": "henghost",
+              "placement": "3rd"
             },
             {
               "id": 1036,
@@ -11816,7 +11828,8 @@
                 "https://archiveofourown.org/works/35236651"
               ],
               "title": "The Postdiluvian Road",
-              "author": "Aleph (Immatrael)EarthScorpion"
+              "author": "Aleph (Immatrael)EarthScorpion",
+              "placement": "3rd"
             },
             {
               "id": 641,
@@ -12646,7 +12659,8 @@
               ],
               "title": "The Postdiluvian Road",
               "author": "Aleph (Immatrael)EarthScorpion",
-              "description": "It is an indication of a world that keeps moving while the main character's street level and very personal story is happening elsewhere"
+              "description": "It is an indication of a world that keeps moving while the main character's street level and very personal story is happening elsewhere",
+              "placement": "3rd"
             },
             {
               "id": 228,
@@ -12797,7 +12811,8 @@
                 "https://archiveofourown.org/works/36674632"
               ],
               "title": "Hatching A Heist",
-              "author": "RecursiveMontage"
+              "author": "RecursiveMontage",
+              "placement": "3rd"
             },
             {
               "id": 955,
@@ -12877,7 +12892,8 @@
               ],
               "title": "It's Cold Out There Every Day",
               "author": "glowspider",
-              "description": "Two characters living a timeloop together."
+              "description": "Two characters living a timeloop together.",
+              "placement": "3rd"
             },
             {
               "id": 235,
@@ -14105,7 +14121,7 @@
               "title": "It's Cold Out There Every Day",
               "artist": "glowspider",
               "artistPage": "https://brocktonbay.tumblr.com",
-              "canonicalURL": "Tumblr"
+              "placement": "3rd"
             },
             {
               "id": 1274,
@@ -15171,7 +15187,8 @@
             {
               "id": 886,
               "votes": 5,
-              "name": "TunTun"
+              "name": "TunTun",
+              "placement": "3rd"
             },
             {
               "id": 199,
@@ -15977,7 +15994,8 @@
             {
               "id": 1250,
               "votes": 12,
-              "name": "Ridtom"
+              "name": "Ridtom",
+              "placement": "3rd"
             },
             {
               "id": 666,
@@ -16115,7 +16133,8 @@
               "votes": 25,
               "name": "Vetting your nominations",
               "owner": "The Mods",
-              "description": "It's a bunch of unpaid manual labour and research work. (Which is why I get them to do most of it for me. 🤫)"
+              "description": "It's a bunch of unpaid manual labour and research work. (Which is why I get them to do most of it for me. 🤫)",
+              "placement": "3rd"
             },
             {
               "id": 875,
