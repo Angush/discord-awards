@@ -7,6 +7,7 @@ const ResultsEntries = ({
   TargetResetButton,
   expanded = false,
   userVotedFor,
+  year,
 }) => {
   const { id, type, nominees, voters, imageOnly } = category
   const [showExtras, setShowExtras] = useState(expanded)
@@ -46,10 +47,10 @@ const ResultsEntries = ({
   const votePercentage = (votes, ranked = true) =>
     votes === 0 ? (
       ranked ? null : (
-        <h6>with no votes</h6>
+        <h6 className='vote-percentage'>with no votes</h6>
       )
     ) : (
-      <h6>
+      <h6 className='vote-percentage'>
         with {votes} vote{votes === 1 ? '' : 's'}{' '}
         <span>({Math.ceil((votes / voters) * 100)}% of voters)</span>
       </h6>
@@ -62,55 +63,70 @@ const ResultsEntries = ({
       className={imageOnly ? 'results-entries imageonly' : 'results-entries'}
     >
       <div className='results-gold'>
-        {golds.map(entry => {
+        {golds.map((entry, index) => {
           let voteID = getVoteIdentifier(entry.id)
           return (
             <Result
+              year={year}
               key={voteID}
               entryKey={voteID}
               entry={entry}
               type={type}
               votedFor={userVotedFor(voteID)}
               category={category}
+              votePercentage={
+                index === golds.length - 1
+                  ? votePercentage(golds[0].votes)
+                  : null
+              }
             />
           )
         })}
-        {votePercentage(golds[0].votes)}
       </div>
       {silvers.length > 0 && (
         <div className='results-silver'>
-          {silvers.map(entry => {
+          {silvers.map((entry, index) => {
             let voteID = getVoteIdentifier(entry.id)
             return (
               <Result
+                year={year}
                 key={voteID}
                 entryKey={voteID}
                 entry={entry}
                 type={type}
                 votedFor={userVotedFor(voteID)}
                 category={category}
+                votePercentage={
+                  index === silvers.length - 1
+                    ? votePercentage(silvers[0].votes)
+                    : null
+                }
               />
             )
           })}
-          {votePercentage(silvers[0].votes)}
         </div>
       )}
       {bronzes.length > 0 && (
         <div className='results-bronze'>
-          {bronzes.map(entry => {
+          {bronzes.map((entry, index) => {
             let voteID = getVoteIdentifier(entry.id)
             return (
               <Result
+                year={year}
                 key={voteID}
                 entryKey={voteID}
                 entry={entry}
                 type={type}
                 votedFor={userVotedFor(voteID)}
                 category={category}
+                votePercentage={
+                  index === bronzes.length - 1
+                    ? votePercentage(bronzes[0].votes)
+                    : null
+                }
               />
             )
           })}
-          {votePercentage(bronzes[0].votes)}
         </div>
       )}
       {extras.length > 0 && (

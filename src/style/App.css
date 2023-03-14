@@ -1899,6 +1899,10 @@ input.form-control-lg {
   opacity: 0.6;
 }
 
+.results h6.vote-percentage {
+  margin-top: 1rem;
+}
+
 .results h6.result-desc {
   line-height: 1.8em;
   opacity: 0.85;
@@ -2719,4 +2723,47 @@ input.form-control-lg {
 
 .modal-topbar {
   flex-wrap: wrap;
+}
+
+.results-category .badges-box {
+  margin-top: 1rem;
+}
+
+.badges-box p:first-of-type {
+  margin-block: 1rem 0.5rem;
+}
+
+.badges-box .button-box {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.badges-box img:last-child {
+  margin-top: 1.5rem;
+}
+
+.badges-box .copied-alert {
+  margin-block: 0.5rem 0;
+  animation: copied-alert 3s forwards;
+}
+
+@keyframes copied-alert {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+    margin-bottom: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    margin-bottom: -2.25rem;
+  }
 }

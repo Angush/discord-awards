@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import FicLinks from '../cards/FicLinks'
 import getMapOfValues from '../../functions/getMapOfValues'
 import getEmbed from '../../functions/getEmbed'
+import BadgeBox from './BadgeBox'
 
 const Result = ({
   entry,
   entryKey,
   category,
   type,
+  year,
   votePercentage = null,
   votedFor,
 }) => {
@@ -140,6 +142,9 @@ const Result = ({
       {blur && !image && title && indicator}
       {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
+      {entry.placement && (
+        <BadgeBox year={year} category={category} entry={entry} />
+      )}
     </div>
   )
 }

@@ -73,6 +73,7 @@ const MapOfSections = ({ data, year, userVotes, userCategoryVotes, target, clear
                 </>
               )}
               <ResultsEntries
+                year={year}
                 category={category}
                 userVotedFor={userVotedFor}
                 expanded={target ? true : false}
