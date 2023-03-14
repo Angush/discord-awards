@@ -142,7 +142,7 @@ const Result = ({
       {blur && !image && title && indicator}
       {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
-      {entry.placement && entry.category === 'fic' && (
+      {entry.placement && category.type === 'fic' && (
         // badges only generated for fic categories at present
         <BadgeBox year={year} category={category} entry={entry} />
       )}
