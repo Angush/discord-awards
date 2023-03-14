@@ -117,7 +117,6 @@ const finalizeData = (sectionResults, categoryResults, nomineeResults) => {
         let previous = null
 
         for (const index in category.nominees) {
-          if (nextPlacement === undefined) break
           const votes = category.nominees[index].votes
           if (previous === null) {
             category.nominees[index].placement = nextPlacement
@@ -126,6 +125,8 @@ const finalizeData = (sectionResults, categoryResults, nomineeResults) => {
           } else {
             if (previous.votes === votes) {
               category.nominees[index].placement = previous.placement
+            } else if (nextPlacement === undefined) {
+              break
             } else {
               category.nominees[index].placement = nextPlacement
               nextPlacement =
