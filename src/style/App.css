@@ -2622,7 +2622,7 @@ input.form-control-lg {
 
   .extra-results {
     left: calc(50% - 169px);
-    padding-left: calc(50% - 60px);
+    padding-left: calc(40% - 60px);
   }
 
   .linked-category .extra-results {
