@@ -2767,3 +2767,91 @@ input.form-control-lg {
     margin-bottom: -2.25rem;
   }
 }
+
+.result .related-links {
+  padding-left: 0;
+  list-style: none;
+  background-color: rgb(230, 230, 230);
+  border-radius: 1rem;
+  border: 1px solid rgb(200, 200, 200);
+  width: fit-content;
+  padding: 1rem;
+  padding-block: 0.75rem;
+  margin: 0 auto;
+}
+
+.extra-results .result .related-links {
+  background-color: rgb(220, 220, 220);
+}
+
+.related-links p {
+  margin-bottom: 0.25rem;
+}
+
+.related-links .fic-links {
+  margin-top: 0;
+  padding: 0;
+  border: none;
+}
+
+.related-links .fic-links a {
+  margin-right: 6px;
+}
+
+.related-links .many-links + :is(.many-links, .one-link) {
+  margin-top: 0.75rem;
+}
+
+.related-links .fic-links a > * {
+  transition: none;
+}
+
+.related-links .fic-links a:hover > * {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+.result .links-text {
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.result .related-links-container {
+  margin-top: 1rem;
+}
+
+.result .related-links-container[open] {
+  margin-bottom: 1rem;
+}
+
+.related-links .many-links:last-child {
+  margin-bottom: 0.5rem;
+}
+
+.related-links li > :is(a, p) {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.related-links .image-link > div {
+  border-radius: 0.5rem;
+  max-width: 100%;
+  overflow: hidden;
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.related-links .image-link > div:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+}
+
+.related-links .image-link:not(:first-child) {
+  margin-top: 1rem;
+}
+
+.related-links .image-link img {
+  max-width: 100%;
+}

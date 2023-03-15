@@ -3,6 +3,7 @@ import FicLinks from '../cards/FicLinks'
 import getMapOfValues from '../../functions/getMapOfValues'
 import getEmbed from '../../functions/getEmbed'
 import BadgeBox from './BadgeBox'
+import RelatedLinks from './RelatedLinks'
 
 const Result = ({
   entry,
@@ -140,6 +141,15 @@ const Result = ({
       {!error && filteredLinks.length > 0 && <FicLinks links={filteredLinks} />}
       {error && nonEmbedLinks.length > 0 && <FicLinks links={nonEmbedLinks} />}
       {blur && !image && title && indicator}
+
+      {entry.related && (
+        <RelatedLinks
+          type={category.type}
+          links={entry.related}
+          creator={entry.creator || entry.author || entry.artist || entry.name}
+        />
+      )}
+
       {votedFor && <h6 className='voted-for'>You voted for this.</h6>}
       {votePercentage}
       {entry.placement && category.type === 'fic' && (

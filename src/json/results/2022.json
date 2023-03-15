@@ -14964,19 +14964,78 @@
               "id": 188,
               "votes": 30,
               "name": "Ridtom",
-              "placement": "1st"
+              "placement": "1st",
+              "related": [
+                {
+                  "title": "Janus",
+                  "link": "https://forums.spacebattles.com/threads/991082/"
+                },
+                {
+                  "title": "Hers Is The Fury",
+                  "link": "https://forums.spacebattles.com/threads/963796/"
+                },
+                {
+                  "title": "Point Me At The Skyrim",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/818454/",
+                    "https://forums.sufficientvelocity.com/threads/61023/",
+                    "https://www.fanfiction.net/s/13512562/",
+                    "https://archiveofourown.org/works/26196070/"
+                  ]
+                }
+              ]
             },
             {
               "id": 673,
               "votes": 23,
               "name": "K800",
-              "placement": "2nd"
+              "placement": "2nd",
+              "related": [
+                {
+                  "title": "Forward",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/933174/",
+                    "https://forums.sufficientvelocity.com/threads/89322/",
+                    "https://archiveofourown.org/works/31089173/"
+                  ]
+                },
+                {
+                  "title": "The Danny Room",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1004422/",
+                    "https://forums.sufficientvelocity.com/threads/102091/",
+                    "https://archiveofourown.org/works/37998727"
+                  ]
+                },
+                {
+                  "title": "Soliloquy",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/982747/",
+                    "https://forums.sufficientvelocity.com/threads/98320/",
+                    "https://archiveofourown.org/works/35678512/"
+                  ]
+                }
+              ]
             },
             {
               "id": 84,
               "votes": 21,
               "name": "Colossal Mistake",
-              "placement": "3rd"
+              "placement": "3rd",
+              "related": [
+                {
+                  "title": "The Great Escape",
+                  "link": "https://archiveofourown.org/works/27459643/"
+                },
+                {
+                  "title": "Internal Calculus",
+                  "link": "https://archiveofourown.org/works/43815387/"
+                },
+                {
+                  "title": "The Underside of Gotham",
+                  "link": "https://archiveofourown.org/works/43819486/"
+                }
+              ]
             },
             {
               "id": 193,
@@ -15081,19 +15140,61 @@
               "id": 197,
               "votes": 41,
               "name": "Pericardium",
-              "placement": "1st"
+              "placement": "1st",
+              "related": [
+                {
+                  "title": "Contessa Explaining Entities",
+                  "image": "https://i.imgur.com/qnWKl6e.gif"
+                },
+                {
+                  "title": "The Man With All the Plans",
+                  "image": "https://i.imgur.com/A2R154J.png"
+                },
+                {
+                  "title": "Contessa Being the Third Wheel",
+                  "image": "https://i.imgur.com/ZbKaeWO.jpeg"
+                }
+              ]
             },
             {
               "id": 196,
               "votes": 23,
               "name": "Joe Duncan",
-              "placement": "2nd"
+              "placement": "2nd",
+              "related": [
+                {
+                  "title": "A World Gone Mad",
+                  "image": "https://i.redd.it/qv1ffm6cgxx91.jpg"
+                },
+                {
+                  "title": "City of Salt Cover",
+                  "image": "https://cdn.discordapp.com/attachments/599554761104162836/960454552547635220/2070f2d0428a7390.jpg"
+                },
+                {
+                  "title": "Rachel Lindt in City of Salt",
+                  "image": "https://i.imgur.com/ZqycRqb.jpeg"
+                }
+              ]
             },
             {
               "id": 1265,
               "votes": 22,
               "name": "glowspider",
-              "placement": "3rd"
+              "placement": "3rd",
+              "related": [
+                {
+                  "title": "Laserdream",
+                  "image": "https://i.redd.it/dmadgmfq72r31.jpg"
+                },
+                {
+                  "title": "Lisa but she's a bottle blonde who cuts her own bangs",
+                  "image": "https://i.redd.it/jsx2r2qagwp91.jpg"
+                },
+                {
+                  "title": "Predestination (Pact)",
+                  "image": "https://i.redd.it/ncyy678fo15a1.jpg"
+                }
+              ]
             },
             {
               "id": 769,
@@ -15158,37 +15259,125 @@
               "id": 198,
               "votes": 12,
               "name": "Plato",
-              "placement": "1st"
+              "placement": "1st",
+              "related": [
+                {
+                  "title": "City of Salt",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1006048/",
+                    "https://archiveofourown.org/works/41635311/"
+                  ]
+                },
+                {
+                  "title": "Trouble in Taylor Town",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1046785/",
+                    "https://archiveofourown.org/works/45276718/"
+                  ]
+                },
+                {
+                  "title": "The Great Faultlie",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1063916/",
+                    "https://archiveofourown.org/works/43989276/"
+                  ]
+                }
+              ]
             },
             {
               "id": 200,
               "votes": 12,
               "name": "Brewsterion",
-              "placement": "1st"
+              "placement": "1st",
+              "related": [
+                {
+                  "title": "The Knife Trick Is Just Something He Can Kinda Do",
+                  "link": "https://archiveofourown.org/works/41025030"
+                },
+                {
+                  "title": "Keep Me In The Loop",
+                  "link": "https://archiveofourown.org/works/42761913"
+                },
+                {
+                  "title": "Heart To Heart Vs. Heart",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1009129/",
+                    "https://archiveofourown.org/works/38458957/"
+                  ]
+                }
+              ]
             },
             {
               "id": 522,
               "votes": 12,
               "name": "Shadelight",
-              "placement": "1st"
+              "placement": "1st",
+              "related": [
+                {
+                  "title": "Realignment",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/994432/",
+                    "https://archiveofourown.org/works/36829303/",
+                    "https://forum.questionablequesting.com/threads/17441/"
+                  ]
+                },
+                {
+                  "title": "In Weave and Woe",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1070819/",
+                    "https://forums.sufficientvelocity.com/threads/113597/",
+                    "https://archiveofourown.org/works/44748587",
+                    "https://forum.questionablequesting.com/threads/21256/"
+                  ]
+                }
+              ]
             },
             {
               "id": 1333,
               "votes": 7,
               "name": "Quisant",
-              "placement": "2nd"
+              "placement": "2nd",
+              "related": [
+                {
+                  "title": "Mens Nebula",
+                  "links": [
+                    "https://forums.spacebattles.com/threads/1053490/",
+                    "https://archiveofourown.org/works/43192698/"
+                  ]
+                }
+              ]
             },
             {
               "id": 874,
               "votes": 5,
               "name": "DatMoonGamer",
-              "placement": "3rd"
+              "placement": "3rd",
+              "related": [
+                {
+                  "title": "Birdwatching",
+                  "link": "https://archiveofourown.org/works/40086720"
+                }
+              ]
             },
             {
               "id": 886,
               "votes": 5,
               "name": "TunTun",
-              "placement": "3rd"
+              "placement": "3rd",
+              "related": [
+                {
+                  "title": "Warlord",
+                  "image": "https://cdn.discordapp.com/attachments/929600188086120489/1045388867135602771/warlord_3.png"
+                },
+                {
+                  "title": "Happy New Year from Skitter",
+                  "image": "https://cdn.discordapp.com/attachments/929600188086120489/1058805519445397544/Skitter_new_year.png"
+                },
+                {
+                  "title": "Patting Bastard is Not Consent",
+                  "image": "https://cdn.discordapp.com/attachments/929600188086120489/1082467809612791859/Rachel.png"
+                }
+              ]
             },
             {
               "id": 199,
@@ -15207,6 +15396,117 @@
               "id": "name",
               "label": "Name",
               "placeholder": "The creator's name"
+            }
+          ],
+          "collection": "people"
+        },
+        {
+          "id": 108,
+          "isNew": true,
+          "votes": 71,
+          "voters": 41,
+          "type": "other",
+          "title": "Favorite Art Style",
+          "description": "Every artist has a unique style. Which artists active this year had your personal favorite?",
+          "nominees": [
+            {
+              "id": 665,
+              "votes": 24,
+              "link": "https://www.deviantart.com/cpericardium",
+              "name": "Pericardium",
+              "placement": "1st",
+              "related": [
+                {
+                  "title": "Contessa Explaining Entities",
+                  "image": "https://i.imgur.com/qnWKl6e.gif"
+                },
+                {
+                  "title": "The Man With All the Plans",
+                  "image": "https://i.imgur.com/A2R154J.png"
+                },
+                {
+                  "title": "Contessa Being the Third Wheel",
+                  "image": "https://i.imgur.com/ZbKaeWO.jpeg"
+                }
+              ]
+            },
+            {
+              "id": 879,
+              "votes": 14,
+              "link": "https://www.tumblr.com/despite",
+              "name": "despite",
+              "placement": "2nd",
+              "related": [
+                {
+                  "title": "*aggressive hair drying*",
+                  "image": "https://64.media.tumblr.com/98468a3d3b08955ea5cd9f57cbaab2c5/56fdc405266a201a-1d/s1280x1920/d3c52f196f54b4e7ce218a3ce2848c997353d871.png"
+                },
+                {
+                  "title": "#damaged",
+                  "image": "https://64.media.tumblr.com/89472fa7f9aee93379715898955bf1bb/26786849d0b1b605-18/s2048x3072/dfa461fab1c04a7a3eafd95586699c17b9e57231.png"
+                },
+                {
+                  "title": "go white girl go",
+                  "image": "https://64.media.tumblr.com/67a2c9fd3b70e4ec32c06696d9f34994/7d0545b6aa7d1fff-7f/s1280x1920/d81b88fa1c3bc2c92de380d799c46b23f5205175.gif"
+                }
+              ]
+            },
+            {
+              "id": 877,
+              "votes": 12,
+              "link": "https://www.tumblr.com/brocktonbay",
+              "name": "glowspider",
+              "placement": "3rd",
+              "related": [
+                {
+                  "title": "Laserdream",
+                  "image": "https://i.redd.it/dmadgmfq72r31.jpg"
+                },
+                {
+                  "title": "Lisa but she's a bottle blonde who cuts her own bangs",
+                  "image": "https://i.redd.it/jsx2r2qagwp91.jpg"
+                },
+                {
+                  "title": "Predestination (Pact)",
+                  "image": "https://i.redd.it/ncyy678fo15a1.jpg"
+                }
+              ]
+            },
+            {
+              "id": 885,
+              "votes": 10,
+              "link": "https://www.tumblr.com/tactilescream",
+              "name": "Seathing"
+            },
+            {
+              "id": 1318,
+              "votes": 7,
+              "link": "https://www.tumblr.com/bug4932",
+              "name": "bug4932"
+            },
+            {
+              "id": 880,
+              "votes": 2,
+              "link": "https://www.tumblr.com/ishdaj",
+              "name": "ishdaj"
+            },
+            {
+              "id": 1319,
+              "votes": 2,
+              "link": "https://www.tumblr.com/aruliart",
+              "name": "Arulia"
+            }
+          ],
+          "fields": [
+            {
+              "id": "name",
+              "label": "Name",
+              "placeholder": "Name of the artist"
+            },
+            {
+              "id": "link",
+              "label": "Link",
+              "placeholder": "Gallery of artist's work"
             }
           ],
           "collection": "people"
@@ -16023,75 +16323,6 @@
               "id": "name",
               "label": "Name",
               "placeholder": "The commenter's name"
-            }
-          ],
-          "collection": "people"
-        },
-        {
-          "id": 108,
-          "isNew": true,
-          "votes": 71,
-          "voters": 41,
-          "type": "other",
-          "title": "Favorite Art Style",
-          "description": "Every artist has a unique style. Which artists active this year had your personal favorite?",
-          "nominees": [
-            {
-              "id": 665,
-              "votes": 24,
-              "link": "https://www.deviantart.com/cpericardium",
-              "name": "Pericardium",
-              "placement": "1st"
-            },
-            {
-              "id": 879,
-              "votes": 14,
-              "link": "https://www.tumblr.com/despite",
-              "name": "despite",
-              "placement": "2nd"
-            },
-            {
-              "id": 877,
-              "votes": 12,
-              "link": "https://www.tumblr.com/brocktonbay",
-              "name": "glowspider",
-              "placement": "3rd"
-            },
-            {
-              "id": 885,
-              "votes": 10,
-              "link": "https://www.tumblr.com/tactilescream",
-              "name": "Seathing"
-            },
-            {
-              "id": 1318,
-              "votes": 7,
-              "link": "https://www.tumblr.com/bug4932",
-              "name": "bug4932"
-            },
-            {
-              "id": 880,
-              "votes": 2,
-              "link": "https://www.tumblr.com/ishdaj",
-              "name": "ishdaj"
-            },
-            {
-              "id": 1319,
-              "votes": 2,
-              "link": "https://www.tumblr.com/aruliart",
-              "name": "Arulia"
-            }
-          ],
-          "fields": [
-            {
-              "id": "name",
-              "label": "Name",
-              "placeholder": "Name of the artist"
-            },
-            {
-              "id": "link",
-              "label": "Link",
-              "placeholder": "Gallery of artist's work"
             }
           ],
           "collection": "people"

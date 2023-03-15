@@ -125,20 +125,29 @@ const ResultsPage = ({ userData, years, year }) => {
       ) {
         event.preventDefault()
         let { id } = event.target
-        const clicked = findItem(id)
-        const srcs = []
-        if (!clicked) return
-        if (clicked.url) srcs.push(clicked.url)
-        if (clicked.image) srcs.push(clicked.image)
-        if (clicked.extraURLs) clicked.extraURLs.forEach(url => srcs.push(url))
-        if (clicked.links) clicked.links.forEach(url => srcs.push(url))
-        setLightboxData({
-          ...clicked,
-          id,
-          srcs: srcs.filter(url => !!url),
-          index: 0,
-          total: srcs.length,
-        })
+        if (id) {
+          const clicked = findItem(id)
+          const srcs = []
+          if (!clicked) return
+          if (clicked.url) srcs.push(clicked.url)
+          if (clicked.image) srcs.push(clicked.image)
+          if (clicked.extraURLs)
+            clicked.extraURLs.forEach(url => srcs.push(url))
+          if (clicked.links) clicked.links.forEach(url => srcs.push(url))
+          setLightboxData({
+            ...clicked,
+            id,
+            srcs: srcs.filter(url => !!url),
+            index: 0,
+            total: srcs.length,
+          })
+        } else {
+          setLightboxData({
+            total: 0,
+            index: 0,
+            srcs: [event.target.src],
+          })
+        }
       }
     },
     [data]
