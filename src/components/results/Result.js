@@ -130,7 +130,7 @@ const Result = ({
             <img
               id={entryKey}
               src={image}
-              loading='lazy'
+              loading={entry.placement ? '' : 'lazy'}
               onError={ifInvalidImage}
               className={blur ? 'nsfw-img result-img' : 'result-img'}
               alt={`Entry ${entry.id}`}
