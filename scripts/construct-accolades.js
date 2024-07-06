@@ -2,8 +2,8 @@ import fs from 'fs'
 const currentYear = process.env.YEAR
   ? process.env.YEAR
   : new Date().getFullYear() - 1
-const preferredPath = `${__dirname}/${currentYear}-results-constructed.json`
-const resultsPath = `${__dirname}/../src/json/results/${currentYear}.json`
+const preferredPath = `./${currentYear}-results-constructed.json`
+const resultsPath = `../src/json/results/${currentYear}.json`
 console.log(`Attempting to read from "${resultsPath}"`)
 
 const readFile = () => {

@@ -79,6 +79,7 @@ const finalizeData = (sectionResults, categoryResults, nomineeResults) => {
         newCategory.fields = JSON.parse(category.fields)
       else newCategory.fields = category.fields
     }
+    if (category.criteria) newCategory.criteria = category.criteria
     if (category.collection) newCategory.collection = category.collection
     if (!SECTION_ORDER.includes(category.section))
       SECTION_ORDER.push(category.section)

@@ -32,8 +32,14 @@ const DATA = {}
 
 db.query(
   `
-  SELECT CONCAT("'", idMember, "'") as idUser, idContest, idNomination
+  SELECT 
+    CONCAT("'", votes.idMember, "'") as idUser,
+    votes.idContest, votes.idNomination, status
   FROM votes
+  LEFT JOIN entries 
+    ON entries.idNomination = votes.idNomination
+    AND entries.idContest = votes.idContest
+  WHERE status = 1
 `,
   (error, results, fields) => {
     if (error) {

@@ -9,6 +9,8 @@ const currentYear = process.env.YEAR
   ? parseInt(process.env.year)
   : new Date().getFullYear() - 1
 
+const CANVAS_WIDTH = 450 // pixels
+
 const colourMap = {
   '1st': {
     primary: `#FFD15C`,
@@ -301,7 +303,7 @@ const getSatoriText = async data => {
       },
     },
     {
-      width: 450,
+      width: CANVAS_WIDTH,
       height: 1000,
       fonts: [
         {
@@ -342,6 +344,7 @@ async function renderImage(nominee, category) {
   const png = await converter.convert(svg)
   sharp(png)
     .trim(1)
+    // .resize({ width: Math.round(CANVAS_WIDTH * 0.75) })
     .toFile(`${dirName}/${fileName}.png`, (err, info) => {
       if (err)
         console.log(`Error on sharp output - ${dirName}/${fileName}.png`, err)
@@ -349,7 +352,8 @@ async function renderImage(nominee, category) {
 }
 
 fs.readFile(
-  `./${currentYear}-results-constructed.json`,
+  // `./${currentYear}-results-constructed.json`,
+  `../src/json/results/${currentYear}.json`,
   'utf-8',
   async (err, file) => {
     if (err) return console.error(err)
