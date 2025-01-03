@@ -59,8 +59,13 @@ const InputOther = ({
       if (field.computed) return true
       if (field.optional && !formData[id]) return true
       if (id === 'link') return validateURL(formData.link)
-      if (id === 'image')
-        return imgValid.loaded && !imgValid.error ? true : false
+      if (id === 'image') {
+        const isDiscordLink =
+          /^\s*https?:\/\/(cdn\.)?discord(app)?\.com/gi.test(formData[id] || '')
+        return imgValid.loaded && !imgValid.error && !isDiscordLink
+          ? true
+          : false
+      }
       return formData[id] && formData[id].trim().length > 0 ? true : false
     },
     [formData, imgValid]
@@ -104,15 +109,25 @@ const InputOther = ({
   const createFormElement = item => {
     if (item.computed) return null
     const validated = validateField(item)
+    const isImage = item.id === 'image'
+    const isDiscordLink =
+      isImage &&
+      /^\s*https?:\/\/(cdn\.)?discord(app)?\.com/gi.test(
+        formData[item.id] || ''
+      )
+    console.log(`isDiscordLink: ${!!isDiscordLink}, value:`, formData[item.id])
     return (
       <Form.Group key={item.id}>
         <InputGroup>
           <InputGroup.Prepend>
             <InputGroup.Text>{item.label}</InputGroup.Text>
           </InputGroup.Prepend>
-          {item.info && (
+          {(item.info || isImage) && (
             <div className='input-group-text extra-fields-info'>
-              {item.info}
+              {item.info}{' '}
+              {isImage
+                ? 'Please do not provide a link to an image uploaded to Discord; instead, re-upload the image elsewhere (such as imgur).'
+                : ''}
             </div>
           )}
           <Form.Control
@@ -131,6 +146,7 @@ const InputOther = ({
             }}
             onBlur={e => blur(item.id)}
             disabled={disabled}
+            isValid={isDiscordLink === true ? false : undefined}
           />
         </InputGroup>
         <LabelShrinkable
@@ -139,6 +155,8 @@ const InputOther = ({
           optional={item.optional}
         >
           {getLabelText(item, validated)}
+          {isDiscordLink &&
+            ' We cannot accept links to images uploaded to Discord. Instead, please re-upload the image elsewhere (such as imgur).'}
         </LabelShrinkable>
       </Form.Group>
     )

@@ -184,7 +184,8 @@ const InputArt = ({
   const validCanonicalURL = !!formData.canonicalURL
     ? validateURL(formData.canonicalURL)
     : true
-  const allValidLinks = validExtraLinks.every((url) => url)
+  const anyDiscordLinks = validExtraLinks.some((url) => /^\s*https?:\/\/(cdn\.)?discord(app)?\.com/gi.test(url || '')) || /^\s*https?:\/\/(cdn\.)?discord(app)?\.com/gi.test(formData.url || '')
+  const allValidLinks = anyDiscordLinks === true ? false : validExtraLinks.every((url) => url)
   const anyInvalidLinks = validExtraLinks.some((url) => !url)
   const invalidLinksAlertString = validExtraLinks
     .map((valid, index) => {
@@ -364,6 +365,7 @@ const InputArt = ({
           {inputtingImage && anyInvalidLinks && invalidLinksAlertString}
           {!inputtingImage &&
             (anyInvalidLinks ? invalidLinksAlertString : 'Link required.')}
+          {anyDiscordLinks && ' We cannot accept links to images uploaded to Discord. Instead, please re-upload the image elsewhere (such as imgur).'}
         </LabelShrinkable>
       </Form.Group>
 
