@@ -38,7 +38,7 @@ const cleanExistingTitles = () => {
   console.log(`Cleaning titles for ${existing.length} fics`)
   const cleaned = existing.map(item => {
     let newTitle = cleanTitle(item.title)
-    console.log(`CLEANED: ${newTitle} —— ORIGINAL: ${item.title}`)
+    if (newTitle !== item.title) console.log(`CLEANED: ${newTitle} —— ORIGINAL: ${item.title}`)
     item.title = newTitle
     return item
   })
