@@ -171,6 +171,8 @@ const selectNominees = (sections, categories) => {
       SELECT v.idContest, v.idNomination, SUM(v.idNomination = v.idNomination) as voteCount, n.data
       FROM votes v
       INNER JOIN nominations n ON n.idNomination = v.idNomination
+      INNER JOIN entries e2 ON e2.idNomination = v.idNomination AND e2.idContest = v.idContest
+      WHERE e2.status IN (${approvedOnly ? '1' : '1, 2, 0'})
       GROUP BY v.idContest, v.idNomination
   
       UNION
