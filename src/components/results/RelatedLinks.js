@@ -18,7 +18,11 @@ const RelatedLinks = ({
             return (
               <li className='image-link'>
                 <p>
-                  <a href={l.image} target='_blank' rel='noopener noreferrer'>
+                  <a
+                    href={l.link || l.image}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
                     {l.title}
                   </a>
                 </p>
