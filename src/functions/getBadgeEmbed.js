@@ -1,5 +1,5 @@
 import makeSafeForURL from './makeSafeForURL'
-const baseURL = `https://cauldron.angu.sh`
+const baseURL = process.env.REACT_APP_BADGE_BASE_URL ?? `https://cauldron.angu.sh`
 
 const getBadgeEmbed = (type, year, category, nominee) => {
   const title = makeSafeForURL(category.title)
